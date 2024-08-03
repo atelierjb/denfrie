@@ -8,58 +8,63 @@
     "color": {
       "palette": [
         {
-          "name": "Primary",
-          "slug": "primary",
-          "color": "#0EA5E9"
+          "name": "Den Frie Sort",
+          "slug": "df-black",
+          "color": "#000000"
         },
         {
-          "name": "Secondary",
-          "slug": "secondary",
-          "color": "#14B8A6"
+          "name": "Den Frie Rød",
+          "slug": "df-red",
+          "color": "#AD2134"
         },
         {
-          "name": "Dark",
-          "slug": "dark",
-          "color": "#1F2937"
+          "name": "Den Frie Light Grey",
+          "slug": "df-light-grey",
+          "color": "#EEEEEE"
         },
         {
-          "name": "Light",
-          "slug": "light",
-          "color": "#F9FAFB"
+          "name": "Den Frie Grey",
+          "slug": "df-grey",
+          "color": "#A9A9A9"
         }
       ]
     },
     "typography": {
       "fontSizes": [
         {
-          "name": "Small",
+          "slug": "xsmall",
+          "name": "X-Small",
+          "size": "calc(0.4rem + 0.5vw)"
+        },
+        {
           "slug": "small",
-          "size": "0.875rem"
+          "name": "Small",
+          "size": "calc(0.4rem + 0.75vw)"
         },
         {
           "slug": "regular",
           "name": "Regular",
-          "size": "1.5rem"
+          "size": "calc(0.5rem + 0.6vw)"
+        },
+        {
+          "slug": "medium",
+          "name": "Medium",
+          "size": "calc(0.6rem + 1.15vw)"
         },
         {
           "slug": "large",
           "name": "Large",
-          "size": "1.125rem"
+          "size": "calc(0.7rem + 1vw)"
         },
         {
           "slug": "xl",
           "name": "XL",
-          "size": "1.25rem"
+          "size": "calc(0.8rem + 1.15vw)"
         },
         {
           "slug": "xxl",
           "name": "2XL",
-          "size": "1.5rem"
-        },
-        {
-          "slug": "xxxl",
-          "name": "3XL",
-          "size": "1.875rem"
+          "size": "calc(1rem + 1.5vw)"
         }
       ]
     }

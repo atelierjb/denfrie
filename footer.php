@@ -7,12 +7,11 @@
 
 <?php do_action( 'tailpress_content_after' ); ?>
 
-<footer id="colophon" class="site-footer bg-gray-50 py-12" role="contentinfo">
-	<?php do_action( 'tailpress_footer' ); ?>
-
-	<div class="container mx-auto text-center text-gray-500">
-		&copy; <?php echo date_i18n( 'Y' );?> - <?php echo get_bloginfo( 'name' );?>
-	</div>
+<footer class="w-full flex justify-between px-[calc(0.25rem+2vw)] pt-[calc(0.5rem+3vw)] pb-[calc(0.5rem+1vw)] list-none font-dfserif text-medium/[0.95]">
+		<li><a class="hover:text-df-grey" href="#">Newsletter</a></li>
+		<li><a class="hover:text-df-grey" href="#">Instagram</a></li>
+		<li><a class="hover:text-df-grey" href="#">Facebook</a></li>
+		<li><a class="hover:text-df-grey" href="#" id="back-to-top">↑</a></li>
 </footer>
 
 </div>

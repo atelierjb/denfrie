@@ -13,14 +13,27 @@ module.exports = {
     theme: {
         container: {
             padding: {
-                DEFAULT: '1rem',
-                sm: '2rem',
+                DEFAULT: '0rem',
+                sm: '0rem',
                 lg: '0rem'
             },
         },
         extend: {
             colors: tailpress.colorMapper(tailpress.theme('settings.color.palette', theme)),
-            fontSize: tailpress.fontSizeMapper(tailpress.theme('settings.typography.fontSizes', theme))
+            fontSize: tailpress.fontSizeMapper(tailpress.theme('settings.typography.fontSizes', theme)),
+            fontFamily: {
+                dfserif: ['DenFrie2024 Serif', 'serif'],
+                superclarendon: ['superclarendon', 'serif'],
+            },
+            lineHeight: {
+                xsmall: [],
+                small: [],
+                regular: ['calc(125% + 0.25vw)'],
+                medium: ['calc(110% + 0.25vw)'],
+                large: ['calc(115% + 0.25vw)'],
+                xl: ['calc(115% + 0.25vw)'],
+                xxl: ['calc(115% + 0.25vw)'],
+            }
         },
         screens: {
             'xs': '480px',
@@ -32,6 +45,10 @@ module.exports = {
         }
     },
     plugins: [
-        tailpress.tailwind
-    ]
+        tailpress.tailwind,
+        require('daisyui')
+    ],
+    daisyui: {
+        themes: [],
+    },
 };
