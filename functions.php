@@ -260,7 +260,7 @@ function filter_search() {
             <hr class="border-df-black">
         <?php endwhile;
     else :
-        echo '<p>No results found.</p>';
+        echo '<p class="font-superclarendon text-large/large mt-sp4">No results found.</p>';
     endif;
 
     wp_die();

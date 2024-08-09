@@ -5,11 +5,11 @@ jQuery(document).ready(function($) {
         $('.collapse input[type="checkbox"]').not(this).prop('checked', false);
 
         // Reset styles for all
-        $('.collapse-title p').removeClass('text-df-red underline');
+        $('.collapse-title p').removeClass('text-df-red underline underline-offset-2');
 
         // Apply styles to the current expanded accordion
         if ($(this).is(':checked')) {
-            $(this).closest('.collapse').find('.collapse-title p').addClass('text-df-red underline');
+            $(this).closest('.collapse').find('.collapse-title p').addClass('text-df-red underline underline-offset-2');
         }
     });
 
@@ -31,9 +31,9 @@ jQuery(document).ready(function($) {
                 // Reapply the accordion behavior to new items
                 $('#social-container .collapse input[type="checkbox"]').change(function() {
                     $('.collapse input[type="checkbox"]').not(this).prop('checked', false);
-                    $('.collapse-title p').removeClass('text-df-red underline');
+                    $('.collapse-title p').removeClass('text-df-red underline underline-offset-2');
                     if ($(this).is(':checked')) {
-                        $(this).closest('.collapse').find('.collapse-title p').addClass('text-df-red underline');
+                        $(this).closest('.collapse').find('.collapse-title p').addClass('text-df-red underline underline-offset-2');
                     }
                 });
             } else {
@@ -57,9 +57,9 @@ jQuery(document).ready(function($) {
                 // Reapply the accordion behavior to new items
                 $('#social-container .collapse input[type="checkbox"]').change(function() {
                     $('.collapse input[type="checkbox"]').not(this).prop('checked', false);
-                    $('.collapse-title p').removeClass('text-df-red underline');
+                    $('.collapse-title p').removeClass('text-df-red underline underline-offset-2');
                     if ($(this).is(':checked')) {
-                        $(this).closest('.collapse').find('.collapse-title p').addClass('text-df-red underline');
+                        $(this).closest('.collapse').find('.collapse-title p').addClass('text-df-red underline underline-offset-2');
                     }
                 });
             }

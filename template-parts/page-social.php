@@ -78,7 +78,7 @@ $total_posts = $social_query->found_posts;
             <hr class="border-df-black">
         <?php endwhile; ?>
     <?php else : ?>
-        <p class="text-superclarendon text-large/large">No events found.</p>
+        <p class="font-superclarendon text-large/large">No events found.</p>
     <?php endif; ?>
     <?php wp_reset_postdata(); ?>
 </div>
