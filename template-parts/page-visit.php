@@ -23,48 +23,48 @@ get_header();
 
 <main id="primary" class="site-main">
 
-    <article class="columns-1 sm:columns-2 gap-[calc(0.2rem+0.5vw)] mx-[calc(0.25rem+2vw)] my-[calc(0.5rem+1vw)] pr-[calc(0.25rem+1vw)]">
-            <section class="w-full sm:w-[95%] pb-[calc(1rem+1vw)]">
-                <h2 class="font-dfserif text-xl/xl pb-[calc(0.2rem+0.5vw)]">
+    <article class="columns-1 sm:columns-2 gap-sp1 mx-sp3 my-sp5 pr-sp2">
+            <section class="w-full sm:w-[95%] pb-sp8">
+                <h2 class="font-dfserif text-xl/xl pb-sp1">
                     <?php echo esc_html( get_field('visit-title-admission') ); ?> 
                 </h2>
 
                 <?php get_template_part( 'template-parts/section-prices' ); ?>
             </section>
-            <section class="w-full sm:w-[calc(90%+1vw)] pb-[calc(1rem+1vw)]">
-                <h2 class="font-dfserif text-xl/xl pb-[calc(0.2rem+0.5vw)]">
+            <section class="w-full sm:w-[calc(90%+1vw)] pb-sp8">
+                <h2 class="font-dfserif text-xl/xl pb-sp1">
                     <?php echo esc_html( get_field('visit-title-annualpass') ); ?>
                 </h2>
                 <div class="font-superclarendon text-regular/regular">
                     <?php the_field('visit-text-annualpass'); ?>
                 </div>
             </section>
-            <section class="w-full sm:w-[calc(90%+1vw)] pb-[calc(1rem+1vw)]">
-                <h2 class="font-dfserif text-xl/xl pb-[calc(0.2rem+0.5vw)]">
+            <section class="w-full sm:w-[calc(90%+1vw)] pb-sp8">
+                <h2 class="font-dfserif text-xl/xl pb-sp1">
                     <?php echo esc_html( get_field('visit-title-pegasus') ); ?>
                 </h2>
                 <div class="font-superclarendon text-regular/regular">
                     <?php the_field('visit-text-pegasus'); ?>
                 </div>
             </section>
-            <section class="w-full sm:w-[calc(90%+1vw)] pb-[calc(1rem+1vw)] break-after-avoid sm:break-after-column">
-                <h2 class="font-dfserif text-xl/xl pb-[calc(0.2rem+0.5vw)]">
+            <section class="w-full sm:w-[calc(90%+1vw)] pb-sp8 break-after-avoid sm:break-after-column">
+                <h2 class="font-dfserif text-xl/xl pb-sp1">
                     <?php echo esc_html( get_field('visit-title-rent') ); ?>
                 </h2>
                 <div class="font-superclarendon text-regular/regular">
                     <?php the_field('visit-text-rent'); ?>
                 </div>
             </section>
-            <section class="w-full sm:w-[calc(90%+1vw)] pb-[calc(1rem+1vw)]">
-                <h2 class="font-dfserif text-xl/xl pb-[calc(0.2rem+0.5vw)]">
+            <section class="w-full sm:w-[calc(90%+1vw)] pb-sp8">
+                <h2 class="font-dfserif text-xl/xl pb-sp1">
                     <?php echo esc_html( get_field('visit-title-transport') ); ?>
                 </h2>
                 <div class="font-superclarendon text-regular/regular">
                     <?php the_field('visit-text-transport'); ?>
                 </div>
             </section>
-            <section class="w-full sm:w-[calc(90%+1vw)] pb-[calc(1rem+1vw)]">
-                <h2 class="font-dfserif text-xl/xl pb-[calc(0.2rem+0.5vw)]">
+            <section class="w-full sm:w-[calc(90%+1vw)] pb-sp8">
+                <h2 class="font-dfserif text-xl/xl pb-sp1">
                     <?php echo esc_html( get_field('visit-title-openings') ); ?>
                 </h2>
                 <div class="font-superclarendon text-regular/regular">
@@ -72,7 +72,7 @@ get_header();
                 </div>
             </section>
             <section class="w-full sm:w-[calc(90%+1vw)]">
-                <h2 class="font-dfserif text-xl/xl pb-[calc(0.2rem+0.5vw)]">
+                <h2 class="font-dfserif text-xl/xl pb-sp1">
                     <?php echo esc_html( get_field('visit-title-info') ); ?>
                 </h2>
                 <div class="font-superclarendon text-regular/regular">

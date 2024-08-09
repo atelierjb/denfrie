@@ -20,7 +20,7 @@ Template Name: Archive
 
 get_header();
 ?>
-<main class="mx-[calc(0.25rem+2vw)] my-[calc(0.5rem+1vw)]">
+<main class="mx-sp3 my-sp5">
     <?php
     // Get the current date
     $current_date = date('Ymd'); // Format: YYYYMMDD
@@ -50,7 +50,7 @@ get_header();
     $query = new WP_Query($args);
     ?>
         
-    <section class="flex justify-between items-center pb-[calc(1rem+0.5vw)]">
+    <section class="flex justify-between items-center pb-sp7">
         <h2 class="font-dfserif text-xl/xl">
             Archive
         </h2>
@@ -59,7 +59,7 @@ get_header();
         </form>
     </section>
 
-    <section id="exhibitions-list" class="grid grid-cols-1 sm:grid-cols-2 gap-[calc(0.2rem+0.5vw)] pb-[calc(1rem+1vw)]">
+    <section id="exhibitions-list" class="grid grid-cols-1 sm:grid-cols-2 gap-sp1 pb-sp8">
         <?php if ($query->have_posts()) : ?>
             <?php while ($query->have_posts()) : $query->the_post(); ?>
                 <?php
@@ -69,14 +69,14 @@ get_header();
                 $exhibition_end_date = get_field('exhibition-end-date');
                 $post_url = get_permalink();
                 ?>
-                <div class="mb-[calc(0.2rem+0.5vw)]">
-                    <figure class="mb-[calc(0.2rem+0.5vw)] overflow-hidden aspect-video">
+                <div class="mb-sp1">
+                    <figure class="mb-sp1 overflow-hidden aspect-video">
                         <a href="<?php echo esc_url($post_url); ?>">
-                            <img src="<?php echo esc_url($exhibition_image); ?>" alt="<?php the_title(); ?>" class="w-full h-full transform transition-transform duration-500 hover:scale-110 object-cover">
+                            <img src="<?php echo esc_url($exhibition_image); ?>" alt="<?php the_title(); ?>" class="w-full h-full transform transition-transform duration-500 hover:scale-105 object-cover">
                         </a>
                     </figure>
-                    <h3 class="font-dfserif text-xl/xl hover:text-df-grey">
-                        <a href="<?php echo esc_url($post_url); ?>">
+                    <h3 class="font-dfserif text-xl/xl">
+                        <a class="hover:text-df-grey" href="<?php echo esc_url($post_url); ?>">
                             <?php the_title(); ?>
                         </a>
                     </h3>
@@ -100,7 +100,7 @@ get_header();
 
     <?php if ($query->max_num_pages > 1) : ?>
         <div id="load-more-container">
-            <button class="font-dfserif text-xl/xl py-[calc(1rem+0.5vw)]" id="load-more" data-page="1" data-max="<?php echo $query->max_num_pages; ?>" data-query="">Show more archive ↓</button>
+            <button class="font-dfserif text-xl/xl py-sp7" id="load-more" data-page="1" data-max="<?php echo $query->max_num_pages; ?>" data-query="">Show more archive ↓</button>
         </div>
     <?php endif; ?>
 

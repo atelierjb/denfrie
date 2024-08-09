@@ -32,20 +32,20 @@ if ($query->have_posts()) :
         $post_url = get_permalink();
         ?>
 
-        <section class="grid grid-cols-1 sm:grid-cols-6 gap-[calc(0.2rem+1vw)] mt-[calc(0.5rem+0.25vw)]">
+        <section class="grid grid-cols-2 sm:grid-cols-6 gap-sp2 mt-sp4">
             <div class="col-span-2">
-                <p class="font-superclarendon mb-[calc(0.5rem+0.5vw)] text-medium/medium">
+                <p class="font-superclarendon mb-sp4 text-medium/medium">
                 <a href="<?php echo esc_url($post_url); ?>">
                     <?php echo esc_html($exhibition_start_date); ?> — <?php echo esc_html($exhibition_end_date); ?>
                     </a>
                 </p>
-                <figure class="w-full mb-[calc(1rem+1vw)] overflow-hidden aspect-video">
+                <figure class="w-full mb-sp4 sm:mb-sp8 overflow-hidden aspect-video">
                 <a href="<?php echo esc_url($post_url); ?>">
-                    <img src="<?php echo esc_url($exhibition_image); ?>" alt="<?php the_title(); ?>" class="w-full h-full transform transition-transform duration-500 hover:scale-110 object-cover"></a>
+                    <img src="<?php echo esc_url($exhibition_image); ?>" alt="<?php the_title(); ?>" class="w-full h-full transform transition-transform duration-500 hover:scale-105 object-cover"></a>
                 </figure>
             </div>
             <div class="col-span-4">
-                <p class="font-superclarendon text-medium/medium mb-[calc(1rem+1vw)]">
+                <p class="font-superclarendon text-medium/medium mb-sp8">
                     <a href="<?php echo esc_url($post_url); ?>" class="font-dfserif hover:text-df-grey">
                         <?php the_title(); ?>:
                     </a> 
@@ -60,6 +60,6 @@ if ($query->have_posts()) :
     endwhile;
     wp_reset_postdata();
 else :
-    echo '<p class="font-superclarendon text-[calc(0.75rem+1vw)]/[calc(100%+0.25vw)] px-[calc(2rem+2vw)]">No upcoming exhibitions found.</p>';
+    echo '<p class="font-superclarendon text-xl/xl px-sp9">No upcoming exhibitions found.</p>';
 endif;
 ?>

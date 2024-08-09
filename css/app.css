@@ -1503,6 +1503,11 @@ details.collapse summary::-webkit-details-marker{
         margin-right: auto
 }
 
+.mx-sp3{
+        margin-left: calc(0.25rem + 2vw);
+        margin-right: calc(0.25rem + 2vw)
+}
+
 .my-3{
         margin-top: 0.75rem;
         margin-bottom: 0.75rem
@@ -1516,6 +1521,16 @@ details.collapse summary::-webkit-details-marker{
 .my-\[calc\(0\.5rem\+1vw\)\]{
         margin-top: calc(0.5rem + 1vw);
         margin-bottom: calc(0.5rem + 1vw)
+}
+
+.my-sp5{
+        margin-top: calc(0.5rem + 1vw);
+        margin-bottom: calc(0.5rem + 1vw)
+}
+
+.mx-sp9{
+        margin-left: calc(2rem + 2vw);
+        margin-right: calc(2rem + 2vw)
 }
 
 .mb-1{
@@ -1552,6 +1567,22 @@ details.collapse summary::-webkit-details-marker{
 
 .mt-\[calc\(0\.5rem\+0\.5vw\)\]{
         margin-top: calc(0.5rem + 0.5vw)
+}
+
+.mb-sp1{
+        margin-bottom: calc(0.2rem + 0.5vw)
+}
+
+.mt-sp4{
+        margin-top: calc(0.5rem + 0.75vw)
+}
+
+.mb-sp4{
+        margin-bottom: calc(0.5rem + 0.75vw)
+}
+
+.mb-sp8{
+        margin-bottom: calc(1rem + 1vw)
 }
 
 .line-clamp-1{
@@ -1665,6 +1696,10 @@ details.collapse summary::-webkit-details-marker{
         grid-template-columns: repeat(4, minmax(0, 1fr))
 }
 
+.grid-cols-2{
+        grid-template-columns: repeat(2, minmax(0, 1fr))
+}
+
 .flex-col{
         flex-direction: column
 }
@@ -1691,6 +1726,14 @@ details.collapse summary::-webkit-details-marker{
 
 .gap-\[calc\(2rem\+2vw\)\]{
         gap: calc(2rem + 2vw)
+}
+
+.gap-sp1{
+        gap: calc(0.2rem + 0.5vw)
+}
+
+.gap-sp2{
+        gap: calc(0.25rem + 1vw)
 }
 
 .overflow-hidden{
@@ -1788,6 +1831,26 @@ details.collapse summary::-webkit-details-marker{
         padding-bottom: calc(1rem + 0.5vw)
 }
 
+.py-sp7{
+        padding-top: calc(1rem + 0.5vw);
+        padding-bottom: calc(1rem + 0.5vw)
+}
+
+.px-sp9{
+        padding-left: calc(2rem + 2vw);
+        padding-right: calc(2rem + 2vw)
+}
+
+.px-sp3{
+        padding-left: calc(0.25rem + 2vw);
+        padding-right: calc(0.25rem + 2vw)
+}
+
+.py-sp5{
+        padding-top: calc(0.5rem + 1vw);
+        padding-bottom: calc(0.5rem + 1vw)
+}
+
 .pb-\[calc\(0\.2rem\+0\.5vw\)\]{
         padding-bottom: calc(0.2rem + 0.5vw)
 }
@@ -1816,11 +1879,47 @@ details.collapse summary::-webkit-details-marker{
         padding-bottom: calc(3rem + 2vw)
 }
 
+.pb-sp1{
+        padding-bottom: calc(0.2rem + 0.5vw)
+}
+
+.pb-sp8{
+        padding-bottom: calc(1rem + 1vw)
+}
+
 .pr-\[calc\(0\.25rem\+1vw\)\]{
         padding-right: calc(0.25rem + 1vw)
 }
 
+.pr-sp2{
+        padding-right: calc(0.25rem + 1vw)
+}
+
 .pt-\[calc\(0\.5rem\+3vw\)\]{
+        padding-top: calc(0.5rem + 3vw)
+}
+
+.pb-sp7{
+        padding-bottom: calc(1rem + 0.5vw)
+}
+
+.pb-sp9{
+        padding-bottom: calc(2rem + 2vw)
+}
+
+.pb-sp4{
+        padding-bottom: calc(0.5rem + 0.75vw)
+}
+
+.pb-sp10{
+        padding-bottom: calc(3rem + 2vw)
+}
+
+.pb-sp5{
+        padding-bottom: calc(0.5rem + 1vw)
+}
+
+.pt-sp6{
         padding-top: calc(0.5rem + 3vw)
 }
 
@@ -1829,6 +1928,10 @@ details.collapse summary::-webkit-details-marker{
 }
 
 .indent-\[calc\(1rem\+1vw\)\]{
+        text-indent: calc(1rem + 1vw)
+}
+
+.indent-sp8{
         text-indent: calc(1rem + 1vw)
 }
 
@@ -1898,6 +2001,11 @@ details.collapse summary::-webkit-details-marker{
 .text-xxl\/xxl{
         font-size: calc(1rem + 1.5vw);
         line-height: calc(115% + 0.25vw)
+}
+
+.text-xl\/\[0\.95\]{
+        font-size: calc(0.8rem + 1.15vw);
+        line-height: 0.95
 }
 
 .font-bold{
@@ -2062,6 +2170,12 @@ details.collapse summary::-webkit-details-marker{
         list-style-type: decimal
 }
 
+.hover\:scale-105:hover{
+        --tw-scale-x: 1.05;
+        --tw-scale-y: 1.05;
+        transform: translate(var(--tw-translate-x), var(--tw-translate-y)) rotate(var(--tw-rotate)) skewX(var(--tw-skew-x)) skewY(var(--tw-skew-y)) scaleX(var(--tw-scale-x)) scaleY(var(--tw-scale-y))
+}
+
 .hover\:scale-110:hover{
         --tw-scale-x: 1.1;
         --tw-scale-y: 1.1;
@@ -2074,6 +2188,18 @@ details.collapse summary::-webkit-details-marker{
 }
 
 @media (min-width: 600px){
+
+        .sm\:col-span-2{
+                grid-column: span 2 / span 2
+        }
+
+        .sm\:col-span-4{
+                grid-column: span 4 / span 4
+        }
+
+        .sm\:mb-sp8{
+                margin-bottom: calc(1rem + 1vw)
+        }
 
         .sm\:block{
                 display: block
@@ -2101,6 +2227,10 @@ details.collapse summary::-webkit-details-marker{
 
         .sm\:w-\[calc\(90\%\+1vw\)\]{
                 width: calc(90% + 1vw)
+        }
+
+        .sm\:w-full{
+                width: 100%
         }
 
         .sm\:columns-2{

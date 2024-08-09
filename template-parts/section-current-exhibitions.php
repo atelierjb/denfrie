@@ -34,14 +34,14 @@ if ($query->have_posts()) :
         $exhibition_end_date = get_field('exhibition-end-date');
         $post_url = get_permalink();
         ?>
-        <section class="pb-[calc(3rem+2vw)]">
-            <figure class="mx-[calc(2rem+2vw)] mb-[calc(0.2rem+0.5vw)] overflow-hidden aspect-video">
+        <section class="pb-sp10">
+            <figure class="mx-sp9 mb-sp1 overflow-hidden aspect-video">
                 <a href="<?php echo esc_url($post_url); ?>">
-                <img src="<?php echo esc_url($exhibition_image); ?>" alt="<?php the_title(); ?>" class="w-full h-full transform transition-transform duration-500 hover:scale-110 object-cover"></a>
+                <img src="<?php echo esc_url($exhibition_image); ?>" alt="<?php the_title(); ?>" class="w-full h-full transform transition-transform duration-500 hover:scale-105 object-cover"></a>
             </figure>
             <div class="w-full">
-                <h3 class="font-dfserif text-xxl/xxl hover:text-df-grey">
-                <a href="<?php echo esc_url($post_url); ?>">
+                <h3 class="font-dfserif text-xxl/xxl">
+                <a  class="hover:text-df-grey" href="<?php echo esc_url($post_url); ?>">
                         <?php the_title(); ?>
                 </a>
                 </h3>
@@ -61,6 +61,6 @@ if ($query->have_posts()) :
     endwhile;
     wp_reset_postdata();
 else :
-    echo '<p class="font-superclarendon text-xl/xl px-[calc(2rem+2vw)]">No current exhibitions found.</p>';
+    echo '<p class="font-superclarendon text-xl/xl px-sp9">No current exhibitions found.</p>';
 endif;
 ?>

@@ -30,7 +30,7 @@ if ($query_non_service->have_posts()) {
 
         // Display non-service staff
         ?>
-        <div class="pb-[calc(0.5rem+0.75vw)] break-inside-avoid">
+        <div class="pb-sp4 break-inside-avoid">
             <p class="underline"><?php echo esc_html($staff_title); ?></p>
             <p><?php the_title(); ?></p>
             <p class="hover:text-df-grey"><a href="mailto:<?php echo esc_attr($staff_mail); ?>"><?php echo esc_html($staff_mail); ?></a></p>
@@ -67,7 +67,7 @@ $query_service = new WP_Query($args_service);
 // Loop for service staff
 if ($query_service->have_posts()) {
     ?>
-    <div class="pb-[calc(0.5rem+0.75vw)]">
+    <div class="pb-sp4">
         <p class="underline">Service staff</p>
         <?php
         while ($query_service->have_posts()) {

@@ -21,8 +21,8 @@ Template Name: Social
 get_header();
 ?>
 
-<main id="primary" class="mx-[calc(0.25rem+2vw)] my-[calc(0.5rem+1vw)]">
-    <section class="flex justify-between items-center pb-[calc(1rem+0.5vw)]">
+<main id="primary" class="mx-sp3 my-sp5">
+    <section class="flex justify-between items-center pb-sp7">
         <h2 class="font-dfserif text-xl/xl">
             Social calendar
         </h2>
@@ -34,7 +34,7 @@ get_header();
         <!-- Posts will be dynamically loaded here -->
     </div>
     <div id="load-more-container">
-        <button class="font-dfserif text-xl/xl py-[calc(1rem+0.5vw)]" id="load-more" data-page="1" data-max="" data-query="">Show previous events ↓</button>
+        <button class="font-dfserif text-xl/xl py-sp7" id="load-more" data-page="1" data-max="" data-query="">Show previous events ↓</button>
     </div>
 </main>
 
