@@ -1,6 +1,6 @@
 <?php get_header(); ?>
 
-	<div class="container my-8 mx-auto">
+<div class="mx-sp3 my-sp5">
 
 	<?php if ( have_posts() ) : ?>
 
@@ -22,7 +22,7 @@
 
 	<?php endif; ?>
 
-	</div>
+</div>
 
 <?php
 get_footer();

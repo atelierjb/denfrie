@@ -1592,6 +1592,17 @@ details.collapse summary::-webkit-details-marker{
         -webkit-line-clamp: 1
 }
 
+.line-clamp-6{
+        overflow: hidden;
+        display: -webkit-box;
+        -webkit-box-orient: vertical;
+        -webkit-line-clamp: 6
+}
+
+.block{
+        display: block
+}
+
 .flex{
         display: flex
 }
@@ -1790,6 +1801,10 @@ details.collapse summary::-webkit-details-marker{
         padding: 0px
 }
 
+.p-sp10{
+        padding: calc(3rem + 2vw)
+}
+
 .px-0{
         padding-left: 0px;
         padding-right: 0px
@@ -1858,6 +1873,11 @@ details.collapse summary::-webkit-details-marker{
 .py-sp4{
         padding-top: calc(0.5rem + 0.75vw);
         padding-bottom: calc(0.5rem + 0.75vw)
+}
+
+.py-sp10{
+        padding-top: calc(3rem + 2vw);
+        padding-bottom: calc(3rem + 2vw)
 }
 
 .pb-\[calc\(0\.2rem\+0\.5vw\)\]{
@@ -1932,6 +1952,10 @@ details.collapse summary::-webkit-details-marker{
         padding-top: calc(0.5rem + 3vw)
 }
 
+.text-center{
+        text-align: center
+}
+
 .text-right{
         text-align: right
 }
@@ -1942,6 +1966,10 @@ details.collapse summary::-webkit-details-marker{
 
 .indent-sp8{
         text-indent: calc(1rem + 1vw)
+}
+
+.indent-sp9{
+        text-indent: calc(2rem + 2vw)
 }
 
 .font-dfserif{
