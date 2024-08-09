@@ -20,12 +20,35 @@
 	<header class="px-sp3 py-sp5">
 
 	<nav class="w-full flex justify-between pb-sp5 list-none font-dfserif text-medium/[0.95]">
-		<li><a href="<?php echo get_permalink(2); ?>" class="hover:text-df-grey">Exhibitions</a></li>
-		<li><a href="<?php echo get_permalink(5); ?>" class="hover:text-df-grey">Social</a></li>
-		<li><a href="<?php echo get_permalink(3); ?>" class="hover:text-df-grey">About</a></li>
-		<li><a href="<?php echo get_permalink(4); ?>" class="hover:text-df-grey">Visit</a></li>
-		<li><a href="#" class="hover:text-df-grey">DK</a>/<a href="#" class="hover:text-df-grey">EN</a></li>
-	</nav>
+    <li>
+        <a href="<?php echo get_permalink(2); ?>"
+           class="hover:text-df-grey <?php echo (is_front_page() || is_page(2) || is_page('archive') || (is_singular('exhibition') && get_post_type() == 'exhibition')) ? 'text-df-red underline underline-offset-2' : ''; ?>">
+           Exhibitions
+        </a>
+    </li>
+    <li>
+        <a href="<?php echo get_permalink(5); ?>"
+           class="hover:text-df-grey <?php echo is_page(5) ? 'text-df-red underline underline-offset-2' : ''; ?>">
+           Social
+        </a>
+    </li>
+    <li>
+        <a href="<?php echo get_permalink(3); ?>"
+           class="hover:text-df-grey <?php echo is_page(3) ? 'text-df-red underline underline-offset-2' : ''; ?>">
+           About
+        </a>
+    </li>
+    <li>
+        <a href="<?php echo get_permalink(4); ?>"
+           class="hover:text-df-grey <?php echo is_page(4) ? 'text-df-red underline underline-offset-2' : ''; ?>">
+           Visit
+        </a>
+    </li>
+    <li>
+        <a href="#" class="hover:text-df-grey">DK</a>/<a href="#" class="hover:text-df-grey">EN</a>
+    </li>
+</nav>
+
 	<figure class="w-full sm:w-[calc(80%+6.5vw)] pb-sp5">
 		<img src="/wp-content/uploads/2024/07/den-frie-logo-xl.svg" alt="Den Frie Udstillingsbygnings Logo">
 	</figure>

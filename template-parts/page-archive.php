@@ -51,7 +51,7 @@ $total_posts = $exhibition_query->found_posts;
             Archive
         </h2>
         <form id="search-form">
-            <input type="text" id="search-input" placeholder="Search in archive..." class="font-dfserif text-xl/xl text-df-grey bg-df-light-grey text-right">
+            <input type="text" id="search-input" placeholder="Search in archive..." class="font-dfserif text-xl/xl text-df-grey bg-df-light-grey text-right focus:outline-none" autocomplete="off">
         </form>
     </section>
 
