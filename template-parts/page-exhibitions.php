@@ -38,7 +38,7 @@ get_header();
     </section>
     <section class="w-full">
         <h2 class="font-dfserif text-xl/xl pb-sp7">
-            Archive
+            <a href="<?php echo get_permalink(159); ?>" class="hover:text-df-grey">Archive</a>
         </h2>
         <hr class="border-df-black">
         <?php get_template_part( 'template-parts/section-latest-exhibitions' ); ?>

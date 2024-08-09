@@ -270,8 +270,131 @@ add_action('wp_ajax_filter_search', 'filter_search');
 add_action('wp_ajax_nopriv_filter_search', 'filter_search');
 
 
+// Archive functions
 
+function enqueue_custom_exhibition_scripts() {
+    wp_enqueue_script('exhibition-page-js', get_template_directory_uri() . '/js/exhibition-page.js', ['jquery'], null, true);
 
+    // Pass PHP data to the JavaScript file
+    wp_localize_script('exhibition-page-js', 'exhibition_ajax', [
+        'ajaxurl' => admin_url('admin-ajax.php'),
+        'posts_per_page' => 6, // Set the posts per page value here
+    ]);
+}
+add_action('wp_enqueue_scripts', 'enqueue_custom_exhibition_scripts');
 
+// Load more exhibitions via AJAX
+function load_more_exhibitions() {
+    $paged = $_POST['page'];
+    $posts_per_page = 6;
+
+    $args = [
+        'post_type' => 'exhibition',
+        'posts_per_page' => $posts_per_page,
+        'paged' => $paged,
+        'meta_key' => 'exhibition-end-date',
+        'orderby' => 'meta_value',
+        'order' => 'DESC',
+        'meta_query' => [
+            [
+                'key' => 'exhibition-end-date',
+                'compare' => '<=',
+                'value' => date('Ymd'),
+                'type' => 'DATE'
+            ]
+        ]
+    ];
+
+    $exhibition_query = new WP_Query($args);
+
+    if ($exhibition_query->have_posts()) :
+        while ($exhibition_query->have_posts()) : $exhibition_query->the_post(); ?>
+            <div class="mb-sp1">
+                <figure class="mb-sp1 overflow-hidden aspect-video">
+                    <a href="<?php the_permalink(); ?>">
+                        <img src="<?php the_field('exhibition-image'); ?>" alt="<?php the_title(); ?>" class="w-full h-full transform transition-transform duration-500 hover:scale-105 object-cover">
+                    </a>
+                </figure>
+                <h3 class="font-dfserif text-xl/xl">
+                    <a class="hover:text-df-grey" href="<?php the_permalink(); ?>">
+                        <?php the_title(); ?>
+                    </a>
+                </h3>
+                <p class="font-superclarendon text-large/large line-clamp-1">
+                    <a href="<?php the_permalink(); ?>">
+                        <?php the_field('exhibition-artists'); ?>
+                    </a>
+                </p>
+                <p class="font-superclarendon text-large/large">
+                    <a href="<?php the_permalink(); ?>">
+                        <?php the_field('exhibition-start-date'); ?> — <?php the_field('exhibition-end-date'); ?>
+                    </a>
+                </p>
+            </div>
+        <?php endwhile;
+    endif;
+
+    wp_die();
+}
+add_action('wp_ajax_load_more_exhibitions', 'load_more_exhibitions');
+add_action('wp_ajax_nopriv_load_more_exhibitions', 'load_more_exhibitions');
+
+// Search exhibitions via AJAX
+function search_exhibitions() {
+    $search_query = sanitize_text_field($_POST['searchQuery']);
+    $posts_per_page = 6;
+
+    $args = [
+        'post_type' => 'exhibition',
+        'posts_per_page' => $posts_per_page,
+        's' => $search_query,
+        'meta_key' => 'exhibition-end-date',
+        'orderby' => 'meta_value',
+        'order' => 'DESC',
+        'meta_query' => [
+            [
+                'key' => 'exhibition-end-date',
+                'compare' => '<=',
+                'value' => date('Ymd'),
+                'type' => 'DATE'
+            ]
+        ]
+    ];
+
+    $exhibition_query = new WP_Query($args);
+
+    if ($exhibition_query->have_posts()) :
+        while ($exhibition_query->have_posts()) : $exhibition_query->the_post(); ?>
+            <div class="mb-sp1">
+                <figure class="mb-sp1 overflow-hidden aspect-video">
+                    <a href="<?php the_permalink(); ?>">
+                        <img src="<?php the_field('exhibition-image'); ?>" alt="<?php the_title(); ?>" class="w-full h-full transform transition-transform duration-500 hover:scale-105 object-cover">
+                    </a>
+                </figure>
+                <h3 class="font-dfserif text-xl/xl">
+                    <a class="hover:text-df-grey" href="<?php the_permalink(); ?>">
+                        <?php the_title(); ?>
+                    </a>
+                </h3>
+                <p class="font-superclarendon text-large/large line-clamp-1">
+                    <a href="<?php the_permalink(); ?>">
+                        <?php the_field('exhibition-artists'); ?>
+                    </a>
+                </p>
+                <p class="font-superclarendon text-large/large">
+                    <a href="<?php the_permalink(); ?>">
+                        <?php the_field('exhibition-start-date'); ?> — <?php the_field('exhibition-end-date'); ?>
+                    </a>
+                </p>
+            </div>
+        <?php endwhile;
+    else :
+        echo '<p class="font-superclarendon text-large/large mt-sp4">No results found.</p>';
+    endif;
+
+    wp_die();
+}
+add_action('wp_ajax_search_exhibitions', 'search_exhibitions');
+add_action('wp_ajax_nopriv_search_exhibitions', 'search_exhibitions');
 
 
