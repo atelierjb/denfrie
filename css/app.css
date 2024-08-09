@@ -849,21 +849,6 @@ html{
         justify-self: end
 }
 
-.radio{
-        flex-shrink: 0;
-        --chkbg: var(--bc);
-        height: 1.5rem;
-        width: 1.5rem;
-        cursor: pointer;
-        -webkit-appearance: none;
-           -moz-appearance: none;
-                appearance: none;
-        border-radius: 9999px;
-        border-width: 1px;
-        border-color: var(--fallback-bc,oklch(var(--bc)/var(--tw-border-opacity)));
-        --tw-border-opacity: 0.2
-}
-
 .textarea{
         min-height: 3rem;
         flex-shrink: 1;
@@ -1339,32 +1324,6 @@ details.collapse summary::-webkit-details-marker{
         }
 }
 
-.radio:focus{
-        box-shadow: none
-}
-
-.radio:focus-visible{
-        outline-style: solid;
-        outline-width: 2px;
-        outline-offset: 2px;
-        outline-color: var(--fallback-bc,oklch(var(--bc)/1))
-}
-
-.radio:checked,
-  .radio[aria-checked="true"]{
-        --tw-bg-opacity: 1;
-        background-color: var(--fallback-bc,oklch(var(--bc)/var(--tw-bg-opacity)));
-        background-image: none;
-        animation: radiomark var(--animation-input, 0.2s) ease-out;
-        box-shadow: 0 0 0 4px var(--fallback-b1,oklch(var(--b1)/1)) inset,
-      0 0 0 4px var(--fallback-b1,oklch(var(--b1)/1)) inset
-}
-
-.radio:disabled{
-        cursor: not-allowed;
-        opacity: 0.2
-}
-
 @keyframes radiomark{
 
         0%{
@@ -1513,12 +1472,12 @@ details.collapse summary::-webkit-details-marker{
         grid-column: span 1 / span 1
 }
 
-.col-span-3{
-        grid-column: span 3 / span 3
-}
-
 .col-span-2{
         grid-column: span 2 / span 2
+}
+
+.col-span-3{
+        grid-column: span 3 / span 3
 }
 
 .col-span-4{
@@ -1642,14 +1601,6 @@ details.collapse summary::-webkit-details-marker{
         width: 4rem
 }
 
-.w-\[35\%\]{
-        width: 35%
-}
-
-.w-auto{
-        width: auto
-}
-
 .w-full{
         width: 100%
 }
@@ -1714,20 +1665,12 @@ details.collapse summary::-webkit-details-marker{
         grid-template-columns: repeat(4, minmax(0, 1fr))
 }
 
-.grid-cols-6{
-        grid-template-columns: repeat(6, minmax(0, 1fr))
-}
-
 .flex-col{
         flex-direction: column
 }
 
 .items-center{
         align-items: center
-}
-
-.justify-start{
-        justify-content: flex-start
 }
 
 .justify-center{
@@ -1907,24 +1850,9 @@ details.collapse summary::-webkit-details-marker{
         line-height: 1
 }
 
-.text-\[calc\(0\.45em\+0\.9vw\)\]\/\[calc\(110\%\+0\.25vw\)\]{
-        font-size: calc(0.45em + 0.9vw);
+.text-\[calc\(0\.5em\+1vw\)\]\/\[calc\(110\%\+0\.25vw\)\]{
+        font-size: calc(0.5em + 1vw);
         line-height: calc(110% + 0.25vw)
-}
-
-.text-\[calc\(0\.5em\+0\.6vw\)\]\/\[calc\(120\%\+0\.2vw\)\]{
-        font-size: calc(0.5em + 0.6vw);
-        line-height: calc(120% + 0.2vw)
-}
-
-.text-\[calc\(0\.5em\+1\.1vw\)\]\/\[calc\(110\%\+0\.25vw\)\]{
-        font-size: calc(0.5em + 1.1vw);
-        line-height: calc(110% + 0.25vw)
-}
-
-.text-\[calc\(0\.6rem\+1\.15vw\)\]\/\[0\.95\]{
-        font-size: calc(0.6rem + 1.15vw);
-        line-height: 0.95
 }
 
 .text-\[calc\(0\.75rem\+1vw\)\]\/\[calc\(100\%\+0\.25vw\)\]{
@@ -1932,54 +1860,9 @@ details.collapse summary::-webkit-details-marker{
         line-height: calc(100% + 0.25vw)
 }
 
-.text-\[calc\(0\.75rem\+1vw\)\]\/\[calc\(115\%\+0\.25vw\)\]{
-        font-size: calc(0.75rem + 1vw);
-        line-height: calc(115% + 0.25vw)
-}
-
 .text-\[calc\(0\.8rem\+1\.15vw\)\]\/\[0\.95\]{
         font-size: calc(0.8rem + 1.15vw);
         line-height: 0.95
-}
-
-.text-\[calc\(0\.8rem\+1\.15vw\)\]\/\[calc\(115\%\+0\.25vw\)\]{
-        font-size: calc(0.8rem + 1.15vw);
-        line-height: calc(115% + 0.25vw)
-}
-
-.text-\[calc\(1rem\+1\.5vw\)\]\/\[calc\(115\%\+0\.25vw\)\]{
-        font-size: calc(1rem + 1.5vw);
-        line-height: calc(115% + 0.25vw)
-}
-
-.text-sm{
-        font-size: 0.875rem;
-        line-height: 1.25rem
-}
-
-.text-xxl\/xxl{
-        font-size: calc(1rem + 1.5vw);
-        line-height: calc(115% + 0.25vw)
-}
-
-.text-large\/\[0\.95\]{
-        font-size: calc(0.7rem + 1vw);
-        line-height: 0.95
-}
-
-.text-xl\/\[0\.95\]{
-        font-size: calc(0.8rem + 1.15vw);
-        line-height: 0.95
-}
-
-.text-xl\/xl{
-        font-size: calc(0.8rem + 1.15vw);
-        line-height: calc(115% + 0.25vw)
-}
-
-.text-regular\/regular{
-        font-size: calc(0.5rem + 0.6vw);
-        line-height: calc(125% + 0.25vw)
 }
 
 .text-large\/large{
@@ -1987,19 +1870,34 @@ details.collapse summary::-webkit-details-marker{
         line-height: calc(115% + 0.25vw)
 }
 
-.text-medium\/medium{
-        font-size: calc(0.6rem + 1.15vw);
-        line-height: calc(110% + 0.25vw)
-}
-
 .text-medium\/\[0\.95\]{
         font-size: calc(0.6rem + 1.15vw);
         line-height: 0.95
 }
 
-.text-\[calc\(0\.5em\+1vw\)\]\/\[calc\(110\%\+0\.25vw\)\]{
-        font-size: calc(0.5em + 1vw);
+.text-medium\/medium{
+        font-size: calc(0.6rem + 1.15vw);
         line-height: calc(110% + 0.25vw)
+}
+
+.text-regular\/regular{
+        font-size: calc(0.5rem + 0.6vw);
+        line-height: calc(125% + 0.25vw)
+}
+
+.text-sm{
+        font-size: 0.875rem;
+        line-height: 1.25rem
+}
+
+.text-xl\/xl{
+        font-size: calc(0.8rem + 1.15vw);
+        line-height: calc(115% + 0.25vw)
+}
+
+.text-xxl\/xxl{
+        font-size: calc(1rem + 1.5vw);
+        line-height: calc(115% + 0.25vw)
 }
 
 .font-bold{
@@ -2189,10 +2087,6 @@ details.collapse summary::-webkit-details-marker{
                 width: 95%
         }
 
-        .sm\:w-\[calc\(25\%\+1vw\)\]{
-                width: calc(25% + 1vw)
-        }
-
         .sm\:w-\[calc\(40\%\+6\.5vw\)\]{
                 width: calc(40% + 6.5vw)
         }
@@ -2225,26 +2119,6 @@ details.collapse summary::-webkit-details-marker{
 
         .sm\:grid-cols-6{
                 grid-template-columns: repeat(6, minmax(0, 1fr))
-        }
-
-        .sm\:text-\[calc\(0\.8rem\+1\.15vw\)\]\/\[calc\(110\%\+0\.25vw\)\]{
-                font-size: calc(0.8rem + 1.15vw);
-                line-height: calc(110% + 0.25vw)
-        }
-
-        .sm\:text-large\/large{
-                font-size: calc(0.7rem + 1vw);
-                line-height: calc(115% + 0.25vw)
-        }
-
-        .sm\:text-medium\/large{
-                font-size: calc(0.6rem + 1.15vw);
-                line-height: calc(115% + 0.25vw)
-        }
-
-        .sm\:text-medium\/medium{
-                font-size: calc(0.6rem + 1.15vw);
-                line-height: calc(110% + 0.25vw)
         }
 }
 
