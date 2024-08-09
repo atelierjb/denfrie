@@ -167,81 +167,108 @@ add_filter( 'wp_check_filetype_and_ext', function($data, $file, $filename, $mime
 add_action('wp_footer', 'custom_back_to_top_script');
 
 
-// Enqueue necessary scripts
 function enqueue_custom_scripts() {
-    wp_enqueue_script('jquery');
-    wp_enqueue_script('custom-social-loop', get_template_directory_uri() . '/js/custom-social-loop.js', array('jquery'), '1.0', true);
-    wp_localize_script('custom-social-loop', 'ajax_object', array('ajax_url' => admin_url('admin-ajax.php')));
+    wp_enqueue_script('social-page-js', get_template_directory_uri() . '/js/social-page.js', ['jquery'], null, true);
+    wp_localize_script('social-page-js', 'ajaxurl', admin_url('admin-ajax.php'));
 }
 add_action('wp_enqueue_scripts', 'enqueue_custom_scripts');
 
-// AJAX handler for fetching posts
-function fetch_social_posts() {
-    $paged = $_POST['page'] ? intval($_POST['page']) : 1;
-    $search = sanitize_text_field($_POST['search']);
 
-    $args = array(
+// Load more posts via AJAX
+function load_more_posts() {
+    $paged = $_POST['page'];
+    $posts_per_page = 8;
+
+    $args = [
         'post_type' => 'social',
-        'posts_per_page' => 10,
+        'posts_per_page' => $posts_per_page,
         'paged' => $paged,
-        'orderby' => 'date',
-        'order' => 'DESC'
-    );
+        'meta_key' => 'social-date',  // Update this to use hyphen
+        'orderby' => 'meta_value',
+        'order' => 'DESC',
+    ];
 
-    if (!empty($search)) {
-        $args['meta_query'] = array(
-            'relation' => 'OR',
-            array(
-                'key' => 'social-description',
-                'value' => $search,
-                'compare' => 'LIKE'
-            )
-        );
-        $args['s'] = $search; // This will search in post title and content
-    }
+    $social_query = new WP_Query($args);
 
-    $query = new WP_Query($args);
-    $response = array();
+    if ($social_query->have_posts()) :
+        while ($social_query->have_posts()) : $social_query->the_post(); ?>
+            <div class="collapse py-sp4 grid-cols-1">
+                <input type="checkbox" class="min-h-0 p-0" />
+                <div class="collapse-title p-0 min-h-0 grid grid-cols-4 gap-sp9 text-medium/medium">
+                    <p class="font-superclarendon col-span-1 whitespace-nowrap hover:text-df-grey"> 
+                        <?php the_field('social-date'); ?> <?php the_field('social-date-start'); ?> <?php the_field('social-date-end'); ?>
+                    </p>
+                    <p class="font-dfserif leading-[calc(110%+0.2vw)] col-span-3 line-clamp-1 hover:text-df-grey">
+                        <?php the_title(); ?>
+                    </p>
+                </div>
+                <div class="collapse-content px-0 grid grid-cols-4 gap-sp9">
+                    <figure class="w-full overflow-hidden aspect-video col-span-1 mt-sp4">
+                        <img src="<?php the_field('social-image'); ?>" alt="<?php the_title(); ?>" class="w-full h-full transform transition-transform duration-500 hover:scale-105 object-cover">
+                    </figure>
+                    <div class="font-superclarendon mt-sp4 text-regular/regular col-span-3 indent-sp8">
+                        <?php the_field('social-description'); ?>
+                    </div>
+                </div>
+            </div>
+            <hr class="border-df-black">
+        <?php endwhile;
+    endif;
 
-    if ($query->have_posts()) {
-        while ($query->have_posts()) {
-            $query->the_post();
-            $response[] = array(
-                'title' => get_the_title(),
-                'date' => get_field('social-date'),
-                'date_start' => get_field('social-date-start'),
-                'date_end' => get_field('social-date-end'),
-                'description' => get_field('social-description'),
-                'image' => get_field('social-image')
-            );
-        }
-    }
-
-    wp_reset_postdata();
-
-    $response['max_pages'] = $query->max_num_pages;
-    wp_send_json($response);
+    wp_die();
 }
-add_action('wp_ajax_fetch_social_posts', 'fetch_social_posts');
-add_action('wp_ajax_nopriv_fetch_social_posts', 'fetch_social_posts');
+add_action('wp_ajax_load_more_posts', 'load_more_posts');
+add_action('wp_ajax_nopriv_load_more_posts', 'load_more_posts');
 
-// Function to output the social calendar loop
-function social_calendar_loop() {
-    ?>
-    <main id="primary" class="mx-[calc(0.25rem+2vw)] my-[calc(0.5rem+1vw)]">
-        <section class="flex justify-between items-center pb-[calc(1rem+0.5vw)]">
-            <h2 class="font-dfserif text-xl/xl">Social calendar</h2>
-            <form id="search-form">
-                <input type="text" id="search-input" placeholder="Search in calendar…" class="font-dfserif text-xl/xl text-df-grey bg-df-light-grey text-right">
-            </form>
-        </section>
-        <div id="social-posts-container"></div>
-        <div id="load-more-container">
-            <button class="font-dfserif text-xl/xl py-[calc(1rem+0.5vw)]" id="load-more" data-page="1" data-max="" data-query="">Show previous events ↓</button>
-        </div>
-    </main>
-    <?php
+// AJAX search function
+function filter_search() {
+    $search_query = sanitize_text_field($_POST['searchQuery']);
+    $posts_per_page = 8;
+
+    $args = [
+        'post_type' => 'social',
+        'posts_per_page' => $posts_per_page,
+        's' => $search_query,  // Main search parameter
+        'meta_key' => 'social-date',  // The custom field to order by
+        'orderby' => 'meta_value',
+        'order' => 'DESC',  // Descending order
+    ];
+
+    $social_query = new WP_Query($args);
+
+    if ($social_query->have_posts()) :
+        while ($social_query->have_posts()) : $social_query->the_post(); ?>
+            <div class="collapse py-sp4 grid-cols-1">
+                <input type="checkbox" class="min-h-0 p-0" />
+                <div class="collapse-title p-0 min-h-0 grid grid-cols-4 gap-sp9 text-medium/medium">
+                    <p class="font-superclarendon col-span-1 whitespace-nowrap hover:text-df-grey"> 
+                        <?php the_field('social-date'); ?> <?php the_field('social-date-start'); ?> <?php the_field('social-date-end'); ?>
+                    </p>
+                    <p class="font-dfserif leading-[calc(110%+0.2vw)] col-span-3 line-clamp-1 hover:text-df-grey">
+                        <?php the_title(); ?>
+                    </p>
+                </div>
+                <div class="collapse-content px-0 grid grid-cols-4 gap-sp9">
+                    <figure class="w-full overflow-hidden aspect-video col-span-1 mt-sp4">
+                        <img src="<?php the_field('social-image'); ?>" alt="<?php the_title(); ?>" class="w-full h-full transform transition-transform duration-500 hover:scale-105 object-cover">
+                    </figure>
+                    <div class="font-superclarendon mt-sp4 text-regular/regular col-span-3 indent-sp8">
+                        <?php the_field('social-description'); ?>
+                    </div>
+                </div>
+            </div>
+            <hr class="border-df-black">
+        <?php endwhile;
+    else :
+        echo '<p>No results found.</p>';
+    endif;
+
+    wp_die();
 }
+
+add_action('wp_ajax_filter_search', 'filter_search');
+add_action('wp_ajax_nopriv_filter_search', 'filter_search');
+
 
 
 

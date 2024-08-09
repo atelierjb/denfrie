@@ -1567,6 +1567,9 @@ details.collapse summary::-webkit-details-marker {
 .gap-sp2 {
   gap: calc(0.25rem + 1vw);
 }
+.gap-sp9 {
+  gap: calc(2rem + 2vw);
+}
 .overflow-hidden {
   overflow: hidden;
 }
@@ -1657,6 +1660,10 @@ details.collapse summary::-webkit-details-marker {
 .py-sp5 {
   padding-top: calc(0.5rem + 1vw);
   padding-bottom: calc(0.5rem + 1vw);
+}
+.py-sp4 {
+  padding-top: calc(0.5rem + 0.75vw);
+  padding-bottom: calc(0.5rem + 0.75vw);
 }
 .pb-\[calc\(0\.2rem\+0\.5vw\)\] {
   padding-bottom: calc(0.2rem + 0.5vw);
@@ -1814,6 +1821,10 @@ details.collapse summary::-webkit-details-marker {
   --tw-text-opacity: 1;
   color: rgb(255 255 255 / var(--tw-text-opacity));
 }
+.text-df-red {
+  --tw-text-opacity: 1;
+  color: rgb(173 33 52 / var(--tw-text-opacity));
+}
 .underline {
   text-decoration-line: underline;
 }
@@ -1906,6 +1917,10 @@ body {
 .hover\:text-df-grey:hover {
   --tw-text-opacity: 1;
   color: rgb(169 169 169 / var(--tw-text-opacity));
+}
+.focus\:outline-none:focus {
+  outline: 2px solid transparent;
+  outline-offset: 2px;
 }
 @media (min-width: 600px) {
 
