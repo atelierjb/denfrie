@@ -22,10 +22,11 @@ get_header();
 ?>
 
 <main id="primary" class="site-main">
+    <div id="main-content">
     <article class="columns-1 sm:columns-2 gap-sp1 mx-sp3 my-sp5 pr-sp2">
             <section class="w-full sm:w-[95%] pb-sp8">
                 <h2 class="font-dfserif text-xl/xl pb-sp1">
-                    Contact 
+                    <?php echo pll__('Contact', 'tailpress'); ?>
                 </h2>
                 <div class="columns-2 font-superclarendon text-regular/regular">
                     <?php get_template_part( 'template-parts/section-contact' ); ?>
@@ -35,7 +36,7 @@ get_header();
                 <h2 class="font-dfserif text-xl/xl pb-sp1">
                     <?php echo esc_html( get_field('about-title-about') ); ?>
                 </h2>
-                <div class="font-superclarendon text-regular/regular indent-sp8">
+                <div class="wysiwyg-content font-superclarendon text-regular/regular text-pretty">
                     <?php the_field('about-text-about'); ?>
                 </div>
             </section>
@@ -43,25 +44,33 @@ get_header();
                 <h2 class="font-dfserif text-xl/xl pb-sp1">
                     <?php echo esc_html( get_field('about-title-oslo') ); ?>
                 </h2>
-                <div class="font-superclarendon text-regular/regular indent-sp8">
+                <div class="wysiwyg-content font-superclarendon text-regular/regular text-pretty">
                     <?php the_field('about-text-oslo'); ?>
                 </div>
             </section>
-            <figure class="w-full sm:w-[calc(90%+1vw)] hidden sm:block break-after-avoid sm:break-after-column pb-sp8">
-                <?php if( get_field('about-image-1') ): ?>
-                    <img src="<?php the_field('about-image-1'); ?>" class="w-full h-auto" />
+            <figure class="w-full px-sp5 sm:px-sp8 sm:w-[calc(90%+1vw)] hidden sm:block break-after-avoid sm:break-after-column pb-sp8 animate-image">
+                <?php 
+                $about_image_1_id = get_field('about-image-1'); 
+                if( $about_image_1_id ) : ?>
+                    <?php echo wp_get_attachment_image( $about_image_1_id, 'full', false, array(
+                        'class' => 'w-full h-auto',
+                    )); ?>
                 <?php endif; ?>
-                </figure>
-            <figure class="w-full sm:w-[calc(90%+1vw)] hidden sm:block pb-sp8">
-                <?php if( get_field('about-image-2') ): ?>
-                    <img src="<?php the_field('about-image-2'); ?>" class="w-full h-auto" />
+            </figure>
+            <figure class="w-full px-sp5 sm:px-sp8 sm:w-[calc(90%+1vw)] hidden sm:block pb-sp8 animate-image">
+                <?php 
+                    $about_image_2_id = get_field('about-image-2'); 
+                    if( $about_image_2_id ) : ?>
+                        <?php echo wp_get_attachment_image( $about_image_2_id, 'full', false, array(
+                        'class' => 'w-full h-auto',
+                    )); ?>
                 <?php endif; ?>
             </figure>
             <section class="w-full sm:w-[calc(90%+1vw)] pb-sp8">
                 <h2 class="font-dfserif text-xl/xl pb-sp1">
                     <?php echo esc_html( get_field('about-title-history') ); ?>
                 </h2>
-                <div class="font-superclarendon text-regular/regular indent-sp8">
+                <div class="wysiwyg-content font-superclarendon text-regular/regular text-pretty">
                     <?php the_field('about-text-history'); ?>
                 </div>
             </section>
@@ -69,17 +78,21 @@ get_header();
                 <h2 class="font-dfserif text-xl/xl pb-sp1">
                     <?php echo esc_html( get_field('about-title-toaster') ); ?>
                 </h2>
-                <div class="font-superclarendon text-regular/regular indent-sp8">
+                <div class="wysiwyg-content font-superclarendon text-regular/regular text-pretty">
                     <?php the_field('about-text-toaster'); ?>
                 </div>
             </section>
-            <figure class="w-full sm:hidden pb-sp8">
-                <?php if( get_field('about-image-1') ): ?>
-                    <img src="<?php the_field('about-image-1'); ?>" class="w-full h-auto" />
+            <figure class="w-full px-sp5 sm:px-sp8 sm:hidden pb-sp8 animate-image">
+                <?php 
+                    $about_image_1_id = get_field('about-image-1'); 
+                    if( $about_image_1_id ) : ?>
+                        <?php echo wp_get_attachment_image( $about_image_1_id, 'full', false, array(
+                        'class' => 'w-full h-auto',
+                    )); ?>
                 <?php endif; ?>
             </figure>
     </article>
-
+</div>
 </main>
 
 

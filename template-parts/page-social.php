@@ -44,12 +44,13 @@ $total_posts = $social_query->found_posts;
 ?>
 
 <main id="primary" class="mx-sp3 my-sp5">
+<div id="main-content">
     <section class="flex justify-between items-center pb-sp7">
         <h2 class="font-dfserif text-xl/xl">
-            Social calendar
+            <?php echo pll__('Social calendar', 'tailpress'); ?>
         </h2>
         <form id="search-form">
-            <input type="text" id="search-input" placeholder="Search in calendar..." class="font-dfserif text-xl/xl text-df-grey bg-df-light-grey text-right focus:outline-none" autocomplete="off">
+            <input type="text" id="search-input" placeholder="<?php echo pll__('Search in calendar...', 'tailpress'); ?>" class="font-dfserif text-xl/xl text-df-grey bg-df-light-grey text-right focus:outline-none" autocomplete="off">
         </form>
     </section>
     <hr class="border-df-black">
@@ -58,19 +59,26 @@ $total_posts = $social_query->found_posts;
         <?php while ($social_query->have_posts()) : $social_query->the_post(); ?>
             <div class="collapse py-sp4 grid-cols-1">
                 <input type="checkbox" class="min-h-0 p-0" />
-                <div class="collapse-title p-0 min-h-0 grid grid-cols-4 gap-sp9 text-medium/medium">
-                    <p class="font-superclarendon col-span-1 whitespace-nowrap hover:text-df-grey"> 
+                <div class="collapse-title p-0 min-h-0 grid sm:grid-cols-4 sm:gap-sp9 text-medium/medium">
+                    <p class="font-superclarendon col-span-1 whitespace-nowrap pt-1 sm:pt-0"> 
                         <?php the_field('social-date'); ?> <?php the_field('social-date-start'); ?> <?php the_field('social-date-end'); ?>
-                    </p>
-                    <p class="font-dfserif leading-[calc(110%+0.2vw)] col-span-3 line-clamp-1 hover:text-df-grey">
+                    </p> <br class="sm:hidden">
+                    <p class="font-dfserif leading-[calc(110%+0.2vw)] pb-1 sm:pb-0 col-span-3 line-clamp-1">
                         <?php the_title(); ?>
                     </p>
                 </div>
-                <div class="collapse-content px-0 grid grid-cols-4 gap-sp9">
-                    <figure class="w-full overflow-hidden aspect-video col-span-1 mt-sp4">
-                        <img src="<?php the_field('social-image'); ?>" alt="<?php the_title(); ?>" class="w-full h-full transform transition-transform duration-500 hover:scale-105 object-cover">
+                <div class="collapse-content px-0 grid sm:grid-cols-4 sm:gap-sp9">
+                    <figure class="w-full overflow-hidden aspect-video col-span-4 sm:col-span-1 mt-sp4">
+                        <?php 
+                        $social_image_id = get_field('social-image'); 
+                        if( $social_image_id ) : ?>
+                            <?php echo wp_get_attachment_image( $social_image_id, 'full', false, array(
+                                'alt'   => get_the_title(),
+                                'class' => 'w-full h-full transform transition-transform duration-500 hover:scale-105 object-cover',
+                            )); ?>
+                        <?php endif; ?>
                     </figure>
-                    <div class="font-superclarendon mt-sp4 text-regular/regular col-span-3 indent-sp8">
+                    <div class="font-superclarendon mt-sp4 text-regular/regular col-span-3 indent-sp8 text-pretty">
                         <?php the_field('social-description'); ?>
                     </div>
                 </div>
@@ -78,15 +86,18 @@ $total_posts = $social_query->found_posts;
             <hr class="border-df-black">
         <?php endwhile; ?>
     <?php else : ?>
-        <p class="font-superclarendon text-large/large">No events found.</p>
+        <p class="font-superclarendon text-large/large">
+            <?php echo pll__('No events found.', 'tailpress'); ?>
+        </p>
     <?php endif; ?>
     <?php wp_reset_postdata(); ?>
 </div>
 <?php if ($total_posts > $posts_per_page) : ?>
     <div id="load-more-container">
-        <button class="font-dfserif text-xl/xl py-sp7" id="load-more">Show previous events ↓</button>
+        <button class="font-dfserif text-xl/xl py-sp7 hover:text-df-red" id="load-more"><?php echo pll__('Show previous events ↓', 'tailpress'); ?></button>
     </div>
 <?php endif; ?>
+</div>
 </main>
 
 

@@ -46,52 +46,63 @@ $total_posts = $exhibition_query->found_posts;
 ?>
 
 <main class="mx-sp3 my-sp5">
-   <section class="flex justify-between items-center pb-sp7">
+<div id="main-content">
+    <section class="flex justify-between items-center pb-sp7">
         <h2 class="font-dfserif text-xl/xl">
-            Archive
+            <?php echo pll__('Archive', 'tailpress'); ?>
         </h2>
         <form id="search-form">
-            <input type="text" id="search-input" placeholder="Search in archive..." class="font-dfserif text-xl/xl text-df-grey bg-df-light-grey text-right focus:outline-none" autocomplete="off">
+            <input type="text" id="search-input" placeholder="<?php echo pll__('Search in archive...', 'tailpress'); ?>" class="font-dfserif text-xl/xl text-df-grey bg-df-light-grey text-right focus:outline-none" autocomplete="off">
         </form>
     </section>
 
-    <section id="exhibitions-list" class="grid grid-cols-1 sm:grid-cols-2 gap-sp1 pb-sp8">
+    <section id="exhibitions-list" class="grid grid-cols-1 sm:grid-cols-2 gap-x-sp1 gap-y-sp9">
         <?php if ($exhibition_query->have_posts()) : ?>
             <?php while ($exhibition_query->have_posts()) : $exhibition_query->the_post(); ?>
-                <div class="mb-sp1">
+                <div class="">
                     <figure class="mb-sp1 overflow-hidden aspect-video">
                         <a href="<?php the_permalink(); ?>">
-                            <img src="<?php the_field('exhibition-image'); ?>" alt="<?php the_title(); ?>" class="w-full h-full transform transition-transform duration-500 hover:scale-105 object-cover">
+                            <?php
+                            $exhibition_image_id = get_field('exhibition-image');
+                            if ( $exhibition_image_id ) {
+                                echo wp_get_attachment_image( $exhibition_image_id, 'full', false, array(
+                                    'alt'   => get_the_title(),
+                                    'class' => 'w-full h-full transform transition-transform duration-500 hover:scale-105 object-cover',
+                                ));
+                            }
+                            ?>
                         </a>
                     </figure>
-                    <h3 class="font-dfserif text-xl/xl">
-                        <a class="hover:text-df-grey" href="<?php the_permalink(); ?>">
-                            <?php the_title(); ?>
-                        </a>
-                    </h3>
-                    <p class="font-superclarendon text-large/large line-clamp-1">
-                        <a href="<?php the_permalink(); ?>">
-                            <?php the_field('exhibition-artists'); ?>
-                        </a>
-                    </p>
-                    <p class="font-superclarendon text-large/large">
-                        <a href="<?php the_permalink(); ?>">
-                            <?php the_field('exhibition-start-date'); ?> — <?php the_field('exhibition-end-date'); ?>
-                        </a>
-                    </p>
+                    <div class="w-fit hover:text-df-red">
+                        <h3 class="font-dfserif text-xxl/xxl line-clamp-2">
+                            <a class="" href="<?php the_permalink(); ?>">
+                                <?php the_title(); ?>
+                            </a>
+                        </h3>
+                        <p class="font-superclarendon text-xxl/xxl">
+                            <a href="<?php echo esc_url( get_permalink() ); ?>">
+                                <?php echo esc_html( get_field('exhibition-start-date') ); ?> — <?php echo esc_html( get_field('exhibition-end-date') ); ?>
+                            </a>
+                        </p>
+                    </div>
                 </div>
             <?php endwhile; ?>
         <?php else : ?>
-            <p>No exhibitions found.</p>
+            <p class="font-superclarendon text-large/large">
+                <?php echo pll__('No exhibitions found.', 'tailpress'); ?>
+            </p>
         <?php endif; ?>
         <?php wp_reset_postdata(); ?>
     </section>
 
     <?php if ($total_posts > $posts_per_page) : ?>
         <div id="load-more-container">
-            <button class="font-dfserif text-xl/xl py-sp7" id="load-more">Show more archive ↓</button>
+            <button class="font-dfserif text-xl/xl py-sp9 hover:text-df-red" id="load-more">
+                <?php echo pll__('Show more archive', 'tailpress'); ?> ↓
+            </button>
         </div>
     <?php endif; ?>
+    </div>
 </main>
 
 <?php

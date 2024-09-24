@@ -33,15 +33,15 @@ if ($query_non_service->have_posts()) {
         <div class="pb-sp4 break-inside-avoid">
             <p class="underline"><?php echo esc_html($staff_title); ?></p>
             <p><?php the_title(); ?></p>
-            <p class="hover:text-df-grey"><a href="mailto:<?php echo esc_attr($staff_mail); ?>"><?php echo esc_html($staff_mail); ?></a></p>
-            <p class="hover:text-df-grey"><a href="tel:<?php echo esc_attr($staff_phone); ?>"><?php echo esc_html($staff_phone); ?></a></p>
+            <p class="hover:text-df-red"><a href="mailto:<?php echo esc_attr($staff_mail); ?>"><?php echo esc_html($staff_mail); ?></a></p>
+            <p class="hover:text-df-red"><a href="tel:<?php echo esc_attr($staff_phone); ?>"><?php echo esc_html($staff_phone); ?></a></p>
         </div>
         <?php
     }
     wp_reset_postdata(); // Restore original Post Data
 } else {
     ?>
-    <p>No non-service staff members found.</p>
+    <p><?php echo pll__('No staff members found.', 'tailpress'); ?></p>
     <?php
 }
 ?>
@@ -68,7 +68,7 @@ $query_service = new WP_Query($args_service);
 if ($query_service->have_posts()) {
     ?>
     <div class="pb-sp4">
-        <p class="underline">Service staff</p>
+        <p class="underline"><?php echo pll__('Service staff', 'tailpress'); ?></p>
         <?php
         while ($query_service->have_posts()) {
             $query_service->the_post();
@@ -82,7 +82,7 @@ if ($query_service->have_posts()) {
     wp_reset_postdata(); // Restore original Post Data
 } else {
     ?>
-    <p>No service staff members found.</p>
+    <p><?php echo pll__('No service staff members found.', 'tailpress'); ?></p>
     <?php
 }
 ?>

@@ -3,7 +3,11 @@
 @import "tailwindcss/utilities";
 
 body {
-    @apply font-sans;
+    @apply font-superclarendon font-light text-base;
+}
+
+h4 {
+    @apply font-dfserif font-normal text-4xl;
 }
 
 .wp-block{

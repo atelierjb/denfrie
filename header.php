@@ -3,6 +3,12 @@
 <head>
 	<meta charset="<?php bloginfo( 'charset' ); ?>">
 	<meta name="viewport" content="width=device-width">
+	<meta name="description" content="<?php the_field('meta-description', 'option'); ?>">
+	<meta property="og:type" content="<?php the_field('og-type', 'option'); ?>">
+    <meta property="og:title" content="<?php the_field('og-title', 'option'); ?>">
+    <meta property="og:description" content="<?php the_field('og-description', 'option'); ?>">
+    <meta property="og:url" content="<?php echo get_permalink(); ?>">
+    <meta property="og:image" content="<?php the_field('og-image', 'option'); ?>">
 	<link rel="profile" href="http://gmpg.org/xfn/11">
 	<link rel="pingback" href="<?php bloginfo( 'pingback_url' ); ?>">
 
@@ -13,57 +19,77 @@
 
 <?php do_action( 'tailpress_site_before' ); ?>
 
+	<!-- Loading screen: add it right here after <body> tag -->
+	<div id="loading-screen" class="fixed inset-0 bg-df-light-grey flex items-center justify-center z-50">
+        <img id="loading-image" src="/wp-content/uploads/2024/09/loading-image.png" class="h-[35vh] sm:h-[75vh] w-auto opacity-0">
+    </div>
+
 <div id="page" class="min-h-screen flex flex-col">
 
 	<?php do_action( 'tailpress_header' ); ?>
 
 	<header class="px-sp3 py-sp5">
+		<div id="nav-container" class="w-full">
+			<nav class="w-full flex justify-between sm:grid sm:grid-cols-12 pb-sp5 list-none font-dfserif text-medium/[0.95]">
+				<li class="sm:col-span-3">
+					<?php 
+					$exhibitions_page_id = pll_get_post(2); 
+					$archive_page_id = pll_get_post(159); // Use the actual ID of the archive page
+					?>
+					<a href="<?php echo get_permalink($exhibitions_page_id); ?>"
+					class="hover:text-df-red <?php 
+					if (is_front_page() || 
+						is_page($exhibitions_page_id) || 
+						is_page($archive_page_id) || 
+						(is_singular('exhibition') && get_post_type() == 'exhibition')) { 
+						echo 'text-df-red underline underline-offset-2'; 
+					} ?>">
+						<?php echo pll__('Exhibitions', 'tailpress'); ?>
+					</a>
+				</li>
+				<li class="sm:col-span-3">
+					<a href="<?php echo get_permalink(pll_get_post(5)); ?>"
+					class="hover:text-df-red <?php echo is_page(pll_get_post(5)) ? 'text-df-red underline underline-offset-2' : ''; ?>">
+					<?php echo pll__('Social', 'tailpress'); ?>
+					</a>
+				</li>
+				<li class="sm:col-span-3">
+					<a href="<?php echo get_permalink(pll_get_post(3)); ?>"
+					class="hover:text-df-red <?php echo is_page(pll_get_post(3)) ? 'text-df-red underline underline-offset-2' : ''; ?>">
+					<?php echo pll__('About', 'tailpress'); ?>
+					</a>
+				</li>
+				<li class="sm:col-auto">
+					<a href="<?php echo get_permalink(pll_get_post(4)); ?>"
+					class="hover:text-df-red <?php echo is_page(pll_get_post(4)) ? 'text-df-red underline underline-offset-2' : ''; ?>">
+					<?php echo pll__('Visit', 'tailpress'); ?>
+					</a>
+				</li>
 
-	<nav class="w-full flex justify-between pb-sp5 list-none font-dfserif text-medium/[0.95]">
-    <li>
-        <a href="<?php echo get_permalink(2); ?>"
-           class="hover:text-df-grey <?php echo (is_front_page() || is_page(2) || is_page('archive') || (is_singular('exhibition') && get_post_type() == 'exhibition')) ? 'text-df-red underline underline-offset-2' : ''; ?>">
-           Exhibitions
-        </a>
-    </li>
-    <li>
-        <a href="<?php echo get_permalink(5); ?>"
-           class="hover:text-df-grey <?php echo is_page(5) ? 'text-df-red underline underline-offset-2' : ''; ?>">
-           Social
-        </a>
-    </li>
-    <li>
-        <a href="<?php echo get_permalink(3); ?>"
-           class="hover:text-df-grey <?php echo is_page(3) ? 'text-df-red underline underline-offset-2' : ''; ?>">
-           About
-        </a>
-    </li>
-    <li>
-        <a href="<?php echo get_permalink(4); ?>"
-           class="hover:text-df-grey <?php echo is_page(4) ? 'text-df-red underline underline-offset-2' : ''; ?>">
-           Visit
-        </a>
-    </li>
-    <li>
-        <a href="#" class="hover:text-df-grey">DK</a>/<a href="#" class="hover:text-df-grey">EN</a>
-    </li>
-</nav>
 
-	<figure class="w-full sm:w-[calc(80%+6.5vw)] pb-sp5">
-		<img src="/wp-content/uploads/2024/07/den-frie-logo-xl.svg" alt="Den Frie Udstillingsbygnings Logo">
-	</figure>
-	<div class="w-full flex font-superclarendon text-[calc(0.5em+1vw)]/[calc(110%+0.25vw)]">
-		<p class="grow sm:w-[calc(40%+6.5vw)]">
-			Oslo plads 1, 2100, Kbh Ø, DK<br>
-			<a href="mailto:info@denfrie.dk" class="hover:text-df-grey">info@denfrie.dk</a><br>
-			<a href="tel:+4533122803" class="hover:text-df-grey">+45 33 12 28 03</a>
-		</p>
-		<p class="grow sm:w-[calc(40%+7vw)]">
-			Mon : Closed<br>
-			Tues-Sun : 12 — 18<br>
-			(Thurs : 12 — 21)
-		</p>
-	</div>
+				<li class="sm:col-span-2 sm:place-self-end">
+					<a href="<?php echo pll_the_languages(array('raw' => 1))['da']['url']; ?>" 
+					class="hover:text-df-red <?php echo pll_current_language() === 'da' ? 'text-df-red underline underline-offset-2' : ''; ?>">DK</a>/<a href="<?php echo pll_the_languages(array('raw' => 1))['en']['url']; ?>" 
+					class="hover:text-df-red <?php echo pll_current_language() === 'en' ? 'text-df-red underline underline-offset-2' : ''; ?>">EN</a>
+				</li>
+			</nav>
+
+			<figure class="w-full sm:w-[calc(80%+6.5vw)] pb-sp5">
+				<img src="/wp-content/uploads/2024/07/den-frie-logo-xl.svg" alt="Den Frie Udstillingsbygnings Logo">
+			</figure>
+			<div class="w-full flex font-superclarendon text-[calc(0.5em+1vw)]/[calc(110%+0.25vw)]">
+				<p class="grow sm:w-[calc(40%+6.5vw)]">
+					<?php echo pll__('Oslo plads 1, 2100, Kbh Ø, DK', 'tailpress'); ?><br>
+					<a href="mailto:<?php the_field('info-email', 'option'); ?>" class="hover:text-df-red"><?php the_field('info-email', 'option'); ?></a><br>
+					<a href="tel:<?php the_field('info-phone', 'option'); ?>" class="hover:text-df-red"><?php the_field('info-phone', 'option'); ?></a>
+				</p>
+				<p class="grow ml-[calc(5%*5vw)] sm:ml-0 sm:w-[calc(40%+7vw)]">
+					<?php echo pll__('Tues-Sun : 12 — 18', 'tailpress'); ?><br>
+					<?php echo pll__('(Thurs : 12 — 21)', 'tailpress'); ?><br>
+					<?php echo pll__('Mon : Closed', 'tailpress'); ?>
+				</p>
+			</div>
+		</div>
 	</header>
 
 	<div id="content" class="site-content flex-grow">
@@ -74,4 +100,4 @@
 
 		<?php do_action( 'tailpress_content_start' ); ?>
 
-		<main>
+	
