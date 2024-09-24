@@ -668,15 +668,15 @@ add_action( 'wp_enqueue_scripts', 'enqueue_swiper_assets' );
 
 
 // // GSAP and ScrollTrigger
-// function enqueue_gsap_scripts() {
-//     // Enqueue GSAP and ScrollTrigger
-//     wp_enqueue_script('gsap', 'https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js', array(), null, true);
-//     wp_enqueue_script('scrolltrigger', 'https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollTrigger.min.js', array('gsap'), null, true);
+function enqueue_gsap_scripts() {
+    // Enqueue GSAP and ScrollTrigger
+    wp_enqueue_script('gsap', 'https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js', array(), null, true);
+    wp_enqueue_script('scrolltrigger', 'https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollTrigger.min.js', array('gsap'), null, true);
 
-//     // Enqueue the custom script, making sure it depends on GSAP and ScrollTrigger only
-//     wp_enqueue_script('custom-gsap', get_template_directory_uri() . '/js/custom-gsap.js', array('gsap', 'scrolltrigger'), null, true);
-// }
-// add_action('wp_enqueue_scripts', 'enqueue_gsap_scripts');
+    // Enqueue the custom script, making sure it depends on GSAP and ScrollTrigger only
+    wp_enqueue_script('custom-gsap', get_template_directory_uri() . '/js/custom-gsap.js', array('gsap', 'scrolltrigger'), null, true);
+}
+add_action('wp_enqueue_scripts', 'enqueue_gsap_scripts');
 
 
 

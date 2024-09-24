@@ -1462,6 +1462,9 @@ details.collapse summary::-webkit-details-marker {
 .ml-\[calc\(5\%\*5vw\)\] {
   margin-left: calc(5% * 5vw);
 }
+.ml-sp5 {
+  margin-left: calc(0.5rem + 1vw);
+}
 .mt-0 {
   margin-top: 0px;
 }
@@ -1479,9 +1482,6 @@ details.collapse summary::-webkit-details-marker {
 }
 .mt-sp4 {
   margin-top: calc(0.5rem + 0.75vw);
-}
-.ml-sp5 {
-  margin-left: calc(0.5rem + 1vw);
 }
 .line-clamp-1 {
   overflow: hidden;
@@ -2052,12 +2052,12 @@ h4 {
     margin-left: 0px;
   }
 
-  .sm\:mt-sp4 {
-    margin-top: calc(0.5rem + 0.75vw);
-  }
-
   .sm\:ml-sp9 {
     margin-left: calc(2rem + 2vw);
+  }
+
+  .sm\:mt-sp4 {
+    margin-top: calc(0.5rem + 0.75vw);
   }
 
   .sm\:line-clamp-\[7\] {
