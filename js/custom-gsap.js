@@ -1,4 +1,7 @@
-/* LOADING SEQUENCE */
+/* -------------------------------------------------------------------------- */
+/*                              LOADING SEQUENCE                              */
+/* -------------------------------------------------------------------------- */
+
 document.addEventListener('DOMContentLoaded', function() {
     // Check if the loading animation has already been shown this session
     if (sessionStorage.getItem('hasSeenAnimation') === 'true') {
@@ -62,7 +65,11 @@ document.addEventListener('DOMContentLoaded', function() {
     }, "-=1.5");
 });
 
-/* PREFETCH FUNCTION */
+
+/* -------------------------------------------------------------------------- */
+/*                              PREFETCH FUNCTION                             */
+/* -------------------------------------------------------------------------- */
+
 document.addEventListener('DOMContentLoaded', function() {
     function prefetchPage(url) {
         if (url && !prefetched[url]) {
@@ -70,8 +77,6 @@ document.addEventListener('DOMContentLoaded', function() {
             fetch(url)
                 .then(response => response.text())
                 .then(html => {
-                    // Optionally, cache or manipulate the fetched HTML here
-                    console.log('Page prefetched:', url);
                 })
                 .catch(err => console.error('Prefetch failed:', err));
         }

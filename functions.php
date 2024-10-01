@@ -193,7 +193,7 @@ add_action('wp_enqueue_scripts', 'enqueue_custom_scripts');
 /* -------------------------------------------------------------------------- */
 
 
-// Load more posts via AJAX
+/* ----------------------- Load more posts via AJAX ---------------------- */
 function load_more_posts() {
     $paged = $_POST['page'];
     $posts_per_page = 8;
@@ -246,7 +246,9 @@ function load_more_posts() {
 add_action('wp_ajax_load_more_posts', 'load_more_posts');
 add_action('wp_ajax_nopriv_load_more_posts', 'load_more_posts');
 
-// AJAX search function
+
+/* ------------------------- AJAX search function ------------------------ */
+
 function filter_search() {
     $search_query = sanitize_text_field($_POST['searchQuery']);
     $posts_per_page = 8;
@@ -321,7 +323,9 @@ function enqueue_custom_exhibition_scripts() {
 }
 add_action('wp_enqueue_scripts', 'enqueue_custom_exhibition_scripts');
 
-// Load more exhibitions via AJAX
+
+/* -------------------- Load more exhibitions via AJAX ------------------- */
+
 function load_more_exhibitions() {
     $paged = $_POST['page'];
     $posts_per_page = 6;
@@ -382,7 +386,9 @@ function load_more_exhibitions() {
 add_action('wp_ajax_load_more_exhibitions', 'load_more_exhibitions');
 add_action('wp_ajax_nopriv_load_more_exhibitions', 'load_more_exhibitions');
 
-// Search exhibitions via AJAX
+
+/* ----------------------- Search exhibitions via AJAX ---------------------- */
+
 function search_exhibitions() {
     $search_query = sanitize_text_field($_POST['searchQuery']);
     $posts_per_page = 6;
