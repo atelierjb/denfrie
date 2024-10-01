@@ -1526,6 +1526,14 @@ details.collapse summary::-webkit-details-marker{
         grid-column: span 4 / span 4;
 }
 
+.col-span-5{
+        grid-column: span 5 / span 5;
+}
+
+.col-span-7{
+        grid-column: span 7 / span 7;
+}
+
 .m-8{
         margin: 2rem;
 }
@@ -1540,14 +1548,14 @@ details.collapse summary::-webkit-details-marker{
         margin-right: calc(0.5rem + 1vw);
 }
 
-.my-3{
-        margin-top: 0.75rem;
-        margin-bottom: 0.75rem;
-}
-
 .my-8{
         margin-top: 2rem;
         margin-bottom: 2rem;
+}
+
+.my-sp4{
+        margin-top: calc(0.5rem + 0.75vw);
+        margin-bottom: calc(0.5rem + 0.75vw);
 }
 
 .my-sp5{
@@ -1558,6 +1566,10 @@ details.collapse summary::-webkit-details-marker{
 .my-sp8{
         margin-top: calc(1rem + 1vw);
         margin-bottom: calc(1rem + 1vw);
+}
+
+.-ml-2{
+        margin-left: -0.5rem;
 }
 
 .-ml-\[1px\]{
@@ -1669,10 +1681,6 @@ details.collapse summary::-webkit-details-marker{
         aspect-ratio: 16 / 9;
 }
 
-.h-1{
-        height: 0.25rem;
-}
-
 .h-\[35vh\]{
         height: 35vh;
 }
@@ -1695,10 +1703,6 @@ details.collapse summary::-webkit-details-marker{
 
 .w-1\/2{
         width: 50%;
-}
-
-.w-16{
-        width: 4rem;
 }
 
 .w-auto{
@@ -1798,6 +1802,10 @@ details.collapse summary::-webkit-details-marker{
         gap: calc(0.2rem + 0.5vw);
 }
 
+.gap-sp2{
+        gap: calc(0.25rem + 1vw);
+}
+
 .gap-x-sp1{
         -moz-column-gap: calc(0.2rem + 0.5vw);
              column-gap: calc(0.2rem + 0.5vw);
@@ -1809,6 +1817,16 @@ details.collapse summary::-webkit-details-marker{
 
 .overflow-hidden{
         overflow: hidden;
+}
+
+.truncate{
+        overflow: hidden;
+        text-overflow: ellipsis;
+        white-space: nowrap;
+}
+
+.text-ellipsis{
+        text-overflow: ellipsis;
 }
 
 .whitespace-nowrap{
@@ -1827,10 +1845,6 @@ details.collapse summary::-webkit-details-marker{
         border-radius: 0px;
 }
 
-.border-b{
-        border-bottom-width: 1px;
-}
-
 .border-df-black{
         --tw-border-opacity: 1;
         border-color: rgb(0 0 0 / var(--tw-border-opacity));
@@ -1839,11 +1853,6 @@ details.collapse summary::-webkit-details-marker{
 .border-df-grey{
         --tw-border-opacity: 1;
         border-color: rgb(169 169 169 / var(--tw-border-opacity));
-}
-
-.border-primary{
-        --tw-border-opacity: 1;
-        border-color: var(--fallback-p,oklch(var(--p)/var(--tw-border-opacity)));
 }
 
 .bg-df-light-grey{
@@ -1962,10 +1971,6 @@ details.collapse summary::-webkit-details-marker{
         padding-bottom: calc(0.5rem + 1vw);
 }
 
-.pb-sp6{
-        padding-bottom: calc(0.5rem + 3vw);
-}
-
 .pb-sp7{
         padding-bottom: calc(1rem + 0.5vw);
 }
@@ -2019,9 +2024,8 @@ details.collapse summary::-webkit-details-marker{
         line-height: 2rem;
 }
 
-.text-5xl{
-        font-size: 3rem;
-        line-height: 1;
+.text-\[8rem\]{
+        font-size: 8rem;
 }
 
 .text-\[calc\(0\.5em\+1vw\)\]\/\[calc\(110\%\+0\.25vw\)\]{
@@ -2090,10 +2094,6 @@ details.collapse summary::-webkit-details-marker{
         font-weight: 300;
 }
 
-.font-normal{
-        font-weight: 400;
-}
-
 .italic{
         font-style: italic;
 }
@@ -2106,9 +2106,18 @@ details.collapse summary::-webkit-details-marker{
         line-height: 1.25;
 }
 
+.tracking-tighter{
+        letter-spacing: -0.05em;
+}
+
 .text-blue-500{
         --tw-text-opacity: 1;
         color: rgb(59 130 246 / var(--tw-text-opacity));
+}
+
+.text-df-black{
+        --tw-text-opacity: 1;
+        color: rgb(0 0 0 / var(--tw-text-opacity));
 }
 
 .text-df-grey{
@@ -2124,11 +2133,6 @@ details.collapse summary::-webkit-details-marker{
 .text-gray-700{
         --tw-text-opacity: 1;
         color: rgb(55 65 81 / var(--tw-text-opacity));
-}
-
-.text-gray-800{
-        --tw-text-opacity: 1;
-        color: rgb(31 41 55 / var(--tw-text-opacity));
 }
 
 .text-white{
@@ -2161,14 +2165,14 @@ details.collapse summary::-webkit-details-marker{
         transition-duration: 150ms;
 }
 
-.transition-all{
-        transition-property: all;
+.transition-transform{
+        transition-property: transform;
         transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
         transition-duration: 150ms;
 }
 
-.transition-transform{
-        transition-property: transform;
+.transition-all{
+        transition-property: all;
         transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
         transition-duration: 150ms;
 }
@@ -2327,11 +2331,17 @@ details.collapse summary::-webkit-details-marker{
 
 .wysiwyg-credits h4{
         font-family: DenFrie2024 Serif, serif;
-        font-size: calc(0.75rem + 0.6vw);
+        font-size: calc(0.5rem + 0.6vw);
         line-height: calc(125% + 0.25vw);
 }
 
-input[type="text"], input[type="email"]{
+.wysiwyg-artists p{
+        font-family: superclarendon, serif;
+        font-size: calc(0.5rem + 0.6vw);
+        line-height: calc(125% + 0.25vw);
+}
+
+#mailchimp-signup-form input[type="text"], input[type="email"]{
         font-family: superclarendon, serif;
         font-size: calc(0.5rem + 0.6vw);
         line-height: calc(125% + 0.25vw);
@@ -2361,6 +2371,16 @@ input[type="text"], input[type="email"]{
     position: relative;
     opacity: 1; /* Ensure visibility */
     transform: translateY(100%); /* Start off-screen for the loading sequence */
+}
+
+::-moz-selection {
+    color: #000;
+    background: #AD2134;
+}
+
+::selection {
+    color: #000;
+    background: #AD2134;
 }
 
 @font-face {
@@ -2418,6 +2438,18 @@ input[type="text"], input[type="email"]{
                 grid-column: span 3 / span 3;
         }
 
+        .sm\:col-span-9{
+                grid-column: span 9 / span 9;
+        }
+
+        .sm\:col-span-5{
+                grid-column: span 5 / span 5;
+        }
+
+        .sm\:col-span-7{
+                grid-column: span 7 / span 7;
+        }
+
         .sm\:mx-0{
                 margin-left: 0px;
                 margin-right: 0px;
@@ -2431,6 +2463,10 @@ input[type="text"], input[type="email"]{
         .sm\:my-0{
                 margin-top: 0px;
                 margin-bottom: 0px;
+        }
+
+        .sm\:-ml-\[2px\]{
+                margin-left: -2px;
         }
 
         .sm\:-ml-\[3px\]{
@@ -2470,10 +2506,6 @@ input[type="text"], input[type="email"]{
 
         .sm\:block{
                 display: block;
-        }
-
-        .sm\:flex{
-                display: flex;
         }
 
         .sm\:grid{
@@ -2538,6 +2570,14 @@ input[type="text"], input[type="email"]{
                 grid-template-columns: repeat(6, minmax(0, 1fr));
         }
 
+        .sm\:grid-cols-8{
+                grid-template-columns: repeat(8, minmax(0, 1fr));
+        }
+
+        .sm\:grid-cols-7{
+                grid-template-columns: repeat(7, minmax(0, 1fr));
+        }
+
         .sm\:gap-sp2{
                 gap: calc(0.25rem + 1vw);
         }
@@ -2548,6 +2588,12 @@ input[type="text"], input[type="email"]{
 
         .sm\:place-self-end{
                 place-self: end;
+        }
+
+        .sm\:truncate{
+                overflow: hidden;
+                text-overflow: ellipsis;
+                white-space: nowrap;
         }
 
         .sm\:p-sp10{
@@ -2568,27 +2614,33 @@ input[type="text"], input[type="email"]{
                 padding-bottom: 0px;
         }
 
-        .sm\:pb-sp10{
-                padding-bottom: calc(3rem + 2vw);
+        .sm\:pb-sp8{
+                padding-bottom: calc(1rem + 1vw);
         }
 
         .sm\:pt-0{
                 padding-top: 0px;
         }
+
+        .sm\:text-\[10rem\]{
+                font-size: 10rem;
+        }
 }
 
 @media (min-width: 782px){
-
-        .md\:my-6{
-                margin-top: 1.5rem;
-                margin-bottom: 1.5rem;
-        }
 
         .md\:line-clamp-\[8\]{
                 overflow: hidden;
                 display: -webkit-box;
                 -webkit-box-orient: vertical;
                 -webkit-line-clamp: 8;
+        }
+
+        .md\:line-clamp-1{
+                overflow: hidden;
+                display: -webkit-box;
+                -webkit-box-orient: vertical;
+                -webkit-line-clamp: 1;
         }
 
         .md\:flex{

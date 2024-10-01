@@ -2,12 +2,33 @@
 @import "tailwindcss/components";
 @import "tailwindcss/utilities";
 
+@font-face {
+    font-family: 'DenFrie2024 Serif';
+    src: url('/wp-content/themes/tailpress/fonts/DenFrie2024-Serif.woff') format('woff'),
+         url('/wp-content/themes/tailpress/fonts/DenFrie2024-Serif.woff2') format('woff2');   
+    font-weight: normal;
+    font-style: normal;
+    font-display: swap;
+}
+
+@font-face {
+    font-family:"superclarendon";
+    src:url("https://use.typekit.net/af/5bb913/00000000000000007735980f/30/l?primer=7cdcb44be4a7db8877ffa5c0007b8dd865b3bbc383831fe2ea177f62257a9191&fvd=n3&v=3") format("woff2"),url("https://use.typekit.net/af/5bb913/00000000000000007735980f/30/d?primer=7cdcb44be4a7db8877ffa5c0007b8dd865b3bbc383831fe2ea177f62257a9191&fvd=n3&v=3") format("woff"),url("https://use.typekit.net/af/5bb913/00000000000000007735980f/30/a?primer=7cdcb44be4a7db8877ffa5c0007b8dd865b3bbc383831fe2ea177f62257a9191&fvd=n3&v=3") format("opentype");
+    font-display:auto;font-style:normal;font-weight:normal;font-stretch:normal;
+    }
+
+@font-face {
+    font-family:"superclarendon";
+    src:url("https://use.typekit.net/af/1601c1/000000000000000077359813/30/l?primer=7cdcb44be4a7db8877ffa5c0007b8dd865b3bbc383831fe2ea177f62257a9191&fvd=i3&v=3") format("woff2"),url("https://use.typekit.net/af/1601c1/000000000000000077359813/30/d?primer=7cdcb44be4a7db8877ffa5c0007b8dd865b3bbc383831fe2ea177f62257a9191&fvd=i3&v=3") format("woff"),url("https://use.typekit.net/af/1601c1/000000000000000077359813/30/a?primer=7cdcb44be4a7db8877ffa5c0007b8dd865b3bbc383831fe2ea177f62257a9191&fvd=i3&v=3") format("opentype");
+    font-display:auto;font-style:italic;font-weight:normal;font-stretch:normal;
+    }
+
 body {
     @apply font-superclarendon font-light text-base;
 }
 
 h4 {
-    @apply font-dfserif font-normal text-4xl;
+    @apply font-dfserif text-[calc(0.75rem+0.6vw)]/regular;
 }
 
 .wp-block{

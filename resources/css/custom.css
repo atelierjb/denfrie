@@ -59,10 +59,14 @@
 }
 
 .wysiwyg-credits h4 {
-    @apply font-dfserif text-[calc(0.75rem+0.6vw)]/regular;
+    @apply font-dfserif text-regular/regular;
 }
 
-input[type="text"], input[type="email"] {
+.wysiwyg-artists p {
+    @apply font-superclarendon text-regular/regular;
+}
+
+#mailchimp-signup-form input[type="text"], input[type="email"] {
     @apply font-superclarendon text-regular/regular;
 }
 
@@ -90,4 +94,10 @@ input[type="text"], input[type="email"] {
     position: relative;
     opacity: 1; /* Ensure visibility */
     transform: translateY(100%); /* Start off-screen for the loading sequence */
+}
+
+
+::selection {
+    color: #000;
+    background: #AD2134;
 }

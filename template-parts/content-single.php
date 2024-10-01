@@ -10,7 +10,7 @@
 		$exhibition_presskit = get_field('exhibition-presskit');
 	?>
 
-	<section class="w-full relative">
+	<section class="w-full relative mb-sp2">
 		<div class="swiper-container mx-sp5 sm:mx-sp9 overflow-hidden">
 			<div class="swiper-wrapper">
 				<?php 
@@ -21,7 +21,7 @@
 						?>
 						<div class="swiper-slide">
 							<figure class="w-full h-auto aspect-video">
-								<?php echo wp_get_attachment_image($image_id, 'full', false, ['class' => 'w-full h-auto object-cover']); ?>
+								<?php echo wp_get_attachment_image($image_id, 'full', false, ['class' => 'w-full h-full object-cover']); ?>
 								<?php if( $image_caption ): ?>
 									<figcaption class="font-superclarendon text-xsmall/regular text-right mt-1">
 										<?php echo esc_html($image_caption); ?>
@@ -70,7 +70,8 @@
 			});
 		</script>
 	</section>
-		<section class="pb-sp6 sm:pb-sp10">
+
+	<section class="pb-sp2 sm:pb-sp8">
             <div class="w-fit">
                 <h3 class="font-dfserif text-xxl/xxl">
                     <?php the_title(); ?>
@@ -84,78 +85,37 @@
 				
     </section>
 
-	<article class="grid grid-cols-1 sm:grid-cols-2 gap-sp1">
+	<article class="columns-1 sm:columns-2 gap-sp2">
     
     <!-- Left side column -->
-    <div class="flex flex-col gap-sp1">
+	
+
+    <div class="flex flex-col gap-sp2">
+		
+			<?php 
+				$manyartists = get_field('exhibition-many-artists');
+				?>
+
+				<?php if( $manyartists ): // Check if the field is not empty ?>
+					<div>
+						<h4 class="font-dfserif text-[calc(0.75rem+0.6vw)]/regular">
+							<?php echo pll__('Participating artists', 'tailpress'); ?>
+						</h4>
+						<div class="wysiwyg-artists w-full sm:w-[calc(90%+1vw)] my-sp8 sm:my-0">
+							<?php echo wp_kses_post($manyartists); ?>
+						</div>
+					</div>
+			<?php endif; ?>
+		
+
         <?php get_template_part( 'template-parts/section-exhibition-description' ); ?>
         
         <!-- Loop through flexible content for images on the left -->
         <?php if( have_rows('exhibition-flex-images') ): ?>
             <?php while( have_rows('exhibition-flex-images') ): the_row(); ?>
-                <?php if( get_row_layout() == 'image-cols-1-left' ): ?>
+                <?php if( get_row_layout() == 'image-cols-1' ): ?>
                     <?php
                     // Get the image ID and description for image-cols-1-left
-                    $image_id = get_sub_field('image');
-                    $image_description = get_sub_field('image-description');
-                    ?>
-                    <section class="mx-sp5 sm:mx-0 sm:w-full break-inside-avoid font-superclarendon">
-                        <figure class="w-full h-auto animate-image">
-                            <?php echo wp_get_attachment_image($image_id, 'full', false, ['class' => 'w-full h-auto object-cover']); ?>
-                            <?php if($image_description): ?>
-                                <figcaption class="text-xsmall text-right mt-1">
-                                    <?php echo esc_html($image_description); ?>
-                                </figcaption>
-                            <?php endif; ?>
-                        </figure>
-                    </section>
-                <?php endif; ?>
-            <?php endwhile; ?>
-        <?php endif; ?>
-    </div>
-
-    <!-- Right side column -->
-    <div class="flex flex-col gap-sp1">
-		<div class="">
-			<?php 
-				$manyartists = get_field('exhibition-many-artists');
-				$credits = get_field('exhibition-credits');
-				?>
-
-				<?php if( $manyartists ): // Check if the field is not empty ?>
-					<div class="wysiwyg-credits w-full sm:w-[calc(90%+1vw)] my-sp8 sm:my-0">
-						<?php echo wp_kses_post($manyartists); ?>
-					</div>
-				<?php endif; ?>
-				<br>
-				<?php if( $credits ): // Check if the field is not empty ?>
-					<div class="wysiwyg-credits w-full sm:w-[calc(90%+1vw)] my-sp8 sm:my-0">
-						<?php echo wp_kses_post($credits); ?>
-					</div>
-				<?php endif; ?>
-
-			<div class="sm:flex flex-col gap-sp1 my-sp8 font-superclarendon text-medium/medium hidden">
-				<?php if (!empty($exhibition_folder)): ?>
-					<a href="<?php echo esc_url($exhibition_folder); ?>" target="_blank" rel="noopener noreferrer" class="hover:text-df-red underline underline-offset-2">
-						<?php echo pll__('Exhibition folder', 'tailpress'); ?>
-					</a>
-				<?php endif; ?>
-
-				<?php if (!empty($exhibition_presskit)): ?>
-					<a href="<?php echo esc_url($exhibition_presskit); ?>" target="_blank" rel="noopener noreferrer" class="hover:text-df-red underline underline-offset-2">
-						<?php echo pll__('Presskit', 'tailpress'); ?>
-					</a>
-				<?php endif; ?>
-			</div>
-
-		</div>
-
-        <!-- Loop through flexible content for images on the right -->
-        <?php if( have_rows('exhibition-flex-images') ): ?>
-            <?php while( have_rows('exhibition-flex-images') ): the_row(); ?>
-                <?php if( get_row_layout() == 'image-cols-1-right' ): ?>
-                    <?php
-                    // Get the image ID and description for image-cols-1-right
                     $image_id = get_sub_field('image');
                     $image_description = get_sub_field('image-description');
                     ?>
@@ -198,37 +158,39 @@
 				</section>
 			<?php endif; ?>
 		<?php endwhile; ?>
-	<?php endif; ?>
+	<?php endif; ?>	
 
-	<div class="sm:hidden">
-			<?php 
-				$credits = get_field('exhibition-credits');
-				?>
-
-				<?php if( $credits ): // Check if the field is not empty ?>
-					<div class="wysiwyg-credits w-full sm:w-[calc(90%+1vw)] my-sp8 sm:my-0">
-						<?php echo wp_kses_post($credits); ?>
-					</div>
-			<?php endif; ?>
-
-			<div class="sm:flex flex-col gap-sp1 my-sp8 font-superclarendon text-medium/medium hidden">
-				<a href="<?php echo esc_url($exhibition_folder); ?>" target="_blank" rel="noopener noreferrer" class="hover:text-df-red underline underline-offset-2">
-					<?php echo pll__('Exhibition folder', 'tailpress'); ?>
-				</a>
-				<a href="<?php echo esc_url($exhibition_presskit); ?>" target="_blank" rel="noopener noreferrer" class="hover:text-df-red underline underline-offset-2">
-					<?php echo pll__('Presskit', 'tailpress'); ?>
-				</a>
-			</div>
-		</div>
-
-
-	<section class="p-sp5 sm:p-sp10 text-center">
+	<!-- <section class="p-sp5 sm:p-sp10 text-center">
 		<h3 class="font-dfserif text-large/large">
 			<?php echo pll__('The exhibition is generously supported by', 'tailpress'); ?>
 		</h3>
 		<p class="font-superclarendon text-large/large">
 			<?php echo($exhibition_supporters); ?>
 		</p>
+	</section> -->
+
+	<section class="grid grid-cols-1 sm:grid-cols-12 mt-sp4">
+		<?php if (!empty($exhibition_supporters)): ?>
+			<div class="flex flex-col col-span-1 sm:col-span-9">
+				<h4 class="font-dfserif text-medium/medium">
+					<?php echo pll__('The exhibition is generously supported by:', 'tailpress'); ?>
+				</h4>
+				<div class="w-full sm:w-[calc(90%+1vw)] mx-sp5 sm:mx-sp9 my-sp4 font-superclarendon text-xl/xl">
+					<?php echo($exhibition_supporters); ?>
+				</div>		
+			</div>
+		<?php endif; ?>
+
+		<div class="col-span-1 sm:col-span-3">
+			<?php $credits = get_field('exhibition-credits'); ?>
+				<?php if( $credits ): // Check if the field is not empty ?>
+					<div class="wysiwyg-credits w-full sm:w-[calc(90%+1vw)] my-sp8 sm:my-0">
+						<?php echo wp_kses_post($credits); ?>
+					</div>
+				<?php endif; ?>
+		</div>
 	</section>
+
+	
 </div>
 </article>

@@ -59,16 +59,16 @@ $total_posts = $social_query->found_posts;
         <?php while ($social_query->have_posts()) : $social_query->the_post(); ?>
             <div class="collapse py-sp4 grid-cols-1">
                 <input type="checkbox" class="min-h-0 p-0" />
-                <div class="collapse-title p-0 min-h-0 grid sm:grid-cols-4 sm:gap-sp9 text-medium/medium">
-                    <p class="font-superclarendon col-span-1 whitespace-nowrap pt-1 sm:pt-0"> 
+                <div class="collapse-title p-0 min-h-0 grid sm:grid-cols-7 sm:gap-sp9 text-medium/medium">
+                    <p class="font-superclarendon col-span-2 whitespace-nowrap pt-1 sm:pt-0"> 
                         <?php the_field('social-date'); ?> <?php the_field('social-date-start'); ?> <?php the_field('social-date-end'); ?>
                     </p> <br class="sm:hidden">
-                    <p class="font-dfserif leading-[calc(110%+0.2vw)] pb-1 sm:pb-0 col-span-3 line-clamp-1">
+                    <p class="font-dfserif leading-[calc(110%+0.2vw)] pb-1 sm:pb-0 col-span-5 sm:truncate">
                         <?php the_title(); ?>
                     </p>
                 </div>
-                <div class="collapse-content px-0 grid sm:grid-cols-4 sm:gap-sp9">
-                    <figure class="w-full overflow-hidden aspect-video col-span-4 sm:col-span-1 mt-sp4">
+                <div class="collapse-content px-0 grid sm:grid-cols-7 sm:gap-sp9">
+                    <figure class="w-full overflow-hidden aspect-video col-span-7 sm:col-span-2 mt-sp4">
                         <?php 
                         $social_image_id = get_field('social-image'); 
                         if( $social_image_id ) : ?>
@@ -78,8 +78,8 @@ $total_posts = $social_query->found_posts;
                             )); ?>
                         <?php endif; ?>
                     </figure>
-                    <div class="font-superclarendon mt-sp4 text-regular/regular col-span-3 indent-sp8 text-pretty">
-                        <?php the_field('social-description'); ?>
+                    <div class="wysiwyg-content font-superclarendon mt-sp4 text-regular/regular col-span-7 sm:col-span-5">
+                        <?php echo wp_kses_post( get_field('social-description') ); ?>
                     </div>
                 </div>
             </div>

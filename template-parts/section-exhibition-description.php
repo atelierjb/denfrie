@@ -1,4 +1,4 @@
-<section class="w-full sm:w-[calc(90%+1vw)] pb-sp8">
+<section class="w-full sm:w-[calc(90%+1vw)] pb-sp4">
     <div class="font-superclarendon text-regular/regular break-inside-avoid text-pretty">
         <?php 
         $short_text = get_field('exhibition-description-short');
@@ -7,13 +7,21 @@
         $exhibition_presskit = get_field('exhibition-presskit');
         ?>
 
-        <div id="exhibition-text" class="wysiwyg-exhibition overflow-hidden transition-all duration-500 ease-in-out">
+        <?php if (!empty($short_text)): ?>
+            <div class="font-dfserif text-[calc(0.75rem+0.6vw)]/regular">
+                <?php echo pll__('Description', 'tailpress'); ?>
+            </div>
+        <?php endif; ?>
+
+        <div id="exhibition-text" class="wysiwyg-exhibition overflow-hidden">
             <?php echo wp_kses_post($short_text); ?>
         </div>
 
-        <p id="toggle-button" class="font-dfserif text-[calc(0.75rem+0.6vw)]/regular cursor-pointer ml-sp5 sm:ml-sp9 hover:text-df-red mt-4">
-            <?php echo pll__('More', 'tailpress'); ?> ↓
-        </p>
+        <?php if (!empty($long_text)): ?>
+            <p id="toggle-button" class="font-dfserif text-[calc(0.75rem+0.6vw)]/regular cursor-pointer ml-sp5 sm:ml-sp9 hover:text-df-red mt-4">
+                <?php echo pll__('More', 'tailpress'); ?> ↓
+            </p>
+        <?php endif; ?>
     </div>      
 </section>
 
@@ -24,17 +32,22 @@ document.addEventListener('DOMContentLoaded', function () {
 
     const shortText = `<?php echo wp_kses_post($short_text); ?>`;
     const longText = `<?php echo wp_kses_post($long_text); ?>` + `
-        <div class="sm:hidden mt-4 text-medium/medium">
-            <?php if (!empty($exhibition_folder)): ?>
-                <a href="<?php echo esc_url($exhibition_folder); ?>" target="_blank" rel="noopener noreferrer" class="hover:text-df-red underline underline-offset-2">
-                    <?php echo pll__('Exhibition folder', 'tailpress'); ?>
-                </a>
-            <?php endif; ?>
+        <div class="mt-4">
+            <?php if (!empty($exhibition_folder) || !empty($exhibition_presskit)): ?>
+                <h4 class="font-dfserif text-[calc(0.75rem+0.6vw)]/regular">
+                    <?php echo pll__('Additional content', 'tailpress'); ?>
+                </h4>
+                <?php if (!empty($exhibition_folder)): ?>
+                    <a href="<?php echo esc_url($exhibition_folder); ?>" target="_blank" rel="noopener noreferrer" class="hover:text-df-red underline underline-offset-2">
+                        <?php echo pll__('Exhibition folder', 'tailpress'); ?>
+                    </a>
+                <?php endif; ?>
                 <br>
-            <?php if (!empty($exhibition_presskit)): ?>
-                <a href="<?php echo esc_url($exhibition_presskit); ?>" target="_blank" rel="noopener noreferrer" class="hover:text-df-red underline underline-offset-2">
-                    <?php echo pll__('Presskit', 'tailpress'); ?>
-                </a>
+                <?php if (!empty($exhibition_presskit)): ?>
+                    <a href="<?php echo esc_url($exhibition_presskit); ?>" target="_blank" rel="noopener noreferrer" class="hover:text-df-red underline underline-offset-2">
+                        <?php echo pll__('Presskit', 'tailpress'); ?>
+                    </a>
+                <?php endif; ?>
             <?php endif; ?>
         </div>`;
 
