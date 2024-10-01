@@ -109,7 +109,13 @@ function tailpress_nav_menu_add_submenu_class( $classes, $args, $depth ) {
 add_filter( 'nav_menu_submenu_css_class', 'tailpress_nav_menu_add_submenu_class', 10, 3 );
 
 
-// Allow SVG
+
+
+/* -------------------------------------------------------------------------- */
+/*                                  Allow SVG                                 */
+/* -------------------------------------------------------------------------- */
+
+
 add_filter( 'wp_check_filetype_and_ext', function($data, $file, $filename, $mimes) {
 
 	global $wp_version;
@@ -144,7 +150,13 @@ add_filter( 'wp_check_filetype_and_ext', function($data, $file, $filename, $mime
   add_action( 'admin_head', 'fix_svg' );
 
 
-  // Back to top function
+
+
+/* -------------------------------------------------------------------------- */
+/*                            Back to top function                            */
+/* -------------------------------------------------------------------------- */
+
+
   function custom_back_to_top_script() {
     ?>
     <script>
@@ -176,7 +188,9 @@ add_action('wp_enqueue_scripts', 'enqueue_custom_scripts');
 
 
 
-// SOCIALS PAGE //
+/* -------------------------------------------------------------------------- */
+/*                             // SOCIALS PAGE //                             */
+/* -------------------------------------------------------------------------- */
 
 
 // Load more posts via AJAX
@@ -289,7 +303,12 @@ add_action('wp_ajax_filter_search', 'filter_search');
 add_action('wp_ajax_nopriv_filter_search', 'filter_search');
 
 
-// Archive functions
+
+
+/* -------------------------------------------------------------------------- */
+/*                              Archive functions                             */
+/* -------------------------------------------------------------------------- */
+
 
 function enqueue_custom_exhibition_scripts() {
     wp_enqueue_script('exhibition-page-js', get_template_directory_uri() . '/js/exhibition-page.js', ['jquery'], null, true);
@@ -427,12 +446,18 @@ add_action('wp_ajax_search_exhibitions', 'search_exhibitions');
 add_action('wp_ajax_nopriv_search_exhibitions', 'search_exhibitions');
 
 
+
+
+/* -------------------------------------------------------------------------- */
+/*                             Polylang functions                             */
+/* -------------------------------------------------------------------------- */
+
+
 // Custom function to get the translated post title based on the current language
 function pll_get_post_title($id) {
     $translated_id = pll_get_post($id);
     return get_the_title($translated_id);
 }
-
 
 
 /* Add strings for translation in Polylang */
@@ -506,7 +531,12 @@ function my_theme_register_strings() {
 add_action('init', 'my_theme_register_strings');
 
 
-// WORDPRESS ADMIN ADJUSTMENTS
+
+
+/* -------------------------------------------------------------------------- */
+/*                         WORDPRESS ADMIN ADJUSTMENTS                        */
+/* -------------------------------------------------------------------------- */
+
 
 function my_custom_admin_bar() {
     global $wp_admin_bar;
@@ -528,7 +558,8 @@ function my_custom_admin_bar() {
 add_action('wp_before_admin_bar_render', 'my_custom_admin_bar');
 
 
-// Fetching ACF fields to custom post type overviews
+
+/* ---------- Fetching ACF fields to custom post type overviews ---------- */
 
 // Add custom columns for the 'exhibition' post type
 function my_exhibition_custom_columns($columns) {
@@ -649,8 +680,8 @@ add_action('pre_get_posts', 'my_custom_orderby');
 
 
 
+/* -----------------------  edits to WYSIWYG editor ----------------------- */
 
-// edits to WYSIWYG editor
 function enqueue_acf_custom_js() {
     wp_enqueue_script('acf-custom-js', get_template_directory_uri() . '/js/acf-custom.js', array('acf-input'), null, true);
 }
@@ -658,36 +689,7 @@ add_action('acf/input/admin_enqueue_scripts', 'enqueue_acf_custom_js');
 
 
 
-// Swiper.js
-
-function enqueue_swiper_assets() {
-    // Swiper CSS
-    wp_enqueue_style( 'swiper-css', 'https://unpkg.com/swiper/swiper-bundle.min.css', array(), null );
-    
-    // Swiper JS
-    wp_enqueue_script( 'swiper-js', 'https://unpkg.com/swiper/swiper-bundle.min.js', array(), null, true );
-}
-add_action( 'wp_enqueue_scripts', 'enqueue_swiper_assets' );
-
-
-// // GSAP and ScrollTrigger
-function enqueue_gsap_scripts() {
-    // Enqueue GSAP and ScrollTrigger
-    wp_enqueue_script('gsap', 'https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js', array(), null, true);
-    wp_enqueue_script('scrolltrigger', 'https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollTrigger.min.js', array('gsap'), null, true);
-
-    // Enqueue the custom script, making sure it depends on GSAP and ScrollTrigger only
-    wp_enqueue_script('custom-gsap', get_template_directory_uri() . '/js/custom-gsap.js', array('gsap', 'scrolltrigger'), null, true);
-}
-add_action('wp_enqueue_scripts', 'enqueue_gsap_scripts');
-
-
-
-
-
-
-
-
+/* -------------------- Automatic date fields for search -------------------- */
 
 // Hook into ACF's save_post action for custom post type 'social'
 add_action('acf/save_post', 'update_social_date_search_field', 20);
@@ -737,6 +739,45 @@ function update_exhibition_date_search_field($post_id) {
         }
     }
 }
+
+
+/* -------------------------------------------------------------------------- */
+/*                                  Swiper.js                                 */
+/* -------------------------------------------------------------------------- */
+
+
+function enqueue_swiper_assets() {
+    // Swiper CSS
+    wp_enqueue_style( 'swiper-css', 'https://unpkg.com/swiper/swiper-bundle.min.css', array(), null );
+    
+    // Swiper JS
+    wp_enqueue_script( 'swiper-js', 'https://unpkg.com/swiper/swiper-bundle.min.js', array(), null, true );
+}
+add_action( 'wp_enqueue_scripts', 'enqueue_swiper_assets' );
+
+
+
+
+/* -------------------------------------------------------------------------- */
+/*                           GSAP and ScrollTrigger                           */
+/* -------------------------------------------------------------------------- */
+
+function enqueue_gsap_scripts() {
+    // Enqueue GSAP and ScrollTrigger
+    wp_enqueue_script('gsap', 'https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js', array(), null, true);
+    wp_enqueue_script('scrolltrigger', 'https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollTrigger.min.js', array('gsap'), null, true);
+
+    // Enqueue the custom script, making sure it depends on GSAP and ScrollTrigger only
+    wp_enqueue_script('custom-gsap', get_template_directory_uri() . '/js/custom-gsap.js', array('gsap', 'scrolltrigger'), null, true);
+}
+add_action('wp_enqueue_scripts', 'enqueue_gsap_scripts');
+
+
+
+
+/* -------------------------------------------------------------------------- */
+/*                             Newsletter function                            */
+/* -------------------------------------------------------------------------- */
 
 
 // Newsletter sign-up function for Mailchimp
