@@ -169,13 +169,13 @@
 		</p>
 	</section> -->
 
-	<section class="grid grid-cols-1 sm:grid-cols-12 mt-sp4">
+	<section class="grid grid-cols-1 sm:grid-cols-12 mt-sp4 text-center sm:text-left">
 		<?php if (!empty($exhibition_supporters)): ?>
 			<div class="flex flex-col col-span-1 sm:col-span-9">
 				<h4 class="font-dfserif text-medium/medium">
 					<?php echo pll__('The exhibition is generously supported by:', 'tailpress'); ?>
 				</h4>
-				<div class="w-full sm:w-[calc(90%+1vw)] mx-sp5 sm:mx-sp9 my-sp4 font-superclarendon text-xl/xl">
+				<div class="w-full sm:w-[calc(90%+1vw)] mx-0 sm:mx-sp9 my-sp4 font-superclarendon text-xl/xl">
 					<?php echo($exhibition_supporters); ?>
 				</div>		
 			</div>
