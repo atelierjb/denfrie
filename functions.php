@@ -179,11 +179,7 @@ add_filter( 'wp_check_filetype_and_ext', function($data, $file, $filename, $mime
 add_action('wp_footer', 'custom_back_to_top_script');
 
 
-function enqueue_custom_scripts() {
-    wp_enqueue_script('social-page-js', get_template_directory_uri() . '/js/social-page.js', ['jquery'], null, true);
-    wp_localize_script('social-page-js', 'ajaxurl', admin_url('admin-ajax.php'));
-}
-add_action('wp_enqueue_scripts', 'enqueue_custom_scripts');
+
 
 
 
@@ -191,6 +187,33 @@ add_action('wp_enqueue_scripts', 'enqueue_custom_scripts');
 /* -------------------------------------------------------------------------- */
 /*                             // SOCIALS PAGE //                             */
 /* -------------------------------------------------------------------------- */
+
+function enqueue_custom_scripts() {
+    wp_enqueue_script('social-page-js', get_template_directory_uri() . '/js/social-page.js', ['jquery'], null, true);
+
+    // Get the total number of posts for the 'social' post type
+    $args = [
+        'post_type' => 'social',
+        'meta_key' => 'social-date',
+        'orderby' => 'meta_value',
+        'order' => 'DESC',
+        'meta_query' => [
+            [
+                'key' => 'social-date',
+                'compare' => 'EXISTS'
+            ]
+        ]
+    ];
+    $social_query = new WP_Query($args);
+    $total_posts = $social_query->found_posts;
+
+    // Pass data to JavaScript
+    wp_localize_script('social-page-js', 'socialPageData', [
+        'ajax_url' => admin_url('admin-ajax.php'),
+        'total_posts' => $total_posts, // Pass total number of posts
+    ]);
+}
+add_action('wp_enqueue_scripts', 'enqueue_custom_scripts');
 
 
 /* ----------------------- Load more posts via AJAX ---------------------- */
@@ -295,7 +318,7 @@ function filter_search() {
             <hr class="border-df-black">
         <?php endwhile;
     else :
-        echo '<p class="font-superclarendon text-large/large mt-sp4">No results found.</p>';
+        echo '<p class="font-superclarendon text-large/large mt-sp4">' . pll__('No events found.', 'tailpress') . '</p>';
     endif;
 
     wp_die();
@@ -315,13 +338,33 @@ add_action('wp_ajax_nopriv_filter_search', 'filter_search');
 function enqueue_custom_exhibition_scripts() {
     wp_enqueue_script('exhibition-page-js', get_template_directory_uri() . '/js/exhibition-page.js', ['jquery'], null, true);
 
-    // Pass PHP data to the JavaScript file
+    // Get the total number of posts for the 'exhibition' post type
+    $args = [
+        'post_type' => 'exhibition',
+        'meta_key' => 'exhibition-end-date',
+        'orderby' => 'meta_value',
+        'order' => 'DESC',
+        'meta_query' => [
+            [
+                'key' => 'exhibition-end-date',
+                'compare' => '<=',
+                'value' => date('Ymd'),
+                'type' => 'DATE'
+            ]
+        ]
+    ];
+    $exhibition_query = new WP_Query($args);
+    $total_posts = $exhibition_query->found_posts;
+
+    // Pass data to JavaScript
     wp_localize_script('exhibition-page-js', 'exhibition_ajax', [
         'ajaxurl' => admin_url('admin-ajax.php'),
-        'posts_per_page' => 6, // Set the posts per page value here
+        'posts_per_page' => 6, // Set the posts per page value
+        'total_posts' => $total_posts // Pass total number of posts
     ]);
 }
 add_action('wp_enqueue_scripts', 'enqueue_custom_exhibition_scripts');
+
 
 
 /* -------------------- Load more exhibitions via AJAX ------------------- */
@@ -443,7 +486,7 @@ function search_exhibitions() {
             </div>
         <?php endwhile;
     else :
-        echo '<p class="font-superclarendon text-large/large mt-sp4">No results found.</p>';
+        echo '<p class="font-superclarendon text-large/large mt-sp4">' . pll__('No exhibitions found.', 'tailpress') . '</p>';
     endif;
 
     wp_die();

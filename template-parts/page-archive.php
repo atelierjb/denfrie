@@ -52,7 +52,7 @@ $total_posts = $exhibition_query->found_posts;
             <?php echo pll__('Archive', 'tailpress'); ?>
         </h2>
         <form id="search-form">
-            <input type="text" id="search-input" placeholder="<?php echo pll__('Search in archive...', 'tailpress'); ?>" class="font-dfserif text-xl/xl text-df-grey bg-df-light-grey text-right focus:outline-none" autocomplete="off">
+            <input type="text" id="archive-search-input" placeholder="<?php echo pll__('Search in archive...', 'tailpress'); ?>" class="font-dfserif text-xl/xl text-df-grey bg-df-light-grey text-right focus:outline-none" autocomplete="off">
         </form>
     </section>
 
@@ -96,8 +96,8 @@ $total_posts = $exhibition_query->found_posts;
     </section>
 
     <?php if ($total_posts > $posts_per_page) : ?>
-        <div id="load-more-container">
-            <button class="font-dfserif text-xl/xl py-sp9 hover:text-df-red" id="load-more">
+        <div id="archive-load-more-container">
+            <button class="font-dfserif text-xl/xl py-sp9 hover:text-df-red" id="archive-load-more">
                 <?php echo pll__('Show more archive', 'tailpress'); ?> ↓
             </button>
         </div>

@@ -50,7 +50,7 @@ $total_posts = $social_query->found_posts;
             <?php echo pll__('Social calendar', 'tailpress'); ?>
         </h2>
         <form id="search-form">
-            <input type="text" id="search-input" placeholder="<?php echo pll__('Search in calendar...', 'tailpress'); ?>" class="font-dfserif text-xl/xl text-df-grey bg-df-light-grey text-right focus:outline-none" autocomplete="off">
+            <input type="text" id="social-search-input" placeholder="<?php echo pll__('Search in calendar...', 'tailpress'); ?>" class="font-dfserif text-xl/xl text-df-grey bg-df-light-grey text-right focus:outline-none" autocomplete="off">
         </form>
     </section>
     <hr class="border-df-black">
@@ -93,8 +93,8 @@ $total_posts = $social_query->found_posts;
     <?php wp_reset_postdata(); ?>
 </div>
 <?php if ($total_posts > $posts_per_page) : ?>
-    <div id="load-more-container">
-        <button class="font-dfserif text-xl/xl py-sp7 hover:text-df-red" id="load-more"><?php echo pll__('Show previous events ↓', 'tailpress'); ?></button>
+    <div id="social-load-more-container">
+        <button class="font-dfserif text-xl/xl py-sp7 hover:text-df-red" id="social-load-more"><?php echo pll__('Show previous events ↓', 'tailpress'); ?></button>
     </div>
 <?php endif; ?>
 </div>
