@@ -30,7 +30,7 @@
 
 	<header class="px-sp3 py-sp5">
 		<div id="nav-container" class="w-full">
-			<nav class="w-full flex justify-between sm:grid sm:grid-cols-12 pb-sp5 list-none font-dfserif text-medium/[0.95]">
+			<nav class="hidden w-full  sm:grid sm:grid-cols-12 pb-sp5 list-none font-dfserif text-medium/[0.95]">
 				<li class="sm:col-span-3">
 					<?php 
 					$exhibitions_page_id = pll_get_post(2); 
@@ -50,19 +50,19 @@
 				<li class="pl-sp2 sm:pl-0 sm:col-span-3">
 					<a href="<?php echo get_permalink(pll_get_post(5)); ?>"
 					class="hover:text-df-red <?php echo is_page(pll_get_post(5)) ? 'text-df-red underline underline-offset-2' : ''; ?>">
-					<?php echo pll__('Social', 'tailpress'); ?>
+						<?php echo pll__('Social', 'tailpress'); ?>
 					</a>
 				</li>
 				<li class="pl-sp2 sm:pl-0 sm:col-span-3">
 					<a href="<?php echo get_permalink(pll_get_post(3)); ?>"
 					class="hover:text-df-red <?php echo is_page(pll_get_post(3)) ? 'text-df-red underline underline-offset-2' : ''; ?>">
-					<?php echo pll__('About', 'tailpress'); ?>
+						<?php echo pll__('About', 'tailpress'); ?>
 					</a>
 				</li>
 				<li class="sm:col-auto">
 					<a href="<?php echo get_permalink(pll_get_post(4)); ?>"
 					class="hover:text-df-red <?php echo is_page(pll_get_post(4)) ? 'text-df-red underline underline-offset-2' : ''; ?>">
-					<?php echo pll__('Visit', 'tailpress'); ?>
+						<?php echo pll__('Visit', 'tailpress'); ?>
 					</a>
 				</li>
 
@@ -74,12 +74,13 @@
 				</li>
 			</nav>
 
-			<figure class="w-full sm:w-[calc(80%+6.5vw)] pb-sp5">
+			<figure class="relative w-[calc(82.5%+6.5vw)] sm:w-[calc(80%+6.5vw)] pb-sp5">
 				<img src="/wp-content/uploads/2024/07/den-frie-logo-xl.svg" alt="Den Frie Udstillingsbygnings Logo">
 			</figure>
-			<div class="w-full columns-2 sm:flex font-superclarendon text-regular/regular sm:text-[calc(0.5em+1vw)]/[calc(110%+0.25vw)]">
+
+			<div class="w-full columns-2 sm:flex font-superclarendon text-base/regular sm:text-[calc(0.5em+1vw)]/[calc(110%+0.25vw)]">
 				<p class="grow break-inside-avoid w-full sm:w-[calc(40%+6.5vw)]">
-					<?php echo pll__('Oslo plads 1, 2100, Kbh Ø, DK', 'tailpress'); ?><br>
+					<span class="line-clamp-1"><?php echo pll__('Oslo plads 1, 2100, Kbh Ø, DK', 'tailpress'); ?></span>
 					<a href="mailto:<?php the_field('info-email', 'option'); ?>" class="hover:text-df-red"><?php the_field('info-email', 'option'); ?></a><br>
 					<a href="tel:<?php the_field('info-phone', 'option'); ?>" class="hover:text-df-red"><?php the_field('info-phone', 'option'); ?></a>
 				</p>
@@ -91,6 +92,10 @@
 			</div>
 		</div>
 	</header>
+
+	<div class="fixed top-sp1 right-sp2 z-20 sm:hidden">
+		<ion-icon name="menu-sharp" size="large" class="text-df-black cursor-pointer"></ion-icon>
+	</div>
 
 
 
