@@ -20,12 +20,10 @@ Template Name: About
 
 get_header();
 ?>
-
-<main id="primary" class="site-main">
-    <div id="main-content">
-    <article class="columns-1 sm:columns-2 gap-sp1 mx-sp3 my-sp5 pr-sp2">
-            <section class="w-full sm:w-[95%] pb-sp8">
-                <h2 class="font-dfserif text-xl/xl pb-sp1">
+<main data-barba="container" data-barba-namespace="about" class="mx-sp3 my-sp5" id="main-content">
+    <article class="columns-1 sm:columns-2 gap-sp1 pr-sp2">
+            <section class="w-full pb-sp8">
+                <h2 class="font-dfserif text-large/large sm:text-xl/xl pb-sp1">
                     <?php echo pll__('Contact', 'tailpress'); ?>
                 </h2>
                 <div class="columns-2 font-superclarendon text-regular/regular">
@@ -33,7 +31,7 @@ get_header();
                 </div>
             </section>
             <section class="w-full sm:w-[calc(90%+1vw)] pb-sp8">
-                <h2 class="font-dfserif text-xl/xl pb-sp1">
+                <h2 class="font-dfserif text-large/large sm:text-xl/xl pb-sp1">
                     <?php echo esc_html( get_field('about-title-about') ); ?>
                 </h2>
                 <div class="wysiwyg-content font-superclarendon text-regular/regular text-pretty">
@@ -41,14 +39,14 @@ get_header();
                 </div>
             </section>
             <section class="w-full sm:w-[calc(90%+1vw)] pb-sp8">
-                <h2 class="font-dfserif text-xl/xl pb-sp1">
+                <h2 class="font-dfserif text-large/large sm:text-xl/xl pb-sp1">
                     <?php echo esc_html( get_field('about-title-oslo') ); ?>
                 </h2>
                 <div class="wysiwyg-content font-superclarendon text-regular/regular text-pretty">
                     <?php the_field('about-text-oslo'); ?>
                 </div>
             </section>
-            <figure class="w-full px-sp5 sm:px-sp8 sm:w-[calc(90%+1vw)] hidden sm:block break-after-avoid sm:break-after-column pb-sp8 animate-image">
+            <figure class="w-full px-sp5 sm:px-sp8 sm:w-[calc(90%+1vw)] hidden sm:block break-after-avoid sm:break-after-column pb-sp8">
                 <?php 
                 $about_image_1_id = get_field('about-image-1'); 
                 if( $about_image_1_id ) : ?>
@@ -57,7 +55,7 @@ get_header();
                     )); ?>
                 <?php endif; ?>
             </figure>
-            <figure class="w-full px-sp5 sm:px-sp8 sm:w-[calc(90%+1vw)] hidden sm:block pb-sp8 animate-image">
+            <figure class="w-full px-sp5 sm:px-sp8 sm:w-[calc(90%+1vw)] hidden sm:block pb-sp8">
                 <?php 
                     $about_image_2_id = get_field('about-image-2'); 
                     if( $about_image_2_id ) : ?>
@@ -67,7 +65,7 @@ get_header();
                 <?php endif; ?>
             </figure>
             <section class="w-full sm:w-[calc(90%+1vw)] pb-sp8">
-                <h2 class="font-dfserif text-xl/xl pb-sp1">
+                <h2 class="font-dfserif text-large/large sm:text-xl/xl pb-sp1">
                     <?php echo esc_html( get_field('about-title-history') ); ?>
                 </h2>
                 <div class="wysiwyg-content font-superclarendon text-regular/regular text-pretty">
@@ -75,14 +73,14 @@ get_header();
                 </div>
             </section>
             <section class="w-full sm:w-[calc(90%+1vw)] pb-sp8">
-                <h2 class="font-dfserif text-xl/xl pb-sp1">
+                <h2 class="font-dfserif text-large/large sm:text-xl/xl pb-sp1">
                     <?php echo esc_html( get_field('about-title-toaster') ); ?>
                 </h2>
                 <div class="wysiwyg-content font-superclarendon text-regular/regular text-pretty">
                     <?php the_field('about-text-toaster'); ?>
                 </div>
             </section>
-            <figure class="w-full px-sp5 sm:px-sp8 sm:hidden pb-sp8 animate-image">
+            <figure class="w-full px-sp5 sm:px-sp8 sm:hidden pb-sp8">
                 <?php 
                     $about_image_1_id = get_field('about-image-1'); 
                     if( $about_image_1_id ) : ?>
@@ -92,7 +90,6 @@ get_header();
                 <?php endif; ?>
             </figure>
     </article>
-</div>
 </main>
 
 

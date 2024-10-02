@@ -16,15 +16,15 @@
 </head>
 
 <body <?php body_class( 'bg-df-light-grey text-text-df-black antialiased' ); ?>>
-
+<div id="barba-wrapper">
 <?php do_action( 'tailpress_site_before' ); ?>
 
 	<!-- Loading screen: add it right here after <body> tag -->
 	<div id="loading-screen" class="fixed inset-0 bg-df-light-grey flex items-center justify-center z-50">
-        <img id="loading-image" src="/wp-content/uploads/2024/09/loading-image.png" class="h-[35vh] sm:h-[75vh] w-auto opacity-0">
+        <img id="loading-image" src="/wp-content/uploads/2024/09/loading-image.png" class="h-[35vh] md:h-[50vh] sm:h-[75vh] w-auto opacity-0">
     </div>
 
-<div id="page" class="min-h-screen flex flex-col">
+<div id="page" class="min-h-screen flex flex-col text-pretty">
 
 	<?php do_action( 'tailpress_header' ); ?>
 
@@ -47,13 +47,13 @@
 						<?php echo pll__('Exhibitions', 'tailpress'); ?>
 					</a>
 				</li>
-				<li class="sm:col-span-3">
+				<li class="pl-sp2 sm:pl-0 sm:col-span-3">
 					<a href="<?php echo get_permalink(pll_get_post(5)); ?>"
 					class="hover:text-df-red <?php echo is_page(pll_get_post(5)) ? 'text-df-red underline underline-offset-2' : ''; ?>">
 					<?php echo pll__('Social', 'tailpress'); ?>
 					</a>
 				</li>
-				<li class="sm:col-span-3">
+				<li class="pl-sp2 sm:pl-0 sm:col-span-3">
 					<a href="<?php echo get_permalink(pll_get_post(3)); ?>"
 					class="hover:text-df-red <?php echo is_page(pll_get_post(3)) ? 'text-df-red underline underline-offset-2' : ''; ?>">
 					<?php echo pll__('About', 'tailpress'); ?>
@@ -77,13 +77,13 @@
 			<figure class="w-full sm:w-[calc(80%+6.5vw)] pb-sp5">
 				<img src="/wp-content/uploads/2024/07/den-frie-logo-xl.svg" alt="Den Frie Udstillingsbygnings Logo">
 			</figure>
-			<div class="w-full flex font-superclarendon text-[calc(0.5em+1vw)]/[calc(110%+0.25vw)]">
-				<p class="grow sm:w-[calc(40%+6.5vw)]">
+			<div class="w-full columns-2 sm:flex font-superclarendon text-regular/regular sm:text-[calc(0.5em+1vw)]/[calc(110%+0.25vw)]">
+				<p class="grow break-inside-avoid w-full sm:w-[calc(40%+6.5vw)]">
 					<?php echo pll__('Oslo plads 1, 2100, Kbh Ø, DK', 'tailpress'); ?><br>
 					<a href="mailto:<?php the_field('info-email', 'option'); ?>" class="hover:text-df-red"><?php the_field('info-email', 'option'); ?></a><br>
 					<a href="tel:<?php the_field('info-phone', 'option'); ?>" class="hover:text-df-red"><?php the_field('info-phone', 'option'); ?></a>
 				</p>
-				<p class="grow ml-[calc(5%*5vw)] sm:ml-0 sm:w-[calc(40%+7vw)]">
+				<p class="grow break-inside-avoid w-full sm:w-[calc(40%+7vw)]">
 					<?php echo pll__('Tues-Sun : 12 — 18', 'tailpress'); ?><br>
 					<?php echo pll__('(Thurs : 12 — 21)', 'tailpress'); ?><br>
 					<?php echo pll__('Mon : Closed', 'tailpress'); ?>
@@ -92,7 +92,7 @@
 		</div>
 	</header>
 
-	<div id="content" class="site-content flex-grow">
+
 
 		<?php if ( is_front_page() ) { ?>
 			

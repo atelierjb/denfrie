@@ -71,12 +71,12 @@
 		</script>
 	</section>
 
-	<section class="pb-sp2 sm:pb-sp8">
+	<section class="pb-sp5 sm:pb-sp8">
             <div class="w-fit">
-                <h3 class="font-dfserif text-xxl/xxl">
+                <h3 class="font-dfserif text-[calc(0.9rem+1.25vw)]/xl sm:text-xxl/xxl">
                     <?php the_title(); ?>
                 </h3>
-                <p class="-ml-[1px] sm:-ml-[3px] font-superclarendon text-xxl/xxl mt-0 sm:-mt-2">
+                <p class="-ml-[1px] sm:-ml-[3px] font-superclarendon text-[calc(0.9rem+1.25vw)]/xl sm:text-xxl/xxl mt-0 sm:-mt-2">
                     <?php echo esc_html($exhibition_start_date); ?> — <?php echo esc_html($exhibition_end_date); ?>
                 </p>
 
@@ -85,56 +85,45 @@
 				
     </section>
 
-	<article class="columns-1 sm:columns-2 gap-sp2">
-    
-    <!-- Left side column -->
-	
-
-    <div class="flex flex-col gap-sp2">
-		
-			<?php 
-				$manyartists = get_field('exhibition-many-artists');
-				?>
-
+	<article class="columns-1 sm:columns-2">
+		<div class="flex flex-col gap-sp4">
+			<?php $manyartists = get_field('exhibition-many-artists'); ?>
 				<?php if( $manyartists ): // Check if the field is not empty ?>
-					<div>
+					<div class="pb-sp2">
 						<h4 class="font-dfserif text-[calc(0.75rem+0.6vw)]/regular">
 							<?php echo pll__('Participating artists', 'tailpress'); ?>
 						</h4>
-						<div class="wysiwyg-artists w-full sm:w-[calc(90%+1vw)] my-sp8 sm:my-0">
+						<div class="wysiwyg-artists w-full sm:w-[calc(90%+1vw)]">
 							<?php echo wp_kses_post($manyartists); ?>
 						</div>
 					</div>
 			<?php endif; ?>
-		
 
-        <?php get_template_part( 'template-parts/section-exhibition-description' ); ?>
-        
-        <!-- Loop through flexible content for images on the left -->
-        <?php if( have_rows('exhibition-flex-images') ): ?>
-            <?php while( have_rows('exhibition-flex-images') ): the_row(); ?>
-                <?php if( get_row_layout() == 'image-cols-1' ): ?>
-                    <?php
-                    // Get the image ID and description for image-cols-1-left
-                    $image_id = get_sub_field('image');
-                    $image_description = get_sub_field('image-description');
-                    ?>
-                    <section class="mx-sp5 sm:mx-0 sm:w-full break-inside-avoid font-superclarendon">
-                        <figure class="w-full h-auto animate-image">
-                            <?php echo wp_get_attachment_image($image_id, 'full', false, ['class' => 'w-full h-auto object-cover']); ?>
-                            <?php if($image_description): ?>
-                                <figcaption class="text-xsmall text-right mt-1">
-                                    <?php echo esc_html($image_description); ?>
-                                </figcaption>
-                            <?php endif; ?>
-                        </figure>
-                    </section>
-                <?php endif; ?>
-            <?php endwhile; ?>
-        <?php endif; ?>
-    </div>
-
-</article>
+			<?php get_template_part( 'template-parts/section-exhibition-description' ); ?>
+			
+			<?php if( have_rows('exhibition-flex-images') ): ?>
+				<?php while( have_rows('exhibition-flex-images') ): the_row(); ?>
+					<?php if( get_row_layout() == 'image-cols-1' ): ?>
+						<?php
+						// Get the image ID and description for image-cols-1-left
+						$image_id = get_sub_field('image');
+						$image_description = get_sub_field('image-description');
+						?>
+						<section class="mx-sp5 sm:mx-0 sm:w-full break-inside-avoid font-superclarendon">
+							<figure class="w-full h-auto animate-image">
+								<?php echo wp_get_attachment_image($image_id, 'full', false, ['class' => 'w-full h-auto object-cover']); ?>
+								<?php if($image_description): ?>
+									<figcaption class="text-xsmall text-right mt-1">
+										<?php echo esc_html($image_description); ?>
+									</figcaption>
+								<?php endif; ?>
+							</figure>
+						</section>
+					<?php endif; ?>
+				<?php endwhile; ?>
+			<?php endif; ?>
+		</div>
+	</article>
 
 
 	<!-- Loop through the images again and place image-cols-2 outside the columns -->
@@ -146,7 +135,7 @@
 				$image_id = get_sub_field('image');
 				$image_description = get_sub_field('image-description');
 				?>
-				<section class="w-full py-sp8 font-superclarendon">
+				<section class="w-full py-sp4 sm:py-sp8 font-superclarendon">
 					<figure class="mx-sp5 sm:mx-sp9 mb-sp1 aspect-video animate-image">
 						<?php echo wp_get_attachment_image($image_id, 'full', false, ['class' => 'w-full h-auto object-cover']); ?>
 						<?php if($image_description): ?>
@@ -172,7 +161,7 @@
 	<section class="grid grid-cols-1 sm:grid-cols-12 mt-sp4 text-center sm:text-left">
 		<?php if (!empty($exhibition_supporters)): ?>
 			<div class="flex flex-col col-span-1 sm:col-span-9">
-				<h4 class="font-dfserif text-medium/medium">
+				<h4 class="font-dfserif text-[calc(0.75rem+0.6vw)]/regular">
 					<?php echo pll__('The exhibition is generously supported by:', 'tailpress'); ?>
 				</h4>
 				<div class="w-full sm:w-[calc(90%+1vw)] mx-0 sm:mx-sp9 my-sp4 font-superclarendon text-xl/xl">

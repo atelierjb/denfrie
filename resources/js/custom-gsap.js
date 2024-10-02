@@ -27,12 +27,12 @@ document.addEventListener('DOMContentLoaded', function() {
     tl.to("#loading-image", { 
         y: 0, 
         opacity: 1, 
-        duration: 1, 
+        duration: 0.5, 
         ease: "power4.out" 
     });
 
     // Pause for 1 second
-    tl.to("#loading-image", { duration: 1 });
+    tl.to("#loading-image", { duration: 0.5 });
 
     // Loading screen slides up and out of view
     tl.to("#loading-screen", {

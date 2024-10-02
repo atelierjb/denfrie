@@ -1,5 +1,5 @@
 <section class="w-full sm:w-[calc(90%+1vw)] pb-sp4">
-    <div class="font-superclarendon text-regular/regular break-inside-avoid text-pretty">
+    <div class="font-superclarendon text-regular/regular break-inside-avoid">
         <?php 
         $short_text = get_field('exhibition-description-short');
         $long_text = get_field('exhibition-description-long');
@@ -18,7 +18,7 @@
         </div>
 
         <?php if (!empty($long_text)): ?>
-            <p id="toggle-button" class="font-dfserif text-[calc(0.75rem+0.6vw)]/regular cursor-pointer ml-sp5 sm:ml-sp9 hover:text-df-red mt-4">
+            <p id="toggle-button" class="font-dfserif text-[calc(0.75rem+0.6vw)]/regular cursor-pointer ml-sp5 sm:ml-sp9 hover:text-df-red mt-sp1">
                 <?php echo pll__('More', 'tailpress'); ?> ↓
             </p>
         <?php endif; ?>

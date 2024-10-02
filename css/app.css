@@ -571,6 +571,58 @@ html{
         --tw-backdrop-sepia:  ;
 }
 
+.container{
+        width: 100%;
+        padding-right: 0rem;
+        padding-left: 0rem;
+}
+
+@media (min-width: 480px){
+
+        .container{
+                max-width: 480px;
+        }
+}
+
+@media (min-width: 600px){
+
+        .container{
+                max-width: 600px;
+                padding-right: 0rem;
+                padding-left: 0rem;
+        }
+}
+
+@media (min-width: 782px){
+
+        .container{
+                max-width: 782px;
+        }
+}
+
+@media (min-width: 960px){
+
+        .container{
+                max-width: 960px;
+                padding-right: 0rem;
+                padding-left: 0rem;
+        }
+}
+
+@media (min-width: 1280px){
+
+        .container{
+                max-width: 1280px;
+        }
+}
+
+@media (min-width: 1440px){
+
+        .container{
+                max-width: 1440px;
+        }
+}
+
 .avatar.placeholder > div{
         display: flex;
         align-items: center;
@@ -1518,10 +1570,6 @@ details.collapse summary::-webkit-details-marker{
         grid-column: span 2 / span 2;
 }
 
-.col-span-3{
-        grid-column: span 3 / span 3;
-}
-
 .col-span-4{
         grid-column: span 4 / span 4;
 }
@@ -1536,6 +1584,11 @@ details.collapse summary::-webkit-details-marker{
 
 .m-8{
         margin: 2rem;
+}
+
+.mx-0{
+        margin-left: 0px;
+        margin-right: 0px;
 }
 
 .mx-sp3{
@@ -1596,6 +1649,10 @@ details.collapse summary::-webkit-details-marker{
         margin-bottom: 2rem;
 }
 
+.mb-\[calc\(0\.2rem\+1vw\)\]{
+        margin-bottom: calc(0.2rem + 1vw);
+}
+
 .mb-sp1{
         margin-bottom: calc(0.2rem + 0.5vw);
 }
@@ -1606,10 +1663,6 @@ details.collapse summary::-webkit-details-marker{
 
 .mb-sp6{
         margin-bottom: calc(0.5rem + 3vw);
-}
-
-.ml-\[calc\(5\%\*5vw\)\]{
-        margin-left: calc(5% * 5vw);
 }
 
 .ml-sp5{
@@ -1640,11 +1693,24 @@ details.collapse summary::-webkit-details-marker{
         margin-top: calc(0.5rem + 0.75vw);
 }
 
-.line-clamp-1{
-        overflow: hidden;
-        display: -webkit-box;
-        -webkit-box-orient: vertical;
-        -webkit-line-clamp: 1;
+.-ml-\[1\%\]{
+        margin-left: -1%;
+}
+
+.ml-\[1vw\]{
+        margin-left: 1vw;
+}
+
+.-ml-\[2vw\]{
+        margin-left: -2vw;
+}
+
+.-ml-\[1\.8vw\]{
+        margin-left: -1.8vw;
+}
+
+.mb-sp8{
+        margin-bottom: calc(1rem + 1vw);
 }
 
 .line-clamp-2{
@@ -1693,6 +1759,14 @@ details.collapse summary::-webkit-details-marker{
         height: 100%;
 }
 
+.h-sp10{
+        height: calc(3rem + 2vw);
+}
+
+.h-32{
+        height: 8rem;
+}
+
 .min-h-0{
         min-height: 0px;
 }
@@ -1718,12 +1792,64 @@ details.collapse summary::-webkit-details-marker{
         width: 100%;
 }
 
-.max-w-sm{
-        max-width: 24rem;
+.w-\[calc\(80\%\+1vw\)\]{
+        width: calc(80% + 1vw);
 }
 
-.flex-grow{
-        flex-grow: 1;
+.w-\[calc\(50\%\+10vw\)\]{
+        width: calc(50% + 10vw);
+}
+
+.w-\[50\%\]{
+        width: 50%;
+}
+
+.w-\[90\%\]{
+        width: 90%;
+}
+
+.w-\[80\%\]{
+        width: 80%;
+}
+
+.w-\[91\%\]{
+        width: 91%;
+}
+
+.w-\[92\%\]{
+        width: 92%;
+}
+
+.w-\[93\%\]{
+        width: 93%;
+}
+
+.w-\[94\%\]{
+        width: 94%;
+}
+
+.w-\[94\.25\%\]{
+        width: 94.25%;
+}
+
+.w-\[94\.5\%\]{
+        width: 94.5%;
+}
+
+.w-\[calc\(80\%\+6\.5vw\)\]{
+        width: calc(80% + 6.5vw);
+}
+
+.w-\[calc\(40\%\+6\.5vw\)\]{
+        width: calc(40% + 6.5vw);
+}
+
+.w-\[calc\(40\%\+7vw\)\]{
+        width: calc(40% + 7vw);
+}
+
+.max-w-sm{
+        max-width: 24rem;
 }
 
 .grow{
@@ -1774,8 +1900,8 @@ details.collapse summary::-webkit-details-marker{
         grid-template-columns: repeat(1, minmax(0, 1fr));
 }
 
-.grid-cols-2{
-        grid-template-columns: repeat(2, minmax(0, 1fr));
+.grid-cols-6{
+        grid-template-columns: repeat(6, minmax(0, 1fr));
 }
 
 .flex-col{
@@ -1794,16 +1920,16 @@ details.collapse summary::-webkit-details-marker{
         justify-content: space-between;
 }
 
-.gap-0{
-        gap: 0px;
-}
-
 .gap-sp1{
         gap: calc(0.2rem + 0.5vw);
 }
 
 .gap-sp2{
         gap: calc(0.25rem + 1vw);
+}
+
+.gap-sp4{
+        gap: calc(0.5rem + 0.75vw);
 }
 
 .gap-x-sp1{
@@ -1815,6 +1941,19 @@ details.collapse summary::-webkit-details-marker{
         row-gap: calc(2rem + 2vw);
 }
 
+.gap-x-sp2{
+        -moz-column-gap: calc(0.25rem + 1vw);
+             column-gap: calc(0.25rem + 1vw);
+}
+
+.gap-y-sp5{
+        row-gap: calc(0.5rem + 1vw);
+}
+
+.gap-y-sp6{
+        row-gap: calc(0.5rem + 3vw);
+}
+
 .overflow-hidden{
         overflow: hidden;
 }
@@ -1823,10 +1962,6 @@ details.collapse summary::-webkit-details-marker{
         overflow: hidden;
         text-overflow: ellipsis;
         white-space: nowrap;
-}
-
-.text-ellipsis{
-        text-overflow: ellipsis;
 }
 
 .whitespace-nowrap{
@@ -1947,16 +2082,42 @@ details.collapse summary::-webkit-details-marker{
         padding-bottom: calc(2rem + 2vw);
 }
 
+.py-sp2{
+        padding-top: calc(0.25rem + 1vw);
+        padding-bottom: calc(0.25rem + 1vw);
+}
+
+.py-sp3{
+        padding-top: calc(0.25rem + 2vw);
+        padding-bottom: calc(0.25rem + 2vw);
+}
+
+.py-sp6{
+        padding-top: calc(0.5rem + 3vw);
+        padding-bottom: calc(0.5rem + 3vw);
+}
+
+.py-\[calc\(0\.5rem\+0\.5vw\)\]{
+        padding-top: calc(0.5rem + 0.5vw);
+        padding-bottom: calc(0.5rem + 0.5vw);
+}
+
+.py-\[calc\(0\.25rem\+0\.5vw\)\]{
+        padding-top: calc(0.25rem + 0.5vw);
+        padding-bottom: calc(0.25rem + 0.5vw);
+}
+
+.py-sp1{
+        padding-top: calc(0.2rem + 0.5vw);
+        padding-bottom: calc(0.2rem + 0.5vw);
+}
+
 .pb-1{
         padding-bottom: 0.25rem;
 }
 
 .pb-sp1{
         padding-bottom: calc(0.2rem + 0.5vw);
-}
-
-.pb-sp10{
-        padding-bottom: calc(3rem + 2vw);
 }
 
 .pb-sp2{
@@ -1995,6 +2156,34 @@ details.collapse summary::-webkit-details-marker{
         padding-top: calc(0.5rem + 3vw);
 }
 
+.pb-sp3{
+        padding-bottom: calc(0.25rem + 2vw);
+}
+
+.pb-\[calc\(0\.2rem\+0\.25vw\)\]{
+        padding-bottom: calc(0.2rem + 0.25vw);
+}
+
+.pb-\[calc\(0\.1rem\+0\.25vw\)\]{
+        padding-bottom: calc(0.1rem + 0.25vw);
+}
+
+.pl-1{
+        padding-left: 0.25rem;
+}
+
+.pl-sp1{
+        padding-left: calc(0.2rem + 0.5vw);
+}
+
+.pl-sp2{
+        padding-left: calc(0.25rem + 1vw);
+}
+
+.pl-sp3{
+        padding-left: calc(0.25rem + 2vw);
+}
+
 .text-center{
         text-align: center;
 }
@@ -2005,10 +2194,6 @@ details.collapse summary::-webkit-details-marker{
 
 .indent-sp5{
         text-indent: calc(0.5rem + 1vw);
-}
-
-.indent-sp8{
-        text-indent: calc(1rem + 1vw);
 }
 
 .font-dfserif{
@@ -2028,13 +2213,18 @@ details.collapse summary::-webkit-details-marker{
         font-size: 8rem;
 }
 
-.text-\[calc\(0\.5em\+1vw\)\]\/\[calc\(110\%\+0\.25vw\)\]{
-        font-size: calc(0.5em + 1vw);
-        line-height: calc(110% + 0.25vw);
-}
-
 .text-\[calc\(0\.75rem\+0\.6vw\)\]\/regular{
         font-size: calc(0.75rem + 0.6vw);
+        line-height: calc(125% + 0.25vw);
+}
+
+.text-\[calc\(0\.9rem\+1\.25vw\)\]\/xl{
+        font-size: calc(0.9rem + 1.25vw);
+        line-height: calc(115% + 0.25vw);
+}
+
+.text-base\/regular{
+        font-size: 1em;
         line-height: calc(125% + 0.25vw);
 }
 
@@ -2061,6 +2251,10 @@ details.collapse summary::-webkit-details-marker{
 .text-sm{
         font-size: 0.875rem;
         line-height: 1.25rem;
+}
+
+.text-small\/small{
+        font-size: calc(0.4rem + 0.75vw);
 }
 
 .text-xl\/xl{
@@ -2167,12 +2361,6 @@ details.collapse summary::-webkit-details-marker{
 
 .transition-transform{
         transition-property: transform;
-        transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
-        transition-duration: 150ms;
-}
-
-.transition-all{
-        transition-property: all;
         transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
         transition-duration: 150ms;
 }
@@ -2426,10 +2614,6 @@ details.collapse summary::-webkit-details-marker{
                 grid-column: auto;
         }
 
-        .sm\:col-span-1{
-                grid-column: span 1 / span 1;
-        }
-
         .sm\:col-span-2{
                 grid-column: span 2 / span 2;
         }
@@ -2438,16 +2622,12 @@ details.collapse summary::-webkit-details-marker{
                 grid-column: span 3 / span 3;
         }
 
-        .sm\:col-span-9{
-                grid-column: span 9 / span 9;
-        }
-
         .sm\:col-span-5{
                 grid-column: span 5 / span 5;
         }
 
-        .sm\:col-span-7{
-                grid-column: span 7 / span 7;
+        .sm\:col-span-9{
+                grid-column: span 9 / span 9;
         }
 
         .sm\:mx-0{
@@ -2463,6 +2643,11 @@ details.collapse summary::-webkit-details-marker{
         .sm\:my-0{
                 margin-top: 0px;
                 margin-bottom: 0px;
+        }
+
+        .sm\:mx-sp8{
+                margin-left: calc(1rem + 1vw);
+                margin-right: calc(1rem + 1vw);
         }
 
         .sm\:-ml-\[2px\]{
@@ -2485,16 +2670,16 @@ details.collapse summary::-webkit-details-marker{
                 margin-bottom: calc(1rem + 1vw);
         }
 
-        .sm\:ml-0{
-                margin-left: 0px;
-        }
-
         .sm\:ml-sp9{
                 margin-left: calc(2rem + 2vw);
         }
 
         .sm\:mt-sp4{
                 margin-top: calc(0.5rem + 0.75vw);
+        }
+
+        .sm\:ml-0{
+                margin-left: 0px;
         }
 
         .sm\:line-clamp-\[7\]{
@@ -2506,6 +2691,10 @@ details.collapse summary::-webkit-details-marker{
 
         .sm\:block{
                 display: block;
+        }
+
+        .sm\:flex{
+                display: flex;
         }
 
         .sm\:grid{
@@ -2562,28 +2751,16 @@ details.collapse summary::-webkit-details-marker{
                 grid-template-columns: repeat(2, minmax(0, 1fr));
         }
 
-        .sm\:grid-cols-4{
-                grid-template-columns: repeat(4, minmax(0, 1fr));
-        }
-
-        .sm\:grid-cols-6{
-                grid-template-columns: repeat(6, minmax(0, 1fr));
-        }
-
-        .sm\:grid-cols-8{
-                grid-template-columns: repeat(8, minmax(0, 1fr));
-        }
-
         .sm\:grid-cols-7{
                 grid-template-columns: repeat(7, minmax(0, 1fr));
         }
 
-        .sm\:gap-sp2{
-                gap: calc(0.25rem + 1vw);
-        }
-
         .sm\:gap-sp9{
                 gap: calc(2rem + 2vw);
+        }
+
+        .sm\:gap-y-sp9{
+                row-gap: calc(2rem + 2vw);
         }
 
         .sm\:place-self-end{
@@ -2600,18 +2777,36 @@ details.collapse summary::-webkit-details-marker{
                 padding: calc(3rem + 2vw);
         }
 
-        .sm\:px-0{
-                padding-left: 0px;
-                padding-right: 0px;
-        }
-
         .sm\:px-sp8{
                 padding-left: calc(1rem + 1vw);
                 padding-right: calc(1rem + 1vw);
         }
 
+        .sm\:py-sp8{
+                padding-top: calc(1rem + 1vw);
+                padding-bottom: calc(1rem + 1vw);
+        }
+
+        .sm\:py-sp4{
+                padding-top: calc(0.5rem + 0.75vw);
+                padding-bottom: calc(0.5rem + 0.75vw);
+        }
+
+        .sm\:py-0{
+                padding-top: 0px;
+                padding-bottom: 0px;
+        }
+
         .sm\:pb-0{
                 padding-bottom: 0px;
+        }
+
+        .sm\:pb-sp10{
+                padding-bottom: calc(3rem + 2vw);
+        }
+
+        .sm\:pb-sp7{
+                padding-bottom: calc(1rem + 0.5vw);
         }
 
         .sm\:pb-sp8{
@@ -2622,8 +2817,49 @@ details.collapse summary::-webkit-details-marker{
                 padding-top: 0px;
         }
 
+        .sm\:pb-sp9{
+                padding-bottom: calc(2rem + 2vw);
+        }
+
+        .sm\:pb-sp1{
+                padding-bottom: calc(0.2rem + 0.5vw);
+        }
+
+        .sm\:pl-0{
+                padding-left: 0px;
+        }
+
+        .sm\:text-left{
+                text-align: left;
+        }
+
         .sm\:text-\[10rem\]{
                 font-size: 10rem;
+        }
+
+        .sm\:text-\[calc\(0\.5em\+1vw\)\]\/\[calc\(110\%\+0\.25vw\)\]{
+                font-size: calc(0.5em + 1vw);
+                line-height: calc(110% + 0.25vw);
+        }
+
+        .sm\:text-medium\/medium{
+                font-size: calc(0.6rem + 1.15vw);
+                line-height: calc(110% + 0.25vw);
+        }
+
+        .sm\:text-regular\/regular{
+                font-size: calc(0.5rem + 0.6vw);
+                line-height: calc(125% + 0.25vw);
+        }
+
+        .sm\:text-xl\/xl{
+                font-size: calc(0.8rem + 1.15vw);
+                line-height: calc(115% + 0.25vw);
+        }
+
+        .sm\:text-xxl\/xxl{
+                font-size: calc(1rem + 1.5vw);
+                line-height: calc(115% + 0.25vw);
         }
 }
 
@@ -2636,15 +2872,12 @@ details.collapse summary::-webkit-details-marker{
                 -webkit-line-clamp: 8;
         }
 
-        .md\:line-clamp-1{
-                overflow: hidden;
-                display: -webkit-box;
-                -webkit-box-orient: vertical;
-                -webkit-line-clamp: 1;
-        }
-
         .md\:flex{
                 display: flex;
+        }
+
+        .md\:h-\[50vh\]{
+                height: 50vh;
         }
 
         .md\:w-1\/2{

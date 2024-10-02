@@ -47,6 +47,11 @@
           "size": "calc(0.5rem + 0.6vw)"
         },
         {
+          "slug": "base",
+          "name": "Base",
+          "size": "1em"
+        },
+        {
           "slug": "medium",
           "name": "Medium",
           "size": "calc(0.6rem + 1.15vw)"

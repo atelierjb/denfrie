@@ -32,14 +32,14 @@ if ($query->have_posts()) :
         $post_url = get_permalink();
         ?>
 
-        <section class="grid grid-cols-2 sm:grid-cols-6 gap-0 sm:gap-sp2 mt-sp2 sm:mt-sp4">
+        <section class="grid grid-cols-6 gap-sp2 mt-sp2 sm:mt-sp4">
             <div class="col-span-2">
-                <p class="font-superclarendon mb-sp2 sm:mb-sp4 text-medium/medium hidden sm:block">
+                <p class="font-superclarendon mb-sp2 sm:mb-sp4 text-regular/regular sm:text-medium/medium">
                     <a href="<?php echo esc_url($post_url); ?>">
                         <?php echo esc_html($exhibition_start_date); ?> — <?php echo esc_html($exhibition_end_date); ?>
                     </a>
                 </p>
-                <figure class="w-full px-sp5 sm:px-0 mb-sp2 sm:mb-sp8 overflow-hidden aspect-video animate-image">
+                <figure class="w-full mb-sp2 sm:mb-sp8 overflow-hidden aspect-video animate-image">
                 <a href="<?php echo esc_url($post_url); ?>">
                     <?php echo wp_get_attachment_image( $exhibition_image_id, 'full', false, array(
                         'alt' => get_the_title(),
@@ -49,12 +49,12 @@ if ($query->have_posts()) :
                 </figure>
             </div>
             <div class="col-span-4 mb-sp6">
-                <p class="font-superclarendon text-medium/medium mb-sp2 sm:mb-sp4 line-clamp-1">
+                <p class="font-superclarendon text-regular/regular sm:text-medium/medium mb-[calc(0.2rem+1vw)] sm:mb-sp4 truncate">
                     <a href="<?php echo esc_url($post_url); ?>" class="font-dfserif hover:text-df-red">
                         <?php the_title(); ?>
                     </a> 
                 </p>
-                <div class="wysiwyg-content font-superclarendon text-regular/regular text-pretty -mt-[0.5vw] line-clamp-5 sm:line-clamp-[7] md:line-clamp-[8] lg:line-clamp-[9] xl:line-clamp-[10] 2xl:line-clamp-[11]">
+                <div class="wysiwyg-content font-superclarendon text-small/small sm:text-regular/regular text-pretty -mt-[0.5vw] line-clamp-5 sm:line-clamp-[7] md:line-clamp-[8] lg:line-clamp-[9] xl:line-clamp-[10] 2xl:line-clamp-[11]">
                     <?php echo wp_kses_post($exhibition_description); ?> 
                 </div>
             </div>

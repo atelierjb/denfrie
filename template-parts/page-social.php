@@ -43,32 +43,31 @@ $social_query = new WP_Query($args);
 $total_posts = $social_query->found_posts;
 ?>
 
-<main id="primary" class="mx-sp3 my-sp5">
-<div id="main-content">
-    <section class="flex justify-between items-center pb-sp7">
-        <h2 class="font-dfserif text-xl/xl">
+<main data-barba="container" data-barba-namespace="social" class="mx-sp3 my-sp5" id="main-content">
+    <section class="flex justify-between items-center pb-sp5 sm:pb-sp7">
+        <h2 class="font-dfserif text-large/large sm:text-xl/xl">
             <?php echo pll__('Social calendar', 'tailpress'); ?>
         </h2>
         <form id="search-form">
-            <input type="text" id="social-search-input" placeholder="<?php echo pll__('Search in calendar...', 'tailpress'); ?>" class="font-dfserif text-xl/xl text-df-grey bg-df-light-grey text-right focus:outline-none" autocomplete="off">
+            <input type="text" id="social-search-input" placeholder="<?php echo pll__('Search in calendar...', 'tailpress'); ?>" class="font-dfserif text-large/large sm:text-xl/xl text-df-grey bg-df-light-grey text-right focus:outline-none" autocomplete="off">
         </form>
     </section>
     <hr class="border-df-black">
     <div id="social-container">
     <?php if ($social_query->have_posts()) : ?>
         <?php while ($social_query->have_posts()) : $social_query->the_post(); ?>
-            <div class="collapse py-sp4 grid-cols-1">
+            <div class="collapse py-[calc(0.25rem+0.5vw)] sm:py-sp4 grid-cols-1">
                 <input type="checkbox" class="min-h-0 p-0" />
                 <div class="collapse-title p-0 min-h-0 grid sm:grid-cols-7 sm:gap-sp9 text-medium/medium">
                     <p class="font-superclarendon col-span-2 whitespace-nowrap pt-1 sm:pt-0"> 
                         <?php the_field('social-date'); ?> <?php the_field('social-date-start'); ?> <?php the_field('social-date-end'); ?>
                     </p> <br class="sm:hidden">
-                    <p class="font-dfserif leading-[calc(110%+0.2vw)] pb-1 sm:pb-0 col-span-5 sm:truncate">
+                    <p class="font-dfserif leading-[calc(110%+0.2vw)] pb-sp1 sm:pb-0 col-span-5 sm:truncate">
                         <?php the_title(); ?>
                     </p>
                 </div>
                 <div class="collapse-content px-0 grid sm:grid-cols-7 sm:gap-sp9">
-                    <figure class="w-full overflow-hidden aspect-video col-span-7 sm:col-span-2 mt-sp4">
+                    <figure class="w-full overflow-hidden aspect-video col-span-7 sm:col-span-2 mt-sp2 sm:mt-sp4">
                         <?php 
                         $social_image_id = get_field('social-image'); 
                         if( $social_image_id ) : ?>
@@ -85,19 +84,18 @@ $total_posts = $social_query->found_posts;
             </div>
             <hr class="border-df-black">
         <?php endwhile; ?>
-    <?php else : ?>
-        <p class="font-superclarendon text-large/large">
-            <?php echo pll__('No events found.', 'tailpress'); ?>
-        </p>
-    <?php endif; ?>
-    <?php wp_reset_postdata(); ?>
-</div>
-<?php if ($total_posts > $posts_per_page) : ?>
-    <div id="social-load-more-container">
-        <button class="font-dfserif text-xl/xl py-sp7 hover:text-df-red" id="social-load-more"><?php echo pll__('Show previous events ↓', 'tailpress'); ?></button>
+        <?php else : ?>
+            <p class="font-superclarendon text-large/large">
+                <?php echo pll__('No events found.', 'tailpress'); ?>
+            </p>
+        <?php endif; ?>
+        <?php wp_reset_postdata(); ?>
     </div>
-<?php endif; ?>
-</div>
+        <?php if ($total_posts > $posts_per_page) : ?>
+            <div id="social-load-more-container">
+                <button class="font-dfserif text-large/large sm:text-xl/xl py-sp7 hover:text-df-red" id="social-load-more"><?php echo pll__('Show previous events ↓', 'tailpress'); ?></button>
+            </div>
+    <?php endif; ?>
 </main>
 
 

@@ -45,22 +45,21 @@ $exhibition_query = new WP_Query($args);
 $total_posts = $exhibition_query->found_posts;
 ?>
 
-<main class="mx-sp3 my-sp5">
-<div id="main-content">
-    <section class="flex justify-between items-center pb-sp7">
-        <h2 class="font-dfserif text-xl/xl">
+<main data-barba="container" data-barba-namespace="archive" class="mx-sp3 my-sp5" id="main-content">
+    <section class="flex justify-between items-center pb-sp5 sm:pb-sp7">
+        <h2 class="font-dfserif text-large/large sm:text-xl/xl">
             <?php echo pll__('Archive', 'tailpress'); ?>
         </h2>
         <form id="search-form">
-            <input type="text" id="archive-search-input" placeholder="<?php echo pll__('Search in archive...', 'tailpress'); ?>" class="font-dfserif text-xl/xl text-df-grey bg-df-light-grey text-right focus:outline-none" autocomplete="off">
+            <input type="text" id="archive-search-input" placeholder="<?php echo pll__('Search in archive...', 'tailpress'); ?>" class="font-dfserif text-large/large sm:text-xl/xl text-df-grey bg-df-light-grey text-right focus:outline-none" autocomplete="off">
         </form>
     </section>
 
-    <section id="exhibitions-list" class="grid grid-cols-1 sm:grid-cols-2 gap-x-sp1 gap-y-sp9">
+    <section id="exhibitions-list" class="grid grid-cols-1 sm:grid-cols-2 gap-x-sp2 gap-y-sp6 sm:gap-y-sp9">
         <?php if ($exhibition_query->have_posts()) : ?>
             <?php while ($exhibition_query->have_posts()) : $exhibition_query->the_post(); ?>
                 <div class="">
-                    <figure class="mb-sp1 overflow-hidden aspect-video">
+                    <figure class="mx-sp5 sm:mx-0 sm:w-full mb-sp1 overflow-hidden aspect-video">
                         <a href="<?php the_permalink(); ?>">
                             <?php
                             $exhibition_image_id = get_field('exhibition-image');
@@ -74,12 +73,12 @@ $total_posts = $exhibition_query->found_posts;
                         </a>
                     </figure>
                     <div class="w-fit hover:text-df-red">
-                        <h3 class="font-dfserif text-xxl/xxl line-clamp-2">
+                        <h3 class="font-dfserif text-[calc(0.9rem+1.25vw)]/xl sm:text-xxl/xxl line-clamp-2">
                             <a class="" href="<?php the_permalink(); ?>">
                                 <?php the_title(); ?>
                             </a>
                         </h3>
-                        <p class="font-superclarendon text-xxl/xxl">
+                        <p class="font-superclarendon text-[calc(0.9rem+1.25vw)]/xl sm:text-xxl/xxl">
                             <a href="<?php echo esc_url( get_permalink() ); ?>">
                                 <?php echo esc_html( get_field('exhibition-start-date') ); ?> — <?php echo esc_html( get_field('exhibition-end-date') ); ?>
                             </a>
@@ -97,12 +96,11 @@ $total_posts = $exhibition_query->found_posts;
 
     <?php if ($total_posts > $posts_per_page) : ?>
         <div id="archive-load-more-container">
-            <button class="font-dfserif text-xl/xl py-sp9 hover:text-df-red" id="archive-load-more">
+            <button class="font-dfserif text-large/large sm:text-xl/xl py-sp9 hover:text-df-red" id="archive-load-more">
                 <?php echo pll__('Show more archive', 'tailpress'); ?> ↓
             </button>
         </div>
     <?php endif; ?>
-    </div>
 </main>
 
 <?php

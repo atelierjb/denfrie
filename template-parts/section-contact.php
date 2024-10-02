@@ -67,7 +67,7 @@ $query_service = new WP_Query($args_service);
 // Loop for service staff
 if ($query_service->have_posts()) {
     ?>
-    <div class="pb-sp4">
+    <div class="">
         <p class="underline"><?php echo pll__('Service staff', 'tailpress'); ?></p>
         <?php
         while ($query_service->have_posts()) {
