@@ -29,8 +29,8 @@
 	<?php do_action( 'tailpress_header' ); ?>
 
 	<header class="px-sp3 py-sp5">
-		<div id="nav-container" class="w-full">
-			<nav class="hidden w-full  sm:grid sm:grid-cols-12 pb-sp5 list-none font-dfserif text-medium/[0.95]">
+		<div id="nav-container" class="w-full fixed sm:static">
+			<nav class="hidden w-full sm:grid sm:grid-cols-12 pb-sp5 list-none font-dfserif text-medium/[0.95]">
 				<li class="sm:col-span-3">
 					<?php 
 					$exhibitions_page_id = pll_get_post(2); 
@@ -94,9 +94,46 @@
 	</header>
 
 	<div class="fixed top-sp1 right-sp2 z-20 sm:hidden">
-		<ion-icon name="menu-sharp" size="large" class="text-df-black cursor-pointer"></ion-icon>
+		<a href="#" aria-label="Toggle navigation" id="primary-menu-toggle">
+			<ion-icon name="menu-sharp" size="large" class="text-df-black cursor-pointer" id="menu-icon"></ion-icon>
+		</a>
 	</div>
 
+	<nav class="fixed px-sp3 z-10 bg-df-light-grey sm:hidden w-[100vw] h-[100vh] flex flex-col justify-center gap-sp3 list-none font-dfserif text-[calc(1.5rem+1.5vw)]/xxl transform translate-x-full" id="primary-menu">
+		<li class="mt-[10vh] ">
+			<?php 
+			$exhibitions_page_id = pll_get_post(2); 
+			$archive_page_id = pll_get_post(159);
+			?>
+			<a href="<?php echo get_permalink($exhibitions_page_id); ?>" class="hover:text-df-red <?php echo (is_front_page() || is_page($exhibitions_page_id) || is_page($archive_page_id) || (is_singular('exhibition') && get_post_type() == 'exhibition')) ? 'text-df-red underline underline-offset-2' : ''; ?>">
+				<?php echo pll__('Exhibitions', 'tailpress'); ?>
+			</a>
+		</li>
+				<li class="sm:col-span-3">
+					<a href="<?php echo get_permalink(pll_get_post(5)); ?>"
+					class="hover:text-df-red <?php echo is_page(pll_get_post(5)) ? 'text-df-red underline underline-offset-2' : ''; ?>">
+						<?php echo pll__('Social', 'tailpress'); ?>
+					</a>
+				</li>
+				<li class="sm:col-span-3">
+					<a href="<?php echo get_permalink(pll_get_post(3)); ?>"
+					class="hover:text-df-red <?php echo is_page(pll_get_post(3)) ? 'text-df-red underline underline-offset-2' : ''; ?>">
+						<?php echo pll__('About', 'tailpress'); ?>
+					</a>
+				</li>
+				<li class="sm:col-auto">
+					<a href="<?php echo get_permalink(pll_get_post(4)); ?>"
+					class="hover:text-df-red <?php echo is_page(pll_get_post(4)) ? 'text-df-red underline underline-offset-2' : ''; ?>">
+						<?php echo pll__('Visit', 'tailpress'); ?>
+					</a>
+				</li>
+
+				<li class="mt-[10vh] text-xxl/xxl">
+					<a href="<?php echo pll_the_languages(array('raw' => 1))['da']['url']; ?>" class="hover:text-df-red <?php echo pll_current_language() === 'da' ? 'text-df-red underline underline-offset-2' : ''; ?>">DK</a>/<a href="<?php echo pll_the_languages(array('raw' => 1))['en']['url']; ?>" class="hover:text-df-red <?php echo pll_current_language() === 'en' ? 'text-df-red underline underline-offset-2' : ''; ?>">EN</a>
+				</li>
+			</nav>
+
+	
 
 
 		<?php if ( is_front_page() ) { ?>

@@ -20,7 +20,7 @@
 						$image_caption = wp_get_attachment_caption( $image_id );
 						?>
 						<div class="swiper-slide">
-							<figure class="w-full h-auto aspect-[12/8] sm:aspect-video">
+							<figure class="w-full h-auto aspect-[11/8] sm:aspect-video">
 								<?php echo wp_get_attachment_image($image_id, 'full', false, ['class' => 'w-full h-full object-cover']); ?>
 								<?php if( $image_caption ): ?>
 									<figcaption class="font-superclarendon text-xsmall/regular text-right mt-1">
@@ -164,7 +164,7 @@
 				<h4 class="font-dfserif text-xl/xl">
 					<?php echo pll__('The exhibition is generously supported by:', 'tailpress'); ?>
 				</h4>
-				<div class="w-full sm:w-[calc(90%+1vw)] mx-0 sm:mx-sp9 my-sp4 font-superclarendon text-xl/xl">
+				<div class="w-full sm:w-[calc(90%+1vw)] mx-0 sm:mx-sp9 mt-sp4 font-superclarendon text-xl/xl">
 					<?php echo($exhibition_supporters); ?>
 				</div>		
 			</div>
