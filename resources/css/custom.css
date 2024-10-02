@@ -38,6 +38,10 @@
     }
 }
 
+.wysiwyg-exhibition p {
+    @apply font-superclarendon text-base/regular sm:text-regular/regular;
+}
+
 .wysiwyg-exhibition a {
     @apply underline hover:text-df-red;
 }
@@ -55,19 +59,19 @@
 }
 
 .wysiwyg-credits p {
-    @apply font-superclarendon text-regular/regular;
+    @apply font-superclarendon text-base/regular sm:text-regular/regular;
 }
 
 .wysiwyg-credits h4 {
-    @apply font-dfserif text-regular/regular;
+    @apply font-dfserif text-medium/medium;
 }
 
 .wysiwyg-artists p {
-    @apply font-superclarendon text-regular/regular;
+    @apply font-superclarendon text-base/regular sm:text-regular/regular;
 }
 
 #mailchimp-signup-form input[type="text"], input[type="email"] {
-    @apply font-superclarendon text-regular/regular;
+    @apply font-superclarendon text-base/regular sm:text-regular/regular;
 }
 
 

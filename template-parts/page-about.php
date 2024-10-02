@@ -23,26 +23,26 @@ get_header();
 <main data-barba="container" data-barba-namespace="about" class="mx-sp3 my-sp5" id="main-content">
     <article class="columns-1 sm:columns-2 gap-sp1 pr-sp2">
             <section class="w-full pb-sp8">
-                <h2 class="font-dfserif text-large/large sm:text-xl/xl pb-sp1">
+                <h2 class="font-dfserif text-xl/xl pb-sp1">
                     <?php echo pll__('Contact', 'tailpress'); ?>
                 </h2>
-                <div class="columns-2 font-superclarendon text-regular/regular">
+                <div class="columns-2 font-superclarendon text-base/regular sm:text-regular/regular">
                     <?php get_template_part( 'template-parts/section-contact' ); ?>
                 </div>
             </section>
             <section class="w-full sm:w-[calc(90%+1vw)] pb-sp8">
-                <h2 class="font-dfserif text-large/large sm:text-xl/xl pb-sp1">
+                <h2 class="font-dfserif text-xl/xl pb-sp1">
                     <?php echo esc_html( get_field('about-title-about') ); ?>
                 </h2>
-                <div class="wysiwyg-content font-superclarendon text-regular/regular text-pretty">
+                <div class="wysiwyg-content font-superclarendon text-base/regular sm:text-regular/regular text-pretty">
                     <?php the_field('about-text-about'); ?>
                 </div>
             </section>
             <section class="w-full sm:w-[calc(90%+1vw)] pb-sp8">
-                <h2 class="font-dfserif text-large/large sm:text-xl/xl pb-sp1">
+                <h2 class="font-dfserif text-xl/xl pb-sp1">
                     <?php echo esc_html( get_field('about-title-oslo') ); ?>
                 </h2>
-                <div class="wysiwyg-content font-superclarendon text-regular/regular text-pretty">
+                <div class="wysiwyg-content font-superclarendon text-base/regular sm:text-regular/regular text-pretty">
                     <?php the_field('about-text-oslo'); ?>
                 </div>
             </section>
@@ -65,22 +65,22 @@ get_header();
                 <?php endif; ?>
             </figure>
             <section class="w-full sm:w-[calc(90%+1vw)] pb-sp8">
-                <h2 class="font-dfserif text-large/large sm:text-xl/xl pb-sp1">
+                <h2 class="font-dfserif text-xl/xl pb-sp1">
                     <?php echo esc_html( get_field('about-title-history') ); ?>
                 </h2>
-                <div class="wysiwyg-content font-superclarendon text-regular/regular text-pretty">
+                <div class="wysiwyg-content font-superclarendon text-base/regular sm:text-regular/regular text-pretty">
                     <?php the_field('about-text-history'); ?>
                 </div>
             </section>
             <section class="w-full sm:w-[calc(90%+1vw)] pb-sp8">
-                <h2 class="font-dfserif text-large/large sm:text-xl/xl pb-sp1">
+                <h2 class="font-dfserif text-xl/xl pb-sp1">
                     <?php echo esc_html( get_field('about-title-toaster') ); ?>
                 </h2>
-                <div class="wysiwyg-content font-superclarendon text-regular/regular text-pretty">
+                <div class="wysiwyg-content font-superclarendon text-base/regular sm:text-regular/regular text-pretty">
                     <?php the_field('about-text-toaster'); ?>
                 </div>
             </section>
-            <figure class="w-full px-sp5 sm:px-sp8 sm:hidden pb-sp8">
+            <figure class="w-full px-sp5 sm:hidden pb-sp8">
                 <?php 
                     $about_image_1_id = get_field('about-image-1'); 
                     if( $about_image_1_id ) : ?>

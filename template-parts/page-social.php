@@ -45,11 +45,11 @@ $total_posts = $social_query->found_posts;
 
 <main data-barba="container" data-barba-namespace="social" class="mx-sp3 my-sp5" id="main-content">
     <section class="flex justify-between items-center pb-sp5 sm:pb-sp7">
-        <h2 class="font-dfserif text-large/large sm:text-xl/xl">
+        <h2 class="font-dfserif text-xl/xl">
             <?php echo pll__('Social calendar', 'tailpress'); ?>
         </h2>
         <form id="search-form">
-            <input type="text" id="social-search-input" placeholder="<?php echo pll__('Search in calendar...', 'tailpress'); ?>" class="font-dfserif text-large/large sm:text-xl/xl text-df-grey bg-df-light-grey text-right focus:outline-none" autocomplete="off">
+            <input type="text" id="social-search-input" placeholder="<?php echo pll__('Search in calendar...', 'tailpress'); ?>" class="font-dfserif text-xl/xl text-df-grey bg-df-light-grey text-right focus:outline-none" autocomplete="off">
         </form>
     </section>
     <hr class="border-df-black">
@@ -77,7 +77,7 @@ $total_posts = $social_query->found_posts;
                             )); ?>
                         <?php endif; ?>
                     </figure>
-                    <div class="wysiwyg-content font-superclarendon mt-sp4 text-regular/regular col-span-7 sm:col-span-5">
+                    <div class="wysiwyg-content font-superclarendon mt-sp4 text-base/text-regular sm:text-regular/regular col-span-7 sm:col-span-5">
                         <?php echo wp_kses_post( get_field('social-description') ); ?>
                     </div>
                 </div>
@@ -93,7 +93,7 @@ $total_posts = $social_query->found_posts;
     </div>
         <?php if ($total_posts > $posts_per_page) : ?>
             <div id="social-load-more-container">
-                <button class="font-dfserif text-large/large sm:text-xl/xl py-sp7 hover:text-df-red" id="social-load-more"><?php echo pll__('Show previous events ↓', 'tailpress'); ?></button>
+                <button class="font-dfserif text-xl/xl py-sp7 hover:text-df-red" id="social-load-more"><?php echo pll__('Show previous events ↓', 'tailpress'); ?></button>
             </div>
     <?php endif; ?>
 </main>

@@ -22,51 +22,51 @@ get_header();
 ?>
 
 <main data-barba="container" data-barba-namespace="visit" class="mx-sp3 my-sp5" id="main-content">
-    <article class="columns-1 sm:columns-2 gap-sp1 mx-sp3 my-sp5 pr-sp2">
+    <article class="columns-1 sm:columns-2 gap-sp1 pr-sp2">
             <section class="w-full sm:w-[95%] pb-sp8">
-                <h2 class="font-dfserif text-large/large sm:text-xl/xl pb-sp1">
+                <h2 class="font-dfserif text-xl/xl pb-sp1">
                     <?php echo esc_html( get_field('visit-title-admission') ); ?> 
                 </h2>
 
                 <?php get_template_part( 'template-parts/section-prices' ); ?>
             </section>
             <section class="w-full sm:w-[calc(90%+1vw)] pb-sp8" id="annualpass">
-                <h2 class="font-dfserif text-large/large sm:text-xl/xl pb-sp1">
+                <h2 class="font-dfserif text-xl/xl pb-sp1">
                     <?php echo esc_html( get_field('visit-title-annualpass') ); ?>
                 </h2>
-                <div class="wysiwyg-content font-superclarendon text-regular/regular text-pretty">
+                <div class="wysiwyg-content font-superclarendon text-base/regular sm:text-regular/regular text-pretty">
                     <?php the_field('visit-text-annualpass'); ?>
                 </div>
             </section>
             <section class="w-full sm:w-[calc(90%+1vw)] pb-sp8">
-                <h2 class="font-dfserif text-large/large sm:text-xl/xl pb-sp1">
+                <h2 class="font-dfserif text-xl/xl pb-sp1">
                     <?php echo esc_html( get_field('visit-title-pegasus') ); ?>
                 </h2>
-                <div class="wysiwyg-content font-superclarendon text-regular/regular text-pretty">
+                <div class="wysiwyg-content font-superclarendon text-base/regular sm:text-regular/regular text-pretty">
                     <?php the_field('visit-text-pegasus'); ?>
                 </div>
             </section>
             <section class="w-full sm:w-[calc(90%+1vw)] pb-sp8">
-                <h2 class="font-dfserif text-large/large sm:text-xl/xl pb-sp1">
+                <h2 class="font-dfserif text-xl/xl pb-sp1">
                     <?php echo esc_html( get_field('visit-title-transport') ); ?>
                 </h2>
-                <div class="wysiwyg-content font-superclarendon text-regular/regular text-pretty">
+                <div class="wysiwyg-content font-superclarendon text-base/regular sm:text-regular/regular text-pretty">
                     <?php the_field('visit-text-transport'); ?>
                 </div>
             </section>
             <section class="w-full sm:w-[calc(90%+1vw)] pb-sp8 break-after-avoid sm:break-after-column">
-                <h2 class="font-dfserif text-large/large sm:text-xl/xl pb-sp1">
+                <h2 class="font-dfserif text-xl/xl pb-sp1">
                     <?php echo esc_html( get_field('visit-title-openings') ); ?>
                 </h2>
-                <div class="wysiwyg-content font-superclarendon text-regular/regular text-pretty">
+                <div class="wysiwyg-content font-superclarendon text-base/regular sm:text-regular/regular text-pretty">
                     <?php the_field('visit-text-openings'); ?>
                 </div>
             </section>
             <section class="w-full sm:w-[calc(90%+1vw)] pb-sp8" id="newsletter">
-                <h2 class="font-dfserif text-large/large sm:text-xl/xl pb-sp1">
+                <h2 class="font-dfserif text-xl/xl pb-sp1">
                 <?php echo esc_html( get_field('visit-title-newsletter') ); ?>
                 </h2>
-                <div class="wysiwyg-content font-superclarendon text-regular/regular text-pretty pb-sp2">
+                <div class="wysiwyg-content font-superclarendon text-base/regular sm:text-regular/regular text-pretty pb-sp2">
                     <?php the_field('visit-text-newsletter'); ?>
                 </div>
                 <form id="mailchimp-signup-form" method="post" class="flex flex-col gap-sp1">
@@ -78,18 +78,18 @@ get_header();
                 </form>
             </section>
             <section class="w-full sm:w-[calc(90%+1vw)] pb-sp8">
-                <h2 class="font-dfserif text-large/large sm:text-xl/xl pb-sp1">
+                <h2 class="font-dfserif text-xl/xl pb-sp1">
                     <?php echo esc_html( get_field('visit-title-info') ); ?>
                 </h2>
-                <div class="wysiwyg-content font-superclarendon text-regular/regular text-pretty">
+                <div class="wysiwyg-content font-superclarendon text-base/regular sm:text-regular/regular">
                     <?php the_field('visit-text-info'); ?>
                 </div>
             </section>
             <section class="w-full sm:w-[calc(90%+1vw)] pb-sp8">
-                <h2 class="font-dfserif text-large/large sm:text-xl/xl pb-sp1">
+                <h2 class="font-dfserif text-xl/xl pb-sp1">
                     <?php echo esc_html( get_field('visit-title-rent') ); ?>
                 </h2>
-                <div class="wysiwyg-content font-superclarendon text-regular/regular text-pretty">
+                <div class="wysiwyg-content font-superclarendon text-base/regular sm:text-regular/regular">
                     <?php the_field('visit-text-rent'); ?>
                 </div>
             </section>

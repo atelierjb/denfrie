@@ -47,11 +47,11 @@ $total_posts = $exhibition_query->found_posts;
 
 <main data-barba="container" data-barba-namespace="archive" class="mx-sp3 my-sp5" id="main-content">
     <section class="flex justify-between items-center pb-sp5 sm:pb-sp7">
-        <h2 class="font-dfserif text-large/large sm:text-xl/xl">
+        <h2 class="font-dfserif text-xl/xl">
             <?php echo pll__('Archive', 'tailpress'); ?>
         </h2>
         <form id="search-form">
-            <input type="text" id="archive-search-input" placeholder="<?php echo pll__('Search in archive...', 'tailpress'); ?>" class="font-dfserif text-large/large sm:text-xl/xl text-df-grey bg-df-light-grey text-right focus:outline-none" autocomplete="off">
+            <input type="text" id="archive-search-input" placeholder="<?php echo pll__('Search in archive...', 'tailpress'); ?>" class="font-dfserif text-xl/xl text-df-grey bg-df-light-grey text-right focus:outline-none" autocomplete="off">
         </form>
     </section>
 
@@ -73,12 +73,12 @@ $total_posts = $exhibition_query->found_posts;
                         </a>
                     </figure>
                     <div class="w-fit hover:text-df-red">
-                        <h3 class="font-dfserif text-[calc(0.9rem+1.25vw)]/xl sm:text-xxl/xxl line-clamp-2">
+                        <h3 class="font-dfserif text-xxl/xxl line-clamp-2">
                             <a class="" href="<?php the_permalink(); ?>">
                                 <?php the_title(); ?>
                             </a>
                         </h3>
-                        <p class="font-superclarendon text-[calc(0.9rem+1.25vw)]/xl sm:text-xxl/xxl">
+                        <p class="font-superclarendon text-xxl/xxl">
                             <a href="<?php echo esc_url( get_permalink() ); ?>">
                                 <?php echo esc_html( get_field('exhibition-start-date') ); ?> — <?php echo esc_html( get_field('exhibition-end-date') ); ?>
                             </a>

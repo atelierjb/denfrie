@@ -1,5 +1,5 @@
 <section class="w-full sm:w-[calc(90%+1vw)] pb-sp4">
-    <div class="font-superclarendon text-regular/regular break-inside-avoid">
+    <div class="font-superclarendon break-inside-avoid">
         <?php 
         $short_text = get_field('exhibition-description-short');
         $long_text = get_field('exhibition-description-long');
@@ -8,7 +8,7 @@
         ?>
 
         <?php if (!empty($short_text)): ?>
-            <div class="font-dfserif text-[calc(0.75rem+0.6vw)]/regular">
+            <div class="font-dfserif text-xl/xl pb-sp1">
                 <?php echo pll__('Description', 'tailpress'); ?>
             </div>
         <?php endif; ?>
@@ -18,7 +18,7 @@
         </div>
 
         <?php if (!empty($long_text)): ?>
-            <p id="toggle-button" class="font-dfserif text-[calc(0.75rem+0.6vw)]/regular cursor-pointer ml-sp5 sm:ml-sp9 hover:text-df-red mt-sp1">
+            <p id="toggle-button" class="font-dfserif text-xl/xl cursor-pointer ml-sp5 sm:ml-sp9 hover:text-df-red mt-sp1">
                 <?php echo pll__('More', 'tailpress'); ?> ↓
             </p>
         <?php endif; ?>
@@ -32,9 +32,9 @@ document.addEventListener('DOMContentLoaded', function () {
 
     const shortText = `<?php echo wp_kses_post($short_text); ?>`;
     const longText = `<?php echo wp_kses_post($long_text); ?>` + `
-        <div class="mt-4">
+        <div class="my-sp4">
             <?php if (!empty($exhibition_folder) || !empty($exhibition_presskit)): ?>
-                <h4 class="font-dfserif text-[calc(0.75rem+0.6vw)]/regular">
+                <h4 class="font-dfserif text-xl/xl pb-sp1">
                     <?php echo pll__('Additional content', 'tailpress'); ?>
                 </h4>
                 <?php if (!empty($exhibition_folder)): ?>

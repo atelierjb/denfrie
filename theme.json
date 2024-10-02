@@ -49,7 +49,7 @@
         {
           "slug": "base",
           "name": "Base",
-          "size": "1em"
+          "size": "calc(0.6rem + 0.5vw)"
         },
         {
           "slug": "medium",

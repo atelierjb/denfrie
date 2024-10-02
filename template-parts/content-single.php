@@ -20,7 +20,7 @@
 						$image_caption = wp_get_attachment_caption( $image_id );
 						?>
 						<div class="swiper-slide">
-							<figure class="w-full h-auto aspect-video">
+							<figure class="w-full h-auto aspect-[12/8] sm:aspect-video">
 								<?php echo wp_get_attachment_image($image_id, 'full', false, ['class' => 'w-full h-full object-cover']); ?>
 								<?php if( $image_caption ): ?>
 									<figcaption class="font-superclarendon text-xsmall/regular text-right mt-1">
@@ -73,10 +73,10 @@
 
 	<section class="pb-sp5 sm:pb-sp8">
             <div class="w-fit">
-                <h3 class="font-dfserif text-[calc(0.9rem+1.25vw)]/xl sm:text-xxl/xxl">
+                <h3 class="font-dfserif text-xxl/xxl">
                     <?php the_title(); ?>
                 </h3>
-                <p class="-ml-[1px] sm:-ml-[3px] font-superclarendon text-[calc(0.9rem+1.25vw)]/xl sm:text-xxl/xxl mt-0 sm:-mt-2">
+                <p class="-ml-[1px] sm:-ml-[3px] font-superclarendon text-xxl/xxl mt-0 sm:-mt-2">
                     <?php echo esc_html($exhibition_start_date); ?> — <?php echo esc_html($exhibition_end_date); ?>
                 </p>
 
@@ -90,7 +90,7 @@
 			<?php $manyartists = get_field('exhibition-many-artists'); ?>
 				<?php if( $manyartists ): // Check if the field is not empty ?>
 					<div class="pb-sp2">
-						<h4 class="font-dfserif text-[calc(0.75rem+0.6vw)]/regular">
+						<h4 class="font-dfserif text-xl/xl pb-sp1">
 							<?php echo pll__('Participating artists', 'tailpress'); ?>
 						</h4>
 						<div class="wysiwyg-artists w-full sm:w-[calc(90%+1vw)]">
@@ -161,7 +161,7 @@
 	<section class="grid grid-cols-1 sm:grid-cols-12 mt-sp4 text-center sm:text-left">
 		<?php if (!empty($exhibition_supporters)): ?>
 			<div class="flex flex-col col-span-1 sm:col-span-9">
-				<h4 class="font-dfserif text-[calc(0.75rem+0.6vw)]/regular">
+				<h4 class="font-dfserif text-xl/xl">
 					<?php echo pll__('The exhibition is generously supported by:', 'tailpress'); ?>
 				</h4>
 				<div class="w-full sm:w-[calc(90%+1vw)] mx-0 sm:mx-sp9 my-sp4 font-superclarendon text-xl/xl">

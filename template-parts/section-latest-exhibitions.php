@@ -32,9 +32,16 @@ if ($query->have_posts()) :
         $post_url = get_permalink();
         ?>
 
-        <section class="grid grid-cols-6 gap-sp2 mt-sp2 sm:mt-sp4">
+        <section class="grid grid-cols-6 gap-x-sp2 mt-sp2 sm:mt-sp4">
+            <div class="col-span-6 block sm:hidden">
+                <p class="font-superclarendon text-medium/medium mb-sp2 sm:mb-sp4 truncate">
+                    <a href="<?php echo esc_url($post_url); ?>" class="font-dfserif hover:text-df-red">
+                        <?php the_title(); ?>
+                    </a> 
+                </p>
+            </div>
             <div class="col-span-2">
-                <p class="font-superclarendon mb-sp2 sm:mb-sp4 text-regular/regular sm:text-medium/medium">
+                <p class="hidden sm:block font-superclarendon mb-sp2 sm:mb-sp4 text-regular/regular sm:text-medium/medium">
                     <a href="<?php echo esc_url($post_url); ?>">
                         <?php echo esc_html($exhibition_start_date); ?> — <?php echo esc_html($exhibition_end_date); ?>
                     </a>
@@ -49,7 +56,7 @@ if ($query->have_posts()) :
                 </figure>
             </div>
             <div class="col-span-4 mb-sp6">
-                <p class="font-superclarendon text-regular/regular sm:text-medium/medium mb-[calc(0.2rem+1vw)] sm:mb-sp4 truncate">
+                <p class="hidden sm:block font-superclarendon text-regular/regular sm:text-medium/medium mb-[calc(0.2rem+1vw)] sm:mb-sp4 truncate">
                     <a href="<?php echo esc_url($post_url); ?>" class="font-dfserif hover:text-df-red">
                         <?php the_title(); ?>
                     </a> 
