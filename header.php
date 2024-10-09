@@ -20,7 +20,7 @@
 
 	<!-- Loading screen: add it right here after <body> tag -->
 	<div id="loading-screen" class="fixed inset-0 bg-df-light-grey flex items-center justify-center z-50">
-        <img id="loading-image" src="/wp-content/uploads/2024/09/loading-image.png" class="w-[85vw] sm:w-[65vw] h-auto opacity-0">
+        <img id="loading-image" src="/wp-content/uploads/2024/09/loading-image.png" class="h-[90vw] sm:h-[90vh] opacity-0">
     </div>
 
 <div id="page" class="min-h-screen flex flex-col text-pretty">
