@@ -1,68 +1,101 @@
-jQuery(document).ready(function($) {
-    let loadMoreButton = $('#social-load-more'); // Use the updated unique ID
+document.addEventListener('DOMContentLoaded', function() {
+    const loadMoreButton = document.getElementById('social-load-more');
     let page = 1;
-    let loadedPosts = $('#social-container').children().length; // Initial count of loaded posts
-    const totalPosts = socialPageData.total_posts; // Total number of posts passed from PHP
+    let loadedPosts = document.getElementById('social-container').children.length;
+    const totalPosts = socialPageData.total_posts;
 
-    // Load more posts functionality for the social page
-    if (loadMoreButton.length) {
-        loadMoreButton.click(function(e) {
-            e.preventDefault();
-            page++;
-            let data = {
-                'action': 'load_more_posts',
-                'page': page
-            };
+    // Function to reapply the accordion behavior
+    function reapplyAccordionBehavior() {
+        const collapseInputs = document.querySelectorAll('#social-container .collapse input[type="checkbox"]');
 
-            $.post(socialPageData.ajax_url, data, function(response) {
-                if (response.trim() !== '') {
-                    $('#social-container').append(response);
-
-                    // Update the count of loaded posts
-                    loadedPosts = $('#social-container').children().length;
-
-                    // Hide the button if all posts are loaded
-                    if (loadedPosts >= totalPosts) {
-                        loadMoreButton.hide();
+        collapseInputs.forEach(input => {
+            input.addEventListener('change', function() {
+                document.querySelectorAll('.collapse input[type="checkbox"]').forEach(checkbox => {
+                    if (checkbox !== input) {
+                        checkbox.checked = false;
+                        // Remove classes from both <p> tags inside the title
+                        checkbox.closest('.collapse').querySelectorAll('.collapse-title p').forEach(p => {
+                            p.classList.remove('text-df-red', 'underline', 'underline-offset-2');
+                        });
                     }
+                });
 
-                    // Reapply the accordion behavior to new items
-                    $('#social-container .collapse input[type="checkbox"]').change(function() {
-                        $('.collapse input[type="checkbox"]').not(this).prop('checked', false);
-                        $('.collapse-title p').removeClass('text-df-red underline underline-offset-2');
-                        if ($(this).is(':checked')) {
-                            $(this).closest('.collapse').find('.collapse-title p').addClass('text-df-red underline underline-offset-2');
-                        }
-                    });
-                } else {
-                    // No more posts to load; hide the button
-                    loadMoreButton.hide();
-                }
+                // Toggle the class on both <p> tags inside the currently selected item
+                const titlePs = input.closest('.collapse').querySelectorAll('.collapse-title p');
+                titlePs.forEach(p => {
+                    if (input.checked) {
+                        p.classList.add('text-df-red', 'underline', 'underline-offset-2');
+                    } else {
+                        p.classList.remove('text-df-red', 'underline', 'underline-offset-2');
+                    }
+                });
             });
         });
     }
 
-    // Search functionality for the social page
-    $('#social-search-input').on('keyup', function() {
-        let searchQuery = $(this).val();
-        $.ajax({
-            type: 'POST',
-            url: socialPageData.ajax_url, // Use socialPageData.ajax_url here
-            data: {
-                action: 'filter_search',
-                searchQuery: searchQuery
-            },
-            success: function(response) {
-                $('#social-container').html(response);
-                // Reapply the accordion behavior to new items
-                $('#social-container .collapse input[type="checkbox"]').change(function() {
-                    $('.collapse input[type="checkbox"]').not(this).prop('checked', false);
-                    $('.collapse-title p').removeClass('text-df-red underline underline-offset-2');
-                    if ($(this).is(':checked')) {
-                        $(this).closest('.collapse').find('.collapse-title p').addClass('text-df-red underline underline-offset-2');
+    // Load more posts functionality
+    if (loadMoreButton) {
+        loadMoreButton.addEventListener('click', function(e) {
+            e.preventDefault();
+            page++;
+
+            const data = new URLSearchParams();
+            data.append('action', 'load_more_posts');
+            data.append('page', page);
+
+            fetch(socialPageData.ajax_url, {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/x-www-form-urlencoded'
+                },
+                body: data
+            })
+            .then(response => response.text())
+            .then(response => {
+                if (response.trim() !== '') {
+                    document.getElementById('social-container').insertAdjacentHTML('beforeend', response);
+                    loadedPosts = document.getElementById('social-container').children.length;
+
+                    if (loadedPosts >= totalPosts) {
+                        loadMoreButton.style.display = 'none';
                     }
-                });
-            }
+
+                    // Reapply the accordion behavior to new items
+                    reapplyAccordionBehavior();
+                } else {
+                    loadMoreButton.style.display = 'none';
+                }
+            })
+            .catch(error => console.error('Error:', error));
         });
+    }
+
+    // Reapply accordion behavior for initially loaded items
+    reapplyAccordionBehavior();
+
+    // Search functionality for the social page
+    document.getElementById('social-search-input').addEventListener('keyup', function() {
+        const searchQuery = this.value;
+
+        const data = new URLSearchParams();
+        data.append('action', 'filter_search');
+        data.append('searchQuery', searchQuery);
+
+        fetch(socialPageData.ajax_url, {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/x-www-form-urlencoded'
+            },
+            body: data
+        })
+        .then(response => response.text())
+        .then(response => {
+            const socialContainer = document.getElementById('social-container');
+            socialContainer.innerHTML = response;
+
+            // Reapply the accordion behavior to new items
+            reapplyAccordionBehavior();
+        })
+        .catch(error => console.error('Error:', error));
     });
 });

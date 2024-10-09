@@ -24,9 +24,9 @@ get_header();
     <article class="columns-1 sm:columns-2 gap-sp1 pr-sp2">
             <section class="w-full pb-sp8">
                 <h2 class="font-dfserif text-xl/xl pb-sp1">
-                    <?php echo pll__('Contact', 'tailpress'); ?>
+                    <?php echo esc_html( get_field('about-title-contact') ); ?>
                 </h2>
-                <div class="columns-2 font-superclarendon text-base/regular sm:text-regular/regular">
+                <div class="columns-2 font-superclarendon text-base/regular sm:text-regular/regular w-full sm:w-[calc(90%+1vw)]">
                     <?php get_template_part( 'template-parts/section-contact' ); ?>
                 </div>
             </section>

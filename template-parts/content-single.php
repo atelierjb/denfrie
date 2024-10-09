@@ -72,11 +72,11 @@
 	</section>
 
 	<section class="pb-sp5 sm:pb-sp8">
-            <div class="w-fit">
-                <h3 class="font-dfserif text-xxl/xxl">
+            <div class="w-fit text-xxl/xxl sm:text-xxxl/xxl">
+                <h3 class="font-dfserif">
                     <?php the_title(); ?>
                 </h3>
-                <p class="-ml-[1px] sm:-ml-[3px] font-superclarendon text-xxl/xxl mt-0 sm:-mt-2">
+                <p class="-ml-[1px] sm:-ml-[3px] font-superclarendon mt-0 sm:-mt-2">
                     <?php echo esc_html($exhibition_start_date); ?> — <?php echo esc_html($exhibition_end_date); ?>
                 </p>
 
@@ -85,12 +85,11 @@
 				
     </section>
 
-	<article class="columns-1 sm:columns-2">
-		<div class="flex flex-col gap-sp4">
+	<article class="columns-1 sm:columns-2 gap-4">
 			<?php $manyartists = get_field('exhibition-many-artists'); ?>
 				<?php if( $manyartists ): // Check if the field is not empty ?>
 					<div class="pb-sp2">
-						<h4 class="font-dfserif text-xl/xl pb-sp1">
+						<h4 class="font-dfserif text-xl/xl sm:text-medium/medium pb-sp1 sm:pb-0">
 							<?php echo pll__('Participating artists', 'tailpress'); ?>
 						</h4>
 						<div class="wysiwyg-artists w-full sm:w-[calc(90%+1vw)]">
@@ -110,10 +109,10 @@
 						$image_description = get_sub_field('image-description');
 						?>
 						<section class="mx-sp5 sm:mx-0 sm:w-full break-inside-avoid font-superclarendon">
-							<figure class="w-full h-auto animate-image">
+							<figure class="w-full h-auto mb-4">
 								<?php echo wp_get_attachment_image($image_id, 'full', false, ['class' => 'w-full h-auto object-cover']); ?>
 								<?php if($image_description): ?>
-									<figcaption class="text-xsmall text-right mt-1">
+									<figcaption class="text-small sm:text-xsmall text-right mt-1">
 										<?php echo esc_html($image_description); ?>
 									</figcaption>
 								<?php endif; ?>
@@ -122,7 +121,6 @@
 					<?php endif; ?>
 				<?php endwhile; ?>
 			<?php endif; ?>
-		</div>
 	</article>
 
 
@@ -135,11 +133,11 @@
 				$image_id = get_sub_field('image');
 				$image_description = get_sub_field('image-description');
 				?>
-				<section class="w-full py-sp4 sm:py-sp8 font-superclarendon">
-					<figure class="mx-sp5 sm:mx-sp9 mb-sp1 aspect-video animate-image">
+				<section class="w-full font-superclarendon">
+					<figure class="mx-sp5 sm:mx-sp9 my-0 sm:my-4 aspect-video">
 						<?php echo wp_get_attachment_image($image_id, 'full', false, ['class' => 'w-full h-auto object-cover']); ?>
 						<?php if($image_description): ?>
-							<figcaption class="text-xsmall text-right mt-1">
+							<figcaption class="text-small sm:text-xsmall text-right mt-1">
 								<?php echo esc_html($image_description); ?>
 							</figcaption>
 						<?php endif; ?>
@@ -149,31 +147,22 @@
 		<?php endwhile; ?>
 	<?php endif; ?>	
 
-	<!-- <section class="p-sp5 sm:p-sp10 text-center">
-		<h3 class="font-dfserif text-large/large">
-			<?php echo pll__('The exhibition is generously supported by', 'tailpress'); ?>
-		</h3>
-		<p class="font-superclarendon text-large/large">
-			<?php echo($exhibition_supporters); ?>
-		</p>
-	</section> -->
-
-	<section class="grid grid-cols-1 sm:grid-cols-12 mt-sp4 text-center sm:text-left">
+	<section class="grid grid-cols-1 sm:grid-cols-12 mt-sp8 text-left align-baseline">
 		<?php if (!empty($exhibition_supporters)): ?>
-			<div class="flex flex-col col-span-1 sm:col-span-9">
-				<h4 class="font-dfserif text-xl/xl">
-					<?php echo pll__('The exhibition is generously supported by:', 'tailpress'); ?>
+			<div class="wysiwyg-credits flex flex-col col-span-1 sm:col-span-9">
+				<h4 class="">
+					<?php echo pll__('The exhibition is generously supported by', 'tailpress'); ?>
 				</h4>
-				<div class="w-full sm:w-[calc(90%+1vw)] mx-0 sm:mx-sp9 mt-sp4 font-superclarendon text-xl/xl">
+				<div class="w-full sm:w-[calc(90%+1vw)] mx-0 sm:mx-sp9">
 					<?php echo($exhibition_supporters); ?>
 				</div>		
 			</div>
 		<?php endif; ?>
 
-		<div class="col-span-1 sm:col-span-3">
+		<div class="col-span-1 sm:col-span-3 my-sp8 sm:my-0">
 			<?php $credits = get_field('exhibition-credits'); ?>
 				<?php if( $credits ): // Check if the field is not empty ?>
-					<div class="wysiwyg-credits w-full sm:w-[calc(90%+1vw)] my-sp8 sm:my-0">
+					<div class="wysiwyg-credits w-full sm:w-[calc(90%+1vw)]">
 						<?php echo wp_kses_post($credits); ?>
 					</div>
 				<?php endif; ?>

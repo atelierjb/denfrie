@@ -96,7 +96,10 @@ document.addEventListener('DOMContentLoaded', function() {
 });
 
 
-// Navigation toggle
+/* -------------------------------------------------------------------------- */
+/*                            // Navigation toggle                            */
+/* -------------------------------------------------------------------------- */
+
 document.addEventListener('DOMContentLoaded', function () {
     let menuIcon = document.querySelector('#menu-icon');
     let mainNavigation = document.querySelector('#primary-menu');

@@ -59,7 +59,7 @@
 }
 
 .wysiwyg-credits p {
-    @apply font-superclarendon text-base/regular sm:text-regular/regular;
+    @apply font-superclarendon text-base/regular sm:text-regular/regular mx-sp5 sm:mx-0;
 }
 
 .wysiwyg-credits h4 {
@@ -102,6 +102,6 @@
 
 
 ::selection {
-    color: #000;
+    color: #EEE;
     background: #AD2134;
 }

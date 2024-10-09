@@ -28,7 +28,7 @@ get_header();
         </h2>
         <?php get_template_part( 'template-parts/section-current-exhibitions' ); ?>
     </section>
-    <section class="w-full pb-sp5 sm:pb-sp9">
+    <section class="w-full pb-sp7 sm:pb-sp9">
         <h2 class="font-dfserif text-xl/xl pb-sp5 sm:pb-sp7">
             <?php echo pll__('Upcoming Exhibitions', 'tailpress'); ?>
         </h2>

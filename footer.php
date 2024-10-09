@@ -7,7 +7,7 @@
 
 <?php do_action( 'tailpress_content_after' ); ?>
 
-<footer class="w-full flex justify-between sm:grid sm:grid-cols-12 px-sp3 pt-sp6 pb-sp5 list-none font-dfserif text-medium/[0.95]">
+<footer class="w-full flex justify-between sm:grid sm:grid-cols-12 px-sp3 pt-sp6 pb-sp8 sm:pb-sp5 list-none font-dfserif text-medium/[0.95]">
 		<li class="sm:col-span-3">
 			<a href="<?php echo get_permalink(pll_get_post(4)); ?>#newsletter" class="hover:text-df-red">
     			<?php echo pll__('Newsletter', 'tailpress'); ?>
@@ -35,11 +35,12 @@
 		</li>
 </footer>
 
-</div>
+
 
 <?php wp_footer(); ?>
 
-<script type="module" src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.esm.js"></script>
-	<script nomodule src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.js"></script>
+<script type="module" src="https://cdnjs.cloudflare.com/ajax/libs/ionicons/7.1.0/ionicons/ionicons.esm.min.js"></script>
+	<script nomodule src="https://cdnjs.cloudflare.com/ajax/libs/ionicons/7.1.0/ionicons/ionicons.min.js"></script>
+
 </body>
 </html>

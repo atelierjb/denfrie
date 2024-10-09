@@ -15,13 +15,12 @@
 	<?php wp_head(); ?>
 </head>
 
-<body <?php body_class( 'bg-df-light-grey text-text-df-black antialiased' ); ?>>
-<div id="barba-wrapper">
+<body <?php body_class( 'bg-df-light-grey text-text-df-black antialiased' ); ?> data-barba="wrapper">
 <?php do_action( 'tailpress_site_before' ); ?>
 
 	<!-- Loading screen: add it right here after <body> tag -->
 	<div id="loading-screen" class="fixed inset-0 bg-df-light-grey flex items-center justify-center z-50">
-        <img id="loading-image" src="/wp-content/uploads/2024/09/loading-image.png" class="h-[35vh] md:h-[50vh] sm:h-[75vh] w-auto opacity-0">
+        <img id="loading-image" src="/wp-content/uploads/2024/09/loading-image.png" class="w-[85vw] sm:w-[65vw] h-auto opacity-0">
     </div>
 
 <div id="page" class="min-h-screen flex flex-col text-pretty">
@@ -74,13 +73,17 @@
 				</li>
 			</nav>
 
-			<figure class="relative w-[calc(82.5%+6.5vw)] sm:w-[calc(80%+6.5vw)] pb-sp5">
-				<img src="/wp-content/uploads/2024/07/den-frie-logo-xl.svg" alt="Den Frie Udstillingsbygnings Logo">
+			<figure class="w-[calc(82.5%+6.5vw)] sm:w-[calc(80%+6.5vw)] pb-sp5">		
+				<a href="<?php echo home_url(); ?>" class="block sm:hidden">
+					<img src="/wp-content/uploads/2024/07/den-frie-logo-xl.svg" alt="Den Frie Udstillingsbygnings Logo">
+				</a>
+				<img src="/wp-content/uploads/2024/07/den-frie-logo-xl.svg" alt="Den Frie Udstillingsbygnings Logo" class="hidden sm:block">
 			</figure>
 
-			<div class="w-full columns-2 sm:flex font-superclarendon text-base/regular sm:text-[calc(0.5em+1vw)]/[calc(110%+0.25vw)]">
+
+			<div class="w-full columns-2 sm:flex font-superclarendon text-regular/regular sm:text-[calc(0.5em+1vw)]/[calc(110%+0.25vw)]">
 				<p class="grow break-inside-avoid w-full sm:w-[calc(40%+6.5vw)]">
-					<span class="line-clamp-1"><?php echo pll__('Oslo plads 1, 2100, Kbh Ø, DK', 'tailpress'); ?></span>
+					<?php echo pll__('Oslo plads 1, 2100, Kbh Ø, DK', 'tailpress'); ?><br>
 					<a href="mailto:<?php the_field('info-email', 'option'); ?>" class="hover:text-df-red"><?php the_field('info-email', 'option'); ?></a><br>
 					<a href="tel:<?php the_field('info-phone', 'option'); ?>" class="hover:text-df-red"><?php the_field('info-phone', 'option'); ?></a>
 				</p>
@@ -99,8 +102,10 @@
 		</a>
 	</div>
 
-	<nav class="fixed px-sp3 z-10 bg-df-light-grey sm:hidden w-[100vw] h-[100vh] flex flex-col justify-center gap-sp3 list-none font-dfserif text-[calc(1.5rem+1.5vw)]/xxl transform translate-x-full" id="primary-menu">
-		<li class="mt-[10vh] ">
+	<nav class="fixed right-0 p-sp5 px-sp3 z-10 bg-df-light-grey sm:hidden w-[55vw] h-[100vh] flex flex-col gap-sp3 list-none font-dfserif text-xxxl/xxl transform translate-x-full drop-shadow-sm" id="primary-menu">
+
+		
+		<li class="mt-sp7">
 			<?php 
 			$exhibitions_page_id = pll_get_post(2); 
 			$archive_page_id = pll_get_post(159);
@@ -128,7 +133,7 @@
 					</a>
 				</li>
 
-				<li class="mt-[10vh] text-xxl/xxl">
+				<li class="">
 					<a href="<?php echo pll_the_languages(array('raw' => 1))['da']['url']; ?>" class="hover:text-df-red <?php echo pll_current_language() === 'da' ? 'text-df-red underline underline-offset-2' : ''; ?>">DK</a>/<a href="<?php echo pll_the_languages(array('raw' => 1))['en']['url']; ?>" class="hover:text-df-red <?php echo pll_current_language() === 'en' ? 'text-df-red underline underline-offset-2' : ''; ?>">EN</a>
 				</li>
 			</nav>

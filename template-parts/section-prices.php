@@ -1,7 +1,7 @@
 <?php
                 $admission = get_field('visit-admission');
                 if( $admission ): ?>
-                    <div class="font-superclarendon text-medium/medium">
+                    <div class="font-superclarendon text-base/regular sm:text-regular/regular">
                         <div class="columns-2 pb-sp1">
                             <p><?php echo pll__('+16 years', 'tailpress'); ?></p>
                             <p><?php echo $admission['admission-adults']; ?></p>

@@ -55,7 +55,7 @@ $total_posts = $exhibition_query->found_posts;
         </form>
     </section>
 
-    <section id="exhibitions-list" class="grid grid-cols-1 sm:grid-cols-2 gap-x-sp2 gap-y-sp6 sm:gap-y-sp9">
+    <section id="exhibitions-list" class="grid grid-cols-1 sm:grid-cols-2 gap-x-sp2 gap-y-sp7 sm:gap-y-sp9">
         <?php if ($exhibition_query->have_posts()) : ?>
             <?php while ($exhibition_query->have_posts()) : $exhibition_query->the_post(); ?>
                 <div class="">
@@ -72,13 +72,13 @@ $total_posts = $exhibition_query->found_posts;
                             ?>
                         </a>
                     </figure>
-                    <div class="w-fit hover:text-df-red">
-                        <h3 class="font-dfserif text-xxl/xxl line-clamp-2">
+                    <div class="w-fit hover:text-df-red text-xxl/xxl sm:text-xxxl/xxl">
+                        <h3 class="font-dfserif line-clamp-2">
                             <a class="" href="<?php the_permalink(); ?>">
                                 <?php the_title(); ?>
                             </a>
                         </h3>
-                        <p class="font-superclarendon text-xxl/xxl">
+                        <p class="font-superclarendon">
                             <a href="<?php echo esc_url( get_permalink() ); ?>">
                                 <?php echo esc_html( get_field('exhibition-start-date') ); ?> — <?php echo esc_html( get_field('exhibition-end-date') ); ?>
                             </a>
@@ -96,7 +96,7 @@ $total_posts = $exhibition_query->found_posts;
 
     <?php if ($total_posts > $posts_per_page) : ?>
         <div id="archive-load-more-container">
-            <button class="font-dfserif text-large/large sm:text-xl/xl py-sp9 hover:text-df-red" id="archive-load-more">
+            <button class="font-dfserif text-xl/xl py-sp9 hover:text-df-red" id="archive-load-more">
                 <?php echo pll__('Show more archive', 'tailpress'); ?> ↓
             </button>
         </div>

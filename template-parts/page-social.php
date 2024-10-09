@@ -58,7 +58,7 @@ $total_posts = $social_query->found_posts;
         <?php while ($social_query->have_posts()) : $social_query->the_post(); ?>
             <div class="collapse py-[calc(0.25rem+0.5vw)] sm:py-sp4 grid-cols-1">
                 <input type="checkbox" class="min-h-0 p-0" />
-                <div class="collapse-title p-0 min-h-0 grid sm:grid-cols-7 sm:gap-sp9 text-medium/medium">
+                <div class="collapse-title p-0 min-h-0 grid sm:grid-cols-7 sm:gap-sp9 text-large/large">
                     <p class="font-superclarendon col-span-2 whitespace-nowrap pt-1 sm:pt-0"> 
                         <?php the_field('social-date'); ?> <?php the_field('social-date-start'); ?> <?php the_field('social-date-end'); ?>
                     </p> <br class="sm:hidden">
@@ -77,7 +77,7 @@ $total_posts = $social_query->found_posts;
                             )); ?>
                         <?php endif; ?>
                     </figure>
-                    <div class="wysiwyg-content font-superclarendon mt-sp4 text-base/text-regular sm:text-regular/regular col-span-7 sm:col-span-5">
+                    <div class="wysiwyg-content font-superclarendon mt-sp4 text-base/regular sm:text-regular/regular col-span-7 sm:col-span-5">
                         <?php echo wp_kses_post( get_field('social-description') ); ?>
                     </div>
                 </div>

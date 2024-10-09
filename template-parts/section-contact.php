@@ -1,88 +1,53 @@
-<?php
-// Arguments for WP_Query for non-service staff
-$args_non_service = array(
-    'post_type' => 'team-member', // Custom post type key
-    'posts_per_page' => -1, // Get all posts
-    'meta_key' => 'staff-order', // Custom field to sort by
-    'orderby' => 'meta_value_num', // Order by custom field numeric value
-    'order' => 'ASC', // Ascending order
-    'meta_query' => array(
-        array(
-            'key' => 'service-staff-option',
-            'value' => '0', // false
-            'compare' => '=='
-        )
-    )
-);
+<?php if( have_rows('team') ): ?>
+    <?php while( have_rows('team') ): the_row(); ?>
+        <?php if( get_row_layout() == 'team-member' ): ?>
+            <div class="pb-sp4 break-inside-avoid">
+                <?php
+                // Fetch ACF fields for each team member
+                $team_member_title = get_sub_field('team-member-title');
+                $team_member_name = get_sub_field('team-member-name');
+                $team_member_mail = get_sub_field('team-member-mail');
+                $team_member_phone = get_sub_field('team-member-phone');
+                ?>
+                
+                <!-- Output the team member details -->
+                <?php if( $team_member_title ): ?>
+                    <p class="underline"><?php echo esc_html($team_member_title); ?></p>
+                <?php endif; ?>
 
-// Custom Query for non-service staff
-$query_non_service = new WP_Query($args_non_service);
+                <?php if( $team_member_name ): ?>
+                    <p><?php echo esc_html($team_member_name); ?></p>
+                <?php endif; ?>
 
-// Loop for non-service staff
-if ($query_non_service->have_posts()) {
-    while ($query_non_service->have_posts()) {
-        $query_non_service->the_post();
+                <?php if( $team_member_mail ): ?>
+                    <p class="hover:text-df-red w-fit">
+                        <a href="mailto:<?php echo esc_attr($team_member_mail); ?>"><?php echo esc_html($team_member_mail); ?></a>
+                    </p>
+                <?php endif; ?>
 
-        // Get ACF fields
-        $staff_title = get_field('staff-title');
-        $staff_mail = get_field('staff-mail');
-        $staff_phone = get_field('staff-phone');
+                <?php if( $team_member_phone ): ?>
+                    <p class="hover:text-df-red w-fit">
+                        <a href="tel:<?php echo esc_attr($team_member_phone); ?>"><?php echo esc_html($team_member_phone); ?></a>
+                    </p>
+                <?php endif; ?>
+            </div>
+        <?php endif; ?>
+    <?php endwhile; ?>
+<?php endif; ?>
 
-        // Display non-service staff
-        ?>
-        <div class="pb-sp4 break-inside-avoid">
-            <p class="underline"><?php echo esc_html($staff_title); ?></p>
-            <p><?php the_title(); ?></p>
-            <p class="hover:text-df-red"><a href="mailto:<?php echo esc_attr($staff_mail); ?>"><?php echo esc_html($staff_mail); ?></a></p>
-            <p class="hover:text-df-red"><a href="tel:<?php echo esc_attr($staff_phone); ?>"><?php echo esc_html($staff_phone); ?></a></p>
-        </div>
+
+
+<p class="underline"><?php echo esc_html( get_field('about-title-servicestaff') ); ?></p>
+<?php if( have_rows('service-staff') ): ?>
+    <?php while( have_rows('service-staff') ): the_row(); ?>
         <?php
-    }
-    wp_reset_postdata(); // Restore original Post Data
-} else {
-    ?>
-    <p><?php echo pll__('No staff members found.', 'tailpress'); ?></p>
-    <?php
-}
-?>
-
-<?php
-// Arguments for WP_Query for service staff
-$args_service = array(
-    'post_type' => 'team-member', // Custom post type key
-    'posts_per_page' => -1, // Get all posts
-    'order' => 'ASC', // Ascending order
-    'meta_query' => array(
-        array(
-            'key' => 'service-staff-option',
-            'value' => '1', // true
-            'compare' => '=='
-        )
-    )
-);
-
-// Custom Query for service staff
-$query_service = new WP_Query($args_service);
-
-// Loop for service staff
-if ($query_service->have_posts()) {
-    ?>
-    <div class="">
-        <p class="underline"><?php echo pll__('Service staff', 'tailpress'); ?></p>
-        <?php
-        while ($query_service->have_posts()) {
-            $query_service->the_post();
-            ?>
-            <p><?php the_title(); ?></p>
-            <?php
-        }
+        // Fetch the service staff name
+        $service_staff_name = get_sub_field('service-staff-name');
         ?>
-    </div>
-    <?php
-    wp_reset_postdata(); // Restore original Post Data
-} else {
-    ?>
-    <p><?php echo pll__('No service staff members found.', 'tailpress'); ?></p>
-    <?php
-}
-?>
+        
+        <?php if( $service_staff_name ): ?>
+            <p><?php echo esc_html($service_staff_name); ?></p>
+        <?php endif; ?>
+        
+    <?php endwhile; ?>
+<?php endif; ?>

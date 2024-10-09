@@ -6,24 +6,29 @@ document.getElementById('mailchimp-signup-form').addEventListener('submit', func
     const surname = document.getElementById('surname').value;
     const responseMessage = document.getElementById('response-message');
 
-    fetch(ajax_object.ajax_url + '?action=mailchimp_subscribe', {
+    // Prepare the data to send via POST
+    const data = new URLSearchParams();
+    data.append('email', email);
+    data.append('name', name);
+    data.append('surname', surname);
+
+    // Use the fetch API to send the data
+    fetch(`${ajax_object.ajax_url}?action=mailchimp_subscribe`, {
         method: 'POST',
         headers: {
             'Content-Type': 'application/x-www-form-urlencoded'
         },
-        body: `email=${encodeURIComponent(email)}&name=${encodeURIComponent(name)}&surname=${encodeURIComponent(surname)}`
+        body: data.toString() // Properly encode the form data
     })
-    .then(response => response.json()) // Ensure the response is parsed as JSON
+    .then(response => response.json()) // Parse the JSON response
     .then(data => {
-        if (data.success) {
-            responseMessage.textContent = 'Successfully subscribed!';
-        } else {
-            // Display detailed error message from backend
-            responseMessage.textContent = `Error: ${data.message || 'Unknown error occurred.'}`;
-        }
+        // Display success or error message based on response
+        responseMessage.textContent = data.success 
+            ? 'Successfully subscribed!' 
+            : `Error: ${data.message || 'Unknown error occurred.'}`;
     })
     .catch(error => {
-        // Log the error for better debugging
+        // Handle and display any errors that occur
         console.error('Error occurred:', error);
         responseMessage.textContent = `An error occurred: ${error.message || 'Unknown error occurred.'}`;
     });

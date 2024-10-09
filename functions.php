@@ -157,7 +157,7 @@ add_filter( 'wp_check_filetype_and_ext', function($data, $file, $filename, $mime
 /* -------------------------------------------------------------------------- */
 
 
-  function custom_back_to_top_script() {
+function custom_back_to_top_script() {
     ?>
     <script>
         document.addEventListener('DOMContentLoaded', function() {
@@ -189,7 +189,8 @@ add_action('wp_footer', 'custom_back_to_top_script');
 /* -------------------------------------------------------------------------- */
 
 function enqueue_custom_scripts() {
-    wp_enqueue_script('social-page-js', get_template_directory_uri() . '/js/social-page.js', ['jquery'], null, true);
+    wp_enqueue_script('social-page-js', get_template_directory_uri() . '/js/social-page.js', array(), null, true);
+
 
     // Get the total number of posts for the 'social' post type
     $args = [
@@ -234,18 +235,18 @@ function load_more_posts() {
 
     if ($social_query->have_posts()) :
         while ($social_query->have_posts()) : $social_query->the_post(); ?>
-            <div class="collapse py-sp4 grid-cols-1">
+            <div class="collapse py-[calc(0.25rem+0.5vw)] sm:py-sp4 grid-cols-1">
                 <input type="checkbox" class="min-h-0 p-0" />
-                <div class="collapse-title p-0 min-h-0 grid sm:grid-cols-7 sm:gap-sp9 text-medium/medium">
+                <div class="collapse-title p-0 min-h-0 grid sm:grid-cols-7 sm:gap-sp9 text-large/large">
                     <p class="font-superclarendon col-span-2 whitespace-nowrap pt-1 sm:pt-0"> 
                         <?php the_field('social-date'); ?> <?php the_field('social-date-start'); ?> <?php the_field('social-date-end'); ?>
                     </p> <br class="sm:hidden">
-                    <p class="font-dfserif leading-[calc(110%+0.2vw)] pb-1 sm:pb-0 col-span-5 sm:truncate">
+                    <p class="font-dfserif leading-[calc(110%+0.2vw)] pb-sp1 sm:pb-0 col-span-5 sm:truncate">
                         <?php the_title(); ?>
                     </p>
                 </div>
                 <div class="collapse-content px-0 grid sm:grid-cols-7 sm:gap-sp9">
-                    <figure class="w-full overflow-hidden aspect-video col-span-7 sm:col-span-2 mt-sp4">
+                    <figure class="w-full overflow-hidden aspect-video col-span-7 sm:col-span-2 mt-sp2 sm:mt-sp4">
                         <?php 
                         $social_image_id = get_field('social-image'); 
                         if( $social_image_id ) : ?>
@@ -255,7 +256,7 @@ function load_more_posts() {
                             )); ?>
                         <?php endif; ?>
                     </figure>
-                    <div class="wysiwyg-content font-superclarendon mt-sp4 text-regular/regular col-span-7 sm:col-span-5">
+                    <div class="wysiwyg-content font-superclarendon mt-sp4 text-base/regular sm:text-regular/regular col-span-7 sm:col-span-5">
                         <?php echo wp_kses_post( get_field('social-description') ); ?>
                     </div>
                 </div>
@@ -289,18 +290,18 @@ function filter_search() {
 
     if ($social_query->have_posts()) :
         while ($social_query->have_posts()) : $social_query->the_post(); ?>
-            <div class="collapse py-sp4 grid-cols-1">
+            <div class="collapse py-[calc(0.25rem+0.5vw)] sm:py-sp4 grid-cols-1">
                 <input type="checkbox" class="min-h-0 p-0" />
-                <div class="collapse-title p-0 min-h-0 grid sm:grid-cols-7 sm:gap-sp9 text-medium/medium">
+                <div class="collapse-title p-0 min-h-0 grid sm:grid-cols-7 sm:gap-sp9 text-large/large">
                     <p class="font-superclarendon col-span-2 whitespace-nowrap pt-1 sm:pt-0"> 
                         <?php the_field('social-date'); ?> <?php the_field('social-date-start'); ?> <?php the_field('social-date-end'); ?>
                     </p> <br class="sm:hidden">
-                    <p class="font-dfserif leading-[calc(110%+0.2vw)] pb-1 sm:pb-0 col-span-5 sm:truncate">
+                    <p class="font-dfserif leading-[calc(110%+0.2vw)] pb-sp1 sm:pb-0 col-span-5 sm:truncate">
                         <?php the_title(); ?>
                     </p>
                 </div>
                 <div class="collapse-content px-0 grid sm:grid-cols-7 sm:gap-sp9">
-                    <figure class="w-full overflow-hidden aspect-video col-span-7 sm:col-span-2 mt-sp4">
+                    <figure class="w-full overflow-hidden aspect-video col-span-7 sm:col-span-2 mt-sp2 sm:mt-sp4">
                         <?php 
                         $social_image_id = get_field('social-image'); 
                         if( $social_image_id ) : ?>
@@ -310,7 +311,7 @@ function filter_search() {
                             )); ?>
                         <?php endif; ?>
                     </figure>
-                    <div class="wysiwyg-content font-superclarendon mt-sp4 text-regular/regular col-span-7 sm:col-span-5">
+                    <div class="wysiwyg-content font-superclarendon mt-sp4 text-base/regular sm:text-regular/regular col-span-7 sm:col-span-5">
                         <?php echo wp_kses_post( get_field('social-description') ); ?>
                     </div>
                 </div>
@@ -336,7 +337,7 @@ add_action('wp_ajax_nopriv_filter_search', 'filter_search');
 
 
 function enqueue_custom_exhibition_scripts() {
-    wp_enqueue_script('exhibition-page-js', get_template_directory_uri() . '/js/exhibition-page.js', ['jquery'], null, true);
+    wp_enqueue_script('exhibition-page-js', get_template_directory_uri() . '/js/exhibition-page.js', array(), null, true);
 
     // Get the total number of posts for the 'exhibition' post type
     $args = [
@@ -395,7 +396,7 @@ function load_more_exhibitions() {
     if ($exhibition_query->have_posts()) :
         while ($exhibition_query->have_posts()) : $exhibition_query->the_post(); ?>
             <div class="">
-                    <figure class="mb-sp1 overflow-hidden aspect-video">
+                    <figure class="mx-sp5 sm:mx-0 sm:w-full mb-sp1 overflow-hidden aspect-video">
                         <a href="<?php the_permalink(); ?>">
                             <?php
                             $exhibition_image_id = get_field('exhibition-image');
@@ -408,19 +409,19 @@ function load_more_exhibitions() {
                             ?>
                         </a>
                     </figure>
-                    <div class="w-fit hover:text-df-red">
-                        <h3 class="font-dfserif text-xxl/xxl line-clamp-2">
+                    <div class="w-fit hover:text-df-red text-xxl/xxl sm:text-xxxl/xxl">
+                        <h3 class="font-dfserif line-clamp-2">
                             <a class="" href="<?php the_permalink(); ?>">
                                 <?php the_title(); ?>
                             </a>
                         </h3>
-                        <p class="font-superclarendon text-xxl/xxl">
+                        <p class="font-superclarendon">
                             <a href="<?php echo esc_url( get_permalink() ); ?>">
                                 <?php echo esc_html( get_field('exhibition-start-date') ); ?> — <?php echo esc_html( get_field('exhibition-end-date') ); ?>
                             </a>
                         </p>
                     </div>
-            </div>
+                </div>
         <?php endwhile;
     endif;
 
@@ -458,7 +459,7 @@ function search_exhibitions() {
     if ($exhibition_query->have_posts()) :
         while ($exhibition_query->have_posts()) : $exhibition_query->the_post(); ?>
             <div class="">
-                    <figure class="mb-sp1 overflow-hidden aspect-video">
+                    <figure class="mx-sp5 sm:mx-0 sm:w-full mb-sp1 overflow-hidden aspect-video">
                         <a href="<?php the_permalink(); ?>">
                             <?php
                             $exhibition_image_id = get_field('exhibition-image');
@@ -471,19 +472,19 @@ function search_exhibitions() {
                             ?>
                         </a>
                     </figure>
-                    <div class="w-fit hover:text-df-red">
-                        <h3 class="font-dfserif text-xxl/xxl line-clamp-2">
+                    <div class="w-fit hover:text-df-red text-xxl/xxl sm:text-xxxl/xxl">
+                        <h3 class="font-dfserif line-clamp-2">
                             <a class="" href="<?php the_permalink(); ?>">
                                 <?php the_title(); ?>
                             </a>
                         </h3>
-                        <p class="font-superclarendon text-xxl/xxl">
+                        <p class="font-superclarendon">
                             <a href="<?php echo esc_url( get_permalink() ); ?>">
                                 <?php echo esc_html( get_field('exhibition-start-date') ); ?> — <?php echo esc_html( get_field('exhibition-end-date') ); ?>
                             </a>
                         </p>
                     </div>
-            </div>
+                </div>
         <?php endwhile;
     else :
         echo '<p class="font-superclarendon text-large/large mt-sp4">' . pll__('No exhibitions found.', 'tailpress') . '</p>';
@@ -797,12 +798,13 @@ function update_exhibition_date_search_field($post_id) {
 
 function enqueue_swiper_assets() {
     // Swiper CSS
-    wp_enqueue_style( 'swiper-css', 'https://unpkg.com/swiper/swiper-bundle.min.css', array(), null );
+    wp_enqueue_style( 'swiper-css', 'https://cdnjs.cloudflare.com/ajax/libs/Swiper/9.4.1/swiper-bundle.min.css', array(), null );
     
     // Swiper JS
-    wp_enqueue_script( 'swiper-js', 'https://unpkg.com/swiper/swiper-bundle.min.js', array(), null, true );
+    wp_enqueue_script( 'swiper-js', 'https://cdnjs.cloudflare.com/ajax/libs/Swiper/9.4.1/swiper-bundle.min.js', array(), null, true );
 }
 add_action( 'wp_enqueue_scripts', 'enqueue_swiper_assets' );
+
 
 
 
@@ -832,7 +834,7 @@ add_action('wp_enqueue_scripts', 'enqueue_gsap_scripts');
 // Newsletter sign-up function for Mailchimp
 
 function enqueue_newsletter_script() {
-    wp_enqueue_script('newsletter-js', get_template_directory_uri() . '/js/newsletter.js', array('jquery'), null, true);
+    wp_enqueue_script('newsletter-js', get_template_directory_uri() . '/js/newsletter.js', array(), null, true);
 
     // Pass admin-ajax.php URL to the JavaScript file
     wp_localize_script('newsletter-js', 'ajax_object', array(

@@ -1,4 +1,4 @@
-<section class="w-full sm:w-[calc(90%+1vw)] pb-sp4">
+<section class="w-full sm:w-[calc(90%+1vw)] mb-sp8">
     <div class="font-superclarendon break-inside-avoid">
         <?php 
         $short_text = get_field('exhibition-description-short');
@@ -8,7 +8,7 @@
         ?>
 
         <?php if (!empty($short_text)): ?>
-            <div class="font-dfserif text-xl/xl pb-sp1">
+            <div class="font-dfserif text-xl/xl sm:text-medium/medium pb-sp1 sm:pb-0">
                 <?php echo pll__('Description', 'tailpress'); ?>
             </div>
         <?php endif; ?>
@@ -18,7 +18,7 @@
         </div>
 
         <?php if (!empty($long_text)): ?>
-            <p id="toggle-button" class="font-dfserif text-xl/xl cursor-pointer ml-sp5 sm:ml-sp9 hover:text-df-red mt-sp1">
+            <p id="toggle-button" class="font-dfserif text-medium/medium sm:text-base/regular cursor-pointer ml-sp5 sm:ml-sp9 hover:text-df-red mt-sp1">
                 <?php echo pll__('More', 'tailpress'); ?> ↓
             </p>
         <?php endif; ?>
@@ -32,19 +32,19 @@ document.addEventListener('DOMContentLoaded', function () {
 
     const shortText = `<?php echo wp_kses_post($short_text); ?>`;
     const longText = `<?php echo wp_kses_post($long_text); ?>` + `
-        <div class="my-sp4">
+        <div class="my-sp4 break-inside-avoid-column">
             <?php if (!empty($exhibition_folder) || !empty($exhibition_presskit)): ?>
-                <h4 class="font-dfserif text-xl/xl pb-sp1">
+                <h4 class="font-dfserif text-xl/xl sm:text-medium/medium pb-sp1 sm:pb-0">
                     <?php echo pll__('Additional content', 'tailpress'); ?>
                 </h4>
                 <?php if (!empty($exhibition_folder)): ?>
-                    <a href="<?php echo esc_url($exhibition_folder); ?>" target="_blank" rel="noopener noreferrer" class="hover:text-df-red underline underline-offset-2">
+                    <a href="<?php echo esc_url($exhibition_folder); ?>" target="_blank" rel="noopener noreferrer" class="hover:text-df-red underline underline-offset-2 text-medium/medium sm:text-base/regular">
                         <?php echo pll__('Exhibition folder', 'tailpress'); ?>
                     </a>
                 <?php endif; ?>
                 <br>
                 <?php if (!empty($exhibition_presskit)): ?>
-                    <a href="<?php echo esc_url($exhibition_presskit); ?>" target="_blank" rel="noopener noreferrer" class="hover:text-df-red underline underline-offset-2">
+                    <a href="<?php echo esc_url($exhibition_presskit); ?>" target="_blank" rel="noopener noreferrer" class="hover:text-df-red underline underline-offset-2 text-medium/medium sm:text-base/regular">
                         <?php echo pll__('Presskit', 'tailpress'); ?>
                     </a>
                 <?php endif; ?>

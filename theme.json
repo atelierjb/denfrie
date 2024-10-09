@@ -49,12 +49,12 @@
         {
           "slug": "base",
           "name": "Base",
-          "size": "calc(0.6rem + 0.5vw)"
+          "size": "calc(0.7rem + 0.5vw)"
         },
         {
           "slug": "medium",
           "name": "Medium",
-          "size": "calc(0.6rem + 1.15vw)"
+          "size": "calc(0.6rem + 1vw)"
         },
         {
           "slug": "large",
@@ -64,12 +64,17 @@
         {
           "slug": "xl",
           "name": "XL",
-          "size": "calc(0.8rem + 1.15vw)"
+          "size": "calc(0.8rem + 1vw)"
         },
         {
           "slug": "xxl",
           "name": "2XL",
           "size": "calc(1rem + 1.5vw)"
+        },
+        {
+          "slug": "xxxl",
+          "name": "3XL",
+          "size": "calc(1.25rem + 1.5vw)"
         }
       ]
     }
