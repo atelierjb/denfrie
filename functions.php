@@ -239,7 +239,7 @@ function load_more_posts() {
                 <input type="checkbox" class="min-h-0 p-0" />
                 <div class="collapse-title p-0 min-h-0 grid sm:grid-cols-7 sm:gap-sp9 text-large/large">
                     <p class="font-superclarendon col-span-2 whitespace-nowrap pt-1 sm:pt-0"> 
-                        <?php the_field('social-date'); ?> <?php the_field('social-date-start'); ?> <?php the_field('social-date-end'); ?>
+                        <?php the_field('social-date'); ?> : <?php the_field('social-date-start'); ?> <?php the_field('social-date-end'); ?>
                     </p> <br class="sm:hidden">
                     <p class="font-dfserif leading-[calc(110%+0.2vw)] pb-sp1 sm:pb-0 col-span-5 sm:truncate">
                         <?php the_title(); ?>
@@ -294,7 +294,7 @@ function filter_search() {
                 <input type="checkbox" class="min-h-0 p-0" />
                 <div class="collapse-title p-0 min-h-0 grid sm:grid-cols-7 sm:gap-sp9 text-large/large">
                     <p class="font-superclarendon col-span-2 whitespace-nowrap pt-1 sm:pt-0"> 
-                        <?php the_field('social-date'); ?> <?php the_field('social-date-start'); ?> <?php the_field('social-date-end'); ?>
+                        <?php the_field('social-date'); ?> : <?php the_field('social-date-start'); ?> <?php the_field('social-date-end'); ?>
                     </p> <br class="sm:hidden">
                     <p class="font-dfserif leading-[calc(110%+0.2vw)] pb-sp1 sm:pb-0 col-span-5 sm:truncate">
                         <?php the_title(); ?>
@@ -641,11 +641,11 @@ function my_exhibition_custom_column_content($column, $post_id) {
 
         // Check if the dates exist and convert them to sortable format (d-m-Y)
         if ($start_date) {
-            $formatted_start_date = DateTime::createFromFormat('d.m.', $start_date)->format('d-m-Y');
+            $formatted_start_date = DateTime::createFromFormat('d.m.y', $start_date)->format('d-m-Y');
         }
 
         if ($end_date) {
-            $formatted_end_date = DateTime::createFromFormat('d.m. Y', $end_date)->format('d-m-Y');
+            $formatted_end_date = DateTime::createFromFormat('d.m.y', $end_date)->format('d-m-Y');
         }
 
         // Display combined start and end dates or a placeholder
@@ -669,15 +669,6 @@ function my_social_custom_column_content($column, $post_id) {
 }
 add_action('manage_social_posts_custom_column', 'my_social_custom_column_content', 10, 2);
 
-// Populate custom columns for the 'team-member' post type
-function my_team_member_custom_column_content($column, $post_id) {
-    if ($column == 'service_staff_option') {
-        $value = get_field('service-staff-option', $post_id);
-        echo $value ? __('Yes') : __('No');
-    }
-}
-add_action('manage_team-member_posts_custom_column', 'my_team_member_custom_column_content', 10, 2);
-
 // Make 'exhibition' columns sortable
 function my_exhibition_sortable_columns($columns) {
     $columns['exhibition_dates'] = 'exhibition_dates';
@@ -691,13 +682,6 @@ function my_social_sortable_columns($columns) {
     return $columns;
 }
 add_filter('manage_edit-social_sortable_columns', 'my_social_sortable_columns');
-
-// Make 'team-member' columns sortable
-function my_team_member_sortable_columns($columns) {
-    $columns['service_staff_option'] = 'service_staff_option';
-    return $columns;
-}
-add_filter('manage_edit-team-member_sortable_columns', 'my_team_member_sortable_columns');
 
 // Sorting logic for custom columns
 function my_custom_orderby($query) {

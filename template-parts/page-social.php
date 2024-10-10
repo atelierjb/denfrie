@@ -60,7 +60,7 @@ $total_posts = $social_query->found_posts;
                 <input type="checkbox" class="min-h-0 p-0" />
                 <div class="collapse-title p-0 min-h-0 grid sm:grid-cols-7 sm:gap-sp9 text-large/large">
                     <p class="font-superclarendon col-span-2 whitespace-nowrap pt-1 sm:pt-0"> 
-                        <?php the_field('social-date'); ?> <?php the_field('social-date-start'); ?> <?php the_field('social-date-end'); ?>
+                        <?php the_field('social-date'); ?> : <?php the_field('social-date-start'); ?> <?php the_field('social-date-end'); ?>
                     </p> <br class="sm:hidden">
                     <p class="font-dfserif leading-[calc(110%+0.2vw)] pb-sp1 sm:pb-0 col-span-5 sm:truncate">
                         <?php the_title(); ?>
