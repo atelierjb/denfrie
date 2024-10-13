@@ -149,7 +149,7 @@
 
 	<section class="grid grid-cols-1 sm:grid-cols-12 mt-sp8 text-left align-baseline">
 		<?php if (!empty($exhibition_supporters)): ?>
-			<div class="wysiwyg-credits flex flex-col col-span-1 sm:col-span-9">
+			<div class="wysiwyg-credits flex flex-col col-span-1 sm:col-span-6">
 				<h4 class="">
 					<?php echo pll__('The exhibition is generously supported by', 'tailpress'); ?>
 				</h4>
@@ -159,7 +159,7 @@
 			</div>
 		<?php endif; ?>
 
-		<div class="col-span-1 sm:col-span-3 my-sp8 sm:my-0">
+		<div class="col-span-1 sm:col-span-6 my-sp8 sm:my-0">
 			<?php $credits = get_field('exhibition-credits'); ?>
 				<?php if( $credits ): // Check if the field is not empty ?>
 					<div class="wysiwyg-credits w-full sm:w-[calc(90%+1vw)]">
