@@ -776,6 +776,38 @@ function update_exhibition_date_search_field($post_id) {
 
 
 /* -------------------------------------------------------------------------- */
+/*                                  barba js                                  */
+/* -------------------------------------------------------------------------- */
+
+
+function enqueue_barba_assets() {
+    // Enqueue the Barba scripts
+    wp_enqueue_script('barba-js', get_template_directory_uri() . '/js/barba.js', array(), null, true);
+    wp_enqueue_script('barba-css-js', get_template_directory_uri() . '/js/barba-css.js', array(), null, true);
+    wp_enqueue_script('barba-scripts-js', get_template_directory_uri() . '/js/barba-scripts.js', array(), null, true);
+
+    // Pass WordPress page data to JavaScript
+    $exhibitions_page_id = pll_get_post(2); // Exhibitions page
+    $archive_page_id = pll_get_post(159);   // Archive page
+
+    wp_localize_script('barba-scripts-js', 'wpData', array(
+        'isFrontPage' => is_front_page(),
+        'isExhibitionsPage' => is_page($exhibitions_page_id),
+        'isArchivePage' => is_page($archive_page_id),
+        'isSingleExhibition' => is_singular('exhibition'),
+        'currentLang' => pll_current_language(),
+        'exhibitionsPageID' => $exhibitions_page_id,
+        'archivePageID' => $archive_page_id
+    ));
+}
+add_action('wp_enqueue_scripts', 'enqueue_barba_assets');
+
+
+
+
+
+
+/* -------------------------------------------------------------------------- */
 /*                                  Swiper.js                                 */
 /* -------------------------------------------------------------------------- */
 

@@ -1,6 +1,6 @@
 <?php get_header(); ?>
-
-<main data-barba="container" data-barba-namespace="single" class="mx-sp3 my-sp5" id="main-content">
+<main data-barba="wrapper" class="mx-sp3 my-sp5" id="main-content">
+    <article data-barba="container">
 
 	<?php if ( have_posts() ) : ?>
 
@@ -14,7 +14,7 @@
 		<?php endwhile; ?>
 
 	<?php endif; ?>
-
+	</article>
 </main>
 
 <?php

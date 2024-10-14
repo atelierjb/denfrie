@@ -15,7 +15,7 @@
 	<?php wp_head(); ?>
 </head>
 
-<body <?php body_class( 'bg-df-light-grey text-text-df-black antialiased' ); ?> data-barba="wrapper">
+<body <?php body_class( 'bg-df-light-grey text-text-df-black antialiased' ); ?>>
 <?php do_action( 'tailpress_site_before' ); ?>
 
 	<!-- Loading screen: add it right here after <body> tag -->
@@ -29,7 +29,7 @@
 
 	<header class="px-sp3 py-sp5">
 		<div id="nav-container" class="w-full fixed sm:static">
-			<nav class="hidden w-full sm:grid sm:grid-cols-12 pb-sp5 list-none font-dfserif text-medium/[0.95]">
+			<nav class="nav hidden w-full sm:grid sm:grid-cols-12 pb-sp5 list-none font-dfserif text-medium/[0.95]">
 				<li class="sm:col-span-3">
 					<?php 
 					$exhibitions_page_id = pll_get_post(2); 
@@ -146,5 +146,4 @@
 		<?php } ?>
 
 		<?php do_action( 'tailpress_content_start' ); ?>
-
 	

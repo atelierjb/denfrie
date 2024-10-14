@@ -1,5 +1,4 @@
 <article id="post-<?php the_ID(); ?>" <?php post_class(); ?>>
-<div id="main-content">
 	<?php 
 		$exhibition_image_id = get_field('exhibition-image');
 		$exhibition_start_date = get_field('exhibition-start-date');
@@ -79,13 +78,10 @@
                 <p class="-ml-[1px] sm:-ml-[3px] font-superclarendon mt-0 sm:-mt-2">
                     <?php echo esc_html($exhibition_start_date); ?> — <?php echo esc_html($exhibition_end_date); ?>
                 </p>
-
-            </div>
-
-				
+            </div>		
     </section>
 
-	<article class="columns-1 sm:columns-2 gap-4">
+	<section class="columns-1 sm:columns-2 gap-4">
 			<?php $manyartists = get_field('exhibition-many-artists'); ?>
 				<?php if( $manyartists ): // Check if the field is not empty ?>
 					<div class="pb-sp2">
@@ -121,8 +117,7 @@
 					<?php endif; ?>
 				<?php endwhile; ?>
 			<?php endif; ?>
-	</article>
-
+	</section>
 
 	<!-- Loop through the images again and place image-cols-2 outside the columns -->
 	<?php if( have_rows('exhibition-flex-images') ): ?>
@@ -153,7 +148,7 @@
 				<h4 class="">
 					<?php echo pll__('The exhibition is generously supported by', 'tailpress'); ?>
 				</h4>
-				<div class="w-full sm:w-[calc(90%+1vw)] mx-0 sm:mx-sp9">
+				<div class="w-full sm:w-[calc(90%+1vw)]">
 					<?php echo($exhibition_supporters); ?>
 				</div>		
 			</div>
@@ -169,6 +164,4 @@
 		</div>
 	</section>
 
-	
-</div>
 </article>

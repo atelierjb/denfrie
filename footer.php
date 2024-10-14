@@ -3,7 +3,8 @@
 
 <?php do_action( 'tailpress_content_end' ); ?>
 
-</div>
+</div> <!-- id="page" ends -->
+
 
 <?php do_action( 'tailpress_content_after' ); ?>
 
@@ -41,6 +42,7 @@
 
 <script type="module" src="https://cdnjs.cloudflare.com/ajax/libs/ionicons/7.1.0/ionicons/ionicons.esm.min.js"></script>
 	<script nomodule src="https://cdnjs.cloudflare.com/ajax/libs/ionicons/7.1.0/ionicons/ionicons.min.js"></script>
+
 
 </body>
 </html>

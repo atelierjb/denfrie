@@ -21,8 +21,8 @@ Template Name: Visit
 get_header();
 ?>
 
-<main data-barba="container" data-barba-namespace="visit" class="mx-sp3 my-sp5" id="main-content">
-    <article class="columns-1 sm:columns-2 gap-sp1 pr-sp2">
+<main data-barba="wrapper" class="mx-sp3 my-sp5" id="main-content">
+    <article data-barba="container" class="columns-1 sm:columns-2 gap-sp1 pr-sp2">
             <section class="w-full sm:w-[95%] pb-sp8">
                 <h2 class="font-dfserif text-xl/xl pb-sp1">
                     <?php echo esc_html( get_field('visit-title-admission') ); ?> 
