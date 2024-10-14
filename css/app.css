@@ -1871,11 +1871,6 @@ details.collapse summary::-webkit-details-marker{
         margin: 2rem;
 }
 
-.mx-0{
-        margin-left: 0px;
-        margin-right: 0px;
-}
-
 .mx-sp3{
         margin-left: calc(0.25rem + 2vw);
         margin-right: calc(0.25rem + 2vw);
