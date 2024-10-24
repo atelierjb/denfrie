@@ -10,8 +10,6 @@ document.addEventListener('DOMContentLoaded', function() {
         gsap.set("#nav-container", { y: 0 });
         gsap.set("#main-content", { y: 0 });
 
-        // Initialize ScrollTrigger after skipping animation
-        initializeScrollTrigger();
         return;
     }
 
@@ -32,7 +30,7 @@ document.addEventListener('DOMContentLoaded', function() {
     });
 
     // Pause for 1 second
-    tl.to("#loading-image", { duration: 0.5 });
+    tl.to("#loading-image", { duration: 0.25 });
 
     // Loading screen slides up and out of view
     tl.to("#loading-screen", {

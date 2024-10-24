@@ -12,22 +12,31 @@
 	<section class="w-full relative mb-sp2">
 		<div class="swiper-container mx-sp5 sm:mx-sp9 overflow-hidden">
 			<div class="swiper-wrapper">
-				<?php 
-				$images = get_field('exhibition-slider');
-				if( $images ):
-					foreach( $images as $image_id ):
-						$image_caption = wp_get_attachment_caption( $image_id );
-						?>
-						<div class="swiper-slide">
-							<figure class="w-full h-auto aspect-[11/8] sm:aspect-video">
-								<?php echo wp_get_attachment_image($image_id, 'full', false, ['class' => 'w-full h-full object-cover']); ?>
-								<?php if( $image_caption ): ?>
-									<figcaption class="font-superclarendon text-xsmall/regular text-right mt-1">
-										<?php echo esc_html($image_caption); ?>
-									</figcaption>
-								<?php endif; ?>
-							</figure>
-						</div>
+			<?php 
+                $images = get_field('exhibition-slider');
+                if ($images):
+                    foreach ($images as $image_id):
+                        $image_caption = wp_get_attachment_caption($image_id);
+                        $image_data = wp_get_attachment_image_src($image_id, 'full');
+                        $image_alt = get_post_meta($image_id, '_wp_attachment_image_alt', true);
+                        $srcset = wp_get_attachment_image_srcset($image_id, 'full');
+                        $sizes = '(max-width: 640px) 100vw, (max-width: 1024px) 80vw, 1200px';
+                        ?>
+                        <div class="swiper-slide">
+                            <figure class="w-full h-auto aspect-[11/8] sm:aspect-video">
+                                <img src="<?php echo esc_url($image_data[0]); ?>"
+                                     srcset="<?php echo esc_attr($srcset); ?>"
+                                     sizes="<?php echo esc_attr($sizes); ?>"
+                                     alt="<?php echo esc_attr($image_alt); ?>"
+                                     class="w-full h-full object-cover"
+                                     loading="lazy">
+                                <?php if ($image_caption): ?>
+                                    <figcaption class="font-superclarendon text-xsmall/regular text-right mt-1">
+                                        <?php echo esc_html($image_caption); ?>
+                                    </figcaption>
+                                <?php endif; ?>
+                            </figure>
+                        </div>
 					<?php endforeach; ?>
 				<?php endif; ?>
 			</div>
@@ -98,22 +107,29 @@
 			
 			<?php if( have_rows('exhibition-flex-images') ): ?>
 				<?php while( have_rows('exhibition-flex-images') ): the_row(); ?>
-					<?php if( get_row_layout() == 'image-cols-1' ): ?>
-						<?php
-						// Get the image ID and description for image-cols-1-left
-						$image_id = get_sub_field('image');
-						$image_description = get_sub_field('image-description');
-						?>
-						<section class="mx-sp5 sm:mx-0 sm:w-full break-inside-avoid font-superclarendon">
-							<figure class="w-full h-auto mb-4">
-								<?php echo wp_get_attachment_image($image_id, 'full', false, ['class' => 'w-full h-auto object-cover']); ?>
-								<?php if($image_description): ?>
-									<figcaption class="text-small sm:text-xsmall text-right mt-1">
-										<?php echo esc_html($image_description); ?>
-									</figcaption>
-								<?php endif; ?>
-							</figure>
-						</section>
+					<?php if (get_row_layout() == 'image-cols-1'):
+                    $image_id = get_sub_field('image');
+                    $image_description = get_sub_field('image-description');
+                    $image_data = wp_get_attachment_image_src($image_id, 'full');
+                    $image_alt = get_post_meta($image_id, '_wp_attachment_image_alt', true);
+                    $srcset = wp_get_attachment_image_srcset($image_id, 'full');
+                    $sizes = '(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 600px';
+                    ?>
+                    <section class="mx-sp5 sm:mx-0 sm:w-full break-inside-avoid font-superclarendon">
+                        <figure class="w-full h-auto mb-4">
+                            <img src="<?php echo esc_url($image_data[0]); ?>"
+                                 srcset="<?php echo esc_attr($srcset); ?>"
+                                 sizes="<?php echo esc_attr($sizes); ?>"
+                                 alt="<?php echo esc_attr($image_alt); ?>"
+                                 class="w-full h-auto object-cover"
+                                 loading="lazy">
+                            <?php if ($image_description): ?>
+                                <figcaption class="text-small sm:text-xsmall text-right mt-1">
+                                    <?php echo esc_html($image_description); ?>
+                                </figcaption>
+                            <?php endif; ?>
+                        </figure>
+                    </section>
 					<?php endif; ?>
 				<?php endwhile; ?>
 			<?php endif; ?>
@@ -122,22 +138,29 @@
 	<!-- Loop through the images again and place image-cols-2 outside the columns -->
 	<?php if( have_rows('exhibition-flex-images') ): ?>
 		<?php while( have_rows('exhibition-flex-images') ): the_row(); ?>
-			<?php if( get_row_layout() == 'image-cols-2' ): ?>
-				<?php
-				// Get the image ID and description for image-cols-2
-				$image_id = get_sub_field('image');
-				$image_description = get_sub_field('image-description');
-				?>
-				<section class="w-full font-superclarendon">
-					<figure class="mx-sp5 sm:mx-sp9 my-0 sm:my-4 aspect-video">
-						<?php echo wp_get_attachment_image($image_id, 'full', false, ['class' => 'w-full h-auto object-cover']); ?>
-						<?php if($image_description): ?>
-							<figcaption class="text-small sm:text-xsmall text-right mt-1">
-								<?php echo esc_html($image_description); ?>
-							</figcaption>
-						<?php endif; ?>
-					</figure>
-				</section>
+			<?php if (get_row_layout() == 'image-cols-2'):
+                $image_id = get_sub_field('image');
+                $image_description = get_sub_field('image-description');
+                $image_data = wp_get_attachment_image_src($image_id, 'full');
+                $image_alt = get_post_meta($image_id, '_wp_attachment_image_alt', true);
+                $srcset = wp_get_attachment_image_srcset($image_id, 'full');
+                $sizes = '(max-width: 640px) 100vw, (max-width: 1024px) 80vw, 1200px';
+                ?>
+                <section class="w-full font-superclarendon">
+                    <figure class="mx-sp5 sm:mx-sp9 my-0 sm:my-4 aspect-video">
+                        <img src="<?php echo esc_url($image_data[0]); ?>"
+                             srcset="<?php echo esc_attr($srcset); ?>"
+                             sizes="<?php echo esc_attr($sizes); ?>"
+                             alt="<?php echo esc_attr($image_alt); ?>"
+                             class="w-full h-auto object-cover"
+                             loading="lazy">
+                        <?php if ($image_description): ?>
+                            <figcaption class="text-small sm:text-xsmall text-right mt-1">
+                                <?php echo esc_html($image_description); ?>
+                            </figcaption>
+                        <?php endif; ?>
+                    </figure>
+                </section>
 			<?php endif; ?>
 		<?php endwhile; ?>
 	<?php endif; ?>	

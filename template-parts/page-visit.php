@@ -23,6 +23,7 @@ get_header();
 
 <main data-barba="wrapper" class="mx-sp3 my-sp5" id="main-content">
     <article data-barba="container" class="columns-1 sm:columns-2 gap-sp1 pr-sp2">
+        <!-- /* -------------------------------- left side ------------------------------- */ -->
             <section class="w-full sm:w-[95%] pb-sp8">
                 <h2 class="font-dfserif text-xl/xl pb-sp1">
                     <?php echo esc_html( get_field('visit-title-admission') ); ?> 
@@ -30,43 +31,27 @@ get_header();
 
                 <?php get_template_part( 'template-parts/section-prices' ); ?>
             </section>
-            <section class="w-full sm:w-[calc(90%+1vw)] pb-sp8" id="annualpass">
+            <?php if( have_rows('visit-left') ): ?>
+                <?php while( have_rows('visit-left') ): the_row(); ?>
+                    <?php if( get_row_layout() == 'textsection' ): ?>
+                        <section class="w-full sm:w-[calc(90%+1vw)] pb-sp8">
+                            <h2 class="font-dfserif text-xl/xl pb-sp1">
+                                <?php echo esc_html( get_sub_field('title') ); ?>
+                            </h2>
+                            <div class="wysiwyg-content">
+                                <?php echo wp_kses_post( get_sub_field('text') ); ?>
+                            </div>
+                        </section>
+                    <?php endif; ?>
+                <?php endwhile; ?>
+            <?php endif; ?>
+
+            <!-- /* -------------------------------- right side ------------------------------- */ -->
+            <section class="w-full sm:w-[calc(90%+1vw)] pb-sp8 break-before-column" id="newsletter">
                 <h2 class="font-dfserif text-xl/xl pb-sp1">
-                    <?php echo esc_html( get_field('visit-title-annualpass') ); ?>
+                    <?php echo esc_html( get_field('visit-title-newsletter') ); ?>
                 </h2>
-                <div class="wysiwyg-content font-superclarendon text-base/regular sm:text-regular/regular text-pretty">
-                    <?php the_field('visit-text-annualpass'); ?>
-                </div>
-            </section>
-            <section class="w-full sm:w-[calc(90%+1vw)] pb-sp8">
-                <h2 class="font-dfserif text-xl/xl pb-sp1">
-                    <?php echo esc_html( get_field('visit-title-pegasus') ); ?>
-                </h2>
-                <div class="wysiwyg-content font-superclarendon text-base/regular sm:text-regular/regular text-pretty">
-                    <?php the_field('visit-text-pegasus'); ?>
-                </div>
-            </section>
-            <section class="w-full sm:w-[calc(90%+1vw)] pb-sp8">
-                <h2 class="font-dfserif text-xl/xl pb-sp1">
-                    <?php echo esc_html( get_field('visit-title-transport') ); ?>
-                </h2>
-                <div class="wysiwyg-content font-superclarendon text-base/regular sm:text-regular/regular text-pretty">
-                    <?php the_field('visit-text-transport'); ?>
-                </div>
-            </section>
-            <section class="w-full sm:w-[calc(90%+1vw)] pb-sp8 break-after-avoid sm:break-after-column">
-                <h2 class="font-dfserif text-xl/xl pb-sp1">
-                    <?php echo esc_html( get_field('visit-title-openings') ); ?>
-                </h2>
-                <div class="wysiwyg-content font-superclarendon text-base/regular sm:text-regular/regular text-pretty">
-                    <?php the_field('visit-text-openings'); ?>
-                </div>
-            </section>
-            <section class="w-full sm:w-[calc(90%+1vw)] pb-sp8" id="newsletter">
-                <h2 class="font-dfserif text-xl/xl pb-sp1">
-                <?php echo esc_html( get_field('visit-title-newsletter') ); ?>
-                </h2>
-                <div class="wysiwyg-content font-superclarendon text-base/regular sm:text-regular/regular text-pretty pb-sp2">
+                <div class="wysiwyg-content pb-sp2">
                     <?php the_field('visit-text-newsletter'); ?>
                 </div>
                 <form id="mailchimp-signup-form" method="post" class="flex flex-col gap-sp1">
@@ -77,22 +62,20 @@ get_header();
                     <p id="response-message" class="font-superclarendon text-regular/regular mt-sp1"></p>
                 </form>
             </section>
-            <section class="w-full sm:w-[calc(90%+1vw)] pb-sp8">
-                <h2 class="font-dfserif text-xl/xl pb-sp1">
-                    <?php echo esc_html( get_field('visit-title-info') ); ?>
-                </h2>
-                <div class="wysiwyg-content font-superclarendon text-base/regular sm:text-regular/regular">
-                    <?php the_field('visit-text-info'); ?>
-                </div>
-            </section>
-            <section class="w-full sm:w-[calc(90%+1vw)] pb-sp8">
-                <h2 class="font-dfserif text-xl/xl pb-sp1">
-                    <?php echo esc_html( get_field('visit-title-rent') ); ?>
-                </h2>
-                <div class="wysiwyg-content font-superclarendon text-base/regular sm:text-regular/regular">
-                    <?php the_field('visit-text-rent'); ?>
-                </div>
-            </section>
+            <?php if( have_rows('visit-right') ): ?>
+                <?php while( have_rows('visit-right') ): the_row(); ?>
+                    <?php if( get_row_layout() == 'textsection' ): ?>
+                        <section class="w-full sm:w-[calc(90%+1vw)] pb-sp8">
+                            <h2 class="font-dfserif text-xl/xl pb-sp1">
+                                <?php echo esc_html( get_sub_field('title') ); ?>
+                            </h2>
+                            <div class="wysiwyg-content font-superclarendon text-base/regular sm:text-regular/regular">
+                                <?php echo wp_kses_post( get_sub_field('text') ); ?>
+                            </div>
+                        </section>
+                    <?php endif; ?>
+                <?php endwhile; ?>
+            <?php endif; ?>
     </article>
 </main>
 

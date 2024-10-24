@@ -4,6 +4,8 @@
  * Theme setup.
  */
 function tailpress_setup() {
+
+    add_theme_support( 'automatic-feed-links' );
 	add_theme_support( 'title-tag' );
 
 	register_nav_menus(
@@ -25,6 +27,11 @@ function tailpress_setup() {
 
     add_theme_support( 'custom-logo' );
 	add_theme_support( 'post-thumbnails' );
+
+    add_image_size('exhibition-small', 400, 0, false);
+    add_image_size('exhibition-medium', 800, 0, false);
+    add_image_size('exhibition-large', 1200, 0, false);
+    add_image_size('exhibition-xlarge', 2000, 0, false);
 
 	add_theme_support( 'align-wide' );
 	add_theme_support( 'wp-block-styles' );
@@ -109,46 +116,15 @@ function tailpress_nav_menu_add_submenu_class( $classes, $args, $depth ) {
 add_filter( 'nav_menu_submenu_css_class', 'tailpress_nav_menu_add_submenu_class', 10, 3 );
 
 
-
-
-/* -------------------------------------------------------------------------- */
-/*                                  Allow SVG                                 */
-/* -------------------------------------------------------------------------- */
-
-
-add_filter( 'wp_check_filetype_and_ext', function($data, $file, $filename, $mimes) {
-
-	global $wp_version;
-	if ( $wp_version !== '4.7.1' ) {
-	   return $data;
-	}
-  
-	$filetype = wp_check_filetype( $filename, $mimes );
-  
-	return [
-		'ext'             => $filetype['ext'],
-		'type'            => $filetype['type'],
-		'proper_filename' => $data['proper_filename']
-	];
-  
-  }, 10, 4 );
-  
-  function cc_mime_types( $mimes ){
-	$mimes['svg'] = 'image/svg+xml';
-	return $mimes;
-  }
-  add_filter( 'upload_mimes', 'cc_mime_types' );
-  
-  function fix_svg() {
-	echo '<style type="text/css">
-		  .attachment-266x266, .thumbnail img {
-			   width: 100% !important;
-			   height: auto !important;
-		  }
-		  </style>';
-  }
-  add_action( 'admin_head', 'fix_svg' );
-
+function tailpress_custom_image_sizes( $sizes ) {
+    return array_merge( $sizes, array(
+        'exhibition-small' => __( 'Exhibition Small' ),
+        'exhibition-medium' => __( 'Exhibition Medium' ),
+        'exhibition-large' => __( 'Exhibition Large' ),
+        'exhibition-xlarge' => __( 'Exhibition XLarge' ),
+    ) );
+}
+add_filter( 'image_size_names_choose', 'tailpress_custom_image_sizes' );
 
 
 
@@ -189,8 +165,10 @@ add_action('wp_footer', 'custom_back_to_top_script');
 /* -------------------------------------------------------------------------- */
 
 function enqueue_custom_scripts() {
-    wp_enqueue_script('social-page-js', get_template_directory_uri() . '/js/social-page.js', array(), null, true);
-
+    $social_page_id = pll_get_post(5); // Assuming 5 is the ID of your social page
+    if (is_page($social_page_id)) {
+        wp_enqueue_script('social-page-js', get_template_directory_uri() . '/js/social-page.js', array(), null, true);
+    }
 
     // Get the total number of posts for the 'social' post type
     $args = [
@@ -337,7 +315,10 @@ add_action('wp_ajax_nopriv_filter_search', 'filter_search');
 
 
 function enqueue_custom_exhibition_scripts() {
+    $archive_page_id = pll_get_post(159); // Assuming 5 is the ID of your social page
+    if (is_page($archive_page_id)) {
     wp_enqueue_script('exhibition-page-js', get_template_directory_uri() . '/js/exhibition-page.js', array(), null, true);
+    }
 
     // Get the total number of posts for the 'exhibition' post type
     $args = [
@@ -502,6 +483,17 @@ add_action('wp_ajax_nopriv_search_exhibitions', 'search_exhibitions');
 /*                             Polylang functions                             */
 /* -------------------------------------------------------------------------- */
 
+// translates info post for header content
+function get_translated_info_post() {
+    $args = array(
+        'post_type' => 'info',
+        'posts_per_page' => 1,
+        'lang' => pll_current_language()
+    );
+    $info_posts = get_posts($args);
+    return !empty($info_posts) ? $info_posts[0] : null;
+}
+
 
 // Custom function to get the translated post title based on the current language
 function pll_get_post_title($id) {
@@ -513,16 +505,6 @@ function pll_get_post_title($id) {
 /* Add strings for translation in Polylang */
 
 function my_theme_register_strings() {
-    // header
-    pll_register_string('exhibitions', 'Exhibitions', 'tailpress');
-    pll_register_string('social', 'Social', 'tailpress');
-    pll_register_string('about', 'About', 'tailpress');
-    pll_register_string('visit', 'Visit', 'tailpress');
-    pll_register_string('address', 'Oslo plads 1, 2100, Kbh Ø, DK', 'tailpress');
-    pll_register_string('mon', 'Mon : Closed', 'tailpress');
-    pll_register_string('tue-sun', 'Tues-Sun : 12 — 18', 'tailpress');
-    pll_register_string('thur', '(Thurs : 12 — 21)', 'tailpress');
-
     // footer
     pll_register_string('newsletter', 'Newsletter', 'tailpress');
     pll_register_string('annualpass', 'Annual pass', 'tailpress');
@@ -548,15 +530,7 @@ function my_theme_register_strings() {
     pll_register_string('search-archive', 'Search in calendar...', 'tailpress');
     pll_register_string('more-events', 'Show previous events ↓', 'tailpress');
 
-    //about page
-    pll_register_string('contact', 'Contact', 'tailpress');
-
     //visit page
-    pll_register_string('price-adults', '+16 years', 'tailpress');
-    pll_register_string('price-seniors', 'Seniors', 'tailpress');
-    pll_register_string('price-students', 'Students', 'tailpress');
-    pll_register_string('price-kids', '0—15 years', 'tailpress');
-    pll_register_string('price-annualpass', 'w. Annual pass', 'tailpress');
     pll_register_string('newsletter-name', 'Name', 'tailpress');
     pll_register_string('newsletter-surname', 'Surname', 'tailpress');
     pll_register_string('newsletter-signup', 'Sign up', 'tailpress');
@@ -613,24 +587,17 @@ add_action('wp_before_admin_bar_render', 'my_custom_admin_bar');
 
 // Add custom columns for the 'exhibition' post type
 function my_exhibition_custom_columns($columns) {
-    $columns['exhibition_dates'] = __('Exhibition Dates');
+    $columns['exhibition_dates'] = __('Exhibition Dates', 'tailpress');
     return $columns;
 }
 add_filter('manage_exhibition_posts_columns', 'my_exhibition_custom_columns');
 
 // Add custom columns for the 'social' post type
 function my_social_custom_columns($columns) {
-    $columns['social_date'] = __('Social Date');
+    $columns['social_date'] = __('Social Date', 'tailpress');
     return $columns;
 }
 add_filter('manage_social_posts_columns', 'my_social_custom_columns');
-
-// Add custom columns for the 'team-member' post type
-function my_team_member_custom_columns($columns) {
-    $columns['service_staff_option'] = __('Service Staff Option');
-    return $columns;
-}
-add_filter('manage_team-member_posts_columns', 'my_team_member_custom_columns');
 
 // Populate custom columns for the 'exhibition' post type
 function my_exhibition_custom_column_content($column, $post_id) {
@@ -654,11 +621,12 @@ function my_exhibition_custom_column_content($column, $post_id) {
         } elseif ($formatted_start_date) {
             echo $formatted_start_date; // If only start date is present
         } else {
-            echo __('No dates available');
+            echo __('No dates available', 'tailpress'); // Added text-domain here
         }
     }
 }
 add_action('manage_exhibition_posts_custom_column', 'my_exhibition_custom_column_content', 10, 2);
+
 
 
 // Populate custom columns for the 'social' post type
@@ -729,7 +697,6 @@ add_action('acf/input/admin_enqueue_scripts', 'enqueue_acf_custom_js');
 add_action('acf/save_post', 'update_social_date_search_field', 20);
 
 function update_social_date_search_field($post_id) {
-
     // Check if we're saving a post of the custom post type 'social'
     if (get_post_type($post_id) == 'social') {
         
@@ -740,21 +707,46 @@ function update_social_date_search_field($post_id) {
 
         // Ensure all fields have values before proceeding
         if ($social_date && $social_date_start && $social_date_end) {
+            // Parse the date string into a DateTime object
+            $date = DateTime::createFromFormat('d.m.y', $social_date);
             
-            // Combine the date and time values in the format you want
-            $social_date_search = $social_date . ' ' . $social_date_start . ' ' . $social_date_end;
-            
-            // Update the 'social-date-search' field with the combined value
-            update_field('social-date-search', $social_date_search, $post_id);
+            if ($date) {
+                // Danish month names
+                $danish_months = [
+                    'januar', 'februar', 'marts', 'april', 'maj', 'juni',
+                    'juli', 'august', 'september', 'oktober', 'november', 'december'
+                ];
+
+                // English month names
+                $english_months = [
+                    'January', 'February', 'March', 'April', 'May', 'June',
+                    'July', 'August', 'September', 'October', 'November', 'December'
+                ];
+
+                // Get month index (1-12)
+                $month_index = (int)$date->format('n');
+
+                // Format the date with both Danish and English month names
+                $formatted_date = $date->format('d') . ' ' . 
+                                  $danish_months[$month_index - 1] . ' ' . 
+                                  $english_months[$month_index - 1] . ' ' . 
+                                  $date->format('Y');
+                
+                // Combine the formatted date and time values
+                $social_date_search = $formatted_date . ' ' . $social_date_start . ' ' . $social_date_end;
+                
+                // Update the 'social-date-search' field with the combined value
+                update_field('social-date-search', $social_date_search, $post_id);
+            }
         }
     }
 }
+
 
 // Hook into ACF's save_post action for custom post type 'exhibition'
 add_action('acf/save_post', 'update_exhibition_date_search_field', 20);
 
 function update_exhibition_date_search_field($post_id) {
-
     // Check if we're saving a post of the custom post type 'exhibition'
     if (get_post_type($post_id) == 'exhibition') {
         
@@ -764,44 +756,43 @@ function update_exhibition_date_search_field($post_id) {
 
         // Ensure both fields have values before proceeding
         if ($exhibition_start_date && $exhibition_end_date) {
+            // Danish month names
+            $danish_months = [
+                'januar', 'februar', 'marts', 'april', 'maj', 'juni',
+                'juli', 'august', 'september', 'oktober', 'november', 'december'
+            ];
+
+            // English month names
+            $english_months = [
+                'January', 'February', 'March', 'April', 'May', 'June',
+                'July', 'August', 'September', 'October', 'November', 'December'
+            ];
+
+            // Function to format date with both Danish and English month names
+            $format_date = function($date_string) use ($danish_months, $english_months) {
+                $date = DateTime::createFromFormat('d.m.y', $date_string);
+                if ($date) {
+                    $month_index = (int)$date->format('n');
+                    return $date->format('d') . ' ' . 
+                           $danish_months[$month_index - 1] . ' ' . 
+                           $english_months[$month_index - 1] . ' ' . 
+                           $date->format('Y');
+                }
+                return $date_string; // Return original if parsing fails
+            };
+
+            // Format start and end dates
+            $formatted_start_date = $format_date($exhibition_start_date);
+            $formatted_end_date = $format_date($exhibition_end_date);
             
-            // Combine the dates in the format you want
-            $exhibition_date_search = $exhibition_start_date . ' — ' . $exhibition_end_date;
+            // Combine the formatted dates
+            $exhibition_date_search = $formatted_start_date . ' — ' . $formatted_end_date;
 
             // Update the 'exhibition-date-search' field with the combined value
             update_field('exhibition-date-search', $exhibition_date_search, $post_id);
         }
     }
 }
-
-
-/* -------------------------------------------------------------------------- */
-/*                                  barba js                                  */
-/* -------------------------------------------------------------------------- */
-
-
-function enqueue_barba_assets() {
-    // Enqueue the Barba scripts
-    wp_enqueue_script('barba-js', get_template_directory_uri() . '/js/barba.js', array(), null, true);
-    wp_enqueue_script('barba-css-js', get_template_directory_uri() . '/js/barba-css.js', array(), null, true);
-    wp_enqueue_script('barba-scripts-js', get_template_directory_uri() . '/js/barba-scripts.js', array(), null, true);
-
-    // Pass WordPress page data to JavaScript
-    $exhibitions_page_id = pll_get_post(2); // Exhibitions page
-    $archive_page_id = pll_get_post(159);   // Archive page
-
-    wp_localize_script('barba-scripts-js', 'wpData', array(
-        'isFrontPage' => is_front_page(),
-        'isExhibitionsPage' => is_page($exhibitions_page_id),
-        'isArchivePage' => is_page($archive_page_id),
-        'isSingleExhibition' => is_singular('exhibition'),
-        'currentLang' => pll_current_language(),
-        'exhibitionsPageID' => $exhibitions_page_id,
-        'archivePageID' => $archive_page_id
-    ));
-}
-add_action('wp_enqueue_scripts', 'enqueue_barba_assets');
-
 
 
 
@@ -814,10 +805,10 @@ add_action('wp_enqueue_scripts', 'enqueue_barba_assets');
 
 function enqueue_swiper_assets() {
     // Swiper CSS
-    wp_enqueue_style( 'swiper-css', 'https://cdnjs.cloudflare.com/ajax/libs/Swiper/9.4.1/swiper-bundle.min.css', array(), null );
+    wp_enqueue_style( 'swiper-css', get_template_directory_uri() . '/css/swiper-bundle.min.css', array(), null );
     
     // Swiper JS
-    wp_enqueue_script( 'swiper-js', 'https://cdnjs.cloudflare.com/ajax/libs/Swiper/9.4.1/swiper-bundle.min.js', array(), null, true );
+    wp_enqueue_script( 'swiper-js', get_template_directory_uri() . '/js/swiper-bundle.min.js', array(), null, true );
 }
 add_action( 'wp_enqueue_scripts', 'enqueue_swiper_assets' );
 
@@ -831,8 +822,8 @@ add_action( 'wp_enqueue_scripts', 'enqueue_swiper_assets' );
 
 function enqueue_gsap_scripts() {
     // Enqueue GSAP and ScrollTrigger
-    wp_enqueue_script('gsap', 'https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js', array(), null, true);
-    wp_enqueue_script('scrolltrigger', 'https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollTrigger.min.js', array('gsap'), null, true);
+    wp_enqueue_script('gsap', get_template_directory_uri() . '/js/gsap.min.js', array(), null, true);
+    wp_enqueue_script('scrolltrigger', get_template_directory_uri() . '/js/ScrollTrigger.min.js', array('gsap'), null, true);
 
     // Enqueue the custom script, making sure it depends on GSAP and ScrollTrigger only
     wp_enqueue_script('custom-gsap', get_template_directory_uri() . '/js/custom-gsap.js', array('gsap', 'scrolltrigger'), null, true);
@@ -846,16 +837,14 @@ add_action('wp_enqueue_scripts', 'enqueue_gsap_scripts');
 /*                             Newsletter function                            */
 /* -------------------------------------------------------------------------- */
 
-
-// Newsletter sign-up function for Mailchimp
-
 function enqueue_newsletter_script() {
-    wp_enqueue_script('newsletter-js', get_template_directory_uri() . '/js/newsletter.js', array(), null, true);
-
-    // Pass admin-ajax.php URL to the JavaScript file
-    wp_localize_script('newsletter-js', 'ajax_object', array(
-        'ajax_url' => admin_url('admin-ajax.php')
-    ));
+    $newsletter_page_id = pll_get_post(4);
+    if (is_page($newsletter_page_id) ) {
+        wp_enqueue_script('newsletter-js', get_template_directory_uri() . '/js/newsletter.js', array(), null, true);
+        wp_localize_script('newsletter-js', 'ajax_object', array(
+            'ajax_url' => admin_url('admin-ajax.php')
+        ));
+    }
 }
 add_action('wp_enqueue_scripts', 'enqueue_newsletter_script');
 
@@ -864,52 +853,106 @@ add_action('wp_ajax_mailchimp_subscribe', 'mailchimp_subscribe');
 add_action('wp_ajax_nopriv_mailchimp_subscribe', 'mailchimp_subscribe');
 
 function mailchimp_subscribe() {
+    // Check if email is set and not empty
     if ( !isset($_POST['email']) || empty($_POST['email']) ) {
-        wp_send_json_error(['message' => 'Email is required.']);
-        exit;
+        wp_send_json_error( array( 'message' => 'Email is required.' ) );
+        wp_die();
     }
 
-    // Retrieve and sanitize inputs
-    $email = sanitize_email($_POST['email']);
-    $name = sanitize_text_field($_POST['name']);
-    $surname = sanitize_text_field($_POST['surname']);
-    $api_key = MAILCHIMP_API_KEY;
-    $list_id = '30cac02d72'; // Replace with actual Mailchimp List ID
+    // Sanitize input data
+    $email   = sanitize_email( $_POST['email'] );
+    $name    = sanitize_text_field( $_POST['name'] );
+    $surname = sanitize_text_field( $_POST['surname'] );
 
-    // Mailchimp API endpoint and data
-    $url = 'https://us5.api.mailchimp.com/3.0/lists/' . $list_id . '/members/';
-    $data = [
+    // Check if email is valid
+    if ( !is_email( $email ) ) {
+        wp_send_json_error( array( 'message' => 'Invalid email address.' ) );
+        wp_die();
+    }
+
+    // Mailchimp API details
+    $api_key = MAILCHIMP_API_KEY; // Replace with your API Key constant
+    $list_id = '30cac02d72';      // Replace with actual Mailchimp List ID
+
+    // Prepare the Mailchimp API endpoint and request data
+    $url  = 'https://us5.api.mailchimp.com/3.0/lists/' . $list_id . '/members/';
+    $body = json_encode( array(
         'email_address' => $email,
-        'status' => 'subscribed',
-        'merge_fields' => [
+        'status'        => 'subscribed',
+        'merge_fields'  => array(
             'FNAME' => $name,
-            'LNAME' => $surname
-        ]
-    ];
+            'LNAME' => $surname,
+        ),
+    ) );
 
-    // Initialize cURL
-    $ch = curl_init($url);
-    curl_setopt($ch, CURLOPT_USERPWD, 'user:' . $api_key);
-    curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
-    curl_setopt($ch, CURLOPT_POSTFIELDS, json_encode($data));
-    curl_setopt($ch, CURLOPT_HTTPHEADER, ['Content-Type: application/json']);
+    // Setup request headers using Bearer token (Mailchimp API Key)
+    $headers = array(
+        'Authorization' => 'Bearer ' . $api_key, // Use Bearer token instead of base64 encoded Basic Auth
+        'Content-Type'  => 'application/json',
+    );
 
-    // Execute request and capture response
-    $response = curl_exec($ch);
-    $http_code = curl_getinfo($ch, CURLINFO_HTTP_CODE);
-    curl_close($ch);
+    // Make the POST request using wp_safe_remote_post()
+    $response = wp_safe_remote_post( $url, array(
+        'body'    => $body,
+        'headers' => $headers,
+        'timeout' => 15, // optional: set a timeout limit
+    ) );
 
-    // Parse the response and handle it
-    $response_data = json_decode($response, true);
-
-    if ($http_code === 200) {
-        wp_send_json_success(['message' => pll__('Successfully subscribed!', 'tailpress')]);
-    } else {
-        // Check for a more detailed error from the Mailchimp API response
-        $error_message = isset($response_data['detail']) ? $response_data['detail'] : pll__('An unknown error occurred.', 'tailpress');
-        wp_send_json_error(['message' => $error_message]);
+    // Check for errors in the response
+    if ( is_wp_error( $response ) ) {
+        wp_send_json_error( array( 'message' => 'An error occurred: ' . $response->get_error_message() ) );
+        wp_die();
     }
 
-    exit;
+    $http_code      = wp_remote_retrieve_response_code( $response );
+    $response_body  = wp_remote_retrieve_body( $response );
+    $response_data  = json_decode( $response_body, true );
+
+    if ( $http_code === 200 ) {
+        wp_send_json_success( array( 'message' => pll__( 'Successfully subscribed!', 'tailpress' ) ) );
+    } else {
+        $error_message = isset( $response_data['detail'] ) ? $response_data['detail'] : pll__( 'An unknown error occurred.', 'tailpress' );
+        wp_send_json_error( array( 'message' => $error_message ) );
+    }
+
+    wp_die();
 }
+
+
+
+
+/* -------------------------------------------------------------------------- */
+/*                        removes block-editor function                       */
+/* -------------------------------------------------------------------------- */
+
+function remove_wp_block_library_css() {
+    if ( ! is_admin() ) { // Ensures it's not removed from the backend
+        wp_dequeue_style( 'wp-block-library' );  // Front-end styles for blocks
+        wp_dequeue_style( 'wp-block-library-theme' ); // Front-end styles for block themes
+        wp_dequeue_style( 'wc-block-style' ); // WooCommerce block styles (if WooCommerce is active)
+    }
+}
+add_action( 'wp_enqueue_scripts', 'remove_wp_block_library_css' );
+
+
+/**
+ * Enable revisions for custom post types.
+ */
+function enable_revisions_for_cpt( $args, $post_type ) {
+    // Specify the custom post types where you want to enable revisions.
+    $supported_post_types = array( 'social', 'exhibition', 'team-member' );
+
+    // Check if the post type is in the list of supported post types.
+    if ( in_array( $post_type, $supported_post_types ) ) {
+        // Add 'revisions' support if it's not already enabled.
+        if ( ! in_array( 'revisions', $args['supports'] ) ) {
+            $args['supports'][] = 'revisions';
+        }
+    }
+
+    return $args;
+}
+add_filter( 'register_post_type_args', 'enable_revisions_for_cpt', 10, 2 );
+
+
 

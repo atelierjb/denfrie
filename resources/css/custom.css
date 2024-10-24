@@ -54,8 +54,16 @@
     @apply indent-sp5 sm:indent-sp8;
 }
 
+.wysiwyg-content p { 
+    @apply font-superclarendon text-base/regular sm:text-regular/regular !important;
+}
+
+.wysiwyg-content span { 
+    @apply font-superclarendon text-base/regular sm:text-regular/regular !important;
+}
+
 .wysiwyg-content a {
-    @apply underline hover:text-df-red;
+    @apply font-superclarendon text-base/regular sm:text-regular/regular underline hover:text-df-red !important;
 }
 
 .wysiwyg-credits p {

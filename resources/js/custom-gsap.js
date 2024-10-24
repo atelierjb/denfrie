@@ -10,8 +10,6 @@ document.addEventListener('DOMContentLoaded', function() {
         gsap.set("#nav-container", { y: 0 });
         gsap.set("#main-content", { y: 0 });
 
-        // Initialize ScrollTrigger after skipping animation
-        initializeScrollTrigger();
         return;
     }
 

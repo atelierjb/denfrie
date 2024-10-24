@@ -42,3 +42,26 @@ h4 {
 .wp-block[data-align=full] {
     @apply max-w-full;
 }
+
+body#tinymce {
+    font-family: 'superclarendon', sans-serif;
+    font-size: calc(0.5rem + 0.6vw) !important;
+    line-height: 1.5 !important;
+}
+
+body#tinymce p,
+body#tinymce ul,
+body#tinymce ol {
+    font-size: inherit !important;
+    line-height: inherit !important;
+}
+
+body#tinymce h1, body#tinymce h2, body#tinymce h3, body#tinymce h4, body#tinymce h5, body#tinymce h6 {
+    font-family: 'DenFrie2024 Serif', serif;
+    /* You can set specific calc() values for headings if needed */
+}
+
+/* Override any inline font sizes */
+body#tinymce *[style*="font-size"] {
+    font-size: inherit !important;
+}

@@ -36,10 +36,23 @@ if ($query->have_posts()) :
         <section class="pb-sp8 sm:pb-sp10">
             <figure class="mx-sp5 sm:mx-sp9 mb-sp1 overflow-hidden aspect-video animate-image">
                 <a href="<?php echo esc_url($post_url); ?>">
-                    <?php echo wp_get_attachment_image( $exhibition_image_id, 'full', false, array(
-                        'alt' => get_the_title(),
-                        'class' => 'w-full h-full transform transition-transform duration-500 hover:scale-105 object-cover',
-                    )); ?>
+                    <?php 
+                    $image_id = get_field('exhibition-image');
+                    if ($image_id) {
+                        $image_data = wp_get_attachment_image_src($image_id, 'full');
+                        $image_alt = get_post_meta($image_id, '_wp_attachment_image_alt', true);
+                        
+                        $srcset = wp_get_attachment_image_srcset($image_id, 'full');
+                        $sizes = '(max-width: 400px) 400px, (max-width: 800px) 800px, (max-width: 1200px) 1200px, 2000px';
+
+                        echo '<img src="' . esc_url($image_data[0]) . '" 
+                                srcset="' . esc_attr($srcset) . '" 
+                                sizes="' . esc_attr($sizes) . '" 
+                                alt="' . esc_attr($image_alt) . '" 
+                                class="w-full h-full transform transition-transform duration-500 hover:scale-105 object-cover"
+                                loading="lazy">';
+                    }
+                    ?>
                 </a>
             </figure>
             <div class="w-fit hover:text-df-red text-xxl/xxl sm:text-xxxl/xxl">

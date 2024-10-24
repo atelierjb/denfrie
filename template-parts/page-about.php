@@ -30,22 +30,22 @@ get_header();
                     <?php get_template_part( 'template-parts/section-contact' ); ?>
                 </div>
             </section>
-            <section class="w-full sm:w-[calc(90%+1vw)] pb-sp8">
-                <h2 class="font-dfserif text-xl/xl pb-sp1">
-                    <?php echo esc_html( get_field('about-title-about') ); ?>
-                </h2>
-                <div class="wysiwyg-content font-superclarendon text-base/regular sm:text-regular/regular text-pretty">
-                    <?php the_field('about-text-about'); ?>
-                </div>
-            </section>
-            <section class="w-full sm:w-[calc(90%+1vw)] pb-sp8">
-                <h2 class="font-dfserif text-xl/xl pb-sp1">
-                    <?php echo esc_html( get_field('about-title-oslo') ); ?>
-                </h2>
-                <div class="wysiwyg-content font-superclarendon text-base/regular sm:text-regular/regular text-pretty">
-                    <?php the_field('about-text-oslo'); ?>
-                </div>
-            </section>
+
+            <?php if( have_rows('about-left') ): ?>
+                <?php while( have_rows('about-left') ): the_row(); ?>
+                    <?php if( get_row_layout() == 'textsection' ): ?>
+                        <section class="w-full sm:w-[calc(90%+1vw)] pb-sp8">
+                            <h2 class="font-dfserif text-xl/xl pb-sp1">
+                                <?php echo esc_html( get_sub_field('title') ); ?>
+                            </h2>
+                            <div class="wysiwyg-content font-superclarendon text-base/regular sm:text-regular/regular text-pretty">
+                                <?php echo wp_kses_post( get_sub_field('text') ); ?>
+                            </div>
+                        </section>
+                    <?php endif; ?>
+                <?php endwhile; ?>
+            <?php endif; ?>
+
             <figure class="w-full px-sp5 sm:px-sp8 sm:w-[calc(90%+1vw)] hidden sm:block break-after-avoid sm:break-after-column pb-sp8">
                 <?php 
                 $about_image_1_id = get_field('about-image-1'); 
@@ -64,22 +64,20 @@ get_header();
                     )); ?>
                 <?php endif; ?>
             </figure>
-            <section class="w-full sm:w-[calc(90%+1vw)] pb-sp8">
-                <h2 class="font-dfserif text-xl/xl pb-sp1">
-                    <?php echo esc_html( get_field('about-title-history') ); ?>
-                </h2>
-                <div class="wysiwyg-content font-superclarendon text-base/regular sm:text-regular/regular text-pretty">
-                    <?php the_field('about-text-history'); ?>
-                </div>
-            </section>
-            <section class="w-full sm:w-[calc(90%+1vw)] pb-sp8">
-                <h2 class="font-dfserif text-xl/xl pb-sp1">
-                    <?php echo esc_html( get_field('about-title-toaster') ); ?>
-                </h2>
-                <div class="wysiwyg-content font-superclarendon text-base/regular sm:text-regular/regular text-pretty">
-                    <?php the_field('about-text-toaster'); ?>
-                </div>
-            </section>
+            <?php if( have_rows('about-right') ): ?>
+                <?php while( have_rows('about-right') ): the_row(); ?>
+                    <?php if( get_row_layout() == 'textsection' ): ?>
+                        <section class="w-full sm:w-[calc(90%+1vw)] pb-sp8">
+                            <h2 class="font-dfserif text-xl/xl pb-sp1">
+                                <?php echo esc_html( get_sub_field('title') ); ?>
+                            </h2>
+                            <div class="wysiwyg-content font-superclarendon text-base/regular sm:text-regular/regular text-pretty">
+                                <?php echo wp_kses_post( get_sub_field('text') ); ?>
+                            </div>
+                        </section>
+                    <?php endif; ?>
+                <?php endwhile; ?>
+            <?php endif; ?>
             <figure class="w-full px-sp5 sm:hidden pb-sp8">
                 <?php 
                     $about_image_1_id = get_field('about-image-1'); 

@@ -19,16 +19,22 @@
     			<?php echo pll__('Annual pass', 'tailpress'); ?>
 			</a>
 		</li>
-		<li class="sm:col-span-3">
-			<a class="hover:text-df-red" target="_blank" href="<?php the_field('info-instagram', 'option'); ?>">
-				Instagram
-			</a>
-		</li>
-		<li class="mt-0 sm:-ml-[2px] sm:col-auto">
-			<a class="hover:text-df-red" target="_blank" href="<?php the_field('info-facebook', 'option'); ?>">
-				Facebook
-			</a>
-		</li>
+		<?php
+		$info_post = get_translated_info_post(); // Make sure this function is defined in functions.php
+		if ($info_post) :
+		?>
+			<li class="sm:col-span-3">
+				<a class="hover:text-df-red" target="_blank" href="<?php echo esc_url(get_field('info-instagram', $info_post->ID)); ?>">
+					Instagram
+				</a>
+			</li>
+			<li class="mt-0 sm:-ml-[2px] sm:col-auto">
+				<a class="hover:text-df-red" target="_blank" href="<?php echo esc_url(get_field('info-facebook', $info_post->ID)); ?>">
+					Facebook
+				</a>
+			</li>
+		<?php endif; ?>
+
 		<li class="sm:col-span-2 sm:place-self-end">
 			<a class="hover:text-df-red" href="#" id="back-to-top">
 				↑
