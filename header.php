@@ -16,7 +16,7 @@
 	<?php endif; ?>
 	<link rel="profile" href="http://gmpg.org/xfn/11">
 	<link rel="pingback" href="<?php bloginfo( 'pingback_url' ); ?>">
-	<link rel="preload" href="<?php echo esc_url($upload_dir['baseurl'] . '/2024/09/loading-image.png'); ?>" as="image">
+	<link rel="preload" href="<?php echo esc_url(wp_get_upload_dir()['baseurl'] . '/2024/09/loading-image.png'); ?>" as="image">
 	<link rel="preconnect" href="https://use.typekit.net" crossorigin>
 	<link rel="preconnect" href="https://p.typekit.net" crossorigin>
 	<link rel="preload" href="<?php echo get_stylesheet_directory_uri(); ?>/css/app.css?ver=1.0" as="style" onload="this.onload=null;this.rel='stylesheet'">
@@ -122,7 +122,7 @@
 
 
 			<figure class="w-[calc(82.5%+6.5vw)] sm:w-[calc(80%+6.5vw)] pb-sp5">
-				<a href="<?php echo esc_url(home_url('/')); ?>">
+				<a href="<?php echo esc_url(home_url('/')); ?>" aria-label="Link to frontpage">
 					<svg class="w-full h-auto" viewBox="0 0 5000 992" fill="none" xmlns="http://www.w3.org/2000/svg">
 						<path d="M0 957.345C39.2368 935.789 50.6281 881.264 50.6281 831.812V168.645C50.6281 119.192 39.2368 64.6682 0 43.1121V29.164H425.276C697.403 29.164 908.775 173.717 908.775 498.326C908.775 822.936 697.403 971.293 425.276 971.293H0V957.345ZM232.889 822.936H425.276C598.678 822.936 721.451 713.887 721.451 498.326C721.451 282.765 598.678 177.521 425.276 177.521H232.889L225.295 185.129V815.328L232.889 822.936Z" fill="black"/>
 						<path d="M1322.81 253.602C1507.6 253.602 1625.32 357.578 1648.1 547.779C1648.1 551.583 1649.36 556.655 1649.36 561.727C1650.63 575.675 1651.89 590.891 1651.89 604.839C1653.16 625.128 1653.16 645.416 1653.16 661.9L1640.5 674.58H1153.21L1144.35 683.456C1167.13 777.288 1240.54 847.029 1349.39 852.101C1459.51 857.173 1541.78 810.256 1583.55 739.248H1601.27L1620.25 902.821C1530.39 966.221 1446.85 991.581 1349.39 991.581C1146.88 991.581 981.072 867.317 981.072 622.592C981.072 377.866 1120.3 253.602 1322.81 253.602ZM1153.21 547.779H1492.42L1501.28 538.903C1489.88 456.483 1453.18 394.35 1330.41 393.082C1211.43 391.814 1163.33 460.287 1145.61 540.171L1153.21 547.779Z" fill="black"/>
@@ -169,7 +169,7 @@
 		</a>
 	</div>
 
-	<nav class="fixed right-0 p-sp5 px-sp3 z-10 bg-df-light-grey sm:hidden w-[55vw] h-[100vh] flex flex-col gap-sp3 list-none font-dfserif text-xxxl/xxl transform translate-x-full drop-shadow-sm" id="primary-menu">
+	<menu class="fixed right-0 p-sp5 px-sp3 z-10 bg-df-light-grey sm:hidden w-[55vw] h-[100vh] flex flex-col gap-sp3 list-none font-dfserif text-xxxl/xxl transform translate-x-full drop-shadow-sm" id="primary-menu">
 
 		
 				<li class="mt-sp7">
@@ -223,7 +223,7 @@
 				<li class="">
 					<a href="<?php echo pll_the_languages(array('raw' => 1))['da']['url']; ?>" class="hover:text-df-red <?php echo pll_current_language() === 'da' ? 'text-df-red underline underline-offset-2' : ''; ?>">DK</a>/<a href="<?php echo pll_the_languages(array('raw' => 1))['en']['url']; ?>" class="hover:text-df-red <?php echo pll_current_language() === 'en' ? 'text-df-red underline underline-offset-2' : ''; ?>">EN</a>
 				</li>
-			</nav>
+			</menu>
 
 	
 

@@ -61,14 +61,14 @@ $total_posts = $exhibition_query->found_posts;
                 <?php while ($exhibition_query->have_posts()) : $exhibition_query->the_post(); ?>
                     <div class="">
                         <figure class="mx-sp5 sm:mx-0 sm:w-full mb-sp1 overflow-hidden aspect-video">
-                            <a href="<?php the_permalink(); ?>">
+                            <a href="<?php the_permalink(); ?>" aria-label="Go to exhibition">
                                 <?php 
                                 $image_id = get_field('exhibition-image');
                                 if ($image_id) {
-                                    $image_data = wp_get_attachment_image_src($image_id, 'full');
+                                    $image_data = wp_get_attachment_image_src($image_id, 'exhibition-medium');
                                     $image_alt = get_post_meta($image_id, '_wp_attachment_image_alt', true);
                                     
-                                    $srcset = wp_get_attachment_image_srcset($image_id, 'full');
+                                    $srcset = wp_get_attachment_image_srcset($image_id, 'exhibition-medium');
                                     $sizes = '(max-width: 400px) 400px, (max-width: 800px) 800px, (max-width: 1200px) 1200px, 2000px';
 
                                     echo '<img src="' . esc_url($image_data[0]) . '" 

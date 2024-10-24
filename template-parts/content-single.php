@@ -17,9 +17,9 @@
                 if ($images):
                     foreach ($images as $image_id):
                         $image_caption = wp_get_attachment_caption($image_id);
-                        $image_data = wp_get_attachment_image_src($image_id, 'full');
+                        $image_data = wp_get_attachment_image_src($image_id, 'exhibition-medium');
                         $image_alt = get_post_meta($image_id, '_wp_attachment_image_alt', true);
-                        $srcset = wp_get_attachment_image_srcset($image_id, 'full');
+                        $srcset = wp_get_attachment_image_srcset($image_id, 'exhibition-medium');
                         $sizes = '(max-width: 640px) 100vw, (max-width: 1024px) 80vw, 1200px';
                         ?>
                         <div class="swiper-slide">
@@ -110,9 +110,9 @@
 					<?php if (get_row_layout() == 'image-cols-1'):
                     $image_id = get_sub_field('image');
                     $image_description = get_sub_field('image-description');
-                    $image_data = wp_get_attachment_image_src($image_id, 'full');
+                    $image_data = wp_get_attachment_image_src($image_id, 'exhibition-medium');
                     $image_alt = get_post_meta($image_id, '_wp_attachment_image_alt', true);
-                    $srcset = wp_get_attachment_image_srcset($image_id, 'full');
+                    $srcset = wp_get_attachment_image_srcset($image_id, 'exhibition-medium');
                     $sizes = '(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 600px';
                     ?>
                     <section class="mx-sp5 sm:mx-0 sm:w-full break-inside-avoid font-superclarendon">
@@ -141,9 +141,9 @@
 			<?php if (get_row_layout() == 'image-cols-2'):
                 $image_id = get_sub_field('image');
                 $image_description = get_sub_field('image-description');
-                $image_data = wp_get_attachment_image_src($image_id, 'full');
+                $image_data = wp_get_attachment_image_src($image_id, 'exhibition-medium');
                 $image_alt = get_post_meta($image_id, '_wp_attachment_image_alt', true);
-                $srcset = wp_get_attachment_image_srcset($image_id, 'full');
+                $srcset = wp_get_attachment_image_srcset($image_id, 'exhibition-medium');
                 $sizes = '(max-width: 640px) 100vw, (max-width: 1024px) 80vw, 1200px';
                 ?>
                 <section class="w-full font-superclarendon">

@@ -47,14 +47,14 @@ if ($query->have_posts()) :
                     </a>
                 </p>
                 <figure class="w-full mb-sp2 sm:mb-sp8 overflow-hidden aspect-video animate-image">
-                <a href="<?php echo esc_url($post_url); ?>">
+                <a href="<?php echo esc_url($post_url); ?>" aria-label="Go to exhibition">
                 <?php 
                     $image_id = get_field('exhibition-image');
                     if ($image_id) {
-                        $image_data = wp_get_attachment_image_src($image_id, 'full');
+                        $image_data = wp_get_attachment_image_src($image_id, 'exhibition-medium');
                         $image_alt = get_post_meta($image_id, '_wp_attachment_image_alt', true);
                         
-                        $srcset = wp_get_attachment_image_srcset($image_id, 'full');
+                        $srcset = wp_get_attachment_image_srcset($image_id, 'exhibition-medium');
                         $sizes = '(max-width: 400px) 400px, (max-width: 800px) 800px, (max-width: 1200px) 1200px, 2000px';
 
                         echo '<img src="' . esc_url($image_data[0]) . '" 

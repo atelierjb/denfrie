@@ -3,25 +3,34 @@
 /* -------------------------------------------------------------------------- */
 
 document.addEventListener('DOMContentLoaded', function() {
+    // Determine if it's mobile or desktop
+    const isMobile = window.innerWidth <= 768; // Adjust this breakpoint as needed
+
+    // If it's mobile, skip the animation entirely
+    if (isMobile) {
+        document.querySelector("#loading-screen").style.display = 'none';
+        gsap.set("#nav-container", { y: 0 });
+        gsap.set("#main-content", { y: 0 });
+        return;
+    }
+
     // Check if the loading animation has already been shown this session
     if (sessionStorage.getItem('hasSeenAnimation') === 'true') {
         // Skip the animation if already seen this session
         document.querySelector("#loading-screen").style.display = 'none';
         gsap.set("#nav-container", { y: 0 });
         gsap.set("#main-content", { y: 0 });
-
         return;
     }
 
-    // Set up the animation as before
     const tl = gsap.timeline();
 
     // Set initial positions
-    gsap.set("#loading-image", { y: "100%", opacity: 0 });
     gsap.set("#nav-container", { y: "100%" });
     gsap.set("#main-content", { y: "100%" });
+    gsap.set("#loading-image", { y: "100%", opacity: 0 });
 
-    // Image slides in from the bottom
+    // Desktop animation
     tl.to("#loading-image", { 
         y: 0, 
         opacity: 1, 
@@ -30,7 +39,7 @@ document.addEventListener('DOMContentLoaded', function() {
     });
 
     // Pause for 1 second
-    tl.to("#loading-image", { duration: 0.5 });
+    tl.to("#loading-image", { duration: 0.25 });
 
     // Loading screen slides up and out of view
     tl.to("#loading-screen", {
@@ -57,7 +66,6 @@ document.addEventListener('DOMContentLoaded', function() {
             // Short delay to ensure layout has settled
             setTimeout(() => {
                 ScrollTrigger.refresh(); // Refresh ScrollTrigger to recalculate positions
-                initializeScrollTrigger(); // Initialize ScrollTrigger after everything is in place
             }, 100); // 100ms delay to allow layout to settle
         }
     }, "-=1.5");
