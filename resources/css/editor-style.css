@@ -2,36 +2,61 @@
 @import "tailwindcss/components";
 @import "tailwindcss/utilities";
 
+/* Font Faces */
 @font-face {
     font-family: 'DenFrie2024 Serif';
     src: url('/wp-content/themes/tailpress/fonts/DenFrie2024-Serif.woff') format('woff'),
-         url('/wp-content/themes/tailpress/fonts/DenFrie2024-Serif.woff2') format('woff2');   
+         url('/wp-content/themes/tailpress/fonts/DenFrie2024-Serif.woff2') format('woff2');
     font-weight: normal;
     font-style: normal;
     font-display: swap;
 }
 
 @font-face {
-    font-family:"superclarendon";
-    src:url("https://use.typekit.net/af/5bb913/00000000000000007735980f/30/l?primer=7cdcb44be4a7db8877ffa5c0007b8dd865b3bbc383831fe2ea177f62257a9191&fvd=n3&v=3") format("woff2"),url("https://use.typekit.net/af/5bb913/00000000000000007735980f/30/d?primer=7cdcb44be4a7db8877ffa5c0007b8dd865b3bbc383831fe2ea177f62257a9191&fvd=n3&v=3") format("woff"),url("https://use.typekit.net/af/5bb913/00000000000000007735980f/30/a?primer=7cdcb44be4a7db8877ffa5c0007b8dd865b3bbc383831fe2ea177f62257a9191&fvd=n3&v=3") format("opentype");
-    font-display:auto;font-style:normal;font-weight:normal;font-stretch:normal;
-    }
+    font-family: "Superclarendon";
+    src: url("https://use.typekit.net/af/5bb913/00000000000000007735980f/30/l?primer=7cdcb44be4a7db8877ffa5c0007b8dd865b3bbc383831fe2ea177f62257a9191&fvd=n3&v=3") format("woff2"),
+         url("https://use.typekit.net/af/5bb913/00000000000000007735980f/30/d?primer=7cdcb44be4a7db8877ffa5c0007b8dd865b3bbc383831fe2ea177f62257a9191&fvd=n3&v=3") format("woff"),
+         url("https://use.typekit.net/af/5bb913/00000000000000007735980f/30/a?primer=7cdcb44be4a7db8877ffa5c0007b8dd865b3bbc383831fe2ea177f62257a9191&fvd=n3&v=3") format("opentype");
+    font-display: auto;
+    font-style: normal;
+    font-weight: normal;
+}
 
-@font-face {
-    font-family:"superclarendon";
-    src:url("https://use.typekit.net/af/1601c1/000000000000000077359813/30/l?primer=7cdcb44be4a7db8877ffa5c0007b8dd865b3bbc383831fe2ea177f62257a9191&fvd=i3&v=3") format("woff2"),url("https://use.typekit.net/af/1601c1/000000000000000077359813/30/d?primer=7cdcb44be4a7db8877ffa5c0007b8dd865b3bbc383831fe2ea177f62257a9191&fvd=i3&v=3") format("woff"),url("https://use.typekit.net/af/1601c1/000000000000000077359813/30/a?primer=7cdcb44be4a7db8877ffa5c0007b8dd865b3bbc383831fe2ea177f62257a9191&fvd=i3&v=3") format("opentype");
-    font-display:auto;font-style:italic;font-weight:normal;font-stretch:normal;
-    }
-
-body {
-    @apply font-superclarendon font-light text-base;
+/* General Font Styling for Editor */
+body, body * {
+    font-family: 'Superclarendon', serif !important;
+    font-weight: 300 !important;
+    font-size: 1rem !important;
+    color: inherit !important;
 }
 
 h4 {
-    @apply font-dfserif text-[calc(0.75rem+0.6vw)]/regular;
+    font-family: 'DenFrie2024 Serif', serif !important;
+    font-weight: normal !important;
+    font-size: 1.5rem !important;
+    line-height: 1.2 !important;
 }
 
-.wp-block{
+/* Hide the section break marker in the editor as well */
+.wysiwyg-content .section-break {
+    display: none;
+}
+
+/* First paragraph in each section without indent */
+.wysiwyg-content p:first-of-type,          /* First paragraph at start */
+.wysiwyg-content .section-break + p {      /* First paragraph after each section break */
+    text-indent: 0;
+}
+
+/* Indent subsequent paragraphs in each section */
+.wysiwyg-content p {
+    text-indent: 1.25rem; /* Adjust to your spacing */
+}
+
+
+
+/* Alignment and Block Overrides */
+.wp-block {
     @apply max-w-screen-xl;
 }
 
@@ -43,25 +68,12 @@ h4 {
     @apply max-w-full;
 }
 
-body#tinymce {
-    font-family: 'superclarendon', sans-serif;
-    font-size: calc(0.5rem + 0.6vw) !important;
-    line-height: 1.5 !important;
+/* Ensure inherited font-size for headings */
+h1, h2, h3, h4, h5, h6 {
+    font-family: 'DenFrie2024 Serif', serif !important;
 }
 
-body#tinymce p,
-body#tinymce ul,
-body#tinymce ol {
-    font-size: inherit !important;
-    line-height: inherit !important;
-}
-
-body#tinymce h1, body#tinymce h2, body#tinymce h3, body#tinymce h4, body#tinymce h5, body#tinymce h6 {
-    font-family: 'DenFrie2024 Serif', serif;
-    /* You can set specific calc() values for headings if needed */
-}
-
-/* Override any inline font sizes */
-body#tinymce *[style*="font-size"] {
+/* Remove inline font styling */
+*[style*="font-size"] {
     font-size: inherit !important;
 }

@@ -24,15 +24,9 @@ get_header();
 <main data-barba="wrapper" class="mx-sp3 my-sp5" id="main-content">
     <article data-barba="container" class="columns-1 sm:columns-2 gap-sp1 pr-sp2">
         <!-- /* -------------------------------- left side ------------------------------- */ -->
-            <section class="w-full sm:w-[95%] pb-sp8">
-                <h2 class="font-dfserif text-xl/xl pb-sp1">
-                    <?php echo esc_html( get_field('visit-title-admission') ); ?> 
-                </h2>
-
-                <?php get_template_part( 'template-parts/section-prices' ); ?>
-            </section>
             <?php if( have_rows('visit-left') ): ?>
                 <?php while( have_rows('visit-left') ): the_row(); ?>
+                
                     <?php if( get_row_layout() == 'textsection' ): ?>
                         <section class="w-full sm:w-[calc(90%+1vw)] pb-sp8">
                             <h2 class="font-dfserif text-xl/xl pb-sp1">
@@ -42,12 +36,33 @@ get_header();
                                 <?php echo wp_kses_post( get_sub_field('text') ); ?>
                             </div>
                         </section>
+                    
+                    <?php elseif( get_row_layout() == 'pricelist' ): ?>
+                        <section class="w-full sm:w-[calc(90%+1vw)] pb-sp8">
+                            <h2 class="font-dfserif text-xl/xl pb-sp1">
+                                <?php echo esc_html( get_sub_field('title') ); ?>
+                            </h2>
+                            
+                            <?php if( have_rows('pricing') ): ?>
+                                <div class="font-superclarendon text-base/regular sm:text-regular/regular">
+                                    <?php while( have_rows('pricing') ): the_row(); ?>
+                                        <div class="columns-2 pb-sp1">
+                                            <p><?php echo pll__( get_sub_field('category'), 'tailpress' ); ?></p>
+                                            <p><?php echo esc_html( get_sub_field('price') ); ?></p>
+                                        </div>
+                                    <?php endwhile; ?>
+                                </div>
+                            <?php endif; ?>
+                        </section>
+                    
                     <?php endif; ?>
+
                 <?php endwhile; ?>
             <?php endif; ?>
 
+
             <!-- /* -------------------------------- right side ------------------------------- */ -->
-            <section class="w-full sm:w-[calc(90%+1vw)] pb-sp8 break-before-column" id="newsletter">
+            <section class="w-full sm:w-[calc(90%+1vw)] pb-sp8 sm:break-before-column" id="newsletter">
                 <h2 class="font-dfserif text-xl/xl pb-sp1">
                     <?php echo esc_html( get_field('visit-title-newsletter') ); ?>
                 </h2>
@@ -78,8 +93,28 @@ get_header();
             <?php endif; ?>
     </article>
 </main>
+<!-- <script>
+    document.addEventListener("DOMContentLoaded", function() {
+    // Select all WYSIWYG content sections
+    const contentSections = document.querySelectorAll('.wysiwyg-content');
 
+    contentSections.forEach(section => {
+        // Find and remove empty <p> tags
+        section.querySelectorAll("p").forEach(p => {
+            if (p.innerHTML.trim() === "" || p.innerHTML === "&nbsp;") {
+                p.remove(); // Remove the empty <p> tags from the DOM
+            }
+        });
+        
+        // Then apply the no-indent class only to the first valid paragraph
+        let paragraphs = section.querySelectorAll("p:not(:empty)");
 
+        if (paragraphs.length) {
+            paragraphs[0].classList.add("no-indent");
+        }
+    });
+});
+</script> -->
 
 <?php
 // Include the footer

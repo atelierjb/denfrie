@@ -13,7 +13,7 @@
             </div>
         <?php endif; ?>
 
-        <div id="exhibition-text" class="wysiwyg-exhibition overflow-hidden">
+        <div id="exhibition-text" class="wysiwyg-content overflow-hidden">
             <?php echo wp_kses_post($short_text); ?>
         </div>
 
@@ -50,6 +50,7 @@ document.addEventListener('DOMContentLoaded', function () {
                 <?php endif; ?>
             <?php endif; ?>
         </div>`;
+
 
     let isExpanded = false;
 

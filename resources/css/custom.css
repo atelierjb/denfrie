@@ -1,43 +1,3 @@
-
-
-.entry-content, .block-editor-block-list__layout {
-    h1 {
-        @apply text-2xl;
-    }
-
-    h2 {
-        @apply text-xl;
-    }
-
-    h3 {
-        @apply text-lg;
-    }
-
-    p, ul, ol {
-        a {
-            @apply text-blue-500 underline;
-
-            &:hover {
-                @apply no-underline;
-            }
-        }
-
-        @apply mb-8;
-    }
-
-    ul:not(.block-editor-block-variation-picker__variations) {
-        li {
-            @apply list-disc list-inside;
-        }
-    }
-
-    ol {
-        li {
-            @apply list-decimal list-inside;
-        }
-    }
-}
-
 .wysiwyg-exhibition p {
     @apply font-superclarendon text-base/regular sm:text-regular/regular;
 }
@@ -47,10 +7,27 @@
 }
 
 .wysiwyg-exhibition p:not(:first-child) {
-    @apply indent-sp5 sm:indent-sp9;
+    @apply indent-sp5 sm:indent-sp8;
 }
 
-.wysiwyg-content p:not(:first-child) {
+/* Ensure the section break marker itself is invisible */
+.wysiwyg-content .section-break {
+    @apply opacity-0 h-[calc(0.5rem+0.6vw)];
+}
+
+/* Remove indentation from the first paragraph in each section */
+.wysiwyg-content p:first-of-type,          /* First paragraph at start */
+.wysiwyg-content .section-break + p {      /* First paragraph after each section break */
+    text-indent: 0; /* No indent */
+}
+
+/* Apply indentation to subsequent paragraphs within the same section */
+.wysiwyg-content p {
+    @apply indent-sp5 sm:indent-sp8; /* Adjust to your `sp5` or `sp8` spacing */
+}
+
+/* Reset indentation on paragraphs following a section break */
+.wysiwyg-content .section-break + p + p {
     @apply indent-sp5 sm:indent-sp8;
 }
 
@@ -67,7 +44,7 @@
 }
 
 .wysiwyg-credits p {
-    @apply font-superclarendon text-base/regular sm:text-regular/regular mx-sp5 sm:mx-sp9;
+    @apply font-superclarendon text-base/regular sm:text-regular/regular;
 }
 
 .wysiwyg-credits h4 {
@@ -111,7 +88,7 @@
 
 ::selection {
     color: #EEE;
-    background: #AD2134;
+    background: #841E2C;
 }
 
 

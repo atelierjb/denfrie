@@ -74,7 +74,7 @@ if ($query->have_posts()) :
                         <?php the_title(); ?>
                     </a> 
                 </p>
-                <div class="wysiwyg-content font-superclarendon text-small/small sm:text-regular/regular text-pretty -mt-[0.5vw] line-clamp-5 sm:line-clamp-[7] md:line-clamp-[8] lg:line-clamp-[9] xl:line-clamp-[10] 2xl:line-clamp-[11]">
+                <div class="wysiwyg-content font-superclarendon text-small/small sm:text-regular/regular text-pretty -mt-[0.5vw] line-clamp-4 sm:line-clamp-[7] md:line-clamp-[8] lg:line-clamp-[9] xl:line-clamp-[10] 2xl:line-clamp-[11]">
                     <?php echo wp_kses_post($exhibition_description); ?> 
                 </div>
             </div>

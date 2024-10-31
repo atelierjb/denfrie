@@ -685,9 +685,18 @@ add_action('pre_get_posts', 'my_custom_orderby');
 /* -----------------------  edits to WYSIWYG editor ----------------------- */
 
 function enqueue_acf_custom_js() {
+    // Enqueue the modified ACF custom JavaScript
     wp_enqueue_script('acf-custom-js', get_template_directory_uri() . '/js/acf-custom.js', array('acf-input'), null, true);
 }
 add_action('acf/input/admin_enqueue_scripts', 'enqueue_acf_custom_js');
+
+// Clean up any formatting when pasting into the editor
+function custom_mce_paste_filter($init) {
+    $init['paste_as_text'] = true; // Forces paste to plain text
+    return $init;
+}
+add_filter('tiny_mce_before_init', 'custom_mce_paste_filter');
+
 
 
 
@@ -955,4 +964,9 @@ function enable_revisions_for_cpt( $args, $post_type ) {
 add_filter( 'register_post_type_args', 'enable_revisions_for_cpt', 10, 2 );
 
 
+function remove_empty_p_tags($content) {
+    return preg_replace('/<p>(\s|&nbsp;)*<\/p>/', '', $content);
+}
+add_filter('the_content', 'remove_empty_p_tags');
+add_filter('acf_the_content', 'remove_empty_p_tags'); // Applies to ACF WYSIWYG fields
 
