@@ -2,12 +2,20 @@
 /*                              LOADING SEQUENCE                              */
 /* -------------------------------------------------------------------------- */
 
+// Create a more persistent storage check using localStorage instead of sessionStorage
+if (!localStorage.getItem('hasSeenAnimation')) {
+    localStorage.setItem('hasSeenAnimation', 'false');
+}
+
 document.addEventListener('DOMContentLoaded', function() {
     const isMobile = window.innerWidth <= 768;
+    const loadingScreen = document.querySelector("#loading-screen");
 
-    // Check if animation has been seen this session
-    if (sessionStorage.getItem('hasSeenAnimation') === 'true') {
-        document.querySelector("#loading-screen").style.display = 'none';
+    // Always ensure the loading screen is hidden if animation was already shown
+    if (localStorage.getItem('hasSeenAnimation') === 'true') {
+        if (loadingScreen) {
+            loadingScreen.style.display = 'none';
+        }
         gsap.set("#nav-container", { y: 0 });
         gsap.set("#main-content", { y: 0 });
         return;
@@ -52,7 +60,14 @@ document.addEventListener('DOMContentLoaded', function() {
         duration: isMobile ? 1 : 1.5, 
         ease: "power4.inOut",
         onComplete: function() {
-            // ... rest of the onComplete function ...
+            if (loadingScreen) {
+                loadingScreen.style.display = 'none';
+            }
+            localStorage.setItem('hasSeenAnimation', 'true');
+            
+            setTimeout(() => {
+                ScrollTrigger.refresh();
+            }, 100);
         }
     }, "-=1");
 });
