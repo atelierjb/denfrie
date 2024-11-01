@@ -48,10 +48,10 @@ $total_posts = $exhibition_query->found_posts;
 <main data-barba="wrapper" class="mx-sp3 my-sp5" id="main-content">
     <article data-barba="container">
         <section class="flex justify-between items-center pb-sp5 sm:pb-sp7">
-            <h2 class="font-dfserif text-xl/xl">
+            <h2 class="font-dfserif text-xl/xl animateOnView">
                 <?php echo pll__('Archive', 'tailpress'); ?>
             </h2>
-            <form id="search-form">
+            <form id="search-form" class="animateOnView">
                 <input type="text" id="archive-search-input" placeholder="<?php echo pll__('Search in archive...', 'tailpress'); ?>" class="font-dfserif text-xl/xl text-df-grey bg-df-light-grey text-right focus:outline-none" autocomplete="off">
             </form>
         </section>
@@ -60,7 +60,7 @@ $total_posts = $exhibition_query->found_posts;
             <?php if ($exhibition_query->have_posts()) : ?>
                 <?php while ($exhibition_query->have_posts()) : $exhibition_query->the_post(); ?>
                     <div class="">
-                        <figure class="mx-sp5 sm:mx-0 sm:w-full mb-sp1 overflow-hidden aspect-video">
+                        <figure class="mx-sp5 sm:mx-0 sm:w-full mb-sp1 overflow-hidden aspect-video animateOnView">
                             <a href="<?php the_permalink(); ?>" aria-label="Go to exhibition">
                                 <?php 
                                 $image_id = get_field('exhibition-image');
@@ -82,12 +82,12 @@ $total_posts = $exhibition_query->found_posts;
                             </a>
                         </figure>
                         <div class="w-fit hover:text-df-red text-xxl/xxl sm:text-xxxl/xxl">
-                            <h3 class="font-dfserif line-clamp-2">
+                            <h3 class="font-dfserif line-clamp-2 animateOnView">
                                 <a class="" href="<?php the_permalink(); ?>">
                                     <?php the_title(); ?>
                                 </a>
                             </h3>
-                            <p class="font-superclarendon">
+                            <p class="font-superclarendon animateOnView">
                                 <a href="<?php echo esc_url( get_permalink() ); ?>">
                                     <?php echo esc_html( get_field('exhibition-start-date') ); ?> — <?php echo esc_html( get_field('exhibition-end-date') ); ?>
                                 </a>
@@ -105,7 +105,7 @@ $total_posts = $exhibition_query->found_posts;
 
         <?php if ($total_posts > $posts_per_page) : ?>
             <div id="archive-load-more-container">
-                <button class="font-dfserif text-xl/xl py-sp9 hover:text-df-red" id="archive-load-more">
+                <button class="font-dfserif text-xl/xl py-sp9 hover:text-df-red animateOnView" id="archive-load-more">
                     <?php echo pll__('Show more archive', 'tailpress'); ?> ↓
                 </button>
             </div>

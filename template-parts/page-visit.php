@@ -29,17 +29,17 @@ get_header();
                 
                     <?php if( get_row_layout() == 'textsection' ): ?>
                         <section class="w-full sm:w-[calc(90%+1vw)] pb-sp8">
-                            <h2 class="font-dfserif text-xl/xl pb-sp1">
+                            <h2 class="font-dfserif text-xl/xl pb-sp1 animateOnView">
                                 <?php echo esc_html( get_sub_field('title') ); ?>
                             </h2>
-                            <div class="wysiwyg-content">
+                            <div class="wysiwyg-content animateOnView">
                                 <?php echo wp_kses_post( get_sub_field('text') ); ?>
                             </div>
                         </section>
                     
                     <?php elseif( get_row_layout() == 'pricelist' ): ?>
                         <section class="w-full sm:w-[calc(90%+1vw)] pb-sp8">
-                            <h2 class="font-dfserif text-xl/xl pb-sp1">
+                            <h2 class="font-dfserif text-xl/xl pb-sp1 animateOnView">
                                 <?php echo esc_html( get_sub_field('title') ); ?>
                             </h2>
                             
@@ -47,8 +47,8 @@ get_header();
                                 <div class="font-superclarendon text-base/regular sm:text-regular/regular">
                                     <?php while( have_rows('pricing') ): the_row(); ?>
                                         <div class="columns-2 pb-sp1">
-                                            <p><?php echo pll__( get_sub_field('category'), 'tailpress' ); ?></p>
-                                            <p><?php echo esc_html( get_sub_field('price') ); ?></p>
+                                            <p class="animateOnView"><?php echo pll__( get_sub_field('category'), 'tailpress' ); ?></p>
+                                            <p class="animateOnView"><?php echo esc_html( get_sub_field('price') ); ?></p>
                                         </div>
                                     <?php endwhile; ?>
                                 </div>
@@ -63,17 +63,17 @@ get_header();
 
             <!-- /* -------------------------------- right side ------------------------------- */ -->
             <section class="w-full sm:w-[calc(90%+1vw)] pb-sp8 sm:break-before-column" id="newsletter">
-                <h2 class="font-dfserif text-xl/xl pb-sp1">
+                <h2 class="font-dfserif text-xl/xl pb-sp1 animateOnView">
                     <?php echo esc_html( get_field('visit-title-newsletter') ); ?>
                 </h2>
-                <div class="wysiwyg-content pb-sp2">
+                <div class="wysiwyg-content pb-sp2 animateOnView">
                     <?php the_field('visit-text-newsletter'); ?>
                 </div>
                 <form id="mailchimp-signup-form" method="post" class="flex flex-col gap-sp1">
-                    <input type="email" name="email" id="email" placeholder="Email" class="input input-bordered rounded-none w-full h-auto p-sp2 border-df-grey" required />
-                    <input type="text" name="name" id="name" placeholder="<?php echo pll__('Name', 'tailpress'); ?>" class="input input-bordered rounded-none w-full h-auto p-sp2 border-df-grey" required />
-                    <input type="text" name="surname" id="surname" placeholder="<?php echo pll__('Surname', 'tailpress'); ?>" class="input input-bordered rounded-none w-full h-auto p-sp2 border-df-grey" />
-                    <button type="submit" class="font-dfserif text-large/large w-fit mt-sp1 hover:text-df-red"><?php echo pll__('Sign up', 'tailpress'); ?> →</button>
+                    <input type="email" name="email" id="email" placeholder="Email" class="input input-bordered rounded-none w-full h-auto p-sp2 border-df-grey animateOnView" required />
+                    <input type="text" name="name" id="name" placeholder="<?php echo pll__('Name', 'tailpress'); ?>" class="input input-bordered rounded-none w-full h-auto p-sp2 border-df-grey animateOnView" required />
+                    <input type="text" name="surname" id="surname" placeholder="<?php echo pll__('Surname', 'tailpress'); ?>" class="input input-bordered rounded-none w-full h-auto p-sp2 border-df-grey animateOnView" />
+                    <button type="submit" class="font-dfserif text-large/large w-fit mt-sp1 hover:text-df-red animateOnView"><?php echo pll__('Sign up', 'tailpress'); ?> →</button>
                     <p id="response-message" class="font-superclarendon text-regular/regular mt-sp1"></p>
                 </form>
             </section>

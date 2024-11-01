@@ -9,7 +9,7 @@
 		$exhibition_presskit = get_field('exhibition-presskit');
 	?>
 
-	<section class="w-full relative mb-sp2">
+	<section class="w-full relative mb-sp2 animateOnView">
 		<div class="swiper-container mx-sp5 sm:mx-sp9 overflow-hidden">
 			<div class="swiper-wrapper">
 			<?php 
@@ -81,10 +81,10 @@
 
 	<section class="pb-sp5 sm:pb-sp8">
             <div class="w-fit text-xxl/xxl sm:text-xxxl/xxl">
-                <h3 class="font-dfserif">
+                <h3 class="font-dfserif animateOnView">
                     <?php the_title(); ?>
                 </h3>
-                <p class="-ml-[1px] sm:-ml-[3px] font-superclarendon mt-0 sm:-mt-2">
+                <p class="-ml-[1px] sm:-ml-[3px] font-superclarendon mt-0 sm:-mt-2 animateOnView">
                     <?php echo esc_html($exhibition_start_date); ?> — <?php echo esc_html($exhibition_end_date); ?>
                 </p>
             </div>		
@@ -94,10 +94,10 @@
 			<?php $manyartists = get_field('exhibition-many-artists'); ?>
 				<?php if( $manyartists ): // Check if the field is not empty ?>
 					<div class="pb-sp2">
-						<h4 class="font-dfserif text-xl/xl sm:text-medium/medium pb-sp1 sm:pb-0">
+						<h4 class="font-dfserif text-xl/xl sm:text-medium/medium pb-sp1 sm:pb-0 animateOnView">
 							<?php echo pll__('Participating artists', 'tailpress'); ?>
 						</h4>
-						<div class="wysiwyg-artists w-full sm:w-[calc(90%+1vw)]">
+						<div class="wysiwyg-artists w-full sm:w-[calc(90%+1vw)] animateOnView">
 							<?php echo wp_kses_post($manyartists); ?>
 						</div>
 					</div>
@@ -116,7 +116,7 @@
                     $sizes = '(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 600px';
                     ?>
                     <section class="mx-sp5 sm:mx-0 sm:w-full break-inside-avoid font-superclarendon">
-                        <figure class="w-full h-auto mb-4">
+                        <figure class="w-full h-auto mb-4 animateOnView">
                             <img src="<?php echo esc_url($image_data[0]); ?>"
                                  srcset="<?php echo esc_attr($srcset); ?>"
                                  sizes="<?php echo esc_attr($sizes); ?>"
@@ -124,7 +124,7 @@
                                  class="w-full h-auto object-cover"
                                  loading="lazy">
                             <?php if ($image_description): ?>
-                                <figcaption class="text-small sm:text-xsmall text-right mt-1">
+                                <figcaption class="text-small sm:text-xsmall text-right mt-1 animateOnView">
                                     <?php echo esc_html($image_description); ?>
                                 </figcaption>
                             <?php endif; ?>
@@ -147,7 +147,7 @@
                 $sizes = '(max-width: 640px) 100vw, (max-width: 1024px) 80vw, 1200px';
                 ?>
                 <section class="w-full font-superclarendon">
-                    <figure class="mx-sp5 sm:mx-sp9 my-0 sm:my-4 aspect-video">
+                    <figure class="mx-sp5 sm:mx-sp9 my-0 sm:my-4 aspect-video animateOnView">
                         <img src="<?php echo esc_url($image_data[0]); ?>"
                              srcset="<?php echo esc_attr($srcset); ?>"
                              sizes="<?php echo esc_attr($sizes); ?>"
@@ -155,7 +155,7 @@
                              class="w-full h-auto object-cover"
                              loading="lazy">
                         <?php if ($image_description): ?>
-                            <figcaption class="text-small sm:text-xsmall text-right mt-1">
+                            <figcaption class="text-small sm:text-xsmall text-right mt-1 animateOnView">
                                 <?php echo esc_html($image_description); ?>
                             </figcaption>
                         <?php endif; ?>
@@ -168,16 +168,16 @@
 	<section class="grid grid-cols-1 sm:grid-cols-12 mt-sp8 text-left align-baseline">
 		<?php if (!empty($exhibition_supporters)): ?>
 			<div class="wysiwyg-credits flex flex-col col-span-1 sm:col-span-6">
-				<h4 class="">
+				<h4 class="animateOnView">
 					<?php echo pll__('The exhibition is generously supported by', 'tailpress'); ?>
 				</h4>
-				<div class="w-full sm:w-[calc(90%+1vw)]">
+				<div class="w-full sm:w-[calc(90%+1vw)] animateOnView">
 					<?php echo($exhibition_supporters); ?>
 				</div>		
 			</div>
 		<?php endif; ?>
 
-		<div class="col-span-1 sm:col-span-6 my-sp8 sm:my-0">
+		<div class="col-span-1 sm:col-span-6 my-sp8 sm:my-0 animateOnView">
 			<?php $credits = get_field('exhibition-credits'); ?>
 				<?php if( $credits ): // Check if the field is not empty ?>
 					<div class="wysiwyg-credits w-full sm:w-[calc(90%+1vw)]">

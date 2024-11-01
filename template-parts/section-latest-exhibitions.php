@@ -34,19 +34,19 @@ if ($query->have_posts()) :
 
         <section class="grid grid-cols-6 gap-x-sp2 mt-sp2 sm:mt-sp4">
             <div class="col-span-6 block sm:hidden">
-                <p class="font-superclarendon text-large/large mb-sp2 sm:mb-sp4 truncate">
+                <p class="font-superclarendon text-large/large mb-sp2 sm:mb-sp4 truncate animateOnView">
                     <a href="<?php echo esc_url($post_url); ?>" class="font-dfserif hover:text-df-red">
                         <?php the_title(); ?>
                     </a> 
                 </p>
             </div>
             <div class="col-span-2">
-                <p class="hidden sm:block font-superclarendon mb-sp4 text-large/large">
+                <p class="hidden sm:block font-superclarendon mb-sp4 text-large/large animateOnView">
                     <a href="<?php echo esc_url($post_url); ?>" class="hover:text-df-red">
                         <?php echo esc_html($exhibition_start_date); ?> — <?php echo esc_html($exhibition_end_date); ?>
                     </a>
                 </p>
-                <figure class="w-full mb-sp2 sm:mb-sp8 overflow-hidden aspect-video animate-image">
+                <figure class="w-full mb-sp2 sm:mb-sp8 overflow-hidden aspect-video animateOnView">
                 <a href="<?php echo esc_url($post_url); ?>" aria-label="Go to exhibition">
                 <?php 
                     $image_id = get_field('exhibition-image');
@@ -69,17 +69,17 @@ if ($query->have_posts()) :
                 </figure>
             </div>
             <div class="col-span-4 mb-sp6">
-                <p class="hidden sm:block font-superclarendon text-large/large mb-sp4 truncate">
+                <p class="hidden sm:block font-superclarendon text-large/large mb-sp4 truncate animateOnView">
                     <a href="<?php echo esc_url($post_url); ?>" class="font-dfserif hover:text-df-red">
                         <?php the_title(); ?>
                     </a> 
                 </p>
-                <div class="wysiwyg-content font-superclarendon text-small/small sm:text-regular/regular text-pretty -mt-[0.5vw] line-clamp-4 sm:line-clamp-[7] md:line-clamp-[8] lg:line-clamp-[9] xl:line-clamp-[10] 2xl:line-clamp-[11]">
+                <div class="wysiwyg-content font-superclarendon text-small/small sm:text-regular/regular text-pretty -mt-[0.5vw] line-clamp-4 sm:line-clamp-[7] md:line-clamp-[8] lg:line-clamp-[9] xl:line-clamp-[10] 2xl:line-clamp-[11] animateOnView">
                     <?php echo wp_kses_post($exhibition_description); ?> 
                 </div>
             </div>
         </section>
-        <hr class="border-df-black">
+        <hr class="border-df-black animateOnView">
         <?php
     endwhile;
     wp_reset_postdata();

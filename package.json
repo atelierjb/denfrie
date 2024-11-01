@@ -35,6 +35,6 @@
 		"tailwindcss": "^3.4.0"
 	},
 	"dependencies": {
-		"motion": "^10.18.0"
+		"@motionone/dom": "^10.18.0"
 	}
 }

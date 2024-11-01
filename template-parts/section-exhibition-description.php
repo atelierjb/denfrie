@@ -8,17 +8,17 @@
         ?>
 
         <?php if (!empty($short_text)): ?>
-            <div class="font-dfserif text-xl/xl sm:text-medium/medium pb-sp1 sm:pb-0">
+            <div class="font-dfserif text-xl/xl sm:text-medium/medium pb-sp1 sm:pb-0 animateOnView">
                 <?php echo pll__('Description', 'tailpress'); ?>
             </div>
         <?php endif; ?>
 
-        <div id="exhibition-text" class="wysiwyg-content overflow-hidden">
+        <div id="exhibition-text" class="wysiwyg-content overflow-hidden animateOnView">
             <?php echo wp_kses_post($short_text); ?>
         </div>
 
         <?php if (!empty($long_text)): ?>
-            <p id="toggle-button" class="font-dfserif text-medium/medium sm:text-base/regular cursor-pointer ml-sp5 sm:ml-sp9 hover:text-df-red mt-sp1">
+            <p id="toggle-button" class="font-dfserif text-medium/medium sm:text-base/regular cursor-pointer ml-sp5 sm:ml-sp9 hover:text-df-red mt-sp1 animateOnView">
                 <?php echo pll__('More', 'tailpress'); ?> ↓
             </p>
         <?php endif; ?>

@@ -8,7 +8,7 @@
 
 <?php do_action( 'tailpress_content_after' ); ?>
 
-<ul class="w-full flex justify-between sm:grid sm:grid-cols-12 px-sp3 pt-sp6 pb-sp8 sm:pb-sp5 list-none font-dfserif text-medium/[0.95]">
+<ul class="w-full flex justify-between sm:grid sm:grid-cols-12 px-sp3 pt-sp6 pb-sp8 sm:pb-sp5 list-none font-dfserif text-medium/[0.95] animateOnView">
 		<li class="sm:col-span-3">
 			<a href="<?php echo get_permalink(pll_get_post(4)); ?>#newsletter" class="hover:text-df-red">
     			<?php echo pll__('Newsletter', 'tailpress'); ?>

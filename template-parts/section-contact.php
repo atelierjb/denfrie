@@ -12,21 +12,21 @@
                 
                 <!-- Output the team member details -->
                 <?php if( $team_member_title ): ?>
-                    <p class="underline"><?php echo esc_html($team_member_title); ?></p>
+                    <p class="underline animateOnView"><?php echo esc_html($team_member_title); ?></p>
                 <?php endif; ?>
 
                 <?php if( $team_member_name ): ?>
-                    <p><?php echo esc_html($team_member_name); ?></p>
+                    <p class="animateOnView"><?php echo esc_html($team_member_name); ?></p>
                 <?php endif; ?>
 
                 <?php if( $team_member_mail ): ?>
-                    <p class="hover:text-df-red w-fit">
+                    <p class="hover:text-df-red w-fit animateOnView">
                         <a href="mailto:<?php echo esc_attr($team_member_mail); ?>"><?php echo esc_html($team_member_mail); ?></a>
                     </p>
                 <?php endif; ?>
 
                 <?php if( $team_member_phone ): ?>
-                    <p class="hover:text-df-red w-fit">
+                    <p class="hover:text-df-red w-fit animateOnView">
                         <a href="tel:<?php echo esc_attr($team_member_phone); ?>"><?php echo esc_html($team_member_phone); ?></a>
                     </p>
                 <?php endif; ?>
@@ -37,7 +37,7 @@
 
 
 
-<p class="underline"><?php echo esc_html( get_field('about-title-servicestaff') ); ?></p>
+<p class="underline animateOnView"><?php echo esc_html( get_field('about-title-servicestaff') ); ?></p>
 <?php if( have_rows('service-staff') ): ?>
     <?php while( have_rows('service-staff') ): the_row(); ?>
         <?php
@@ -46,7 +46,7 @@
         ?>
         
         <?php if( $service_staff_name ): ?>
-            <p><?php echo esc_html($service_staff_name); ?></p>
+            <p class="animateOnView"><?php echo esc_html($service_staff_name); ?></p>
         <?php endif; ?>
         
     <?php endwhile; ?>

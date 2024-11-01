@@ -3256,47 +3256,6 @@ details.collapse summary::-webkit-details-marker{
     background: #841E2C;
 }
 
-/* Controls the transition */
-
-/* "Once" is controlling the initial load */
-
-.fade-leave-active,
-.fade-enter-active,
-.fade-once-active {
-    transition: opacity var(--timing) var(--bezier), 
-                transform var(--timing) var(--bezier);
-}
-
-/* Controls the start of page content (goes from) */
-
-.fade-leave {
-    opacity: 1;
-    transform: translate(0,0);
-}
-
-/* Controls the start of page content (goes to) */
-
-.fade-leave-to {
-    opacity: 0;
-    transform: translate(0,30px);
-}
-
-/* Controls the new page content (goes from) */
-
-.fade-enter,
-.fade-once {
-    opacity: 0;
-    transform: translate(0,30px);
-}
-
-/* Controls the new page content (goes to) */
-
-.fade-enter-to,
-.fade-once-to {
-    opacity: 1;
-    transform: translate(0,0);
-}
-
 @font-face {
     font-family: 'DenFrie2024 Serif';
     src: url('/wp-content/themes/tailpress/fonts/DenFrie2024-Serif.woff') format('woff'),
@@ -3437,10 +3396,6 @@ details.collapse summary::-webkit-details-marker{
 
   .sm\:max-h-\[90vh\]{
     max-height: 90vh;
-  }
-
-  .sm\:w-\[95\%\]{
-    width: 95%;
   }
 
   .sm\:w-\[calc\(40\%\+6\.5vw\)\]{

@@ -34,7 +34,7 @@ if ($query->have_posts()) :
         $post_url = get_permalink();
         ?>
         <section class="pb-sp8 sm:pb-sp10">
-            <figure class="mx-sp5 sm:mx-sp9 mb-sp1 overflow-hidden aspect-video animate-image">
+            <figure class="mx-sp5 sm:mx-sp9 mb-sp1 overflow-hidden aspect-video animateOnView">
                 <a href="<?php echo esc_url($post_url); ?>" aria-label="Go to exhibition">
                     <?php 
                     $image_id = get_field('exhibition-image');
@@ -56,15 +56,15 @@ if ($query->have_posts()) :
                 </a>
             </figure>
             <div class="w-fit hover:text-df-red text-xxl/xxl sm:text-xxxl/xxl">
-                <h3 class="font-dfserif">
+                <h3 class="font-dfserif animateOnView">
                     <a  class="" href="<?php echo esc_url($post_url); ?>">
                         <?php the_title(); ?>
                     </a>
                 </h3>
-                <p class="ml-[1px] sm:-ml-[2px] font-superclarendon">
-                <a href="<?php echo esc_url($post_url); ?>">
-                    <?php echo esc_html($exhibition_start_date); ?> — <?php echo esc_html($exhibition_end_date); ?>
-                </a>
+                <p class="ml-[1px] sm:-ml-[2px] font-superclarendon animateOnView">
+                    <a href="<?php echo esc_url($post_url); ?>">
+                        <?php echo esc_html($exhibition_start_date); ?> — <?php echo esc_html($exhibition_end_date); ?>
+                    </a>
                 </p>
             </div>
         </section>
