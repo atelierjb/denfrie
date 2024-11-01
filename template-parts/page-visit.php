@@ -81,10 +81,10 @@ get_header();
                 <?php while( have_rows('visit-right') ): the_row(); ?>
                     <?php if( get_row_layout() == 'textsection' ): ?>
                         <section class="w-full sm:w-[calc(90%+1vw)] pb-sp8">
-                            <h2 class="font-dfserif text-xl/xl pb-sp1">
+                            <h2 class="font-dfserif text-xl/xl pb-sp1 animateOnView">
                                 <?php echo esc_html( get_sub_field('title') ); ?>
                             </h2>
-                            <div class="wysiwyg-content font-superclarendon text-base/regular sm:text-regular/regular">
+                            <div class="wysiwyg-content font-superclarendon text-base/regular sm:text-regular/regular animateOnView">
                                 <?php echo wp_kses_post( get_sub_field('text') ); ?>
                             </div>
                         </section>
@@ -93,28 +93,6 @@ get_header();
             <?php endif; ?>
     </article>
 </main>
-<!-- <script>
-    document.addEventListener("DOMContentLoaded", function() {
-    // Select all WYSIWYG content sections
-    const contentSections = document.querySelectorAll('.wysiwyg-content');
-
-    contentSections.forEach(section => {
-        // Find and remove empty <p> tags
-        section.querySelectorAll("p").forEach(p => {
-            if (p.innerHTML.trim() === "" || p.innerHTML === "&nbsp;") {
-                p.remove(); // Remove the empty <p> tags from the DOM
-            }
-        });
-        
-        // Then apply the no-indent class only to the first valid paragraph
-        let paragraphs = section.querySelectorAll("p:not(:empty)");
-
-        if (paragraphs.length) {
-            paragraphs[0].classList.add("no-indent");
-        }
-    });
-});
-</script> -->
 
 <?php
 // Include the footer

@@ -3,20 +3,10 @@
 /* -------------------------------------------------------------------------- */
 
 document.addEventListener('DOMContentLoaded', function() {
-    // Determine if it's mobile or desktop
-    const isMobile = window.innerWidth <= 768; // Adjust this breakpoint as needed
+    const isMobile = window.innerWidth <= 768;
 
-    // If it's mobile, skip the animation entirely
-    if (isMobile) {
-        document.querySelector("#loading-screen").style.display = 'none';
-        gsap.set("#nav-container", { y: 0 });
-        gsap.set("#main-content", { y: 0 });
-        return;
-    }
-
-    // Check if the loading animation has already been shown this session
+    // Check if animation has been seen this session
     if (sessionStorage.getItem('hasSeenAnimation') === 'true') {
-        // Skip the animation if already seen this session
         document.querySelector("#loading-screen").style.display = 'none';
         gsap.set("#nav-container", { y: 0 });
         gsap.set("#main-content", { y: 0 });
@@ -25,50 +15,46 @@ document.addEventListener('DOMContentLoaded', function() {
 
     const tl = gsap.timeline();
 
-    // Set initial positions
+    // Set initial positions with different starting points for mobile/desktop
     gsap.set("#nav-container", { y: "100%" });
     gsap.set("#main-content", { y: "100%" });
-    gsap.set("#loading-image", { y: "100%", opacity: 0 });
+    gsap.set("#loading-image", { 
+        y: isMobile ? "10%" : "100%",
+        opacity: 0 
+    });
 
-    // Desktop animation
+    // Animation sequence
     tl.to("#loading-image", { 
         y: 0, 
         opacity: 1, 
-        duration: 0.5, 
+        duration: isMobile ? 0.3 : 0.5, 
         ease: "power4.out" 
     });
 
-    // Pause for 1 second
-    tl.to("#loading-image", { duration: 0.25 });
+    // Shorter pause for mobile
+    tl.to("#loading-image", { duration: isMobile ? 0.15 : 0.25 });
 
-    // Loading screen slides up and out of view
+    // Rest of the animation
     tl.to("#loading-screen", {
         y: "-100%", 
-        duration: 1.5, 
+        duration: isMobile ? 1 : 1.5, 
         ease: "power4.inOut"
     });
 
-    // Nav-container and main-content move up as a combined block
+    // Nav-container and main-content move up
     tl.to("#nav-container", {
         y: 0, 
-        duration: 1.5, 
+        duration: isMobile ? 1 : 1.5, 
         ease: "power4.inOut"
-    }, "-=1.5")
+    }, "-=1")
     .to("#main-content", {
         y: 0,
-        duration: 1.5, 
+        duration: isMobile ? 1 : 1.5, 
         ease: "power4.inOut",
         onComplete: function() {
-            document.querySelector("#loading-screen").style.display = 'none';
-            // Store a value in session storage to indicate the animation has been seen this session
-            sessionStorage.setItem('hasSeenAnimation', 'true');
-
-            // Short delay to ensure layout has settled
-            setTimeout(() => {
-                ScrollTrigger.refresh(); // Refresh ScrollTrigger to recalculate positions
-            }, 100); // 100ms delay to allow layout to settle
+            // ... rest of the onComplete function ...
         }
-    }, "-=1.5");
+    }, "-=1");
 });
 
 
