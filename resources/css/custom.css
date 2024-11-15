@@ -1,5 +1,5 @@
 .wysiwyg-exhibition p {
-    @apply font-superclarendon text-base/regular sm:text-regular/regular;
+    @apply font-superclarendon text-regular/regular;
 }
 
 .wysiwyg-exhibition a {
@@ -32,7 +32,7 @@
 }
 
 .wysiwyg-content p { 
-    @apply font-superclarendon text-base/regular sm:text-regular/regular !important;
+    @apply font-superclarendon text-regular/regular !important;
 }
 
 .wysiwyg-content h4 {
@@ -40,15 +40,15 @@
 }
 
 .wysiwyg-content span { 
-    @apply font-superclarendon text-base/regular sm:text-regular/regular !important;
+    @apply font-superclarendon text-regular/regular !important;
 }
 
 .wysiwyg-content a {
-    @apply font-superclarendon text-base/regular sm:text-regular/regular underline hover:text-df-red !important;
+    @apply font-superclarendon text-regular/regular underline hover:text-df-red !important;
 }
 
 .wysiwyg-credits p {
-    @apply font-superclarendon text-base/regular sm:text-regular/regular;
+    @apply font-superclarendon text-regular/regular;
 }
 
 .wysiwyg-credits h4 {
@@ -56,11 +56,11 @@
 }
 
 .wysiwyg-artists p {
-    @apply font-superclarendon text-base/regular sm:text-regular/regular;
+    @apply font-superclarendon text-regular/regular !important;
 }
 
 #mailchimp-signup-form input[type="text"], input[type="email"] {
-    @apply font-superclarendon text-base/regular sm:text-regular/regular;
+    @apply font-superclarendon text-regular/regular;
 }
 
 

@@ -26,7 +26,7 @@ get_header();
                 <h2 class="font-dfserif text-xl/xl pb-sp1 animateOnView">
                     <?php echo esc_html( get_field('about-title-contact') ); ?>
                 </h2>
-                <div class="columns-2 font-superclarendon text-base/regular sm:text-regular/regular w-full sm:w-[calc(90%+1vw)]">
+                <div class="columns-2 gap-x-4 font-superclarendon text-regular/regular w-full sm:w-[calc(90%+1vw)]">
                     <?php get_template_part( 'template-parts/section-contact' ); ?>
                 </div>
             </section>
@@ -38,7 +38,7 @@ get_header();
                             <h2 class="font-dfserif text-xl/xl pb-sp1 animateOnView">
                                 <?php echo esc_html( get_sub_field('title') ); ?>
                             </h2>
-                            <div class="wysiwyg-content font-superclarendon text-base/regular sm:text-regular/regular text-pretty animateOnView">
+                            <div class="wysiwyg-content animateOnView">
                                 <?php echo wp_kses_post( get_sub_field('text') ); ?>
                             </div>
                         </section>
@@ -46,7 +46,7 @@ get_header();
                 <?php endwhile; ?>
             <?php endif; ?>
 
-            <figure class="w-full px-sp5 sm:px-sp8 sm:w-[calc(90%+1vw)] hidden sm:block break-after-avoid sm:break-after-column pb-sp8 animateOnView">
+            <figure class="w-full px-sp5 sm:px-0 sm:w-[calc(90%+1vw)] hidden sm:block break-after-avoid sm:break-after-column pb-sp8 animateOnView">
                 <?php 
                 $about_image_1_id = get_field('about-image-1'); 
                 if( $about_image_1_id ) : ?>
@@ -55,7 +55,7 @@ get_header();
                     )); ?>
                 <?php endif; ?>
             </figure>
-            <figure class="w-full px-sp5 sm:px-sp8 sm:w-[calc(90%+1vw)] hidden sm:block pb-sp8 animateOnView">
+            <figure class="w-full px-sp5 sm:px-0 sm:w-[calc(90%+1vw)] hidden sm:block pb-sp8 animateOnView">
                 <?php 
                     $about_image_2_id = get_field('about-image-2'); 
                     if( $about_image_2_id ) : ?>
@@ -71,14 +71,14 @@ get_header();
                             <h2 class="font-dfserif text-xl/xl pb-sp1 animateOnView">
                                 <?php echo esc_html( get_sub_field('title') ); ?>
                             </h2>
-                            <div class="wysiwyg-content font-superclarendon text-base/regular sm:text-regular/regular text-pretty animateOnView">
+                            <div class="wysiwyg-content animateOnView">
                                 <?php echo wp_kses_post( get_sub_field('text') ); ?>
                             </div>
                         </section>
                     <?php endif; ?>
                 <?php endwhile; ?>
             <?php endif; ?>
-            <figure class="w-full px-sp5 sm:hidden pb-sp8 animateOnView">
+            <figure class="w-full px-sp5 sm:hidden pb-sp9 animateOnView">
                 <?php 
                     $about_image_1_id = get_field('about-image-1'); 
                     if( $about_image_1_id ) : ?>

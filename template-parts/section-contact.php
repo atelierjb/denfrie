@@ -1,7 +1,7 @@
 <?php if( have_rows('team') ): ?>
     <?php while( have_rows('team') ): the_row(); ?>
         <?php if( get_row_layout() == 'team-member' ): ?>
-            <div class="pb-sp4 break-inside-avoid">
+            <div class="pb-sp4 break-inside-avoid animateOnView">
                 <?php
                 // Fetch ACF fields for each team member
                 $team_member_title = get_sub_field('team-member-title');
@@ -12,21 +12,21 @@
                 
                 <!-- Output the team member details -->
                 <?php if( $team_member_title ): ?>
-                    <p class="underline animateOnView"><?php echo esc_html($team_member_title); ?></p>
+                    <p class="underline"><?php echo esc_html($team_member_title); ?></p>
                 <?php endif; ?>
 
                 <?php if( $team_member_name ): ?>
-                    <p class="animateOnView"><?php echo esc_html($team_member_name); ?></p>
+                    <p><?php echo esc_html($team_member_name); ?></p>
                 <?php endif; ?>
 
                 <?php if( $team_member_mail ): ?>
-                    <p class="hover:text-df-red w-fit animateOnView">
+                    <p class="hover:text-df-red w-fit">
                         <a href="mailto:<?php echo esc_attr($team_member_mail); ?>"><?php echo esc_html($team_member_mail); ?></a>
                     </p>
                 <?php endif; ?>
 
                 <?php if( $team_member_phone ): ?>
-                    <p class="hover:text-df-red w-fit animateOnView">
+                    <p class="hover:text-df-red w-fit">
                         <a href="tel:<?php echo esc_attr($team_member_phone); ?>"><?php echo esc_html($team_member_phone); ?></a>
                     </p>
                 <?php endif; ?>

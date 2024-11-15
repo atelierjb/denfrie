@@ -8,8 +8,7 @@
 
 @font-face {
     font-family: 'DenFrie2024 Serif';
-    src: url('/wp-content/themes/tailpress/fonts/DenFrie2024-Serif.woff') format('woff'),
-         url('/wp-content/themes/tailpress/fonts/DenFrie2024-Serif.woff2') format('woff2');   
+    src: url('/wp-content/themes/tailpress/fonts/DenFrie2024-Serif.woff2') format('woff2');   
     font-weight: normal;
     font-style: normal;
     font-display: swap;

@@ -26,16 +26,15 @@ document.addEventListener('DOMContentLoaded', function () {
 
     const shortText = `<?php echo wp_kses_post($short_text); ?>`;
     const longText = `<?php echo wp_kses_post($long_text); ?>` + `
-        <div class="my-sp4 break-inside-avoid-column">
+        <div class="flex flex-col my-sp4 break-inside-avoid-column">
             <?php if (!empty($exhibition_folder) || !empty($exhibition_presskit)): ?>
                 <?php if (!empty($exhibition_folder)): ?>
-                    <a href="<?php echo esc_url($exhibition_folder); ?>" target="_blank" rel="noopener noreferrer" class="hover:text-df-red underline underline-offset-2 text-medium/medium sm:text-base/regular">
+                    <a href="<?php echo esc_url($exhibition_folder); ?>" target="_blank" rel="noopener noreferrer" class="hover:text-df-red underline underline-offset-2 text-medium/medium sm:text-regular/regular">
                         <?php echo pll__('Exhibition folder', 'tailpress'); ?>
                     </a>
                 <?php endif; ?>
-                <br>
                 <?php if (!empty($exhibition_presskit)): ?>
-                    <a href="<?php echo esc_url($exhibition_presskit); ?>" target="_blank" rel="noopener noreferrer" class="hover:text-df-red underline underline-offset-2 text-medium/medium sm:text-base/regular">
+                    <a href="<?php echo esc_url($exhibition_presskit); ?>" target="_blank" rel="noopener noreferrer" class="hover:text-df-red underline underline-offset-2 text-medium/medium sm:text-regular/regular">
                         <?php echo pll__('Presskit', 'tailpress'); ?>
                     </a>
                 <?php endif; ?>

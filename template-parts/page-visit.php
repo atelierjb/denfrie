@@ -44,7 +44,7 @@ get_header();
                             </h2>
                             
                             <?php if( have_rows('pricing') ): ?>
-                                <div class="font-superclarendon text-base/regular sm:text-regular/regular">
+                                <div class="font-superclarendon text-regular/regular">
                                     <?php while( have_rows('pricing') ): the_row(); ?>
                                         <div class="columns-2 pb-sp1 animateOnView">
                                             <p><?php echo pll__( get_sub_field('category'), 'tailpress' ); ?></p>
@@ -84,7 +84,7 @@ get_header();
                             <h2 class="font-dfserif text-xl/xl pb-sp1 animateOnView">
                                 <?php echo esc_html( get_sub_field('title') ); ?>
                             </h2>
-                            <div class="wysiwyg-content font-superclarendon text-base/regular sm:text-regular/regular animateOnView">
+                            <div class="wysiwyg-content animateOnView">
                                 <?php echo wp_kses_post( get_sub_field('text') ); ?>
                             </div>
                         </section>
