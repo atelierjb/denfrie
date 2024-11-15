@@ -7,18 +7,12 @@
         $exhibition_presskit = get_field('exhibition-presskit');
         ?>
 
-        <?php if (!empty($short_text)): ?>
-            <div class="font-dfserif text-xl/xl sm:text-medium/medium pb-sp1 sm:pb-0 animateOnView">
-                <?php echo pll__('Description', 'tailpress'); ?>
-            </div>
-        <?php endif; ?>
-
         <div id="exhibition-text" class="wysiwyg-content overflow-hidden animateOnView">
             <?php echo wp_kses_post($short_text); ?>
         </div>
 
         <?php if (!empty($long_text)): ?>
-            <p id="toggle-button" class="font-dfserif text-medium/medium sm:text-base/regular cursor-pointer ml-sp5 sm:ml-sp9 hover:text-df-red mt-sp1 animateOnView">
+            <p id="toggle-button" class="font-dfserif text-medium/medium sm:text-base/regular cursor-pointer ml-sp5 sm:ml-sp8 hover:text-df-red mt-sp1 animateOnView">
                 <?php echo pll__('More', 'tailpress'); ?> ↓
             </p>
         <?php endif; ?>
@@ -34,9 +28,6 @@ document.addEventListener('DOMContentLoaded', function () {
     const longText = `<?php echo wp_kses_post($long_text); ?>` + `
         <div class="my-sp4 break-inside-avoid-column">
             <?php if (!empty($exhibition_folder) || !empty($exhibition_presskit)): ?>
-                <h4 class="font-dfserif text-xl/xl sm:text-medium/medium pb-sp1 sm:pb-0">
-                    <?php echo pll__('Additional content', 'tailpress'); ?>
-                </h4>
                 <?php if (!empty($exhibition_folder)): ?>
                     <a href="<?php echo esc_url($exhibition_folder); ?>" target="_blank" rel="noopener noreferrer" class="hover:text-df-red underline underline-offset-2 text-medium/medium sm:text-base/regular">
                         <?php echo pll__('Exhibition folder', 'tailpress'); ?>

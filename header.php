@@ -94,7 +94,7 @@
 				</li>
 				<li class="pl-sp2 sm:pl-0 sm:col-span-3">
 					<?php 
-					$about_page_id = pll_get_post(3);
+					$about_page_id = pll_current_language() === 'da' ? 197 : 3;
 					$about_title = get_the_title($about_page_id);
 					?>
 					<a href="<?php echo get_permalink($about_page_id); ?>"
@@ -201,7 +201,7 @@
 				</li>
 				<li class="sm:col-span-3">
 					<?php 
-					$about_page_id = pll_get_post(3);
+					$about_page_id = pll_current_language() === 'da' ? 197 : 3;
 					$about_title = get_the_title($about_page_id);
 					?>
 					<a href="<?php echo get_permalink($about_page_id); ?>"

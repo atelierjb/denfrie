@@ -214,31 +214,31 @@ function load_more_posts() {
     if ($social_query->have_posts()) :
         while ($social_query->have_posts()) : $social_query->the_post(); ?>
             <div class="collapse py-[calc(0.25rem+0.5vw)] sm:py-sp4 grid-cols-1">
-                <input type="checkbox" class="min-h-0 p-0" />
-                <div class="collapse-title p-0 min-h-0 grid sm:grid-cols-7 sm:gap-sp9 text-large/large">
-                    <p class="font-superclarendon col-span-2 whitespace-nowrap pt-1 sm:pt-0"> 
-                        <?php the_field('social-date'); ?> : <?php the_field('social-date-start'); ?> <?php the_field('social-date-end'); ?>
-                    </p> <br class="sm:hidden">
-                    <p class="font-dfserif leading-[calc(110%+0.2vw)] pb-sp1 sm:pb-0 col-span-5 sm:truncate">
-                        <?php the_title(); ?>
-                    </p>
-                </div>
-                <div class="collapse-content px-0 grid sm:grid-cols-7 sm:gap-sp9">
-                    <figure class="w-full overflow-hidden aspect-video col-span-7 sm:col-span-2 mt-sp2 sm:mt-sp4">
-                        <?php 
-                        $social_image_id = get_field('social-image'); 
-                        if( $social_image_id ) : ?>
-                            <?php echo wp_get_attachment_image( $social_image_id, 'full', false, array(
-                                'alt'   => get_the_title(),
-                                'class' => 'w-full h-full transform transition-transform duration-500 hover:scale-105 object-cover',
-                            )); ?>
-                        <?php endif; ?>
-                    </figure>
-                    <div class="wysiwyg-content font-superclarendon mt-sp4 text-base/regular sm:text-regular/regular col-span-7 sm:col-span-5">
-                        <?php echo wp_kses_post( get_field('social-description') ); ?>
+                    <input type="checkbox" class="min-h-0 p-0" />
+                    <div class="collapse-title p-0 min-h-0 grid sm:grid-cols-6 sm:gap-sp2 text-large/large">
+                        <p class="font-superclarendon col-span-2 whitespace-nowrap pt-1 sm:pt-0 animateOnView"> 
+                            <?php the_field('social-date'); ?> : <?php the_field('social-date-start'); ?> <?php the_field('social-date-end'); ?>
+                        </p> <br class="sm:hidden">
+                        <p class="font-dfserif leading-[calc(110%+0.2vw)] pb-sp1 sm:pb-0 col-span-4 sm:truncate animateOnView">
+                            <?php the_title(); ?>
+                        </p>
+                    </div>
+                    <div class="collapse-content px-0 grid sm:grid-cols-6 sm:gap-sp2">
+                        <figure class="w-full overflow-hidden aspect-video col-span-6 sm:col-span-2 mt-sp2 sm:mt-sp4">
+                            <?php 
+                            $social_image_id = get_field('social-image'); 
+                            if( $social_image_id ) : ?>
+                                <?php echo wp_get_attachment_image( $social_image_id, 'full', false, array(
+                                    'alt'   => get_the_title(),
+                                    'class' => 'w-full h-full transform transition-transform duration-500 hover:scale-105 object-cover',
+                                )); ?>
+                            <?php endif; ?>
+                        </figure>
+                        <div class="wysiwyg-content font-superclarendon mt-sp4 text-base/regular sm:text-regular/regular col-span-6 sm:col-span-4">
+                            <?php echo wp_kses_post( get_field('social-description') ); ?>
+                        </div>
                     </div>
                 </div>
-            </div>
             <hr class="border-df-black">
         <?php endwhile;
     endif;
@@ -269,31 +269,31 @@ function filter_search() {
     if ($social_query->have_posts()) :
         while ($social_query->have_posts()) : $social_query->the_post(); ?>
             <div class="collapse py-[calc(0.25rem+0.5vw)] sm:py-sp4 grid-cols-1">
-                <input type="checkbox" class="min-h-0 p-0" />
-                <div class="collapse-title p-0 min-h-0 grid sm:grid-cols-7 sm:gap-sp9 text-large/large">
-                    <p class="font-superclarendon col-span-2 whitespace-nowrap pt-1 sm:pt-0"> 
-                        <?php the_field('social-date'); ?> : <?php the_field('social-date-start'); ?> <?php the_field('social-date-end'); ?>
-                    </p> <br class="sm:hidden">
-                    <p class="font-dfserif leading-[calc(110%+0.2vw)] pb-sp1 sm:pb-0 col-span-5 sm:truncate">
-                        <?php the_title(); ?>
-                    </p>
-                </div>
-                <div class="collapse-content px-0 grid sm:grid-cols-7 sm:gap-sp9">
-                    <figure class="w-full overflow-hidden aspect-video col-span-7 sm:col-span-2 mt-sp2 sm:mt-sp4">
-                        <?php 
-                        $social_image_id = get_field('social-image'); 
-                        if( $social_image_id ) : ?>
-                            <?php echo wp_get_attachment_image( $social_image_id, 'full', false, array(
-                                'alt'   => get_the_title(),
-                                'class' => 'w-full h-full transform transition-transform duration-500 hover:scale-105 object-cover',
-                            )); ?>
-                        <?php endif; ?>
-                    </figure>
-                    <div class="wysiwyg-content font-superclarendon mt-sp4 text-base/regular sm:text-regular/regular col-span-7 sm:col-span-5">
-                        <?php echo wp_kses_post( get_field('social-description') ); ?>
+                    <input type="checkbox" class="min-h-0 p-0" />
+                    <div class="collapse-title p-0 min-h-0 grid sm:grid-cols-6 sm:gap-sp2 text-large/large">
+                        <p class="font-superclarendon col-span-2 whitespace-nowrap pt-1 sm:pt-0 animateOnView"> 
+                            <?php the_field('social-date'); ?> : <?php the_field('social-date-start'); ?> <?php the_field('social-date-end'); ?>
+                        </p> <br class="sm:hidden">
+                        <p class="font-dfserif leading-[calc(110%+0.2vw)] pb-sp1 sm:pb-0 col-span-4 sm:truncate animateOnView">
+                            <?php the_title(); ?>
+                        </p>
+                    </div>
+                    <div class="collapse-content px-0 grid sm:grid-cols-6 sm:gap-sp2">
+                        <figure class="w-full overflow-hidden aspect-video col-span-6 sm:col-span-2 mt-sp2 sm:mt-sp4">
+                            <?php 
+                            $social_image_id = get_field('social-image'); 
+                            if( $social_image_id ) : ?>
+                                <?php echo wp_get_attachment_image( $social_image_id, 'full', false, array(
+                                    'alt'   => get_the_title(),
+                                    'class' => 'w-full h-full transform transition-transform duration-500 hover:scale-105 object-cover',
+                                )); ?>
+                            <?php endif; ?>
+                        </figure>
+                        <div class="wysiwyg-content font-superclarendon mt-sp4 text-base/regular sm:text-regular/regular col-span-6 sm:col-span-4">
+                            <?php echo wp_kses_post( get_field('social-description') ); ?>
+                        </div>
                     </div>
                 </div>
-            </div>
             <hr class="border-df-black">
         <?php endwhile;
     else :
@@ -390,7 +390,7 @@ function load_more_exhibitions() {
                             ?>
                         </a>
                     </figure>
-                    <div class="w-fit hover:text-df-red text-xxl/xxl sm:text-xxxl/xxl">
+                    <div class="w-fit hover:text-df-red text-xl/xl">
                         <h3 class="font-dfserif line-clamp-2">
                             <a class="" href="<?php the_permalink(); ?>">
                                 <?php the_title(); ?>
@@ -453,7 +453,7 @@ function search_exhibitions() {
                             ?>
                         </a>
                     </figure>
-                    <div class="w-fit hover:text-df-red text-xxl/xxl sm:text-xxxl/xxl">
+                    <div class="w-fit hover:text-df-red text-xl/xl">
                         <h3 class="font-dfserif line-clamp-2">
                             <a class="" href="<?php the_permalink(); ?>">
                                 <?php the_title(); ?>
@@ -543,8 +543,6 @@ function my_theme_register_strings() {
     pll_register_string('exhibition-more', 'More', 'tailpress');
     pll_register_string('exhibition-less', 'Less', 'tailpress');
     pll_register_string('exhibition-artists', 'Participating artists', 'tailpress');
-    pll_register_string('exhibition-description', 'Description', 'tailpress');
-    pll_register_string('exhibition-additional', 'Additional content', 'tailpress');
     pll_register_string('exhibition-support', 'The exhibition is generously supported by', 'tailpress');
 
     //contact section

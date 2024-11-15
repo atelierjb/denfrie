@@ -35,6 +35,10 @@
     @apply font-superclarendon text-base/regular sm:text-regular/regular !important;
 }
 
+.wysiwyg-content h4 {
+    @apply font-dfserif text-medium/medium;
+}
+
 .wysiwyg-content span { 
     @apply font-superclarendon text-base/regular sm:text-regular/regular !important;
 }
@@ -85,10 +89,9 @@
     transform: translateY(100%); /* Start off-screen for the loading sequence */
 }
 
-
 ::selection {
+    background-color: rgba(132, 30, 44, 0.99);
     color: #EEE;
-    background: #841E2C;
 }
 
 

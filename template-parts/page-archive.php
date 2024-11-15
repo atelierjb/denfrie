@@ -81,7 +81,7 @@ $total_posts = $exhibition_query->found_posts;
                                 ?>
                             </a>
                         </figure>
-                        <div class="w-fit hover:text-df-red text-xxl/xxl sm:text-xxxl/xxl">
+                        <div class="w-fit hover:text-df-red text-xl/xl">
                             <h3 class="font-dfserif line-clamp-2 animateOnView">
                                 <a class="" href="<?php the_permalink(); ?>">
                                     <?php the_title(); ?>

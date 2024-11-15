@@ -22,7 +22,7 @@ get_header();
 ?>
 
 <main data-barba="wrapper" class="mx-sp3 my-sp5" id="main-content">
-    <article data-barba="container" class="columns-1 sm:columns-2 gap-sp1 pr-sp2">
+    <article data-barba="container" class="columns-1 sm:columns-2 gap-sp1 pr-sp2" id="annualpass">
         <!-- /* -------------------------------- left side ------------------------------- */ -->
             <?php if( have_rows('visit-left') ): ?>
                 <?php while( have_rows('visit-left') ): the_row(); ?>
@@ -46,9 +46,9 @@ get_header();
                             <?php if( have_rows('pricing') ): ?>
                                 <div class="font-superclarendon text-base/regular sm:text-regular/regular">
                                     <?php while( have_rows('pricing') ): the_row(); ?>
-                                        <div class="columns-2 pb-sp1">
-                                            <p class="animateOnView"><?php echo pll__( get_sub_field('category'), 'tailpress' ); ?></p>
-                                            <p class="animateOnView"><?php echo esc_html( get_sub_field('price') ); ?></p>
+                                        <div class="columns-2 pb-sp1 animateOnView">
+                                            <p><?php echo pll__( get_sub_field('category'), 'tailpress' ); ?></p>
+                                            <p><?php echo esc_html( get_sub_field('price') ); ?></p>
                                         </div>
                                     <?php endwhile; ?>
                                 </div>
@@ -70,9 +70,9 @@ get_header();
                     <?php the_field('visit-text-newsletter'); ?>
                 </div>
                 <form id="mailchimp-signup-form" method="post" class="flex flex-col gap-sp1">
-                    <input type="email" name="email" id="email" placeholder="Email" class="input input-bordered rounded-none w-full h-auto p-sp2 border-df-grey animateOnView" required />
-                    <input type="text" name="name" id="name" placeholder="<?php echo pll__('Name', 'tailpress'); ?>" class="input input-bordered rounded-none w-full h-auto p-sp2 border-df-grey animateOnView" required />
-                    <input type="text" name="surname" id="surname" placeholder="<?php echo pll__('Surname', 'tailpress'); ?>" class="input input-bordered rounded-none w-full h-auto p-sp2 border-df-grey animateOnView" />
+                    <input type="email" name="email" id="email" placeholder="Email" class="input input-bordered rounded-none w-full h-auto p-sp1 border-df-grey animateOnView" required />
+                    <input type="text" name="name" id="name" placeholder="<?php echo pll__('Name', 'tailpress'); ?>" class="input input-bordered rounded-none w-full h-auto p-sp1 border-df-grey animateOnView" required />
+                    <input type="text" name="surname" id="surname" placeholder="<?php echo pll__('Surname', 'tailpress'); ?>" class="input input-bordered rounded-none w-full h-auto p-sp1 border-df-grey animateOnView" />
                     <button type="submit" class="font-dfserif text-large/large w-fit mt-sp1 hover:text-df-red animateOnView"><?php echo pll__('Sign up', 'tailpress'); ?> →</button>
                     <p id="response-message" class="font-superclarendon text-regular/regular mt-sp1"></p>
                 </form>
