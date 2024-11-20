@@ -497,6 +497,7 @@ function my_theme_register_strings() {
     pll_register_string('no-events-found', 'No events found.', 'tailpress');
     pll_register_string('search-archive', 'Search in calendar...', 'tailpress');
     pll_register_string('more-events', 'Show previous events ↓', 'tailpress');
+    pll_register_string('less-events', 'Hide previous events ↑', 'tailpress');
 
     //visit page
     pll_register_string('newsletter-name', 'Name', 'tailpress');
