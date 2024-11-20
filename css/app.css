@@ -2320,11 +2320,6 @@ details.collapse summary::-webkit-details-marker{
   margin-bottom: calc(1rem + 1vw);
 }
 
-.my-sp2{
-  margin-top: calc(0.25rem + 1vw);
-  margin-bottom: calc(0.25rem + 1vw);
-}
-
 .-ml-2{
   margin-left: -0.5rem;
 }
@@ -3213,6 +3208,25 @@ details.collapse summary::-webkit-details-marker{
 ::selection {
     background-color: rgba(132, 30, 44, 0.99);
     color: #EEE;
+}
+
+/* Fixes hover state on social page */
+
+.collapse-title {
+    pointer-events: none;
+}
+
+.collapse-title p {
+    pointer-events: auto;
+}
+
+.collapse > input[type="checkbox"] {
+    pointer-events: auto;
+    cursor: pointer;
+}
+
+.collapse:hover .collapse-title p {
+    color: #841E2C;
 }
 
 @font-face {

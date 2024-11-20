@@ -94,4 +94,20 @@
     color: #EEE;
 }
 
+/* Fixes hover state on social page */
+.collapse-title {
+    pointer-events: none;
+}
 
+.collapse-title p {
+    pointer-events: auto;
+}
+
+.collapse > input[type="checkbox"] {
+    pointer-events: auto;
+    cursor: pointer;
+}
+
+.collapse:hover .collapse-title p {
+    color: #841E2C;
+}
