@@ -2396,6 +2396,10 @@ details.collapse summary::-webkit-details-marker{
   margin-top: calc(0.5rem + 0.75vw);
 }
 
+.mt-sp5{
+  margin-top: calc(0.5rem + 1vw);
+}
+
 .mt-sp7{
   margin-top: calc(1rem + 0.5vw);
 }
