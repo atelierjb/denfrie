@@ -511,7 +511,6 @@ function my_theme_register_strings() {
     pll_register_string('exhibition-presskit', 'Presskit', 'tailpress');
     pll_register_string('exhibition-more', 'More', 'tailpress');
     pll_register_string('exhibition-less', 'Less', 'tailpress');
-    pll_register_string('exhibition-artists', 'Participating artists', 'tailpress');
     pll_register_string('exhibition-support', 'The exhibition is generously supported by', 'tailpress');
 
     //contact section

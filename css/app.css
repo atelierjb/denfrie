@@ -3509,11 +3509,6 @@ details.collapse summary::-webkit-details-marker{
     line-height: calc(125% + 0.25vw);
   }
 
-  .sm\:text-medium\/medium{
-    font-size: calc(0.6rem + 1vw);
-    line-height: calc(110% + 0.25vw);
-  }
-
   .sm\:text-regular\/regular{
     font-size: calc(0.5rem + 0.6vw);
     line-height: calc(125% + 0.25vw);

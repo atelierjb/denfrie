@@ -94,9 +94,6 @@
 			<?php $manyartists = get_field('exhibition-many-artists'); ?>
 				<?php if( $manyartists ): // Check if the field is not empty ?>
 					<div class="pb-sp2">
-						<h4 class="font-dfserif text-xl/xl sm:text-medium/medium pb-sp1 sm:pb-0 animateOnView">
-							<?php echo pll__('Participating artists', 'tailpress'); ?>
-						</h4>
 						<div class="wysiwyg-artists w-full sm:w-[calc(90%+1vw)] animateOnView">
 							<?php echo wp_kses_post($manyartists); ?>
 						</div>
