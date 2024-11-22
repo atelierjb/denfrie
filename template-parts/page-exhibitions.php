@@ -21,8 +21,8 @@ Template Name: Exhibitions
 get_header();
 ?>
 
-<main data-barba="wrapper" class="mx-sp3 my-sp5" id="main-content">
-    <article data-barba="container">
+<main class="mx-sp3 my-sp5" id="main-content">
+    <article>
         <section class="w-full">
             <h2 class="font-dfserif text-large/large sm:text-xl/xl pb-sp5 sm:pb-sp7 animateOnView">
                 <?php echo pll__('Current Exhibitions', 'tailpress'); ?>

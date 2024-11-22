@@ -21,8 +21,8 @@ Template Name: Visit
 get_header();
 ?>
 
-<main data-barba="wrapper" class="mx-sp3 my-sp5" id="main-content">
-    <article data-barba="container" class="columns-1 sm:columns-2 gap-sp1 pr-sp2" id="annualpass">
+<main class="mx-sp3 my-sp5" id="main-content">
+    <article class="columns-1 sm:columns-2 gap-sp1 pr-sp2" id="annualpass">
         <!-- /* -------------------------------- left side ------------------------------- */ -->
             <?php if( have_rows('visit-left') ): ?>
                 <?php while( have_rows('visit-left') ): the_row(); ?>

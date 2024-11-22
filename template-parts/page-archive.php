@@ -45,8 +45,8 @@ $exhibition_query = new WP_Query($args);
 $total_posts = $exhibition_query->found_posts;
 ?>
 
-<main data-barba="wrapper" class="mx-sp3 my-sp5" id="main-content">
-    <article data-barba="container">
+<main class="mx-sp3 my-sp5" id="main-content">
+    <article>
         <section class="flex justify-between items-center pb-sp5 sm:pb-sp7">
             <h2 class="font-dfserif text-xl/xl animateOnView">
                 <?php echo pll__('Archive', 'tailpress'); ?>
