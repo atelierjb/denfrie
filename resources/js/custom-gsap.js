@@ -2,74 +2,73 @@
 /*                              LOADING SEQUENCE                              */
 /* -------------------------------------------------------------------------- */
 
-// Create a more persistent storage check using localStorage instead of sessionStorage
-if (!localStorage.getItem('hasSeenAnimation')) {
-    localStorage.setItem('hasSeenAnimation', 'false');
-}
-
 document.addEventListener('DOMContentLoaded', function() {
     const isMobile = window.innerWidth <= 768;
     const loadingScreen = document.querySelector("#loading-screen");
+    const loadingImage = document.querySelector("#loading-image");
+    const mainContent = document.querySelector("#main-content");
+    const navContainer = document.querySelector("#nav-container");
 
-    // Always ensure the loading screen is hidden if animation was already shown
-    if (localStorage.getItem('hasSeenAnimation') === 'true') {
-        if (loadingScreen) {
-            loadingScreen.style.display = 'none';
-        }
-        gsap.set("#nav-container", { y: 0 });
-        gsap.set("#main-content", { y: 0 });
+    // Debug logs
+    console.log('Loading screen:', loadingScreen);
+    console.log('Loading image:', loadingImage);
+    console.log('Main content:', mainContent);
+    console.log('Nav container:', navContainer);
+
+    // Error handling if elements don't exist
+    if (!loadingScreen || !loadingImage || !mainContent || !navContainer) {
+        console.warn('Required elements not found');
         return;
     }
 
-    const tl = gsap.timeline();
+    // Check if this is a fresh page load or internal navigation
+    if (performance.navigation.type === 1 || !document.referrer.includes(window.location.hostname)) {
+        // Set initial positions
+        gsap.set(navContainer, { y: "100%" });
+        gsap.set(mainContent, { y: "100%" });
+        gsap.set(loadingImage, { 
+            y: isMobile ? "10%" : "100%",
+            opacity: 0 
+        });
 
-    // Set initial positions with different starting points for mobile/desktop
-    gsap.set("#nav-container", { y: "100%" });
-    gsap.set("#main-content", { y: "100%" });
-    gsap.set("#loading-image", { 
-        y: isMobile ? "10%" : "100%",
-        opacity: 0 
-    });
+        // Force image reload to trigger onload
+        const imageSrc = loadingImage.src;
+        loadingImage.src = '';
+        requestAnimationFrame(() => {
+            loadingImage.src = imageSrc;
+        });
 
-    // Animation sequence
-    tl.to("#loading-image", { 
-        y: 0, 
-        opacity: 1, 
-        duration: isMobile ? 0.3 : 0.5, 
-        ease: "power4.out" 
-    });
+        loadingImage.onload = function() {
+            console.log('Image loaded, starting animation');
+            const tl = gsap.timeline();
 
-    // Shorter pause for mobile
-    tl.to("#loading-image", { duration: isMobile ? 0.15 : 0.25 });
-
-    // Rest of the animation
-    tl.to("#loading-screen", {
-        y: "-100%", 
-        duration: isMobile ? 1 : 1.5, 
-        ease: "power4.inOut"
-    });
-
-    // Nav-container and main-content move up
-    tl.to("#nav-container", {
-        y: 0, 
-        duration: isMobile ? 1 : 1.5, 
-        ease: "power4.inOut"
-    }, "-=1")
-    .to("#main-content", {
-        y: 0,
-        duration: isMobile ? 1 : 1.5, 
-        ease: "power4.inOut",
-        onComplete: function() {
-            if (loadingScreen) {
-                loadingScreen.style.display = 'none';
-            }
-            localStorage.setItem('hasSeenAnimation', 'true');
-            
-            setTimeout(() => {
-                ScrollTrigger.refresh();
-            }, 100);
-        }
-    }, "-=1");
+            tl.to(loadingImage, { 
+                y: 0, 
+                opacity: 1, 
+                duration: isMobile ? 0.3 : 0.5, 
+                ease: "power4.out" 
+            })
+            .to(loadingScreen, {
+                y: "-100%", 
+                duration: isMobile ? 1 : 0.8, 
+                ease: "power4.inOut"
+            })
+            .to([navContainer, mainContent], {
+                y: 0, 
+                duration: isMobile ? 0.75 : 1.5, 
+                ease: "power3.inOut",
+                onComplete: function() {
+                    loadingScreen.style.display = 'none';
+                    ScrollTrigger.refresh();
+                }
+            }, "-=1");
+        };
+    } else {
+        // Hide loading screen immediately for internal navigation
+        loadingScreen.style.display = 'none';
+        gsap.set(navContainer, { y: 0 });
+        gsap.set(mainContent, { y: 0 });
+    }
 });
 
 

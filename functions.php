@@ -796,11 +796,13 @@ add_action( 'wp_enqueue_scripts', 'enqueue_swiper_assets' );
 /* -------------------------------------------------------------------------- */
 
 function enqueue_gsap_scripts() {
-    // Enqueue GSAP and ScrollTrigger
-    wp_enqueue_script('gsap', get_template_directory_uri() . '/js/gsap.min.js', array(), null, true);
-    wp_enqueue_script('scrolltrigger', get_template_directory_uri() . '/js/ScrollTrigger.min.js', array('gsap'), null, true);
-
-    // Enqueue the custom script, making sure it depends on GSAP and ScrollTrigger only
+    // Enqueue GSAP core first
+    wp_enqueue_script('gsap', get_template_directory_uri() . '/js/gsap.min.js', array(), null, false);
+    
+    // ScrollTrigger depends on GSAP
+    wp_enqueue_script('scrolltrigger', get_template_directory_uri() . '/js/ScrollTrigger.min.js', array('gsap'), null, false);
+    
+    // Custom script depends on both
     wp_enqueue_script('custom-gsap', get_template_directory_uri() . '/js/custom-gsap.js', array('gsap', 'scrolltrigger'), null, true);
 }
 add_action('wp_enqueue_scripts', 'enqueue_gsap_scripts');

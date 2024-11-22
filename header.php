@@ -16,7 +16,6 @@
 	<?php endif; ?>
 	<link rel="profile" href="http://gmpg.org/xfn/11">
 	<link rel="pingback" href="<?php bloginfo( 'pingback_url' ); ?>">
-	<link rel="preload" href="<?php echo esc_url(wp_get_upload_dir()['baseurl'] . '/2024/09/loading-image.png'); ?>" as="image">
 	<link rel="preconnect" href="https://use.typekit.net" crossorigin>
 	<link rel="preconnect" href="https://p.typekit.net" crossorigin>
 	<link rel="preload" href="<?php echo get_stylesheet_directory_uri(); ?>/css/app.css?ver=1.0" as="style" onload="this.onload=null;this.rel='stylesheet'">
@@ -35,23 +34,13 @@
 
 	<!-- Loading screen: add it right here after <body> tag -->
 	<div id="loading-screen" class="fixed inset-0 bg-df-light-grey flex items-center justify-center z-50">
-        <?php
-        $upload_dir = wp_upload_dir();
-        $image_url = $upload_dir['baseurl'] . '/2024/09/loading-image.png';
-        $image_path = $upload_dir['basedir'] . '/2024/09/loading-image.png';
-        
-        if (file_exists($image_path)) {
-            list($width, $height) = getimagesize($image_path);
-            ?>
-            <img id="loading-image" 
-                 src="<?php echo esc_url($image_url); ?>" 
-                 width="<?php echo $width; ?>"
-                 height="<?php echo $height; ?>"
-                 alt="Loading"
-                 class="w-auto h-auto max-h-[90vw] sm:max-h-[90vh] max-w-[90vw] sm:max-w-[90vh] object-contain opacity-0">
-        <?php
-        }
+        <?php 
+        $loading_image = get_template_directory_uri() . '/assets/loading-image.png';
         ?>
+        <img id="loading-image" 
+             src="<?php echo esc_url($loading_image); ?>"
+             alt="Loading"
+             class="w-auto h-auto max-h-[90vw] sm:max-h-[90vh] max-w-[90vw] sm:max-w-[90vh] object-contain opacity-0">
     </div>
 
 

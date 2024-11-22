@@ -91,6 +91,7 @@
     </section>
 
 	<section class="columns-1 sm:columns-2 gap-4">
+		<div class="break-inside-avoid break-after-column">
 			<?php $manyartists = get_field('exhibition-many-artists'); ?>
 				<?php if( $manyartists ): // Check if the field is not empty ?>
 					<div class="pb-sp2">
@@ -104,7 +105,7 @@
 			
 			<?php if( have_rows('exhibition-flex-images') ): ?>
 				<?php while( have_rows('exhibition-flex-images') ): the_row(); ?>
-					<?php if (get_row_layout() == 'image-cols-1'):
+					<?php if (get_row_layout() == 'image-cols-1-left'):
                     $image_id = get_sub_field('image');
                     $image_description = get_sub_field('image-description');
                     $image_data = wp_get_attachment_image_src($image_id, 'exhibition-medium');
@@ -130,6 +131,37 @@
 					<?php endif; ?>
 				<?php endwhile; ?>
 			<?php endif; ?>
+		</div>
+		<div class="break-inside-avoid">
+		<?php if( have_rows('exhibition-flex-images') ): ?>
+				<?php while( have_rows('exhibition-flex-images') ): the_row(); ?>
+					<?php if (get_row_layout() == 'image-cols-1-right'):
+                    $image_id = get_sub_field('image');
+                    $image_description = get_sub_field('image-description');
+                    $image_data = wp_get_attachment_image_src($image_id, 'exhibition-medium');
+                    $image_alt = get_post_meta($image_id, '_wp_attachment_image_alt', true);
+                    $srcset = wp_get_attachment_image_srcset($image_id, 'exhibition-medium');
+                    $sizes = '(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 600px';
+                    ?>
+                    <section class="mx-sp5 sm:mx-0 sm:w-full break-inside-avoid font-superclarendon">
+                        <figure class="w-full h-auto mb-4 animateOnView">
+                            <img src="<?php echo esc_url($image_data[0]); ?>"
+                                 srcset="<?php echo esc_attr($srcset); ?>"
+                                 sizes="<?php echo esc_attr($sizes); ?>"
+                                 alt="<?php echo esc_attr($image_alt); ?>"
+                                 class="w-full h-auto object-cover"
+                                 loading="lazy">
+                            <?php if ($image_description): ?>
+                                <figcaption class="text-small sm:text-xsmall text-right mt-1 animateOnView">
+                                    <?php echo esc_html($image_description); ?>
+                                </figcaption>
+                            <?php endif; ?>
+                        </figure>
+                    </section>
+					<?php endif; ?>
+				<?php endwhile; ?>
+			<?php endif; ?>
+		</div>
 	</section>
 
 	<!-- Loop through the images again and place image-cols-2 outside the columns -->
