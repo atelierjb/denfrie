@@ -187,53 +187,37 @@ add_action('wp_enqueue_scripts', 'enqueue_custom_scripts');
 
 
 function fetch_social_events() {
-    $show_past = isset($_POST['show_past']) ? sanitize_text_field($_POST['show_past']) : '0'; // Default to upcoming events
+    $offset = isset($_POST['offset']) ? intval($_POST['offset']) : 0;
+    $posts_per_page = isset($_POST['posts_per_page']) ? intval($_POST['posts_per_page']) : 5;
     $search_query = isset($_POST['search_query']) ? sanitize_text_field($_POST['search_query']) : '';
 
     $args = [
         'post_type' => 'social',
-        'posts_per_page' => -1, // Show all matching results
+        'posts_per_page' => $posts_per_page,
+        'offset' => $offset,
         'meta_key' => 'social-date',
         'orderby' => 'meta_value',
+        'order' => 'DESC', // Sort by the farthest future date
     ];
 
-    if ($show_past === '1') {
-        // Show past events
-        $args['meta_query'] = [
-            [
-                'key' => 'social-date',
-                'value' => date('Y-m-d'),
-                'compare' => '<', // Only past events
-                'type' => 'DATE',
-            ],
-        ];
-        $args['order'] = 'DESC'; // Sort descending for past events
-    } elseif ($show_past === '0') {
-        // Show upcoming events
-        $args['meta_query'] = [
-            [
-                'key' => 'social-date',
-                'value' => date('Y-m-d'),
-                'compare' => '>=', // Only upcoming events
-                'type' => 'DATE',
-            ],
-        ];
-        $args['order'] = 'ASC'; // Sort ascending for upcoming events
-    }
-
-    // Remove meta_query when fetching both (searching)
-    if ($show_past === 'both') {
-        unset($args['meta_query']);
-        $args['order'] = 'ASC'; // Default to ascending order
-    }
-
     // Add search query
-    $args['s'] = $search_query;
+    if (!empty($search_query)) {
+        $args['s'] = $search_query;
+    }
 
     $social_query = new WP_Query($args);
 
+    // Get the total number of events matching the query
+    $total_args = $args;
+    unset($total_args['posts_per_page'], $total_args['offset']); // Remove pagination to count all matching posts
+    $total_query = new WP_Query($total_args);
+    $total_posts = $total_query->found_posts;
+
+    $html = '';
+
     if ($social_query->have_posts()) :
         while ($social_query->have_posts()) : $social_query->the_post();
+            ob_start(); // Start output buffering
             ?>
             <div class="collapse py-[calc(0.25rem+0.5vw)] sm:py-sp4 grid-cols-1">
                 <input type="checkbox" class="min-h-0 p-0" />
@@ -264,15 +248,18 @@ function fetch_social_events() {
             </div>
             <hr class="border-df-black animateOnView">
             <?php
+            $html .= ob_get_clean(); // Append buffered content
         endwhile;
-    else :
-        echo '<p class="font-superclarendon text-large/large mt-sp4">' . pll__('No events found.', 'tailpress') . '</p>';
     endif;
 
-    wp_die();
+    wp_send_json([
+        'html' => $html,
+        'total' => $total_posts,
+    ]);
 }
 add_action('wp_ajax_fetch_social_events', 'fetch_social_events');
 add_action('wp_ajax_nopriv_fetch_social_events', 'fetch_social_events');
+
 
 
 

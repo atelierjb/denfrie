@@ -1,58 +1,29 @@
 document.addEventListener('DOMContentLoaded', function () {
-    let showPast = false; // Tracks the current toggle state
+    let offset = 0; // Tracks the current offset for loaded events
+    const postsPerPage = 5; // Number of events per load
     const toggleButton = document.getElementById('toggle-past-events');
     const searchInput = document.getElementById('social-search-input');
     const searchForm = document.getElementById('search-form');
     const socialContainer = document.getElementById('social-container');
+    let totalEvents = 0; // Tracks the total number of events
 
-    // Prevent form submission (disable "Enter" refresh)
+    // Prevent form submission
     searchForm.addEventListener('submit', function (e) {
         e.preventDefault();
     });
 
-    // Reapply accordion behavior with styling for open items
-    function reapplyAccordionBehavior() {
-        const collapseInputs = document.querySelectorAll('#social-container .collapse input[type="checkbox"]');
-
-        collapseInputs.forEach(input => {
-            input.addEventListener('change', function () {
-                // Close all other accordions and reset their styling
-                document.querySelectorAll('.collapse input[type="checkbox"]').forEach(checkbox => {
-                    if (checkbox !== input) {
-                        checkbox.checked = false;
-
-                        // Remove styling from title <p> tags of closed accordions
-                        checkbox.closest('.collapse').querySelectorAll('.collapse-title p').forEach(p => {
-                            p.classList.remove('text-df-red', 'underline', 'underline-offset-2');
-                        });
-                    }
-                });
-
-                // Style the title <p> tags of the currently opened accordion
-                const titlePs = input.closest('.collapse').querySelectorAll('.collapse-title p');
-                titlePs.forEach(p => {
-                    if (input.checked) {
-                        p.classList.add('text-df-red', 'underline', 'underline-offset-2');
-                    } else {
-                        p.classList.remove('text-df-red', 'underline', 'underline-offset-2');
-                    }
-                });
-            });
-        });
-    }
-
     // Fetch events
-    function fetchEvents(fetchAll = false) {
-        const data = new URLSearchParams();
-        data.append('action', 'fetch_social_events');
-
-        if (fetchAll) {
-            data.append('show_past', 'both'); // Fetch both upcoming and past events during search
-        } else {
-            data.append('show_past', showPast ? '1' : '0'); // Respect the toggle state
+    function fetchEvents(isSearch = false, resetOffset = false) {
+        if (resetOffset) {
+            offset = 0;
+            totalEvents = 0; // Reset the total events count when refreshing
         }
 
-        data.append('search_query', searchInput.value.trim()); // Include search query
+        const data = new URLSearchParams();
+        data.append('action', 'fetch_social_events');
+        data.append('offset', offset);
+        data.append('posts_per_page', postsPerPage);
+        data.append('search_query', searchInput.value.trim());
 
         fetch(socialPageData.ajax_url, {
             method: 'POST',
@@ -61,43 +32,57 @@ document.addEventListener('DOMContentLoaded', function () {
             },
             body: data,
         })
-            .then((response) => response.text())
-            .then((html) => {
-                socialContainer.innerHTML = html;
-                reapplyAccordionBehavior(); // Reapply accordion behavior for new content
+            .then((response) => response.json()) // Expect JSON response
+            .then((result) => {
+                const { html, total } = result;
+
+                if (resetOffset) {
+                    socialContainer.innerHTML = html; // Replace content for new searches
+                } else {
+                    socialContainer.insertAdjacentHTML('beforeend', html); // Append new events
+                }
+
+                // Update offset and total events
+                offset += postsPerPage;
+                totalEvents = total;
+
+                // Check if all events are loaded
+                if (offset >= totalEvents) {
+                    toggleButton.style.display = 'none'; // Hide button if no more events
+                } else {
+                    toggleButton.style.display = 'block'; // Ensure button is visible if more events are available
+                }
+
+                reapplyAccordionBehavior(); // Reapply accordion behavior
             })
             .catch((error) => console.error('Error fetching events:', error));
     }
 
-    // Toggle past events
-    toggleButton.addEventListener('click', function () {
-        if (searchInput.value.trim()) return; // Disable toggle while searching
+    // Initialize accordion behavior
+    function reapplyAccordionBehavior() {
+        const collapseInputs = document.querySelectorAll('#social-container .collapse input[type="checkbox"]');
 
-        showPast = !showPast;
-        toggleButton.textContent = showPast
-            ? socialPageData.toggle_hide_text
-            : socialPageData.toggle_show_text;
+        collapseInputs.forEach(input => {
+            input.addEventListener('change', function () {
+                // Close all other accordions
+                document.querySelectorAll('.collapse input[type="checkbox"]').forEach(checkbox => {
+                    if (checkbox !== input) checkbox.checked = false;
+                });
+            });
+        });
+    }
+
+    // Toggle load more events
+    toggleButton.addEventListener('click', function () {
+        if (searchInput.value.trim() || offset >= totalEvents) return; // Disable toggle if searching or all events loaded
         fetchEvents();
     });
 
     // Search functionality
     searchInput.addEventListener('input', function () {
-        const searchQuery = searchInput.value.trim();
-
-        if (searchQuery) {
-            fetchEvents(true);
-        } else {
-            fetchEvents();
-        }
+        fetchEvents(true, true);
     });
 
-    // Prevent "Enter" from refreshing the page
-    searchInput.addEventListener('keydown', function (e) {
-        if (e.key === 'Enter') {
-            e.preventDefault();
-        }
-    });
-
-    // Initialize accordion behavior
-    reapplyAccordionBehavior();
+    // Initial fetch
+    fetchEvents();
 });
