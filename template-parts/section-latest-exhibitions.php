@@ -28,8 +28,8 @@ if ($query->have_posts()) :
         $exhibition_image_id = get_field('exhibition-image');
         $exhibition_start_date = get_field('exhibition-start-date');
         $exhibition_end_date = get_field('exhibition-end-date');
-        $exhibition_description = get_field('exhibition-description-long');
-        $post_url = get_permalink();
+        $exhibition_description = get_field('exhibition-description-long') ?: get_field('exhibition-description-short');
+        $post_url = get_permalink()
         ?>
 
         <section class="grid grid-cols-6 gap-x-sp2 mt-sp2 sm:mt-sp4">

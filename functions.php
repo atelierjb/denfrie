@@ -777,15 +777,17 @@ function update_exhibition_date_search_field($post_id) {
 /*                                  Swiper.js                                 */
 /* -------------------------------------------------------------------------- */
 
-
 function enqueue_swiper_assets() {
-    // Swiper CSS
-    wp_enqueue_style( 'swiper-css', get_template_directory_uri() . '/css/swiper-bundle.min.css', array(), null );
-    
-    // Swiper JS
-    wp_enqueue_script( 'swiper-js', get_template_directory_uri() . '/js/swiper-bundle.min.js', array(), null, true );
+    // Only load Swiper assets on single posts/pages
+    if (is_single() || is_singular('exhibition')) {
+        // Swiper CSS
+        wp_enqueue_style('swiper-css', get_template_directory_uri() . '/css/swiper-bundle.min.css', array(), null);
+        
+        // Swiper JS
+        wp_enqueue_script('swiper-js', get_template_directory_uri() . '/js/swiper-bundle.min.js', array(), null, true);
+    }
 }
-add_action( 'wp_enqueue_scripts', 'enqueue_swiper_assets' );
+add_action('wp_enqueue_scripts', 'enqueue_swiper_assets');
 
 
 
