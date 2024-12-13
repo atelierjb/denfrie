@@ -13,12 +13,43 @@ get_header();
             </h2>
             <?php get_template_part( 'template-parts/section-current-exhibitions' ); ?>
         </section>
-        <section class="w-full pb-sp7 sm:pb-sp9">
-            <h2 class="font-dfserif text-large/large sm:text-xl/xl pb-sp5 sm:pb-sp7 animateOnView">
-                <?php echo pll__('Upcoming Exhibitions', 'tailpress'); ?>
-            </h2>
-            <?php get_template_part( 'template-parts/section-upcoming-exhibitions' ); ?>
-        </section>
+
+        <?php
+        // Check if there are upcoming exhibitions
+        $current_date = date('Ymd');
+        $upcoming_args = array(
+            'post_type' => 'exhibition',
+            'posts_per_page' => 1, // Only need to check for at least one
+            'meta_query' => array(
+                array(
+                    'key' => 'exhibition-start-date',
+                    'compare' => '>',
+                    'value' => $current_date,
+                    'type' => 'DATE'
+                ),
+                array(
+                    'key' => 'exhibition-end-date',
+                    'compare' => '>',
+                    'value' => $current_date,
+                    'type' => 'DATE'
+                )
+            )
+        );
+        $upcoming_query = new WP_Query($upcoming_args);
+
+        if ($upcoming_query->have_posts()) :
+            ?>
+            <section class="w-full pb-sp7 sm:pb-sp9">
+                <h2 class="font-dfserif text-large/large sm:text-xl/xl pb-sp5 sm:pb-sp7 animateOnView">
+                    <?php echo pll__('Upcoming Exhibitions', 'tailpress'); ?>
+                </h2>
+                <?php get_template_part('template-parts/section-upcoming-exhibitions'); ?>
+            </section>
+        <?php
+        endif;
+        wp_reset_postdata();
+        ?>
+        
         <section class="w-full">
             <div class="flex justify-between">
                 <h2 class="font-dfserif text-large/large sm:text-xl/xl pb-sp5 sm:pb-sp7 animateOnView">
