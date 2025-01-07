@@ -2295,11 +2295,6 @@ details.collapse summary::-webkit-details-marker{
   margin-right: calc(0.5rem + 1vw);
 }
 
-.my-0{
-  margin-top: 0px;
-  margin-bottom: 0px;
-}
-
 .my-8{
   margin-top: 2rem;
   margin-bottom: 2rem;
@@ -2404,10 +2399,6 @@ details.collapse summary::-webkit-details-marker{
   margin-top: calc(1rem + 0.5vw);
 }
 
-.mt-sp8{
-  margin-top: calc(1rem + 1vw);
-}
-
 .line-clamp-2{
   overflow: hidden;
   display: -webkit-box;
@@ -2444,10 +2435,6 @@ details.collapse summary::-webkit-details-marker{
 
 .hidden{
   display: none;
-}
-
-.aspect-\[11\/8\]{
-  aspect-ratio: 11/8;
 }
 
 .aspect-video{
@@ -2563,11 +2550,6 @@ details.collapse summary::-webkit-details-marker{
 .break-after-avoid{
   -moz-column-break-after: avoid;
        break-after: avoid;
-}
-
-.break-after-column{
-  -moz-column-break-after: column;
-       break-after: column;
 }
 
 .grid-cols-1{
@@ -2899,10 +2881,6 @@ details.collapse summary::-webkit-details-marker{
   font-style: italic;
 }
 
-.leading-\[calc\(110\%\+0\.2vw\)\]{
-  line-height: calc(110% + 0.2vw);
-}
-
 .leading-tight{
   line-height: 1.25;
 }
@@ -3136,9 +3114,9 @@ details.collapse summary::-webkit-details-marker{
 }
 
 .wysiwyg-content h4{
-  font-family: DenFrie2024 Serif, serif;
-  font-size: calc(0.6rem + 1vw);
-  line-height: calc(110% + 0.25vw);
+  font-family: DenFrie2024 Serif, serif !important;
+  font-size: calc(0.6rem + 1vw) !important;
+  line-height: calc(110% + 0.25vw) !important;
 }
 
 .wysiwyg-content span{
@@ -3325,11 +3303,6 @@ details.collapse summary::-webkit-details-marker{
     margin-bottom: 0px;
   }
 
-  .sm\:my-4{
-    margin-top: 1rem;
-    margin-bottom: 1rem;
-  }
-
   .sm\:-ml-\[2px\]{
     margin-left: -2px;
   }
@@ -3379,10 +3352,6 @@ details.collapse summary::-webkit-details-marker{
 
   .sm\:hidden{
     display: none;
-  }
-
-  .sm\:aspect-video{
-    aspect-ratio: 16 / 9;
   }
 
   .sm\:max-h-\[90vh\]{
@@ -3466,10 +3435,6 @@ details.collapse summary::-webkit-details-marker{
   .sm\:py-sp4{
     padding-top: calc(0.5rem + 0.75vw);
     padding-bottom: calc(0.5rem + 0.75vw);
-  }
-
-  .sm\:pb-0{
-    padding-bottom: 0px;
   }
 
   .sm\:pb-sp10{

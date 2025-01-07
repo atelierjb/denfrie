@@ -23,9 +23,9 @@ get_header();
 <main class="mx-sp3 my-sp5" id="main-content">
     <article class="columns-1 sm:columns-2 gap-sp1 pr-sp2">
             <section class="w-full pb-sp8">
-                <h2 class="font-dfserif text-xl/xl pb-sp1 animateOnView">
+                <h1 class="font-dfserif text-xl/xl pb-sp1 animateOnView">
                     <?php echo esc_html( get_field('about-title-contact') ); ?>
-                </h2>
+                </h1>
                 <div class="columns-2 gap-x-4 font-superclarendon text-regular/regular w-full sm:w-[calc(90%+1vw)]">
                     <?php get_template_part( 'template-parts/section-contact' ); ?>
                 </div>

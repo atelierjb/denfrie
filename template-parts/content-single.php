@@ -23,7 +23,7 @@
                         $sizes = '(max-width: 640px) 100vw, (max-width: 1024px) 80vw, 1200px';
                         ?>
                         <div class="swiper-slide">
-                            <figure class="w-full h-auto aspect-[11/8] sm:aspect-video">
+                            <figure class="w-full h-auto aspect-video">
                                 <img src="<?php echo esc_url($image_data[0]); ?>"
                                      srcset="<?php echo esc_attr($srcset); ?>"
                                      sizes="<?php echo esc_attr($sizes); ?>"
@@ -81,9 +81,9 @@
 
 	<section class="pb-sp5 sm:pb-sp8">
             <div class="w-fit text-xxl/xxl sm:text-xxxl/xxl">
-                <h3 class="font-dfserif animateOnView">
+                <h1 class="font-dfserif animateOnView">
                     <?php the_title(); ?>
-                </h3>
+                </h1>
                 <p class="-ml-[1px] sm:-ml-[3px] font-superclarendon mt-0 sm:-mt-2 animateOnView">
                     <?php echo esc_html($exhibition_start_date); ?> — <?php echo esc_html($exhibition_end_date); ?>
                 </p>
@@ -91,7 +91,7 @@
     </section>
 
 	<section class="columns-1 sm:columns-2 gap-4">
-		<div class="break-inside-avoid break-after-column">
+		<div class="break-inside-avoid sm:break-after-column">
 			<?php $manyartists = get_field('exhibition-many-artists'); ?>
 				<?php if( $manyartists ): // Check if the field is not empty ?>
 					<div class="pb-sp2">
@@ -132,7 +132,7 @@
 				<?php endwhile; ?>
 			<?php endif; ?>
 		</div>
-		<div class="break-inside-avoid">
+		<div class="break-inside-avoid block sm:block">
 		<?php if( have_rows('exhibition-flex-images') ): ?>
 				<?php while( have_rows('exhibition-flex-images') ): the_row(); ?>
 					<?php if (get_row_layout() == 'image-cols-1-right'):
@@ -175,13 +175,13 @@
                 $srcset = wp_get_attachment_image_srcset($image_id, 'exhibition-medium');
                 $sizes = '(max-width: 640px) 100vw, (max-width: 1024px) 80vw, 1200px';
                 ?>
-                <section class="w-full font-superclarendon">
-                    <figure class="mx-sp5 sm:mx-sp9 my-0 sm:my-4 aspect-video animateOnView">
+                <section class="w-full columns-1 gap-4 font-superclarendon">
+                    <figure class="mx-sp5 sm:mx-sp9 mb-4 aspect-video animateOnView">
                         <img src="<?php echo esc_url($image_data[0]); ?>"
                              srcset="<?php echo esc_attr($srcset); ?>"
                              sizes="<?php echo esc_attr($sizes); ?>"
                              alt="<?php echo esc_attr($image_alt); ?>"
-                             class="w-full h-auto object-cover"
+                             class="w-full h-full object-cover"
                              loading="lazy">
                         <?php if ($image_description): ?>
                             <figcaption class="text-small sm:text-xsmall text-right mt-1 animateOnView">
@@ -194,7 +194,7 @@
 		<?php endwhile; ?>
 	<?php endif; ?>	
 
-	<section class="grid grid-cols-1 sm:grid-cols-12 mt-sp8 text-left align-baseline">
+	<section class="grid grid-cols-1 sm:grid-cols-12 mt-sp4 text-left align-baseline">
 		<?php if (!empty($exhibition_supporters)): ?>
 			<div class="wysiwyg-credits flex flex-col col-span-1 sm:col-span-6">
 				<h4 class="animateOnView">

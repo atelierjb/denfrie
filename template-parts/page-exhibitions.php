@@ -8,9 +8,9 @@ get_header();
 <main class="mx-sp3 my-sp5" id="main-content">
     <article>
         <section class="w-full">
-            <h2 class="font-dfserif text-large/large sm:text-xl/xl pb-sp5 sm:pb-sp7 animateOnView">
+            <h1 class="font-dfserif text-large/large sm:text-xl/xl pb-sp5 sm:pb-sp7 animateOnView">
                 <?php echo pll__('Current Exhibitions', 'tailpress'); ?>
-            </h2>
+            </h1>
             <?php get_template_part( 'template-parts/section-current-exhibitions' ); ?>
         </section>
 

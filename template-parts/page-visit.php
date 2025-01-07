@@ -39,9 +39,9 @@ get_header();
                     
                     <?php elseif( get_row_layout() == 'pricelist' ): ?>
                         <section class="w-full sm:w-[calc(90%+1vw)] pb-sp8">
-                            <h2 class="font-dfserif text-xl/xl pb-sp1 animateOnView">
+                            <h1 class="font-dfserif text-xl/xl pb-sp1 animateOnView">
                                 <?php echo esc_html( get_sub_field('title') ); ?>
-                            </h2>
+                            </h1>
                             
                             <?php if( have_rows('pricing') ): ?>
                                 <div class="font-superclarendon text-regular/regular">

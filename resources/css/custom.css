@@ -36,7 +36,7 @@
 }
 
 .wysiwyg-content h4 {
-    @apply font-dfserif text-medium/medium;
+    @apply font-dfserif text-medium/medium !important;
 }
 
 .wysiwyg-content span { 

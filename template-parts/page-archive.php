@@ -48,9 +48,9 @@ $total_posts = $exhibition_query->found_posts;
 <main class="mx-sp3 my-sp5" id="main-content">
     <article>
         <section class="flex justify-between items-center pb-sp5 sm:pb-sp7">
-            <h2 class="font-dfserif text-xl/xl animateOnView">
+            <h1 class="font-dfserif text-xl/xl animateOnView">
                 <?php echo pll__('Archive', 'tailpress'); ?>
-            </h2>
+            </h1>
             <form id="search-form" class="animateOnView">
                 <input type="text" id="archive-search-input" placeholder="<?php echo pll__('Search in archive...', 'tailpress'); ?>" class="font-dfserif text-xl/xl text-df-grey bg-df-light-grey text-right focus:outline-none" autocomplete="off">
             </form>
