@@ -921,9 +921,53 @@ function enable_revisions_for_cpt( $args, $post_type ) {
 add_filter( 'register_post_type_args', 'enable_revisions_for_cpt', 10, 2 );
 
 
-function remove_empty_p_tags($content) {
-    return preg_replace('/<p>(\s|&nbsp;)*<\/p>/', '', $content);
+
+
+/* -------------------------------------------------------------------------- */
+/*                         WORDPRESS ADMIN ADJUSTMENTS                        */
+/* -------------------------------------------------------------------------- */
+
+
+function my_custom_tinymce_config($init) {
+    if (!isset($init['extended_valid_elements'])) {
+        $init['extended_valid_elements'] = '';
+    }
+    
+    // Add p[class] and h4 to extended_valid_elements
+    if (strlen($init['extended_valid_elements']) > 0) {
+        $init['extended_valid_elements'] .= ',p[class],h4';
+    } else {
+        $init['extended_valid_elements'] = 'p[class],h4';
+    }
+
+    // Prevent TinyMCE from removing empty tags
+    $init['verify_html'] = false;
+    
+    // Prevent automatic tag conversion
+    $init['forced_root_block'] = false;
+    
+    // Keep HTML formatting when switching between visual/text editors
+    $init['preserve_format'] = true;
+
+    return $init;
 }
-add_filter('the_content', 'remove_empty_p_tags');
-add_filter('acf_the_content', 'remove_empty_p_tags'); // Applies to ACF WYSIWYG fields
+add_filter('tiny_mce_before_init', 'my_custom_tinymce_config');
+
+// Modify allowed HTML tags for wp_kses_post
+function my_custom_kses_allowed_html($tags) {
+    $tags['h4'] = array();
+    return $tags;
+}
+add_filter('wp_kses_allowed_html', 'my_custom_kses_allowed_html', 10, 2);
+
+
+// Modified function to preserve intentional empty paragraphs
+function preserve_empty_p_tags($content) {
+    // Only remove paragraphs that are truly empty (no spaces or &nbsp;)
+    return preg_replace('/<p><\/p>/', '', $content);
+}
+add_filter('the_content', 'preserve_empty_p_tags');
+add_filter('acf_the_content', 'preserve_empty_p_tags');
+
+
 

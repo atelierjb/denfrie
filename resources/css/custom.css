@@ -1,33 +1,11 @@
-.wysiwyg-exhibition p {
-    @apply font-superclarendon text-regular/regular;
-}
-
-.wysiwyg-exhibition a {
-    @apply underline hover:text-df-red;
-}
-
-.wysiwyg-exhibition p:not(:first-child) {
-    @apply indent-sp5 sm:indent-sp8;
-}
-
-/* Ensure the section break marker itself is invisible */
-.wysiwyg-content .section-break {
-    @apply opacity-0 h-[calc(0.5rem+0.6vw)];
-}
-
-/* Remove indentation from the first paragraph in each section */
-.wysiwyg-content p:first-of-type,          /* First paragraph at start */
-.wysiwyg-content .section-break + p {      /* First paragraph after each section break */
-    text-indent: 0; /* No indent */
-}
-
 /* Apply indentation to subsequent paragraphs within the same section */
 .wysiwyg-content p {
-    @apply indent-sp5 sm:indent-sp8; /* Adjust to your `sp5` or `sp8` spacing */
+    @apply font-superclarendon text-regular/regular !important;
+    text-indent: 0;
 }
 
-/* Reset indentation on paragraphs following a section break */
-.wysiwyg-content .section-break + p + p {
+/* Apply indentation only to paragraphs with the indent class */
+.wysiwyg-content p.indent-paragraph {
     @apply indent-sp5 sm:indent-sp8;
 }
 
@@ -45,18 +23,6 @@
 
 .wysiwyg-content a {
     @apply font-superclarendon text-regular/regular underline hover:text-df-red !important;
-}
-
-.wysiwyg-credits p {
-    @apply font-superclarendon text-regular/regular;
-}
-
-.wysiwyg-credits h4 {
-    @apply font-dfserif text-medium/medium;
-}
-
-.wysiwyg-artists p {
-    @apply font-superclarendon text-regular/regular !important;
 }
 
 #mailchimp-signup-form input[type="text"], input[type="email"] {
@@ -109,5 +75,11 @@
 }
 
 .collapse:hover .collapse-title p {
-    color: #841E2C;
+    color: rgba(132, 30, 44, 0.99);
+}
+
+/* Ensure empty paragraphs have proper height */
+.wysiwyg-content p:empty {
+    min-height: 1.5em;
+    display: block;
 }

@@ -8,11 +8,22 @@
         ?>
 
         <div id="exhibition-text" class="wysiwyg-content overflow-hidden animateOnView">
-            <?php echo wp_kses_post($short_text); ?>
+            <?php 
+            $allowed_html = array(
+                'p' => array(
+                    'class' => array(),
+                    'style' => array()
+                ),
+                'h4' => array(),
+                // other allowed tags...
+            );
+
+            echo wp_kses($short_text, $allowed_html);
+            ?>
         </div>
 
         <?php if (!empty($long_text)): ?>
-            <p id="toggle-button" class="font-dfserif text-medium/medium sm:text-base/regular cursor-pointer ml-sp5 sm:ml-sp8 hover:text-df-red mt-sp1 animateOnView">
+            <p id="toggle-button" class="font-dfserif text-medium/medium sm:text-base/regular cursor-pointer hover:text-df-red mt-sp1 animateOnView">
                 <?php echo pll__('More', 'tailpress'); ?> ↓
             </p>
         <?php endif; ?>

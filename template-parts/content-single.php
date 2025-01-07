@@ -95,7 +95,7 @@
 			<?php $manyartists = get_field('exhibition-many-artists'); ?>
 				<?php if( $manyartists ): // Check if the field is not empty ?>
 					<div class="pb-sp2">
-						<div class="wysiwyg-artists w-full sm:w-[calc(90%+1vw)] animateOnView">
+						<div class="wysiwyg-content w-full sm:w-[calc(90%+1vw)] animateOnView">
 							<?php echo wp_kses_post($manyartists); ?>
 						</div>
 					</div>
@@ -196,11 +196,11 @@
 
 	<section class="grid grid-cols-1 sm:grid-cols-12 mt-sp4 text-left align-baseline">
 		<?php if (!empty($exhibition_supporters)): ?>
-			<div class="wysiwyg-credits flex flex-col col-span-1 sm:col-span-6">
-				<h4 class="animateOnView">
+			<div class="flex flex-col col-span-1 sm:col-span-6">
+				<h4 class="font-dfserif text-medium/medium animateOnView">
 					<?php echo pll__('The exhibition is generously supported by', 'tailpress'); ?>
 				</h4>
-				<div class="w-full sm:w-[calc(90%+1vw)] animateOnView">
+				<div class="wysiwyg-content w-full sm:w-[calc(90%+1vw)] animateOnView">
 					<?php echo($exhibition_supporters); ?>
 				</div>		
 			</div>
@@ -209,7 +209,7 @@
 		<div class="col-span-1 sm:col-span-6 my-sp8 sm:my-0 animateOnView">
 			<?php $credits = get_field('exhibition-credits'); ?>
 				<?php if( $credits ): // Check if the field is not empty ?>
-					<div class="wysiwyg-credits w-full sm:w-[calc(90%+1vw)]">
+					<div class="wysiwyg-content w-full sm:w-[calc(90%+1vw)]">
 						<?php echo wp_kses_post($credits); ?>
 					</div>
 				<?php endif; ?>

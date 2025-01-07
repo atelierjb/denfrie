@@ -1,13 +1,25 @@
 document.addEventListener('DOMContentLoaded', function () {
     if (typeof acf !== 'undefined') {
         acf.addFilter('wysiwyg_tinymce_settings', function(mceInit, id) {
-            // Customize the TinyMCE toolbar to include 'sectionbreak'
-            mceInit.toolbar1 = 'italic,link,formatselect,sectionbreak'; // Added 'sectionbreak' to the toolbar
-            mceInit.toolbar2 = ''; // Ensure this is empty to remove additional options
-            mceInit.menubar = false; // Hide the menu bar
-            mceInit.plugins = mceInit.plugins ? mceInit.plugins + ' sectionbreak' : 'sectionbreak'; // Add 'sectionbreak' plugin
+            // Add indent-paragraph to valid elements
+            mceInit.valid_elements = mceInit.valid_elements ? mceInit.valid_elements + ',p[class],h4' : 'p[class],h4';
+            mceInit.extended_valid_elements = mceInit.extended_valid_elements ? mceInit.extended_valid_elements + ',p[class],h4' : 'p[class],h4';
+            
+            // Preserve empty paragraphs
+            mceInit.remove_linebreaks = false;
+            mceInit.keep_styles = true;
+            mceInit.verify_html = false;
+            mceInit.forced_root_block = 'p';
+            mceInit.force_br_newlines = false;
+            mceInit.force_p_newlines = true;
+            
+            // Customize the TinyMCE toolbar
+            mceInit.toolbar1 = 'formatselect,removeformat,italic,link,paragraphindent';
+            mceInit.toolbar2 = '';
+            mceInit.menubar = false;
+            mceInit.plugins = mceInit.plugins ? mceInit.plugins + ' paragraphindent paste' : 'paragraphindent paste';
 
-            // Customize block formats to only allow h4
+            // Customize block formats
             mceInit.block_formats = 'Heading 4=h4;Paragraph=p';
 
             // Remove additional buttons
@@ -16,14 +28,31 @@ document.addEventListener('DOMContentLoaded', function () {
             return mceInit;
         });
 
-        // Define and register the 'sectionbreak' TinyMCE plugin
+        // Define and register the 'paragraphindent' TinyMCE plugin
         if (typeof tinymce !== 'undefined') {
-            tinymce.PluginManager.add('sectionbreak', function(editor) {
-                editor.addButton('sectionbreak', {
-                    title: 'Insert Section Break',
-                    text: 'Tilføj nyt tekstafsnit', // Add text label instead of icon
+            tinymce.PluginManager.add('paragraphindent', function(editor) {
+                editor.addButton('paragraphindent', {
+                    title: 'Add Paragraph Indent',
+                    icon: 'indent',
                     onclick: function() {
-                        editor.insertContent('<div class="section-break"></div>'); // Invisible marker
+                        const node = editor.selection.getNode();
+                        if (node.nodeName === 'P') {
+                            // Toggle class and force editor update
+                            if (node.classList.contains('indent-paragraph')) {
+                                editor.dom.removeClass(node, 'indent-paragraph');
+                            } else {
+                                editor.dom.addClass(node, 'indent-paragraph');
+                            }
+                            // Force a visual update
+                            editor.fire('NodeChange');
+                        }
+                    },
+                    // Add active state handling
+                    onPostRender: function() {
+                        const btn = this;
+                        editor.on('NodeChange', function(e) {
+                            btn.active(e.element.classList.contains('indent-paragraph'));
+                        });
                     }
                 });
             });

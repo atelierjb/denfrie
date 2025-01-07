@@ -36,23 +36,34 @@ h4 {
     line-height: 1.2 !important;
 }
 
-/* Hide the section break marker in the editor as well */
-.wysiwyg-content .section-break {
-    display: none;
-}
-
-/* First paragraph in each section without indent */
-.wysiwyg-content p:first-of-type,          /* First paragraph at start */
-.wysiwyg-content .section-break + p {      /* First paragraph after each section break */
+/* Base paragraph styling without indent */
+p {
+    font-family: 'Superclarendon', serif !important;
+    font-weight: 300 !important;
+    font-size: 1rem !important;
+    line-height: 1.5 !important;
     text-indent: 0;
 }
 
-/* Indent subsequent paragraphs in each section */
-.wysiwyg-content p {
-    text-indent: 1.25rem; /* Adjust to your spacing */
+.indent-paragraph {
+    text-indent: 2rem !important;
+    background-color: rgba(132, 30, 44, 0.03) !important;
+    margin: 0.5rem !important;
 }
 
-
+/* Visual indicator for indented paragraphs in editor */
+.wysiwyg-content p.indent-paragraph::before {
+    content: '';
+    display: block;
+    position: absolute;
+    left: 0.5rem;
+    top: 50%;
+    height: 100%;
+    width: 2px;
+    color: #841E2C !important;
+    background-color: rgba(132, 30, 44, 0.5);
+    transform: translateY(-50%);
+}
 
 /* Alignment and Block Overrides */
 .wp-block {
