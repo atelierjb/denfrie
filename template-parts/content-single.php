@@ -80,11 +80,11 @@
 	</section>
 
 	<section class="pb-sp5 sm:pb-sp8">
-            <div class="w-fit text-xxl/xxl sm:text-xxxl/xxl">
+            <div class="w-fit text-xl/xl sm:text-xxxl/xxl">
                 <h1 class="font-dfserif animateOnView">
                     <?php the_title(); ?>
                 </h1>
-                <p class="-ml-[1px] sm:-ml-[3px] font-superclarendon mt-0 sm:-mt-2 animateOnView">
+                <p class="-ml-[1px] sm:-ml-[3px] font-superclarendon animateOnView">
                     <?php echo esc_html($exhibition_start_date); ?> — <?php echo esc_html($exhibition_end_date); ?>
                 </p>
             </div>		
@@ -200,7 +200,7 @@
 				<h4 class="font-dfserif text-medium/medium animateOnView">
 					<?php echo pll__('The exhibition is generously supported by', 'tailpress'); ?>
 				</h4>
-				<div class="wysiwyg-content w-full sm:w-[calc(90%+1vw)] animateOnView">
+				<div class="wysiwyg-content no-indent w-full sm:w-[calc(90%+1vw)] animateOnView">
 					<?php echo($exhibition_supporters); ?>
 				</div>		
 			</div>
@@ -209,7 +209,7 @@
 		<div class="col-span-1 sm:col-span-6 my-sp8 sm:my-0 animateOnView">
 			<?php $credits = get_field('exhibition-credits'); ?>
 				<?php if( $credits ): // Check if the field is not empty ?>
-					<div class="wysiwyg-content w-full sm:w-[calc(90%+1vw)]">
+					<div class="wysiwyg-content no-indent w-full sm:w-[calc(90%+1vw)]">
 						<?php echo wp_kses_post($credits); ?>
 					</div>
 				<?php endif; ?>

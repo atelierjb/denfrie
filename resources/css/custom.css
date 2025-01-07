@@ -1,12 +1,26 @@
 /* Apply indentation to subsequent paragraphs within the same section */
 .wysiwyg-content p {
     @apply font-superclarendon text-regular/regular !important;
-    text-indent: 0;
+    @apply indent-sp5 sm:indent-sp8;
 }
 
-/* Apply indentation only to paragraphs with the indent class */
-.wysiwyg-content p.indent-paragraph {
-    @apply indent-sp5 sm:indent-sp8;
+/* Remove indentation from first paragraph */
+.wysiwyg-content p:first-of-type {
+    text-indent: 0 !important;
+}
+
+/* Remove indentation from paragraphs after headings */
+.wysiwyg-content h4 + p {
+    text-indent: 0 !important;
+}
+
+/* Remove indentation from paragraphs with the no-indent class */
+.wysiwyg-content p.no-indent {
+    text-indent: 0 !important;
+}
+
+.no-indent {
+    text-indent: 0 !important;
 }
 
 .wysiwyg-content p { 
@@ -82,4 +96,11 @@
 .wysiwyg-content p:empty {
     min-height: 1.5em;
     display: block;
+}
+
+/* Ensure empty h4 elements have proper height */
+.wysiwyg-content h4:empty {
+    min-height: 1.5em;
+    display: block;
+    margin: 1em 0;
 }

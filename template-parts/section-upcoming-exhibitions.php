@@ -6,6 +6,9 @@ $current_date = date('Ymd'); // Format: YYYYMMDD
 $args = array(
     'post_type' => 'exhibition',
     'posts_per_page' => -1,
+    'meta_key' => 'exhibition-start-date',
+    'orderby' => 'meta_value',
+    'order' => 'ASC', // Sort in ascending order (closest date first)
     'meta_query' => array(
         array(
             'key' => 'exhibition-start-date',

@@ -61,7 +61,7 @@ if ($query->have_posts()) :
                         <?php the_title(); ?>
                     </a>
                 </h3>
-                <p class="ml-[1px] sm:-ml-[2px] font-superclarendon animateOnView">
+                <p class="-ml-[1px] sm:-ml-[2px] font-superclarendon animateOnView">
                     <a href="<?php echo esc_url($post_url); ?>">
                         <?php echo esc_html($exhibition_start_date); ?> — <?php echo esc_html($exhibition_end_date); ?>
                     </a>

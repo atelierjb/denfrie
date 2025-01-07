@@ -42,13 +42,39 @@ p {
     font-weight: 300 !important;
     font-size: 1rem !important;
     line-height: 1.5 !important;
-    text-indent: 0;
+    /* Default state - with indent */
+    text-indent: 2rem !important;
 }
 
-.indent-paragraph {
-    text-indent: 2rem !important;
-    background-color: rgba(132, 30, 44, 0.03) !important;
-    margin: 0.5rem !important;
+/* Remove indentation from first paragraph */
+p:first-of-type {
+    text-indent: 0 !important;
+    background-color: transparent !important;
+    padding: 0 !important;
+    margin: 0 !important;
+}
+
+/* Remove indentation from paragraphs after headings */
+h4 + p {
+    text-indent: 0 !important;
+    background-color: transparent !important;
+    padding: 0 !important;
+    margin: 0 !important;
+}
+
+/* Ensure empty elements have proper height in editor */
+p:empty,
+h4:empty {
+    min-height: 1.5em !important;
+    display: block !important;
+    border: 1px dashed rgba(132, 30, 44, 0.2);
+}
+
+.no-indent {
+    text-indent: 0 !important;
+    background-color: transparent !important;
+    padding: 0 !important;
+    margin: 0 !important;
 }
 
 /* Visual indicator for indented paragraphs in editor */
@@ -61,7 +87,6 @@ p {
     height: 100%;
     width: 2px;
     color: #841E2C !important;
-    background-color: rgba(132, 30, 44, 0.5);
     transform: translateY(-50%);
 }
 
