@@ -16,7 +16,7 @@ get_header();
             </form>
         </section>
         <hr class="border-df-black animateOnView">
-        <div id="social-container">
+        <div id="social-container" class="animateOnView">
             
         </div>
         <div id="social-toggle-container" class="mt-sp5">

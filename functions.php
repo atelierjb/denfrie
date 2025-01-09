@@ -225,7 +225,7 @@ function fetch_social_events() {
                     <p class="font-superclarendon col-span-2 whitespace-nowrap pt-1 sm:pt-0 animateOnView">
                         <?php the_field('social-date'); ?> : <?php the_field('social-date-start'); ?> <?php the_field('social-date-end'); ?>
                     </p>
-                    <p class="font-dfserif col-span-4 sm:truncate animateOnView">
+                    <p class="font-dfserif pb-sp1 sm:pb-0 col-span-4 sm:truncate animateOnView">
                         <?php the_title(); ?>
                     </p>
                 </div>

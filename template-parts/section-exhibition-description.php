@@ -15,6 +15,8 @@
                     'style' => array()
                 ),
                 'h4' => array(),
+                'em' => array(),
+                'i' => array(),
                 // other allowed tags...
             );
 

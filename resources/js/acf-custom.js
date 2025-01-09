@@ -47,12 +47,18 @@ document.addEventListener('DOMContentLoaded', function () {
                         const paragraphs = editor.selection.getSelectedBlocks();
                         
                         if (paragraphs.length > 0) {
-                            // Check if the first paragraph has no-indent to determine action
-                            const shouldAdd = !paragraphs[0].classList.contains('no-indent');
+                            // Check if the first non-empty paragraph has no-indent to determine action
+                            const firstNonEmptyParagraph = Array.from(paragraphs).find(p => 
+                                p.nodeName === 'P' && p.textContent.trim() !== ''
+                            );
                             
-                            // Apply the same action to all selected paragraphs
+                            const shouldAdd = firstNonEmptyParagraph ? 
+                                !firstNonEmptyParagraph.classList.contains('no-indent') : 
+                                !paragraphs[0].classList.contains('no-indent');
+                            
+                            // Apply the same action to all non-empty selected paragraphs
                             paragraphs.forEach(function(p) {
-                                if (p.nodeName === 'P') {
+                                if (p.nodeName === 'P' && p.textContent.trim() !== '') {
                                     if (shouldAdd) {
                                         editor.dom.addClass(p, 'no-indent');
                                     } else {
@@ -69,13 +75,27 @@ document.addEventListener('DOMContentLoaded', function () {
                     onPostRender: function() {
                         const btn = this;
                         editor.on('NodeChange', function(e) {
-                            // Check if any selected paragraph has no-indent
+                            // Check if any selected non-empty paragraph has no-indent
                             const selectedBlocks = editor.selection.getSelectedBlocks();
                             const hasNoIndent = selectedBlocks.some(block => 
-                                block.nodeName === 'P' && block.classList.contains('no-indent')
+                                block.nodeName === 'P' && 
+                                block.textContent.trim() !== '' && 
+                                block.classList.contains('no-indent')
                             );
                             btn.active(hasNoIndent);
                         });
+                    }
+                });
+                editor.on('keydown', function(e) {
+                    if (e.keyCode === 13) { // Enter key
+                        setTimeout(function() { // Use setTimeout to ensure the new line is created
+                            const selectedBlocks = editor.selection.getSelectedBlocks();
+                            selectedBlocks.forEach(function(block) {
+                                if (block.nodeName === 'P' && block.classList.contains('no-indent')) {
+                                    editor.dom.removeClass(block, 'no-indent');
+                                }
+                            });
+                        }, 0);
                     }
                 });
             });

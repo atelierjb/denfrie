@@ -39,6 +39,11 @@
     @apply font-superclarendon text-regular/regular underline hover:text-df-red !important;
 }
 
+.wysiwyg-content div:empty {
+    min-height: 1.5em !important;
+    display: block !important;
+}
+
 #mailchimp-signup-form input[type="text"], input[type="email"] {
     @apply font-superclarendon text-regular/regular;
 }
