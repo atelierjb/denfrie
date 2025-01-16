@@ -9,12 +9,6 @@ document.addEventListener('DOMContentLoaded', function() {
     const mainContent = document.querySelector("#main-content");
     const navContainer = document.querySelector("#nav-container");
 
-    // Debug logs
-    console.log('Loading screen:', loadingScreen);
-    console.log('Loading image:', loadingImage);
-    console.log('Main content:', mainContent);
-    console.log('Nav container:', navContainer);
-
     // Error handling if elements don't exist
     if (!loadingScreen || !loadingImage || !mainContent || !navContainer) {
         console.warn('Required elements not found');
@@ -39,7 +33,6 @@ document.addEventListener('DOMContentLoaded', function() {
         });
 
         loadingImage.onload = function() {
-            console.log('Image loaded, starting animation');
             const tl = gsap.timeline();
 
             tl.to(loadingImage, { 

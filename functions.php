@@ -504,6 +504,17 @@ function my_theme_register_strings() {
     pll_register_string('contact-servicestaff', 'Service staff', 'tailpress');
     pll_register_string('contact-nostaff', 'No staff members found.', 'tailpress');
     pll_register_string('contact-noservicestaff', 'No service staff members found.', 'tailpress');
+
+    // Newsletter error messages
+    pll_register_string('newsletter-error-already-subscribed', 'This email is already subscribed to our newsletter.', 'tailpress');
+    pll_register_string('newsletter-error-required-fields', 'Please fill in all required fields.', 'tailpress');
+    pll_register_string('newsletter-error-valid-email', 'Please enter a valid email address.', 'tailpress');
+    pll_register_string('newsletter-error-auth-failed', 'Authentication failed. Please try again later.', 'tailpress');
+    pll_register_string('newsletter-error-access-denied', 'Access denied. Please try again later.', 'tailpress');
+    pll_register_string('newsletter-error-too-many-requests', 'Too many requests. Please try again later.', 'tailpress');
+
+    // Newsletter messages
+    pll_register_string('newsletter-generic-error', 'An error occurred while processing your request.', 'tailpress');
 }
 add_action('init', 'my_theme_register_strings');
 
@@ -808,7 +819,8 @@ function enqueue_newsletter_script() {
     if (is_page($newsletter_page_id) ) {
         wp_enqueue_script('newsletter-js', get_template_directory_uri() . '/js/newsletter.js', array(), null, true);
         wp_localize_script('newsletter-js', 'ajax_object', array(
-            'ajax_url' => admin_url('admin-ajax.php')
+            'ajax_url' => admin_url('admin-ajax.php'),
+            'generic_error' => pll__('An error occurred while processing your request.', 'tailpress')
         ));
     }
 }
@@ -877,7 +889,30 @@ function mailchimp_subscribe() {
     if ( $http_code === 200 ) {
         wp_send_json_success( array( 'message' => pll__( 'Successfully subscribed!', 'tailpress' ) ) );
     } else {
-        $error_message = isset( $response_data['detail'] ) ? $response_data['detail'] : pll__( 'An unknown error occurred.', 'tailpress' );
+        // Get the error title if available
+        $error_title = isset($response_data['title']) ? $response_data['title'] : '';
+        
+        // Handle specific error cases
+        if ($http_code === 400) {
+            if (strpos($response_data['detail'], 'already a list member')) {
+                $error_message = pll__('This email is already subscribed to our newsletter.', 'tailpress');
+            } elseif (strpos($response_data['detail'], 'please enter a value')) {
+                $error_message = pll__('Please fill in all required fields.', 'tailpress');
+            } elseif (strpos($response_data['detail'], 'valid email')) {
+                $error_message = pll__('Please enter a valid email address.', 'tailpress');
+            } else {
+                $error_message = $response_data['detail'];
+            }
+        } elseif ($http_code === 401) {
+            $error_message = pll__('Authentication failed. Please try again later.', 'tailpress');
+        } elseif ($http_code === 403) {
+            $error_message = pll__('Access denied. Please try again later.', 'tailpress');
+        } elseif ($http_code === 429) {
+            $error_message = pll__('Too many requests. Please try again later.', 'tailpress');
+        } else {
+            $error_message = isset($response_data['detail']) ? $response_data['detail'] : pll__('An unknown error occurred.', 'tailpress');
+        }
+
         wp_send_json_error( array( 'message' => $error_message ) );
     }
 
@@ -968,6 +1003,16 @@ function preserve_empty_p_tags($content) {
 }
 add_filter('the_content', 'preserve_empty_p_tags');
 add_filter('acf_the_content', 'preserve_empty_p_tags');
+
+
+// Redirect non-exhibition single posts to homepage
+function redirect_non_exhibition_posts() {
+    if (!is_admin() && is_single() && get_post_type() !== 'exhibition') {
+        wp_redirect(home_url());
+        exit;
+    }
+}
+add_action('template_redirect', 'redirect_non_exhibition_posts');
 
 
 

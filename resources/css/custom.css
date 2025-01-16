@@ -48,6 +48,11 @@
     @apply font-superclarendon text-regular/regular;
 }
 
+#mailchimp-signup-form input[type="text"]:focus, input[type="email"]:focus {
+    outline: 0px solid transparent;
+    outline-offset: 0px;
+}
+
 
 /* Loading screen */
 #loading-screen {

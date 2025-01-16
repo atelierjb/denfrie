@@ -1,3 +1,10 @@
+<?php
+// Check if this is not an exhibition post type and redirect to homepage
+if (get_post_type() !== 'exhibition') {
+    wp_redirect(home_url());
+    exit;
+}
+?>
 <article id="post-<?php the_ID(); ?>" <?php post_class(); ?>>
 	<?php 
 		$exhibition_image_id = get_field('exhibition-image');
