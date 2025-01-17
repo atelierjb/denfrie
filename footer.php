@@ -14,15 +14,15 @@
     			<?php echo pll__('Newsletter', 'tailpress'); ?>
 			</a>
 		</li>
-		<li class="hidden sm:block sm:col-span-3">
-			<a href="<?php echo get_permalink(pll_get_post(4)); ?>#annualpass" class="hover:text-df-red">
-    			<?php echo pll__('Annual pass', 'tailpress'); ?>
-			</a>
-		</li>
 		<?php
 		$info_post = get_translated_info_post(); // Make sure this function is defined in functions.php
 		if ($info_post) :
 		?>
+			<li class="hidden sm:block sm:col-span-3">
+			<a class="hover:text-df-red" target="_blank" href="<?php echo esc_url(get_field('info-annualpass', $info_post->ID)); ?>">
+					<?php echo pll__('Annual pass', 'tailpress'); ?>
+				</a>
+			</li>
 			<li class="sm:col-span-3">
 				<a class="hover:text-df-red" target="_blank" href="<?php echo esc_url(get_field('info-instagram', $info_post->ID)); ?>">
 					Instagram
