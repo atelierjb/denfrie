@@ -190,19 +190,39 @@ function fetch_social_events() {
     $offset = isset($_POST['offset']) ? intval($_POST['offset']) : 0;
     $posts_per_page = isset($_POST['posts_per_page']) ? intval($_POST['posts_per_page']) : 5;
     $search_query = isset($_POST['search_query']) ? sanitize_text_field($_POST['search_query']) : '';
+    $load_past_events = isset($_POST['load_past_events']) ? $_POST['load_past_events'] === '1' : false;
+
+    $current_date = date('Ymd'); // Format: YYYYMMDD
 
     $args = [
         'post_type' => 'social',
-        'posts_per_page' => $posts_per_page,
-        'offset' => $offset,
         'meta_key' => 'social-date',
         'orderby' => 'meta_value',
-        'order' => 'DESC', // Sort by the farthest future date
+        'order' => $load_past_events ? 'DESC' : 'ASC', // DESC for past events, ASC for future events
     ];
 
-    // Add search query
-    if (!empty($search_query)) {
-        $args['s'] = $search_query;
+    // If searching or loading future events, show all results
+    if (!empty($search_query) || !$load_past_events) {
+        $args['posts_per_page'] = -1; // Show all results
+        if (!empty($search_query)) {
+            $args['s'] = $search_query;
+        }
+    } else {
+        // Only paginate past events
+        $args['posts_per_page'] = $posts_per_page;
+        $args['offset'] = $offset;
+    }
+
+    // Add date filtering if not searching
+    if (empty($search_query)) {
+        $args['meta_query'] = [
+            [
+                'key' => 'social-date',
+                'value' => $current_date,
+                'compare' => $load_past_events ? '<=' : '>', // <= for past events, > for future events
+                'type' => 'DATE'
+            ]
+        ];
     }
 
     $social_query = new WP_Query($args);

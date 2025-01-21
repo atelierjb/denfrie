@@ -6,17 +6,80 @@ document.addEventListener('DOMContentLoaded', function () {
     const searchForm = document.getElementById('search-form');
     const socialContainer = document.getElementById('social-container');
     let totalEvents = 0; // Tracks the total number of events
+    let loadingPastEvents = false; // Track whether we're loading past events
+    
+    // State management
+    let savedState = {
+        offset: 0,
+        loadingPastEvents: false,
+        totalEvents: 0,
+        html: '',
+        isSearching: false
+    };
 
-    // Prevent form submission
+    // Prevent form submission and Enter key
     searchForm.addEventListener('submit', function (e) {
         e.preventDefault();
     });
 
+    searchInput.addEventListener('keydown', function(e) {
+        if (e.key === 'Enter') {
+            e.preventDefault();
+        }
+    });
+
+    // Save current state before searching
+    function saveCurrentState() {
+        savedState = {
+            offset: offset,
+            loadingPastEvents: loadingPastEvents,
+            totalEvents: totalEvents,
+            html: socialContainer.innerHTML,
+            isSearching: true
+        };
+    }
+
+    // Restore previous state
+    function restoreState() {
+        if (savedState.isSearching) {
+            offset = savedState.offset;
+            loadingPastEvents = savedState.loadingPastEvents;
+            totalEvents = savedState.totalEvents;
+            socialContainer.innerHTML = savedState.html;
+            
+            // Restore toggle button state
+            if (offset >= totalEvents) {
+                if (!loadingPastEvents) {
+                    toggleButton.style.display = 'block';
+                    toggleButton.textContent = socialPageData.toggle_show_text;
+                } else {
+                    toggleButton.style.display = 'none';
+                }
+            } else {
+                toggleButton.style.display = 'block';
+                toggleButton.textContent = socialPageData.toggle_show_text;
+            }
+            
+            savedState.isSearching = false;
+        }
+    }
+
     // Fetch events
     function fetchEvents(isSearch = false, resetOffset = false) {
+        // Save state when starting a new search
+        if (isSearch && resetOffset && !savedState.isSearching) {
+            saveCurrentState();
+        }
+
         if (resetOffset) {
             offset = 0;
             totalEvents = 0; // Reset the total events count when refreshing
+            if (isSearch) {
+                // Don't reset loadingPastEvents during search
+                savedState.isSearching = true;
+            } else {
+                loadingPastEvents = false; // Only reset for non-search resets
+            }
         }
 
         const data = new URLSearchParams();
@@ -24,6 +87,7 @@ document.addEventListener('DOMContentLoaded', function () {
         data.append('offset', offset);
         data.append('posts_per_page', postsPerPage);
         data.append('search_query', searchInput.value.trim());
+        data.append('load_past_events', loadingPastEvents ? '1' : '0');
 
         fetch(socialPageData.ajax_url, {
             method: 'POST',
@@ -36,6 +100,12 @@ document.addEventListener('DOMContentLoaded', function () {
             .then((result) => {
                 const { html, total } = result;
 
+                // If search is cleared, restore previous state
+                if (isSearch && searchInput.value.trim() === '') {
+                    restoreState();
+                    return;
+                }
+
                 if (resetOffset) {
                     socialContainer.innerHTML = html; // Replace content for new searches
                 } else {
@@ -46,11 +116,24 @@ document.addEventListener('DOMContentLoaded', function () {
                 offset += postsPerPage;
                 totalEvents = total;
 
-                // Check if all events are loaded
-                if (offset >= totalEvents) {
-                    toggleButton.style.display = 'none'; // Hide button if no more events
+                // Handle toggle button visibility
+                if (isSearch) {
+                    // Hide toggle button during search
+                    toggleButton.style.display = 'none';
                 } else {
-                    toggleButton.style.display = 'block'; // Ensure button is visible if more events are available
+                    // Normal toggle button logic for non-search state
+                    if (offset >= totalEvents) {
+                        if (!loadingPastEvents) {
+                            loadingPastEvents = true;
+                            offset = 0;
+                            toggleButton.style.display = 'block';
+                        } else {
+                            toggleButton.style.display = 'none';
+                        }
+                    } else {
+                        toggleButton.style.display = 'block';
+                    }
+                    toggleButton.textContent = socialPageData.toggle_show_text;
                 }
 
                 reapplyAccordionBehavior(); // Reapply accordion behavior
@@ -74,13 +157,17 @@ document.addEventListener('DOMContentLoaded', function () {
 
     // Toggle load more events
     toggleButton.addEventListener('click', function () {
-        if (searchInput.value.trim() || offset >= totalEvents) return; // Disable toggle if searching or all events loaded
+        if (searchInput.value.trim()) return; // Disable toggle if searching
         fetchEvents();
     });
 
-    // Search functionality
+    // Search functionality with debounce
+    let searchTimeout;
     searchInput.addEventListener('input', function () {
-        fetchEvents(true, true);
+        clearTimeout(searchTimeout);
+        searchTimeout = setTimeout(() => {
+            fetchEvents(true, true);
+        }, 300); // Wait 300ms after user stops typing
     });
 
     // Initial fetch
