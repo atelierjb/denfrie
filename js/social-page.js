@@ -109,7 +109,16 @@ document.addEventListener('DOMContentLoaded', function () {
                 if (resetOffset) {
                     socialContainer.innerHTML = html; // Replace content for new searches
                 } else {
-                    socialContainer.insertAdjacentHTML('beforeend', html); // Append new events
+                    if (loadingPastEvents && offset === 0) {
+                        // Add section title for previous events
+                        socialContainer.insertAdjacentHTML('beforeend', `
+                            <h2 class="font-dfserif text-xl/xl pt-sp7 pb-sp5 sm:pb-sp7 mt-sp5 animateOnView">
+                                ${socialPageData.previous_events_text}
+                            </h2>
+                            <hr class="border-df-black animateOnView">
+                        `);
+                    }
+                    socialContainer.insertAdjacentHTML('beforeend', html);
                 }
 
                 // Update offset and total events
@@ -125,14 +134,14 @@ document.addEventListener('DOMContentLoaded', function () {
                     // or if there are more past events to load
                     if (!loadingPastEvents) {
                         toggleButton.style.display = 'block';
-                        toggleButton.textContent = socialPageData.toggle_show_text;
+                        toggleButton.textContent = socialPageData.toggle_initial_text;
                     } else {
                         // For past events, hide button if all loaded
                         if (offset >= totalEvents) {
                             toggleButton.style.display = 'none';
                         } else {
                             toggleButton.style.display = 'block';
-                            toggleButton.textContent = socialPageData.toggle_show_text;
+                            toggleButton.textContent = socialPageData.toggle_more_text;
                         }
                     }
                 }

@@ -178,8 +178,9 @@ function enqueue_custom_scripts() {
         // Pass AJAX URL and translations to JavaScript
         wp_localize_script('social-page-js', 'socialPageData', [
             'ajax_url' => admin_url('admin-ajax.php'),
-            'toggle_show_text' => pll__('Show previous events ↓', 'tailpress'), // Translation for "Show previous events"
-            'toggle_hide_text' => pll__('Hide previous events ↑', 'tailpress'), // Translation for "Hide previous events"
+            'toggle_initial_text' => pll__('Show past socials ↓', 'tailpress'),
+            'toggle_more_text' => pll__('Show more past socials ↓', 'tailpress'),
+            'previous_events_text' => pll__('Past socials', 'tailpress')
         ]);
     }
 }
@@ -192,7 +193,10 @@ function fetch_social_events() {
     $search_query = isset($_POST['search_query']) ? sanitize_text_field($_POST['search_query']) : '';
     $load_past_events = isset($_POST['load_past_events']) ? $_POST['load_past_events'] === '1' : false;
 
-    $current_date = date('Ymd'); // Format: YYYYMMDD
+    // Get today's date at 23:59:59
+    $today = new DateTime();
+    $today->setTime(23, 59, 59);
+    $current_date = $today->format('Ymd'); // Format: YYYYMMDD for today
 
     $args = [
         'post_type' => 'social',
@@ -219,7 +223,7 @@ function fetch_social_events() {
             [
                 'key' => 'social-date',
                 'value' => $current_date,
-                'compare' => $load_past_events ? '<=' : '>', // <= for past events, > for future events
+                'compare' => $load_past_events ? '<' : '>=', // < for past events (before today), >= for today and future
                 'type' => 'DATE'
             ]
         ];
@@ -503,8 +507,9 @@ function my_theme_register_strings() {
     pll_register_string('social-calendar', 'Social calendar', 'tailpress');
     pll_register_string('no-events-found', 'No events found.', 'tailpress');
     pll_register_string('search-archive', 'Search in calendar...', 'tailpress');
-    pll_register_string('more-events', 'Show previous events ↓', 'tailpress');
-    pll_register_string('less-events', 'Hide previous events ↑', 'tailpress');
+    pll_register_string('toggle_initial', 'Show past socials ↓', 'tailpress');
+    pll_register_string('toggle_more', 'Show more past socials ↓', 'tailpress');
+    pll_register_string('previous-events', 'Past socials', 'tailpress');
 
     //visit page
     pll_register_string('newsletter-name', 'Name', 'tailpress');
@@ -807,25 +812,6 @@ function enqueue_swiper_assets() {
 }
 add_action('wp_enqueue_scripts', 'enqueue_swiper_assets');
 
-
-
-
-
-/* -------------------------------------------------------------------------- */
-/*                           GSAP and ScrollTrigger                           */
-/* -------------------------------------------------------------------------- */
-
-function enqueue_gsap_scripts() {
-    // Enqueue GSAP core first
-    wp_enqueue_script('gsap', get_template_directory_uri() . '/js/gsap.min.js', array(), null, false);
-    
-    // ScrollTrigger depends on GSAP
-    wp_enqueue_script('scrolltrigger', get_template_directory_uri() . '/js/ScrollTrigger.min.js', array('gsap'), null, false);
-    
-    // Custom script depends on both
-    wp_enqueue_script('custom-gsap', get_template_directory_uri() . '/js/custom-gsap.js', array('gsap', 'scrolltrigger'), null, true);
-}
-add_action('wp_enqueue_scripts', 'enqueue_gsap_scripts');
 
 
 

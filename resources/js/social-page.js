@@ -1,6 +1,6 @@
 document.addEventListener('DOMContentLoaded', function () {
     let offset = 0; // Tracks the current offset for loaded events
-    const postsPerPage = 5; // Number of events per load
+    const postsPerPage = 5; // Number of events per load (only used for past events)
     const toggleButton = document.getElementById('toggle-past-events');
     const searchInput = document.getElementById('social-search-input');
     const searchForm = document.getElementById('search-form');
@@ -48,12 +48,12 @@ document.addEventListener('DOMContentLoaded', function () {
             socialContainer.innerHTML = savedState.html;
             
             // Restore toggle button state
-            if (offset >= totalEvents) {
-                if (!loadingPastEvents) {
+            if (loadingPastEvents) {
+                if (offset >= totalEvents) {
+                    toggleButton.style.display = 'none';
+                } else {
                     toggleButton.style.display = 'block';
                     toggleButton.textContent = socialPageData.toggle_show_text;
-                } else {
-                    toggleButton.style.display = 'none';
                 }
             } else {
                 toggleButton.style.display = 'block';
@@ -109,7 +109,16 @@ document.addEventListener('DOMContentLoaded', function () {
                 if (resetOffset) {
                     socialContainer.innerHTML = html; // Replace content for new searches
                 } else {
-                    socialContainer.insertAdjacentHTML('beforeend', html); // Append new events
+                    if (loadingPastEvents && offset === 0) {
+                        // Add section title for previous events
+                        socialContainer.insertAdjacentHTML('beforeend', `
+                            <h2 class="font-dfserif text-xl/xl pt-sp7 pb-sp5 sm:pb-sp7 mt-sp5 animateOnView">
+                                ${socialPageData.previous_events_text}
+                            </h2>
+                            <hr class="border-df-black animateOnView">
+                        `);
+                    }
+                    socialContainer.insertAdjacentHTML('beforeend', html);
                 }
 
                 // Update offset and total events
@@ -121,19 +130,20 @@ document.addEventListener('DOMContentLoaded', function () {
                     // Hide toggle button during search
                     toggleButton.style.display = 'none';
                 } else {
-                    // Normal toggle button logic for non-search state
-                    if (offset >= totalEvents) {
-                        if (!loadingPastEvents) {
-                            loadingPastEvents = true;
-                            offset = 0;
-                            toggleButton.style.display = 'block';
-                        } else {
-                            toggleButton.style.display = 'none';
-                        }
-                    } else {
+                    // Show toggle button for future events (to load past events)
+                    // or if there are more past events to load
+                    if (!loadingPastEvents) {
                         toggleButton.style.display = 'block';
+                        toggleButton.textContent = socialPageData.toggle_initial_text;
+                    } else {
+                        // For past events, hide button if all loaded
+                        if (offset >= totalEvents) {
+                            toggleButton.style.display = 'none';
+                        } else {
+                            toggleButton.style.display = 'block';
+                            toggleButton.textContent = socialPageData.toggle_more_text;
+                        }
                     }
-                    toggleButton.textContent = socialPageData.toggle_show_text;
                 }
 
                 reapplyAccordionBehavior(); // Reapply accordion behavior
@@ -158,6 +168,11 @@ document.addEventListener('DOMContentLoaded', function () {
     // Toggle load more events
     toggleButton.addEventListener('click', function () {
         if (searchInput.value.trim()) return; // Disable toggle if searching
+        if (!loadingPastEvents) {
+            // First click on toggle - switch to past events
+            loadingPastEvents = true;
+            offset = 0;
+        }
         fetchEvents();
     });
 

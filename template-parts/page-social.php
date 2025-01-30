@@ -19,7 +19,7 @@ get_header();
         <div id="social-container" class="animateOnView">
             
         </div>
-        <div id="social-toggle-container" class="mt-sp5">
+        <div id="social-toggle-container" class="mt-sp5 animateOnView">
             <button id="toggle-past-events" class="font-dfserif text-xl/xl py-sp7 hover:text-df-red animateOnView">
                 <?php echo pll__('Show previous events ↓', 'tailpress'); ?>
             </button>

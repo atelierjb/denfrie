@@ -1,8 +1,126 @@
 <!DOCTYPE html>
 <html <?php language_attributes(); ?>>
 <head>
+	<?php 
+	// Only preload desktop image since mobile is inlined
+	$loading_image_md = get_template_directory_uri() . '/assets/loading-image-md.webp';
+	?>
+	<link rel="preload" as="image" href="<?php echo esc_url($loading_image_md); ?>" media="(min-width: 769px)" fetchpriority="high">
+
 	<meta charset="<?php bloginfo( 'charset' ); ?>">
 	<meta name="viewport" content="width=device-width">
+
+	<!-- Critical loading sequence - execute immediately -->
+	<script>
+		// Execute immediately without waiting for DOMContentLoaded
+		(function() {
+			// Check if this is internal navigation
+			function isInternalNavigation() {
+				try {
+					if (performance.getEntriesByType && performance.getEntriesByType('navigation').length > 0) {
+						const navEntry = performance.getEntriesByType('navigation')[0];
+						return navEntry.type !== 'reload' && 
+							(navEntry.type !== 'navigate' || document.referrer.includes(window.location.hostname));
+					}
+				} catch(e) {}
+				return document.referrer.includes(window.location.hostname);
+			}
+
+			// Add no-animation class as early as possible if needed
+			if (isInternalNavigation()) {
+				document.documentElement.classList.add('no-animation');
+			}
+		})();
+	</script>
+
+	<!-- Critical CSS for loading sequence -->
+	<style>
+		/* Base styles that should load immediately */
+		:root {
+			--df-light-grey: #F5F5F5;
+		}
+		
+		/* Loading sequence styles */
+		#loading-screen {
+			position: fixed;
+			inset: 0;
+			background-color: var(--df-light-grey);
+			display: flex;
+			align-items: center;
+			justify-content: center;
+			z-index: 50;
+			animation: hideLoadingScreen 0.5s ease-in-out 1.5s forwards;
+			will-change: transform;
+		}
+		#loading-image-sm {
+			width: auto;
+			height: auto;
+			max-height: 90vw;
+			max-width: 90vw;
+			object-fit: contain;
+			animation: fadeInUpMobile 0.3s ease-out forwards;
+			will-change: transform, opacity;
+		}
+		#loading-image-md {
+			display: none;
+			width: auto;
+			height: auto;
+			max-height: 90vh;
+			max-width: 90vh;
+			object-fit: contain;
+			transform: translateY(100%);
+			opacity: 0;
+			animation: fadeInUpDesktop 0.5s ease-out forwards;
+			will-change: transform, opacity;
+		}
+		#nav-container, 
+		#main-content {
+			transform: translateY(100%);
+			animation: slideUpContent 1s ease-out 1s forwards;
+			will-change: transform;
+		}
+
+		/* Hide loading elements immediately if no animation needed */
+		.no-animation #loading-screen {
+			display: none !important;
+		}
+		.no-animation #nav-container,
+		.no-animation #main-content {
+			transform: none !important;
+			animation: none !important;
+		}
+
+		@media (min-width: 768px) {
+			#loading-image-sm { display: none; }
+			#loading-image-md { display: block; }
+		}
+
+		/* Animation keyframes */
+		@keyframes fadeInUpMobile {
+			from { opacity: 0; transform: translateY(10%); }
+			to { opacity: 1; transform: translateY(0); }
+		}
+		@keyframes fadeInUpDesktop {
+			from { opacity: 0; transform: translateY(100%); }
+			to { opacity: 1; transform: translateY(0); }
+		}
+		@keyframes hideLoadingScreen {
+			to { transform: translateY(-100%); }
+		}
+		@keyframes slideUpContent {
+			to { transform: translateY(0); }
+		}
+	</style>
+
+	<!-- Cleanup script -->
+	<script>
+		// Clean up loading screen after animation completes
+		setTimeout(() => {
+			const loadingScreen = document.getElementById('loading-screen');
+			if (loadingScreen) loadingScreen.remove();
+		}, 2000);
+	</script>
+
 	<?php
 	$info_post = get_translated_info_post();
 	if ($info_post) :
@@ -18,34 +136,38 @@
 	<link rel="pingback" href="<?php bloginfo( 'pingback_url' ); ?>">
 	<link rel="preconnect" href="https://use.typekit.net" crossorigin>
 	<link rel="preconnect" href="https://p.typekit.net" crossorigin>
+
 	<link rel="preload" href="<?php echo get_stylesheet_directory_uri(); ?>/css/app.css?ver=1.0" as="style" onload="this.onload=null;this.rel='stylesheet'">
 	<noscript><link rel="stylesheet" href="<?php echo get_stylesheet_directory_uri(); ?>/css/app.css?ver=1.0"></noscript>
 	<script>
 		!function(n){"use strict";n.loadCSS||(n.loadCSS=function(){});var o=loadCSS.relpreload={};if(o.support=function(){var e;try{e=n.document.createElement("link").relList.supports("preload")}catch(t){e=!1}return function(){return e}}(),o.bindMediaToggle=function(t){var e=t.media||"all";function a(){t.media=e}t.addEventListener?t.addEventListener("load",a):t.attachEvent&&t.attachEvent("onload",a),setTimeout(function(){t.rel="stylesheet",t.media="only x"}),setTimeout(a,3e3)},o.poly=function(){if(!o.support())for(var t=n.document.getElementsByTagName("link"),e=0;e<t.length;e++){var a=t[e];"preload"!==a.rel||"style"!==a.getAttribute("as")||a.getAttribute("data-loadcss")||(a.setAttribute("data-loadcss",!0),o.bindMediaToggle(a))}},!o.support()){o.poly();var t=n.setInterval(o.poly,500);n.addEventListener?n.addEventListener("load",function(){o.poly(),n.clearInterval(t)}):n.attachEvent&&n.attachEvent("onload",function(){o.poly(),n.clearInterval(t)})}"undefined"!=typeof exports?exports.loadCSS=loadCSS:n.loadCSS=loadCSS}("undefined"!=typeof global?global:this);
 	</script>
 
-
-	<?php wp_head(); ?>
+<?php wp_head(); ?>
 </head>
 
-<body <?php body_class( 'bg-df-light-grey text-text-df-black antialiased' ); ?>>
-<?php wp_body_open(); ?>
-<?php do_action( 'tailpress_site_before' ); ?>
-
-	<!-- Loading screen: add it right here after <body> tag -->
-	<div id="loading-screen" class="fixed inset-0 bg-df-light-grey flex items-center justify-center z-50">
-        <?php 
-        $loading_image = get_template_directory_uri() . '/assets/loading-image.png';
-        ?>
-        <img id="loading-image" 
-             src="<?php echo esc_url($loading_image); ?>"
-             alt="Loading"
-             class="w-auto h-auto max-h-[90vw] sm:max-h-[90vh] max-w-[90vw] sm:max-w-[90vh] object-contain opacity-0">
-    </div>
 
 
+	<body <?php body_class( 'bg-df-light-grey text-text-df-black antialiased' ); ?>>
+	<?php wp_body_open(); ?>
+	<?php do_action( 'tailpress_site_before' ); ?>
 
-
+	<!-- Loading screen with inlined mobile image -->
+	<div id="loading-screen">
+		<?php
+		// Get the mobile image file path
+		$mobile_image_path = get_template_directory() . '/assets/loading-image-sm.webp';
+		
+		// Convert mobile image to base64
+		if (file_exists($mobile_image_path)) {
+			$mobile_image_data = base64_encode(file_get_contents($mobile_image_path));
+			echo '<img id="loading-image-sm" src="data:image/webp;base64,' . $mobile_image_data . '" alt="Loading">';
+		}
+		?>
+		<img id="loading-image-md" 
+			 src="<?php echo esc_url($loading_image_md); ?>"
+			 alt="Loading">
+	</div>
 
 <div id="page" class="min-h-screen flex flex-col text-pretty">
 

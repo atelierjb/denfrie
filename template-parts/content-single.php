@@ -183,7 +183,7 @@ if (get_post_type() !== 'exhibition') {
                 $sizes = '(max-width: 640px) 100vw, (max-width: 1024px) 80vw, 1200px';
                 ?>
                 <section class="w-full columns-1 gap-4 font-superclarendon">
-                    <figure class="mx-sp5 sm:mx-sp9 mb-4 aspect-video animateOnView">
+                    <figure class="mx-sp5 sm:mx-sp9 mb-4 animateOnView">
                         <img src="<?php echo esc_url($image_data[0]); ?>"
                              srcset="<?php echo esc_attr($srcset); ?>"
                              sizes="<?php echo esc_attr($sizes); ?>"

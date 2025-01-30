@@ -59,11 +59,11 @@ if ($query->have_posts()) :
                 </a>
             </figure>
             <div class="w-fit hover:text-df-red text-xl/xl sm:text-xxxl/xxl">
-                <h3 class="font-dfserif animateOnView">
+                <h2 class="font-dfserif animateOnView">
                     <a class="" href="<?php echo esc_url($post_url); ?>">
                         <?php the_title(); ?>
                     </a>
-                </h3>
+                </h2>
                 <p class="-ml-[1px] sm:-ml-[2px] font-superclarendon animateOnView">
                     <a href="<?php echo esc_url($post_url); ?>">
                         <?php echo esc_html($exhibition_start_date); ?> — <?php echo esc_html($exhibition_end_date); ?>

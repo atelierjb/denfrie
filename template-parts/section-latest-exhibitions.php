@@ -69,11 +69,11 @@ if ($query->have_posts()) :
                 </figure>
             </div>
             <div class="col-span-4 mb-sp6">
-                <p class="hidden sm:block font-superclarendon text-large/large mb-sp4 truncate animateOnView">
+                <h2 class="hidden sm:block font-superclarendon text-large/large mb-sp4 truncate animateOnView">
                     <a href="<?php echo esc_url($post_url); ?>" class="font-dfserif hover:text-df-red">
                         <?php the_title(); ?>
                     </a> 
-                </p>
+                </h2>
                 <div class="wysiwyg-content text-regular/regular text-pretty -mt-[0.5vw] line-clamp-5 xs:line-clamp-[6] sm:line-clamp-[7] md:line-clamp-[8] lg:line-clamp-[9] xl:line-clamp-[10] 2xl:line-clamp-[11] animateOnView">
                     <?php echo wp_kses_post($exhibition_description); ?> 
                 </div>
