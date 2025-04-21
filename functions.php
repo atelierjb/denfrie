@@ -230,7 +230,43 @@ function fetch_social_events() {
     }
 
     $social_query = new WP_Query($args);
-
+    
+    // Get all posts and sort them by date and time
+    $posts = $social_query->posts;
+    
+    // Custom sorting function
+    usort($posts, function($a, $b) use ($load_past_events) {
+        $date_a = get_field('social-date', $a->ID);
+        $date_b = get_field('social-date', $b->ID);
+        
+        // Convert dates to timestamps for comparison
+        $timestamp_a = DateTime::createFromFormat('d.m.y', $date_a)->getTimestamp();
+        $timestamp_b = DateTime::createFromFormat('d.m.y', $date_b)->getTimestamp();
+        
+        // Compare dates
+        if ($timestamp_a !== $timestamp_b) {
+            // For future events (ASC), we want closest to today first
+            // For past events (DESC), we want most recent first
+            return $load_past_events ? 
+                ($timestamp_b - $timestamp_a) : // Past events: most recent first
+                ($timestamp_a - $timestamp_b);  // Future events: closest first
+        }
+        
+        // If dates are equal, compare times
+        $time_a = get_field('social-date-start', $a->ID);
+        $time_b = get_field('social-date-start', $b->ID);
+        
+        // Remove any non-numeric characters and convert to integers
+        $time_a = (int)preg_replace('/[^0-9]/', '', $time_a);
+        $time_b = (int)preg_replace('/[^0-9]/', '', $time_b);
+        
+        // Always sort times in ascending order (earliest first)
+        return $time_a - $time_b;
+    });
+    
+    // Replace the posts in the query
+    $social_query->posts = $posts;
+    
     // Get the total number of events matching the query
     $total_args = $args;
     unset($total_args['posts_per_page'], $total_args['offset']); // Remove pagination to count all matching posts
@@ -597,11 +633,13 @@ function my_exhibition_custom_column_content($column, $post_id) {
 
         // Check if the dates exist and convert them to sortable format (d-m-Y)
         if ($start_date) {
-            $formatted_start_date = DateTime::createFromFormat('d.m.y', $start_date)->format('d-m-Y');
+            $date_obj = DateTime::createFromFormat('d.m.y', $start_date);
+            $formatted_start_date = $date_obj ? $date_obj->format('d-m-Y') : $start_date;
         }
 
         if ($end_date) {
-            $formatted_end_date = DateTime::createFromFormat('d.m.y', $end_date)->format('d-m-Y');
+            $date_obj = DateTime::createFromFormat('d.m.y', $end_date);
+            $formatted_end_date = $date_obj ? $date_obj->format('d-m-Y') : $end_date;
         }
 
         // Display combined start and end dates or a placeholder

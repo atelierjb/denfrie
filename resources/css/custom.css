@@ -79,6 +79,15 @@
     transform: translateY(100%); /* Start off-screen for the loading sequence */
 }
 
+/* Mobile Menu Animation */
+#primary-menu {
+    transition: transform 0.3s ease-in-out;
+}
+
+#primary-menu.menu-open {
+    transform: translateX(0);
+}
+
 ::selection {
     background-color: rgba(132, 30, 44, 0.99);
     color: #EEE;
